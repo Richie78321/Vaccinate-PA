@@ -1,0 +1,33 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "UPMC Children's",
+                "address": "4401 Penn Avenue Pittsburgh, PA 15224",
+                "phone_number": "(412) 692-5325",
+                "first_dose_available": 300,
+                "second_dose_available": 150
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [40.46732,-79.9536]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "UPMC Magee",
+                "address": "300 Halket Street Pittsburgh, PA 15213",
+                "phone_number": "(412) 641-1000",
+                "first_dose_available": 3000,
+                "second_dose_available": 1500
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [40.43689,-79.9607]
+            }
+        }
+    ]
+}
