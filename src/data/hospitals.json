@@ -1,33 +1,379 @@
 {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "UPMC Children's",
-                "address": "4401 Penn Avenue Pittsburgh, PA 15224",
-                "phone_number": "(412) 692-5325",
-                "first_dose_available": 300,
-                "second_dose_available": 150
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [40.46732,-79.9536]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "UPMC Magee",
-                "address": "300 Halket Street Pittsburgh, PA 15213",
-                "phone_number": "(412) 641-1000",
-                "first_dose_available": 3000,
-                "second_dose_available": 1500
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [40.43689,-79.9607]
-            }
-        }
-    ]
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Children's",
+        "address": "4401 Penn Avenue Pittsburgh, PA 15224",
+        "phone": 4126925325,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.467315,
+          -79.95359
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Magee",
+        "address": "300 Halkett Street Pittsburgh, PA 15213",
+        "phone": 4126411000,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.436889,
+          -79.9607
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC McKeesport",
+        "address": "1500 5th Avenue McKeesport, PA 15132",
+        "phone": 4126642000,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.351343,
+          -79.849457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Mercy",
+        "address": "1400 Locust Street Pittsburgh, PA 15219",
+        "phone": 4122328111,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.436137,
+          -79.985285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Passavant",
+        "address": "9100 Babcock Boulevard Pittsburgh, PA 15237",
+        "phone": 4123676700,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.573319,
+          -80.014525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Presbyterian",
+        "address": "3601 Fifth Avenue Pittsburgh, PA  15213",
+        "phone": 4126472345,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.441544,
+          -79.959356
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC Shadyside",
+        "address": "5230 Center Ave Pittsburgh, PA  15232",
+        "phone": 4126232121,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.454845,
+          -79.939793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC St. Margaret's",
+        "address": "815 Freeport Road Pittsburgh, PA 15215",
+        "phone": 4127844000,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.489286,
+          -79.895994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC East",
+        "address": "2775 Mosside Boulevard Monroeville, PA 15146",
+        "phone": 4123573000,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.436561,
+          -79.760197
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Allegheny General Hospital",
+        "address": "AGH 320 E. North Ave, PGH 15212",
+        "phone": 4123593131,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.45701,
+          -80.003724
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Allegheny Valley Hospital",
+        "address": "Allegheny Valley 1301 Carlisle Street, Natrona Heights, PA 15065",
+        "phone": 7242245100,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.619129,
+          -79.737849
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Forbes Regional Hospital",
+        "address": "Forbes Regional 2570 Haymaker Rd, Monroeville, PA 15146",
+        "phone": 4128582000,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.427585,
+          -79.747217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "West Penn Hospital",
+        "address": "West Penn 4800 Friendship Ave, PGH 15224",
+        "phone": 4125785000,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.461453,
+          -79.946364
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VA Pittsburgh Hospital",
+        "address": "VA Pittsburgh 4100 Allequippa St, PGH 15261",
+        "phone": 4128222222,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.447391,
+          -79.959788
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Heritage Valley Hospital",
+        "address": "Heritage Valley Sewickley 720 Blackburn Rd, Sewickley, PA 15143",
+        "phone": 8777714847,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.543454,
+          -80.177601
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jefferson Regional Hospital",
+        "address": "Jefferson Regional 565 Coal Valley Rd, Clairton, PA 15025",
+        "phone": 4124695000,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.31844,
+          -79.933488
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ohio Valley Hospital",
+        "address": "Ohio Valley 25 Heckel Rd, McKees Rocks, PA 15136",
+        "phone": 4127776204,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.472755,
+          -80.090742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "St Clair Hospital",
+        "address": "St. Clair 1000 Bower Hill Rd, PGH 15243",
+        "phone": 4129424000,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.378099,
+          -80.06661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Encompass Health Rehabilitation Hospital of Sewickley",
+        "address": "303 Camp Meeting Rd, Sewickley, PA 15143",
+        "phone": 4127419500,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.576315,
+          -80.203135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Southwood Psychatric Hospital",
+        "address": "2575 Boyce Plaza Rd, Pittsburgh, PA 15241",
+        "phone": 4129988427,
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.321195,
+          -80.112625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lifecare Hospital of Monroville",
+        "address": "2380 McGinley Road, Monroeville, PA 15146",
+        "phone": 4122472000,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.424369,
+          -79.745967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Health South  Harmaville Rehabilitaiton",
+        "address": "320 Guys Run Rd, Pittsburgh, PA 15238",
+        "phone": 4128281300,
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.536213,
+          -79.849228
+        ]
+      }
+    }
+  ]
 }

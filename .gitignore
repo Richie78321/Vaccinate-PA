@@ -11,6 +11,9 @@
 # production
 /build
 
+# py script
+/scripts/gcred.json
+
 # misc
 .DS_Store
 .env.local
