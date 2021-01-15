@@ -26,6 +26,9 @@ function App() {
     }
   }, []);
 
+  const SIZE = 32;
+  const UNIT = 'px'
+
   return (
     <div>
       <ReactMapGL
@@ -41,6 +44,7 @@ function App() {
             key={hospital.properties.phone_number}
             latitude={hospital.geometry.coordinates[0]}
             longitude={hospital.geometry.coordinates[1]}
+            offsetTop={-32}  offsetLeft={-16}
           >
             <button onClick={(e) => {
               e.preventDefault();
