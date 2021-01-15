@@ -12,7 +12,10 @@ function App() {
   })
   return (
     <div>
-      <ReactMapGL {...viewPort}></ReactMapGL>
+      <ReactMapGL 
+        {...viewPort} 
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        ></ReactMapGL>
     </div>
   );
 }
