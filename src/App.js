@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import * as hospitalData from "./data/hospitals.json";
 
@@ -12,6 +12,19 @@ function App() {
     zoom: 10,
   });
   const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(()=>{
+    const listener = e => {
+      if (e.key === "Escape") {
+        setSelectedPark(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    }
+  }, []);
 
   return (
     <div>
