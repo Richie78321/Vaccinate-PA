@@ -5,7 +5,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Children's",
-        "address": "4401 Penn Avenue Pittsburgh, PA 15224",
+        "address": {
+          "street": "4401 Penn Avenue ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15224
+        },
         "phone": "(412) 692-5325",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -22,7 +27,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Magee",
-        "address": "300 Halkett Street Pittsburgh, PA 15213",
+        "address": {
+          "street": "300 Halkett Street ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15213
+        },
         "phone": "(412) 641-1000",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -39,7 +49,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC McKeesport",
-        "address": "1500 5th Avenue McKeesport, PA 15132",
+        "address": {
+          "street": "1500 5th Avenue ",
+          "city": "McKeesport",
+          "state": "PA",
+          "zip": 15132
+        },
         "phone": "(412) 664-2000",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -56,7 +71,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Mercy",
-        "address": "1400 Locust Street Pittsburgh, PA 15219",
+        "address": {
+          "street": "1400 Locust Street ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15219
+        },
         "phone": "(412) 232-8111",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -73,7 +93,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Passavant",
-        "address": "9100 Babcock Boulevard Pittsburgh, PA 15237",
+        "address": {
+          "street": "9100 Babcock Boulevard ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15237
+        },
         "phone": "(412) 367-6700",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -90,7 +115,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Presbyterian",
-        "address": "3601 Fifth Avenue Pittsburgh, PA  15213",
+        "address": {
+          "street": "3601 Fifth Avenue ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15213
+        },
         "phone": "(412) 647-2345",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -107,7 +137,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC Shadyside",
-        "address": "5230 Center Ave Pittsburgh, PA  15232",
+        "address": {
+          "street": "5230 Center Ave ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15232
+        },
         "phone": "(412) 623-2121",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -124,7 +159,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC St. Margaret's",
-        "address": "815 Freeport Road Pittsburgh, PA 15215",
+        "address": {
+          "street": "815 Freeport Road ",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15215
+        },
         "phone": "(412) 784-4000",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -141,7 +181,12 @@
       "type": "Feature",
       "properties": {
         "name": "UPMC East",
-        "address": "2775 Mosside Boulevard Monroeville, PA 15146",
+        "address": {
+          "street": "2775 Mosside Boulevard ",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
         "phone": "(412) 357-3000",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -158,7 +203,12 @@
       "type": "Feature",
       "properties": {
         "name": "Allegheny General Hospital",
-        "address": "AGH 320 E. North Ave, PGH 15212",
+        "address": {
+          "street": "320 E. North Ave",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15212
+        },
         "phone": "(412) 359-3131",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -175,7 +225,12 @@
       "type": "Feature",
       "properties": {
         "name": "Allegheny Valley Hospital",
-        "address": "Allegheny Valley 1301 Carlisle Street, Natrona Heights, PA 15065",
+        "address": {
+          "street": "1301 Carlisle Street",
+          "city": "Natrona Heights",
+          "state": "PA",
+          "zip": 15065
+        },
         "phone": "(724) 224-5100",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -192,7 +247,12 @@
       "type": "Feature",
       "properties": {
         "name": "Forbes Regional Hospital",
-        "address": "Forbes Regional 2570 Haymaker Rd, Monroeville, PA 15146",
+        "address": {
+          "street": "2570 Haymaker Rd",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
         "phone": "(412) 858-2000",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -209,7 +269,12 @@
       "type": "Feature",
       "properties": {
         "name": "West Penn Hospital",
-        "address": "West Penn 4800 Friendship Ave, PGH 15224",
+        "address": {
+          "street": "4800 Friendship Ave",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15224
+        },
         "phone": "(412) 578-5000",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -226,7 +291,12 @@
       "type": "Feature",
       "properties": {
         "name": "VA Pittsburgh Hospital",
-        "address": "VA Pittsburgh 4100 Allequippa St, PGH 15261",
+        "address": {
+          "street": "4100 Allequippa St",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15261
+        },
         "phone": "(412) 822-2222",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -243,7 +313,12 @@
       "type": "Feature",
       "properties": {
         "name": "Heritage Valley Hospital",
-        "address": "Heritage Valley Sewickley 720 Blackburn Rd, Sewickley, PA 15143",
+        "address": {
+          "street": "720 Blackburn Rd",
+          "city": "Sewickley",
+          "state": "PA",
+          "zip": 15143
+        },
         "phone": "(877) 771-4847",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -260,7 +335,12 @@
       "type": "Feature",
       "properties": {
         "name": "Jefferson Regional Hospital",
-        "address": "Jefferson Regional 565 Coal Valley Rd, Clairton, PA 15025",
+        "address": {
+          "street": "565 Coal Valley Rd",
+          "city": "Clairton",
+          "state": "PA",
+          "zip": 15025
+        },
         "phone": "(412) 469-5000",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -277,7 +357,12 @@
       "type": "Feature",
       "properties": {
         "name": "Ohio Valley Hospital",
-        "address": "Ohio Valley 25 Heckel Rd, McKees Rocks, PA 15136",
+        "address": {
+          "street": "25 Heckel Rd",
+          "city": "McKees Rocks",
+          "state": "PA",
+          "zip": 15136
+        },
         "phone": "(412) 777-6204",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -294,7 +379,12 @@
       "type": "Feature",
       "properties": {
         "name": "St Clair Hospital",
-        "address": "St. Clair 1000 Bower Hill Rd, PGH 15243",
+        "address": {
+          "street": "1000 Bower Hill Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15243
+        },
         "phone": "(412) 942-4000",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -311,7 +401,12 @@
       "type": "Feature",
       "properties": {
         "name": "Encompass Health Rehabilitation Hospital of Sewickley",
-        "address": "303 Camp Meeting Rd, Sewickley, PA 15143",
+        "address": {
+          "street": "303 Camp Meeting Rd",
+          "city": "Sewickley",
+          "state": "PA",
+          "zip": 15143
+        },
         "phone": "(412) 741-9500",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -328,7 +423,12 @@
       "type": "Feature",
       "properties": {
         "name": "Southwood Psychatric Hospital",
-        "address": "2575 Boyce Plaza Rd, Pittsburgh, PA 15241",
+        "address": {
+          "street": "2575 Boyce Plaza Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15241
+        },
         "phone": "(412) 998-8427",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
@@ -345,7 +445,12 @@
       "type": "Feature",
       "properties": {
         "name": "Lifecare Hospital of Monroville",
-        "address": "2380 McGinley Road, Monroeville, PA 15146",
+        "address": {
+          "street": "2380 McGinley Road",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
         "phone": "(412) 247-2000",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
@@ -362,7 +467,12 @@
       "type": "Feature",
       "properties": {
         "name": "Health South  Harmaville Rehabilitaiton",
-        "address": "320 Guys Run Rd, Pittsburgh, PA 15238",
+        "address": {
+          "street": "320 Guys Run Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15238
+        },
         "phone": "(412) 828-1300",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"

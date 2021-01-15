@@ -16,7 +16,7 @@ export default function HospitalPopup(props) {
                 >
                     {props.selectedPark.properties.name}
                 </h2>
-                <p className="">{props.selectedPark.properties.address}</p>
+                <p className="">{props.selectedPark.properties.address.street}</p>
             </div>
         </Popup>
     )

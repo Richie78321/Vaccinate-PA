@@ -22,7 +22,12 @@ for i, hospital in enumerate(hospital_data):
         "type": "Feature", 
         "properties":{
             "name": hospital['Facility'],
-            "address": hospital['Address'],
+            "address": {
+                "street": hospital['Street'],
+                "city": hospital["City"],
+                "state": hospital["State"],
+                "zip": hospital['Zip'],
+            },
             "phone": prettify_phone(hospital['Phone_Num']),
             "has_doses": True if hospital['Has_Doses'].lower() == 'y' else False,
             "last_update": hospital['Last_Update_Time'],
