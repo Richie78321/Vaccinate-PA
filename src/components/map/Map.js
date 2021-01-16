@@ -69,7 +69,7 @@ export default function PennMap() {
 
     const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat,lng});
-        mapRef.current.setZoom(10);
+        mapRef.current.setZoom(15);
     }, [])
 
     if (loadError) return "Error loading map";
@@ -83,7 +83,7 @@ export default function PennMap() {
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
-                zoom={14}
+                zoom={13}
                 center={center}
                 options={options}
                 onLoad={onMapLoad}
@@ -94,6 +94,7 @@ export default function PennMap() {
                             key={hospital.properties.name}
                             setSelectedHospital={setSelectedHospital} 
                             hospital={hospital}
+                            panTo={panTo}
                         />
                     ))
                 }
