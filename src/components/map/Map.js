@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import ReactMapGL, { Popup } from "react-map-gl";
+import ReactMapGL from "react-map-gl";
 import * as hospitalData from "../../data/hospitals.json";
 import Hospitalmark from "./Hospitalmark";
 import HospitalPopup from "./HospitalPopup"
