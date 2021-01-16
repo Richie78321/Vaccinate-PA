@@ -4,17 +4,7 @@ import {
     useLoadScript 
 } from "@react-google-maps/api";
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
+import MapBar from "./MapBar"
 
 import * as hospitalData from "../../data/hospitals.json";
 import mapStyles from "../../mapStyles";
@@ -77,9 +67,7 @@ export default function PennMap() {
 
     return (
         <div className="my-4">
-            {/* <Search panTo={panTo}/> */}
-
-            <Locate panTo={panTo} />
+            <MapBar panTo={panTo}/>
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -109,81 +97,4 @@ export default function PennMap() {
             </GoogleMap>
         </div>
     );
-}
-
-function Search({ panTo }) {
-    const {
-        ready, 
-        value, 
-        suggestions: {status, data}, 
-        setValue, 
-        clearSuggestions
-    } = usePlacesAutocomplete({
-        requestOptions: {
-            location: {
-                lat: () => 40.4416941,
-                lng: () => -79.9900861
-            },
-            radius: 100 * 1000
-        }
-    });
-    
-    const handleInput = (e) => {
-        setValue(e.target.value);
-    }
-
-    const handleSelect = async (address) => {
-        setValue(address, false);
-        clearSuggestions();
-
-        try {
-            const results = await getGeocode({ address });
-            const { lat, lng} = await getLatLng(results[0]);
-            panTo({lat, lng});
-        } catch (error) {
-            console.log("Error: ", error)
-        }
-    }
-
-    return (
-    <div className="absolute top-1 left-1/2 transform translate-x-0 width-full max-w-screen-sm z-10 ">        
-        <Combobox onSelect = { handleSelect }>
-            <ComboboxInput 
-                value={value} 
-                onChange={handleInput} 
-                disabled ={!ready}
-                placeholder="Enter an address"
-                className="p-2 text-4xl width-full"
-            />
-            <ComboboxPopover>
-                <ComboboxList>
-                    {status === "OK" && data.map(({id, description}) => ( 
-                        <ComboboxOption 
-                            key={id + description} value={description}
-                            className="bg-white"                                
-                            />
-                        ) )}
-                </ComboboxList>
-            </ComboboxPopover>
-        </Combobox>
-    </div>
-    )
-}
-
-function Locate ({panTo}) {
-    return (
-    <button 
-        className="bg-gray-300 py-2 px-6 my-1 text-center hover:bg-gray-800 hover:text-white active:bg-gray-600 active:text-white"
-        onClick={() => {
-            navigator.geolocation.getCurrentPosition((position)=>{
-                panTo({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                });
-            },()=>null);
-        }}
-    >
-        Locate Me!
-    </button>
-    )
 }
