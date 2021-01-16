@@ -1,49 +1,82 @@
-import React,{useState, useEffect} from 'react'
-import ReactMapGL from "react-map-gl";
+import React, {useState,useEffect} from 'react'
+import { 
+    GoogleMap, 
+    useLoadScript 
+} from "@react-google-maps/api";
 import * as hospitalData from "../../data/hospitals.json";
-import Hospitalmark from "./Hospitalmark";
-import HospitalPopup from "./HospitalPopup"
+import mapStyles from "../../mapStyles";
 
-export default function Map() {
-    const [viewPort, setViewPort] = useState({
-        latitude: 40.441694,
-        longitude: -79.990086,
-        width: "100vw",
-        height: "93.5vh",
-        zoom: 12.5,
+import HospitalMarker from "./HospitalMarker";
+import HospitalPopup from "./HospitalPopup";
+
+const libraries = ["places"]
+
+const mapContainerStyle = {
+    width: "100vw",
+    height: "100vh",
+}
+
+const center = {
+    lat: 40.441694,
+    lng: -79.990086
+}
+
+const options = {
+    styles: mapStyles,
+    disableDefaultUI: true,
+    zoomControl: true
+}
+
+export default function PennMap() {
+    const {isLoaded, loadError} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
+        libraries,
     });
 
-    const [selectedPark, setSelectedPark] = useState(null);
+    const [selectedHospital, setSelectedHospital] = useState(null)
 
     useEffect(()=>{
-        const listener = e => {
-        if (e.key === "Escape") {
-            setSelectedPark(null);
-        }
-        };
-        window.addEventListener("keydown", listener);
+            const listener = e => {
+            if (e.key === "Escape") {
+                setSelectedHospital(null);
+            }
+            };
+            window.addEventListener("keydown", listener);
 
-        return () => {
-        window.removeEventListener("keydown", listener);
-        }
+            return () => {
+            window.removeEventListener("keydown", listener);
+            }
     }, []);
+
+    if (loadError) return "Error loading map";
+    if (!isLoaded) return "Currently loading map";
 
     return (
         <>
-            <ReactMapGL
-                {...viewPort}
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/zhengmingw/ckjxtj6rc21zx17rw0j3om2hg?optimize=true"
-                onViewportChange={(viewport) => {
-                setViewPort(viewport);
-                }}
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={14}
+                center={center}
+                options={options}
             >
-                {hospitalData.features.map((hospital) => (
-                    <Hospitalmark setSelectedPark={setSelectedPark} hospital={hospital}/>
-                ))}
+                {
+                    hospitalData.features.map((hospital) => (
+                        <HospitalMarker 
+                            key={hospital.properties.name}
+                            setSelectedHospital={setSelectedHospital} 
+                            hospital={hospital}
+                        />
+                    ))
+                }
 
-                { selectedPark && <HospitalPopup selectedPark={selectedPark} setSelectedPark={setSelectedPark} />}
-            </ReactMapGL>
+                {selectedHospital 
+                    && 
+                    <HospitalPopup 
+                        setSelectedHospital={setSelectedHospital} 
+                        selectedHospital = {selectedHospital} 
+                    />
+                }
+            </GoogleMap>
         </>
-    )
+    );
 }

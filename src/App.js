@@ -1,12 +1,12 @@
 import "./App.css";
+// import Navbar from "./components/Navbar";
 import Map from "./components/map/Map";
-import Navbar from "./components/Navbar";
+
 
 function App() {
 
   return (
-    <div>
-      <Navbar />
+    <div className="w-screen h-screen">
       <Map />
     </div>
   );
