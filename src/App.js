@@ -6,7 +6,7 @@ import Map from "./components/map/Map";
 function App() {
 
   return (
-    <div className="w-screen h-screen">
+    <div className="flex justify-center">
       <Map />
     </div>
   );

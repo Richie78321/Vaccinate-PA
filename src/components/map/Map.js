@@ -15,8 +15,6 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import { formatRelative } from "date-fns";
-
 
 import * as hospitalData from "../../data/hospitals.json";
 import mapStyles from "../../mapStyles";
@@ -27,8 +25,9 @@ import HospitalPopup from "./HospitalPopup";
 const libraries = ["places"]
 
 const mapContainerStyle = {
-    width: "100vw",
-    height: "100vh",
+    width: "50vw",
+    height: "50vh",
+    border: "0.15em solid black",
 }
 
 const center = {
@@ -70,15 +69,15 @@ export default function PennMap() {
 
     const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat,lng});
-        mapRef.current.setZoom(16);
+        mapRef.current.setZoom(10);
     }, [])
 
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Currently loading map";
 
     return (
-        <>
-            <Search panTo={panTo}/>
+        <div className="my-4">
+            {/* <Search panTo={panTo}/> */}
 
             <Locate panTo={panTo} />
             <GoogleMap
@@ -107,7 +106,7 @@ export default function PennMap() {
                     />
                 }
             </GoogleMap>
-        </>
+        </div>
     );
 }
 
@@ -173,7 +172,7 @@ function Search({ panTo }) {
 function Locate ({panTo}) {
     return (
     <button 
-        className="bg-transparent absolute top-1 left-1 z-10"
+        className="bg-gray-300 py-2 px-6 my-1 text-center hover:bg-gray-800 hover:text-white active:bg-gray-600 active:text-white"
         onClick={() => {
             navigator.geolocation.getCurrentPosition((position)=>{
                 panTo({
@@ -183,7 +182,7 @@ function Locate ({panTo}) {
             },()=>null);
         }}
     >
-        <img src="./compass.svg" alt="Compass Icon" className="w-24"/>
+        Locate Me!
     </button>
     )
 }
