@@ -3,6 +3,21 @@ import {
     GoogleMap, 
     useLoadScript 
 } from "@react-google-maps/api";
+
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import { formatRelative } from "date-fns";
+
+
 import * as hospitalData from "../../data/hospitals.json";
 import mapStyles from "../../mapStyles";
 
@@ -58,29 +73,13 @@ export default function PennMap() {
         mapRef.current.setZoom(14);
     }, [])
 
-    function Locate ({panTo}) {
-        return (
-        <button 
-            className="bg-transparent absolute top-1 left-1 z-10"
-            onClick={() => {
-                navigator.geolocation.getCurrentPosition((position)=>{
-                    panTo({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    });
-                },()=>null);
-            }}
-        >
-            <img src="./compass.svg" alt="Compass Icon" className="w-24"/>
-        </button>
-        )
-    }
-
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Currently loading map";
 
     return (
         <>
+            <Search />
+
             <Locate panTo={panTo} />
             <GoogleMap
                 id="map"
@@ -110,4 +109,56 @@ export default function PennMap() {
             </GoogleMap>
         </>
     );
+}
+
+function Search({panTo}) {
+    const {
+        ready, 
+        value, 
+        suggestions: {status, data}, 
+        setValue, 
+        clearSuggestions
+    } = usePlacesAutocomplete({
+        requestOptions: {
+            location: {
+                lat: () => 40.4416941,
+                lng: () => -79.9900861
+            },
+            radius: 200 * 1000,
+        }
+    });
+
+    return (
+    <div className="absolute top-1 left-1/2 transform translate-x-0 width-full max-w-screen-sm z-10 ">        
+        <Combobox onSelect = {(address) => {
+                console.log(address);
+            }}>
+            <ComboboxInput value={value} onChange={(e) => {
+                    setValue(e.target.value);
+                }} 
+                disabled ={!ready}
+                placeholder="Enter an address"
+                className="p-2 text-4xl width-full"
+            />
+        </Combobox>
+    </div>
+    )
+}
+
+function Locate ({panTo}) {
+    return (
+    <button 
+        className="bg-transparent absolute top-1 left-1 z-10"
+        onClick={() => {
+            navigator.geolocation.getCurrentPosition((position)=>{
+                panTo({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+            },()=>null);
+        }}
+    >
+        <img src="./compass.svg" alt="Compass Icon" className="w-24"/>
+    </button>
+    )
 }
