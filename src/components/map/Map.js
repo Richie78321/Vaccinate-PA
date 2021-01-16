@@ -31,14 +31,14 @@ const options = {
     zoomControl: true
 }
 
-export default function PennMap() {
+export default function Map() {
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
         libraries,
     });
 
     const [selectedHospital, setSelectedHospital] = useState(null)
-
+    
     useEffect(()=>{
             const listener = e => {
             if (e.key === "Escape") {

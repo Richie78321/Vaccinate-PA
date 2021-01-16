@@ -12,14 +12,14 @@ export default function HospitalPopup(props) {
                 lng: props.selectedHospital.geometry.coordinates[1]
             }}
         >
-            <>
+            <div>
                 <div className="container flex justify-between">
                     <h2
-                        className="font-bold text-lg mr-2"
+                        className="font-bold text-lg mr-5 ml-5"
                     >
                         {props.selectedHospital.properties.name}
                     </h2>
-                    <p className="ml-2 mt-0.5 text-sm text-gray-500">{props.selectedHospital.properties.address.street}</p>
+                    <p className="ml-5 mr-5 mt-0.5 text-sm text-gray-500">{props.selectedHospital.properties.address.street}</p>
                 </div>
 
                 <div className="container flex justify_between">
@@ -28,7 +28,7 @@ export default function HospitalPopup(props) {
                         : <span className="text-red-500 font-bold">No doses</span>
                     }
                 </div>
-            </>
+            </div>
         </InfoWindow>
     )
 }

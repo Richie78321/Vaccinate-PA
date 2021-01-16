@@ -4,6 +4,8 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
+import "@reach/combobox/styles.css";
+
 import {
   Combobox,
   ComboboxInput,
