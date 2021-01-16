@@ -70,7 +70,7 @@ export default function PennMap() {
 
     const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat,lng});
-        mapRef.current.setZoom(14);
+        mapRef.current.setZoom(16);
     }, [])
 
     if (loadError) return "Error loading map";
@@ -78,7 +78,7 @@ export default function PennMap() {
 
     return (
         <>
-            <Search />
+            <Search panTo={panTo}/>
 
             <Locate panTo={panTo} />
             <GoogleMap
@@ -111,7 +111,7 @@ export default function PennMap() {
     );
 }
 
-function Search({panTo}) {
+function Search({ panTo }) {
     const {
         ready, 
         value, 
@@ -124,22 +124,47 @@ function Search({panTo}) {
                 lat: () => 40.4416941,
                 lng: () => -79.9900861
             },
-            radius: 200 * 1000,
+            radius: 100 * 1000
         }
     });
+    
+    const handleInput = (e) => {
+        setValue(e.target.value);
+    }
+
+    const handleSelect = async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+
+        try {
+            const results = await getGeocode({ address });
+            const { lat, lng} = await getLatLng(results[0]);
+            panTo({lat, lng});
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
 
     return (
     <div className="absolute top-1 left-1/2 transform translate-x-0 width-full max-w-screen-sm z-10 ">        
-        <Combobox onSelect = {(address) => {
-                console.log(address);
-            }}>
-            <ComboboxInput value={value} onChange={(e) => {
-                    setValue(e.target.value);
-                }} 
+        <Combobox onSelect = { handleSelect }>
+            <ComboboxInput 
+                value={value} 
+                onChange={handleInput} 
                 disabled ={!ready}
                 placeholder="Enter an address"
                 className="p-2 text-4xl width-full"
             />
+            <ComboboxPopover>
+                <ComboboxList>
+                    {status === "OK" && data.map(({id, description}) => ( 
+                        <ComboboxOption 
+                            key={id + description} value={description}
+                            className="bg-white"                                
+                            />
+                        ) )}
+                </ComboboxList>
+            </ComboboxPopover>
         </Combobox>
     </div>
     )
