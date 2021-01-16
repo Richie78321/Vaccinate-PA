@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useCallback, useRef} from 'react'
 import { 
     GoogleMap, 
     useLoadScript 
@@ -48,16 +48,47 @@ export default function PennMap() {
             }
     }, []);
 
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
+        mapRef.current = map;
+    }, [])
+
+    const panTo = useCallback(({lat, lng}) => {
+        mapRef.current.panTo({lat,lng});
+        mapRef.current.setZoom(14);
+    }, [])
+
+    function Locate ({panTo}) {
+        return (
+        <button 
+            className="bg-transparent absolute top-1 left-1 z-10"
+            onClick={() => {
+                navigator.geolocation.getCurrentPosition((position)=>{
+                    panTo({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
+                },()=>null);
+            }}
+        >
+            <img src="./compass.svg" alt="Compass Icon" className="w-24"/>
+        </button>
+        )
+    }
+
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Currently loading map";
 
     return (
         <>
+            <Locate panTo={panTo} />
             <GoogleMap
+                id="map"
                 mapContainerStyle={mapContainerStyle}
                 zoom={14}
                 center={center}
                 options={options}
+                onLoad={onMapLoad}
             >
                 {
                     hospitalData.features.map((hospital) => (
