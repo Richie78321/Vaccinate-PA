@@ -14,7 +14,7 @@ export default function HospitalMarker(props) {
                 props.setSelectedHospital(props.hospital);
             }}
             icon={{
-                url:'./blue_marker.png'
+                url: props.hospital.properties.has_doses ? './blue_marker.png' : './red_marker.png'
             }}
         />
     )

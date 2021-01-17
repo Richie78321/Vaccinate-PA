@@ -28,7 +28,8 @@ const center = {
 const options = {
     styles: mapStyles,
     disableDefaultUI: true,
-    zoomControl: true
+    zoomControl: true,
+    clickableIcons: false,
 }
 
 export default function Map() {
