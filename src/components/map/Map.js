@@ -68,9 +68,8 @@ export default function Map() {
     if (!isLoaded) return "Currently loading map";
 
     return (
-        // <div className="container h-72 md:h-96">
-        <div className="container h-72 md:h-96 "> 
-            {/* <MapBar panTo={panTo}/> */}
+        <div className="container h-72 md:h-96"> 
+            <MapBar panTo={panTo}/>
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
