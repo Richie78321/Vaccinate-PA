@@ -13,7 +13,7 @@ import mapStyles from "../../mapStyles";
 import HospitalMarker from "./HospitalMarker";
 import HospitalPopup from "./HospitalPopup";
 
-const libraries = ["places"]
+const libraries = ["places"];
 
 const mapContainerStyle = {
     width: "100%",
