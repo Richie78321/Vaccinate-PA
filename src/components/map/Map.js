@@ -15,9 +15,10 @@ import HospitalPopup from "./HospitalPopup";
 const libraries = ["places"]
 
 const mapContainerStyle = {
-    width: "50vw",
-    height: "50vh",
-    border: "0.15em solid black",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    overflow:"hidden",
 }
 
 const center = {
@@ -67,8 +68,9 @@ export default function Map() {
     if (!isLoaded) return "Currently loading map";
 
     return (
-        <div className="my-4">
-            <MapBar panTo={panTo}/>
+        <div className="container h-72 md:h-96 lg:h-full">
+        {/* // <div className="my-4 w-1/2 h-1/2"> */}
+            {/* <MapBar panTo={panTo}/> */}
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -96,6 +98,7 @@ export default function Map() {
                     />
                 }
             </GoogleMap>
+        {/* </div> */}
         </div>
     );
 }
