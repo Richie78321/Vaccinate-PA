@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="flex justify-center">
-      <Map />
+        <Map />
     </div>
   );
 }

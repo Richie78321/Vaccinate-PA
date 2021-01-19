@@ -68,8 +68,8 @@ export default function Map() {
     if (!isLoaded) return "Currently loading map";
 
     return (
-        <div className="container h-72 md:h-96 lg:h-full">
-        {/* // <div className="my-4 w-1/2 h-1/2"> */}
+        // <div className="container h-72 md:h-96">
+        <div className="container h-72 md:h-96 "> 
             {/* <MapBar panTo={panTo}/> */}
             <GoogleMap
                 id="map"
@@ -98,7 +98,6 @@ export default function Map() {
                     />
                 }
             </GoogleMap>
-        {/* </div> */}
         </div>
     );
 }
