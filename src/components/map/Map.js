@@ -1,7 +1,8 @@
 import React, {useState,useEffect, useCallback, useRef} from 'react'
 import { 
     GoogleMap, 
-    useLoadScript 
+    useLoadScript,
+    MarkerClusterer,
 } from "@react-google-maps/api";
 
 import MapBar from "./MapBar"
@@ -67,6 +68,10 @@ export default function Map() {
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Currently loading map";
 
+    const clusterOptions = {
+        imagePath:
+            "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+    }
     return (
         <div className="container h-72 md:h-96"> 
             <MapBar panTo={panTo}/>
@@ -78,16 +83,19 @@ export default function Map() {
                 options={options}
                 onLoad={onMapLoad}
             >
-                {
-                    hospitalData.features.map((hospital) => (
+                <MarkerClusterer options={clusterOptions}>
+                    {(clusterer) => hospitalData.features.map((hospital) => (
                         <HospitalMarker 
                             key={hospital.properties.name}
                             setSelectedHospital={setSelectedHospital} 
                             hospital={hospital}
+                            clusterer={clusterer}
                             panTo={panTo}
                         />
-                    ))
-                }
+                    )) 
+                    
+                    }
+                </MarkerClusterer>
 
                 {selectedHospital 
                     && 

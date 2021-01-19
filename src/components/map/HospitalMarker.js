@@ -13,6 +13,7 @@ export default function HospitalMarker(props) {
                 props.panTo(position)
                 props.setSelectedHospital(props.hospital);
             }}
+            clusterer={props.clusterer}
             icon={{
                 url: props.hospital.properties.has_doses ? './blue_marker.png' : './red_marker.png'
             }}

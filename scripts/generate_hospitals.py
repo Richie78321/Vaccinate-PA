@@ -31,6 +31,7 @@ for i, hospital in enumerate(hospital_data):
             "phone": prettify_phone(hospital['Phone_Num']),
             "has_doses": True if hospital['Has_Doses'].lower() == 'y' else False,
             "last_update": hospital['Last_Update_Time'],
+            "cluster": False,
         }, 
         "geometry": {
             "type":"Point",
