@@ -70,7 +70,8 @@ export default function Map() {
 
     const clusterOptions = {
         imagePath:
-            "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+            "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+        minimumClusterSize: 3
     }
     return (
         <div className="container h-72 md:h-96"> 
