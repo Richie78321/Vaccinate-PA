@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "./components/Navbar";
 import Map from "./components/map/Map";
 import Phases from "./components/phase/Phases";
