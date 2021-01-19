@@ -6,9 +6,12 @@ import Map from "./components/map/Map";
 function App() {
 
   return (
-    <div className="flex justify-center">
-        <Map />
-    </div>
+    <>
+      <h1 className="text-4xl text-red-500 font-bold text-center">THIS IS A WIP. ALL DATA IS FAKE.</h1>
+      <div className="flex justify-center">
+          <Map />
+      </div>
+    </>
   );
 }
 
