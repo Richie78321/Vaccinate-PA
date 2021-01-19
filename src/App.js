@@ -2,14 +2,14 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Map from "./components/map/Map";
 import Phases from "./components/phase/Phases";
+import Alert from "./components/Alert"
 
 
 function App() {
-
   const currPhase = "1A"
   return (
     <>
-      <h1 className="text-4xl text-red-500 font-bold text-center mt-7 mb-20">THIS IS A WIP. ALL DATA IS FAKE AND FOR TESTING PURPOSES.</h1>
+      <Alert />
       <Navbar />
       <div className="flex flex-col items-center">
           <Map />
