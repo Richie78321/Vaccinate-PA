@@ -49,14 +49,14 @@ export default function SearchBar(props) {
   };
 
   return (
-    <div className="border border-black transform translate-x-0 w-64 sm:w-96 max-w-screen-sm z-10 my-2">
+    <div className="border border-black overflow-hidden">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder="Enter an address"
-          className="px-2 py-3 text-lg sm:text-3xl height-full width-full"
+          className="px-2 py-3 text-lg sm:text-3xl outline-none"
         />
         <ComboboxPopover>
           <ComboboxList>

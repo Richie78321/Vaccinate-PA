@@ -3,7 +3,7 @@ import React from "react";
 export default function Locate(props) {
   return (
     <button
-      className="bg-gray-300 sm:py-1 px-3 text-xs sm:text-base sm:px-6 sm:my-2 text-center hover:bg-gray-800 hover:text-white active:bg-gray-600 active:text-white"
+      className="p-4 bg-gray-300 hover:bg-gray-800 active:bg-gray-600 hover:text-white active:text-white rounded"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
