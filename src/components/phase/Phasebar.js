@@ -7,10 +7,10 @@ export default function Phasebar(props) {
             {
                 phases.map((phase, i)=>(
                     (props.num >= i )
-                    ?   <div key={phase} className="sm:w-60 sm:h-60 p-5 bg-blue-300 flex justify-center items-center font-bold text-2xl text-blue-900 transition duration-500 ease-in-out hover:bg-blue-900 hover:text-white">
+                    ?   <div key={phase} className="sm:w-60 sm:h-60 p-5 bg-blue-300 flex justify-center items-center font-bold text-xs sm:text-2xl text-blue-900 transition duration-500 ease-in-out hover:bg-blue-900 hover:text-white">
                             Phase {phase}
                         </div>
-                    :   <div key={phase} className="sm:w-60 sm:h-60 p-5 bg-white flex justify-center items-center font-bold text-2xl text-gray-400 transition duration-500 ease-in-out hover:bg-gray-500 hover:text-gray-200">
+                    :   <div key={phase} className="sm:w-60 sm:h-60 p-5 bg-white flex justify-center items-center font-bold text-xs sm:text-2xl text-gray-400 sm:transition sm:duration-500 sm:ease-in-out hover:bg-gray-500 hover:text-gray-200">
                             Phase {phase}
                         </div>
                 ))
