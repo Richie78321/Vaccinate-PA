@@ -4,6 +4,644 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Allegheny County Health Dept-Immunization Clinic",
+        "address": {
+          "street": "425 1st Ave 4th floor",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15219
+        },
+        "phone": "(412) 578-8062",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.43679,
+          -79.999023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Allegheny General Hospital",
+        "address": {
+          "street": "320 E. North Ave",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15212
+        },
+        "phone": "(412) 359-3131",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.45701,
+          -80.003724
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Allegheny Valley Hospital",
+        "address": {
+          "street": "1301 Carlisle Street",
+          "city": "Natrona Heights",
+          "state": "PA",
+          "zip": 15065
+        },
+        "phone": "(724) 224-5100",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.619129,
+          -79.737849
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Alma Illery Medical Center",
+        "address": {
+          "street": "7227 Hamilton Ave",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15208
+        },
+        "phone": "(412) 244-4700",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.43679,
+          -79.999023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Asti's Long Term Care Pharmacy",
+        "address": {
+          "street": "250 Mt. Lebanon Blvd Suite A-1",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15234
+        },
+        "phone": "(412) 561-2347",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.3680141,
+          -80.0373845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "East Liberty Family Health Care Center",
+        "address": {
+          "street": "6023 Harvard Street",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15206
+        },
+        "phone": "(412) 661-2802",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.46298981,
+          -79.92375946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Encompass Health Rehabilitation Hospital of Sewickley",
+        "address": {
+          "street": "303 Camp Meeting Rd",
+          "city": "Sewickley",
+          "state": "PA",
+          "zip": 15143
+        },
+        "phone": "(412) 741-9500",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.576315,
+          -80.203135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Family Matters Direct Primary Care",
+        "address": {
+          "street": "4284 William Flynn Hwy Suite 102",
+          "city": "Allison Park",
+          "state": "PA",
+          "zip": 15101
+        },
+        "phone": "(412) 685-3373",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.600419,
+          -79.946592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Forbes Regional Hospital",
+        "address": {
+          "street": "2570 Haymaker Rd",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
+        "phone": "(412) 858-2000",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.427585,
+          -79.747217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Health South  Harmaville Rehabilitaiton",
+        "address": {
+          "street": "320 Guys Run Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15238
+        },
+        "phone": "(412) 828-1300",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.536213,
+          -79.849228
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HealthQuest Medical Associates",
+        "address": {
+          "street": "5318 Ranalli Dr",
+          "city": "Gibsonia",
+          "state": "PA",
+          "zip": 15044
+        },
+        "phone": "(724) 449-9355",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.61595356,
+          -79.94528856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Heritage Valley Hospital",
+        "address": {
+          "street": "720 Blackburn Rd",
+          "city": "Sewickley",
+          "state": "PA",
+          "zip": 15143
+        },
+        "phone": "(877) 771-4847",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.543454,
+          -80.177601
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HERITAGE VALLEY KENNEDY",
+        "address": {
+          "street": "25 Heckel Road",
+          "city": "McKees Rocks",
+          "state": "PA",
+          "zip": 15136
+        },
+        "phone": "(412) 777-6161",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.47287143,
+          -80.09076367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hilltop Pharmacy",
+        "address": {
+          "street": "818 E. Warrington Ave.",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15201
+        },
+        "phone": "(412) 431-5766",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.42173794,
+          -79.9928918
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Integrated Corporate Health",
+        "address": {
+          "street": "2403 Sidney Street Ste 220",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15203
+        },
+        "phone": "(412) 481-1644",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.43018208,
+          -79.9692189
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jefferson Regional Hospital",
+        "address": {
+          "street": "565 Coal Valley Rd",
+          "city": "Clairton",
+          "state": "PA",
+          "zip": 15025
+        },
+        "phone": "(412) 469-5000",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.31844,
+          -79.933488
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lifecare Hospital of Monroville",
+        "address": {
+          "street": "2380 McGinley Road",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
+        "phone": "(412) 247-2000",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.424369,
+          -79.745967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Livingston Pharmacy",
+        "address": {
+          "street": "550 Miller Avenue",
+          "city": "Clairton",
+          "state": "PA",
+          "zip": 15025
+        },
+        "phone": "(412) 233-7100",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.29367295,
+          -79.88248672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Metro Community Health Center",
+        "address": {
+          "street": "1789 S Braddock Ave, Ste 410",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15218
+        },
+        "phone": "(412) 247-2310",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.42460023,
+          -79.88709025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "North Side Christian Health Center",
+        "address": {
+          "street": "816 Middle St.",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15212
+        },
+        "phone": "(412) 321-4001",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.45534339,
+          -79.99900989
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ohio Valley Hospital",
+        "address": {
+          "street": "25 Heckel Rd",
+          "city": "McKees Rocks",
+          "state": "PA",
+          "zip": 15136
+        },
+        "phone": "(412) 777-6204",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.472755,
+          -80.090742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Primary Care Pharmacy Services",
+        "address": {
+          "street": "27 Heckel Road Suite 110",
+          "city": "McKees Rocks",
+          "state": "PA",
+          "zip": 15136
+        },
+        "phone": "(412) 771-2149",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.47274467,
+          -80.09117416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "RX Partners LTC",
+        "address": {
+          "street": "500 Old Pond Road Suite 406",
+          "city": "Bridgeville",
+          "state": "PA",
+          "zip": 15017
+        },
+        "phone": "(412) 257-1263",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.3531276,
+          -80.11965607
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Southwood Psychatric Hospital",
+        "address": {
+          "street": "2575 Boyce Plaza Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15241
+        },
+        "phone": "(412) 998-8427",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.321195,
+          -80.112625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Squirrel Hill Health Center",
+        "address": {
+          "street": "4516 Browns Hill Road",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15217
+        },
+        "phone": "(412) 422-7442",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.4170414,
+          -79.92520005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Squirrel Hill Health Center - Brentwood",
+        "address": {
+          "street": "103 Towne Square Way",
+          "city": "Brentwood",
+          "state": "PA",
+          "zip": 15227
+        },
+        "phone": "(412) 422-7442",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.36744314,
+          -79.98168985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "St Clair Hospital",
+        "address": {
+          "street": "1000 Bower Hill Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": 15243
+        },
+        "phone": "(412) 942-4000",
+        "has_doses": true,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.378099,
+          -80.06661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sto Rox Family Health Center",
+        "address": {
+          "street": "710 Thompson Ave",
+          "city": "McKees Rocks",
+          "state": "PA",
+          "zip": 15136
+        },
+        "phone": "(412) 771-6462",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.4651817,
+          -80.06224994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trilogy Mission Rx, LLC dba PCA Pittsburgh Pharmacy",
+        "address": {
+          "street": "307 23rd Street Extension, Suite 164",
+          "city": "Sharpsburg",
+          "state": "PA",
+          "zip": 15215
+        },
+        "phone": "(724) 545-1600",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.49439365,
+          -79.91049343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "UPMC Children's",
         "address": {
           "street": "4401 Penn Avenue ",
@@ -20,6 +658,28 @@
         "coordinates": [
           40.467315,
           -79.95359
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UPMC East",
+        "address": {
+          "street": "2775 Mosside Boulevard ",
+          "city": "Monroeville",
+          "state": "PA",
+          "zip": 15146
+        },
+        "phone": "(412) 357-3000",
+        "has_doses": false,
+        "last_update": "1/15/2021 16:09:36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.436561,
+          -79.760197
         ]
       }
     },
@@ -180,88 +840,22 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "UPMC East",
+        "name": "VA Pittsburgh Hospital",
         "address": {
-          "street": "2775 Mosside Boulevard ",
-          "city": "Monroeville",
-          "state": "PA",
-          "zip": 15146
-        },
-        "phone": "(412) 357-3000",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.436561,
-          -79.760197
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Allegheny General Hospital",
-        "address": {
-          "street": "320 E. North Ave",
+          "street": "4100 Allequippa St",
           "city": "Pittsburgh",
           "state": "PA",
-          "zip": 15212
+          "zip": 15261
         },
-        "phone": "(412) 359-3131",
+        "phone": "(412) 822-2222",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          40.45701,
-          -80.003724
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Allegheny Valley Hospital",
-        "address": {
-          "street": "1301 Carlisle Street",
-          "city": "Natrona Heights",
-          "state": "PA",
-          "zip": 15065
-        },
-        "phone": "(724) 224-5100",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.619129,
-          -79.737849
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Forbes Regional Hospital",
-        "address": {
-          "street": "2570 Haymaker Rd",
-          "city": "Monroeville",
-          "state": "PA",
-          "zip": 15146
-        },
-        "phone": "(412) 858-2000",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.427585,
-          -79.747217
+          40.447391,
+          -79.959788
         ]
       }
     },
@@ -290,198 +884,44 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "VA Pittsburgh Hospital",
+        "name": "Wilkinsburg Family Health Center",
         "address": {
-          "street": "4100 Allequippa St",
+          "street": "807 Wallace Avenue Suite 203",
           "city": "Pittsburgh",
           "state": "PA",
-          "zip": 15261
+          "zip": 15221
         },
-        "phone": "(412) 822-2222",
+        "phone": "(412) 247-5216",
         "has_doses": true,
         "last_update": "1/15/2021 16:09:36"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          40.447391,
-          -79.959788
+          40.44391772,
+          -79.88010197
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Heritage Valley Hospital",
+        "name": "Wilson's Pharmacy",
         "address": {
-          "street": "720 Blackburn Rd",
-          "city": "Sewickley",
+          "street": "4101 Penn Ave Suite A",
+          "city": "Pittsburgh",
           "state": "PA",
-          "zip": 15143
+          "zip": 15224
         },
-        "phone": "(877) 771-4847",
+        "phone": "(412) 621-6471",
         "has_doses": false,
         "last_update": "1/15/2021 16:09:36"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          40.543454,
-          -80.177601
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Jefferson Regional Hospital",
-        "address": {
-          "street": "565 Coal Valley Rd",
-          "city": "Clairton",
-          "state": "PA",
-          "zip": 15025
-        },
-        "phone": "(412) 469-5000",
-        "has_doses": true,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.31844,
-          -79.933488
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Ohio Valley Hospital",
-        "address": {
-          "street": "25 Heckel Rd",
-          "city": "McKees Rocks",
-          "state": "PA",
-          "zip": 15136
-        },
-        "phone": "(412) 777-6204",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.472755,
-          -80.090742
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "St Clair Hospital",
-        "address": {
-          "street": "1000 Bower Hill Rd",
-          "city": "Pittsburgh",
-          "state": "PA",
-          "zip": 15243
-        },
-        "phone": "(412) 942-4000",
-        "has_doses": true,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.378099,
-          -80.06661
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Encompass Health Rehabilitation Hospital of Sewickley",
-        "address": {
-          "street": "303 Camp Meeting Rd",
-          "city": "Sewickley",
-          "state": "PA",
-          "zip": 15143
-        },
-        "phone": "(412) 741-9500",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.576315,
-          -80.203135
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Southwood Psychatric Hospital",
-        "address": {
-          "street": "2575 Boyce Plaza Rd",
-          "city": "Pittsburgh",
-          "state": "PA",
-          "zip": 15241
-        },
-        "phone": "(412) 998-8427",
-        "has_doses": false,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.321195,
-          -80.112625
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Lifecare Hospital of Monroville",
-        "address": {
-          "street": "2380 McGinley Road",
-          "city": "Monroeville",
-          "state": "PA",
-          "zip": 15146
-        },
-        "phone": "(412) 247-2000",
-        "has_doses": true,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.424369,
-          -79.745967
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Health South  Harmaville Rehabilitaiton",
-        "address": {
-          "street": "320 Guys Run Rd",
-          "city": "Pittsburgh",
-          "state": "PA",
-          "zip": 15238
-        },
-        "phone": "(412) 828-1300",
-        "has_doses": true,
-        "last_update": "1/15/2021 16:09:36"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          40.536213,
-          -79.849228
+          40.46603553,
+          -79.95514762
         ]
       }
     }

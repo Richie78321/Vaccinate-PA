@@ -25,11 +25,16 @@ export default function HospitalPopup(props) {
                     </div>
                 </div>
 
-                <div className="container flex justify_between">
-                    { props.selectedHospital.properties.has_doses ? 
-                        <span className="text-green-500 text-lg font-bold">Has doses</span>
-                        : <span className="text-red-500 text-lg font-bold">No doses</span>
-                    }
+                <div className="container flex justify-between">
+                    <div className="">
+                        { props.selectedHospital.properties.has_doses ? 
+                            <span className="text-green-500 text-lg font-bold">Has doses</span>
+                            : <span className="text-red-500 text-lg font-bold">No doses</span>
+                        }
+                    </div>
+                    <div>
+                        <span className="text-bold"> Last Updated: {props.selectedHospital.properties.last_update}</span>
+                    </div>
                 </div>
             </div>
         </InfoWindow>
