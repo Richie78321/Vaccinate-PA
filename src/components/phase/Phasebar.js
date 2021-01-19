@@ -10,14 +10,14 @@ export default function Phasebar(props) {
                         (props.num >= i )
                         ?   <div 
                                 key={phase} 
-                                className="sm:w-60 sm:h-60 p-5 bg-blue-300 flex justify-center items-center font-bold text-xs sm:text-2xl 
+                                className="md:w-40 md:h-40 md:text-lg lg:w-60 lg:h-60 p-5 bg-blue-300 flex justify-center items-center font-bold text-xs lg:text-2xl 
                                 text-blue-900 sm:transition sm:duration-500 sm:ease-in-out hover:bg-blue-900 hover:text-white"
                             >
                                 Phase {phase}
                             </div>
                         :   <div 
                                 key={phase} 
-                                className="sm:w-60 sm:h-60 p-5 bg-white flex justify-center items-center font-bold text-xs sm:text-2xl 
+                                className="md:w-40 md:h-40 md:text-lg lg:w-60 lg:h-60 p-5 bg-white flex justify-center items-center font-bold text-xs lg:text-2xl 
                                 text-gray-400 sm:transition sm:duration-500 sm:ease-in-out hover:bg-gray-500 hover:text-gray-200"
                             >
                                 Phase {phase}
