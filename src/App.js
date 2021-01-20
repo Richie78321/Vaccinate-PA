@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Map from "./components/map/Map";
 import Phases from "./components/phase/Phases";
 import Alert from "./components/Alert";
+import Home from "./components/home/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
@@ -9,14 +10,12 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Route
-        exact path="/"
-      >
-
-      </Route>
       <Route 
-        path="/experimental"
-      >
+        exact 
+        path="/" 
+        component={Home}
+      />
+      <Route path="/experimental">
         <div className="flex flex-col items-center">
           <Alert />
           <Map />
