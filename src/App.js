@@ -10,11 +10,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Route 
-        exact 
-        path="/" 
-        component={Home}
-      />
+      <Route exact path="/" component={Home} />
       <Route path="/experimental">
         <div className="flex flex-col items-center">
           <Alert />

@@ -6,7 +6,7 @@ export default function Phases(props) {
     "1A": 0,
     "1B": 1,
     "1C": 2,
-    "2": 3,
+    2: 3,
   };
 
   return (
