@@ -9,6 +9,11 @@ function App() {
   return (
     <Router>
       <Navbar />
+      <Route
+        exact path="/"
+      >
+
+      </Route>
       <Route 
         path="/experimental"
       >
