@@ -4,7 +4,7 @@ export default function Phasebar(props) {
   const phases = ["1A", "1B", "1C", "2"];
   return (
     <>
-      <div className="flex border border-blue-900 mb-2 mt-6">
+      <div className="flex justify-between border border-blue-900 mb-2 mt-6">
         {phases.map((phase, i) =>
           props.num >= i ? (
             <div

@@ -74,37 +74,39 @@ export default function Map() {
     minimumClusterSize: 3,
   };
   return (
-    <div className="container h-72 md:h-96">
+    <div className="container">
       <MapBar panTo={panTo} />
-      <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={13}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        <MarkerClusterer options={clusterOptions}>
-          {(clusterer) =>
-            hospitalData.features.map((hospital) => (
-              <HospitalMarker
-                key={hospital.properties.name}
-                setSelectedHospital={setSelectedHospital}
-                hospital={hospital}
-                clusterer={clusterer}
-                panTo={panTo}
-              />
-            ))
-          }
-        </MarkerClusterer>
+      <div className="h-72 md:h-96">
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={13}
+          center={center}
+          options={options}
+          onLoad={onMapLoad}
+        >
+          <MarkerClusterer options={clusterOptions}>
+            {(clusterer) =>
+              hospitalData.features.map((hospital) => (
+                <HospitalMarker
+                  key={hospital.properties.name}
+                  setSelectedHospital={setSelectedHospital}
+                  hospital={hospital}
+                  clusterer={clusterer}
+                  panTo={panTo}
+                />
+              ))
+            }
+          </MarkerClusterer>
 
-        {selectedHospital && (
-          <HospitalPopup
-            setSelectedHospital={setSelectedHospital}
-            selectedHospital={selectedHospital}
-          />
-        )}
-      </GoogleMap>
+          {selectedHospital && (
+            <HospitalPopup
+              setSelectedHospital={setSelectedHospital}
+              selectedHospital={selectedHospital}
+            />
+          )}
+        </GoogleMap>
+      </div>
     </div>
   );
 }
