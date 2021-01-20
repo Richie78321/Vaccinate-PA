@@ -9,7 +9,7 @@ export default function Home() {
             src="https://airtable.com/embed/shr1fCiGy7sVnNixq?backgroundColor=grayLight&viewControls=on"
             frameborder="0"
             onmousewheel=""
-            width="100%"
+            width="90%"
             height="533"
             className="bg-transparent border border-gray-500"
             />
