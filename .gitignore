@@ -121,4 +121,6 @@ dist
 !.vscode/extensions.json
 *.code-workspace
 
+### others
+/scripts/gcred.json
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode
