@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function AirTable() {
   return (
@@ -8,8 +8,8 @@ export default function AirTable() {
       frameBorder="0"
       width="100%"
       height="100%"
-      style={{ height: '85vh' }}
+      style={{ height: "85vh" }}
       className="airtable-embed"
     />
-  )
+  );
 }

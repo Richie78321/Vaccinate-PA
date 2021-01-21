@@ -1,12 +1,8 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import SiteNavbar from './components/SiteNavbar';
-import AirTableView from './pages/AirTableView';
-import Footer from './components/Footer';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SiteNavbar from "./components/SiteNavbar";
+import AirTableView from "./pages/AirTableView";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -14,7 +10,7 @@ function App() {
       <SiteNavbar />
       <Switch>
         <Route path="/">
-          <AirTableView/>
+          <AirTableView />
         </Route>
       </Switch>
       <Footer />
