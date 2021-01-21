@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import ReactGA from "react-ga";
 
-ReactGA.initialize("G-LPVKBF3BLE");
+ReactGA.initialize("UA-58446605-2");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
