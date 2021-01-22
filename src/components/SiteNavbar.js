@@ -14,8 +14,12 @@ export default function SiteNavbar() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/availability">Vaccine Availability</Nav.Link>
-          <Nav.Link as={Link} to="/additional-info">Additional Info</Nav.Link>
+          <Nav.Link as={Link} to="/availability">
+            Vaccine Availability
+          </Nav.Link>
+          <Nav.Link as={Link} to="/additional-info">
+            Additional Info
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

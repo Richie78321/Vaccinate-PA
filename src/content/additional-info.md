@@ -1,35 +1,42 @@
 # Additional Info
+
 For the latest official updates from PA, visit: [https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx](https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx)
 
 <br />
 
 ## Phases
+
 As of **January 19th**, Pennsylvania COVID-19 vaccine distribution has entered **Phase 1A**, which determines who the vaccine is currently being distributed to. You can learn more about the distribution phases [here](https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#distribution).
 ![PA Distribution Phase Progress Bar](https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/PublishingImages/phases%20progress%20bar.png)
 
 <br />
 
 ## Am I eligible?
+
 You are currently eligible if you belong to any of the following groups:
-* People 65 and older
-* Adults of any age with serious medical conditions
-* Long-term care facility residents
-* Health care personnel
+
+- People 65 and older
+- Adults of any age with serious medical conditions
+- Long-term care facility residents
+- Health care personnel
 
 <br />
 
 ## I'm not eligible yet. When can I get the vaccine?
+
 **Note**: People working or living in specific counties may be able to complete a pre-registration form in order to be contacted by the county when a vaccine is available for their group. If you do not see your county listed below, please refer to your county's website in order to determine whether your county has launched a pre-registration form.
-* Philadelphia County [pre-registration](https://phillyfightingcovid.com/vaccine)
-* Bucks County [pre-registration](https://buckscovid.powerappsportals.us/Vaccine-Registration/)
-* Chester County [pre-registration](https://docs.google.com/forms/d/e/1FAIpQLSdl8K8S2Mkpe1aGyDOeq8y51mZTNJb0dmkosypQu3p10xQVzw/viewform)
-* Delaware County [pre-registration](https://docs.google.com/forms/d/e/1FAIpQLSdl8K8S2Mkpe1aGyDOeq8y51mZTNJb0dmkosypQu3p10xQVzw/viewform)
-* Lebanon County [pre-registration](https://www.lcdes.org/vaccinate/)
-* Montgomery County [pre-registration](https://www.montcopa.org/3660/COVID-19-Vaccine)
+
+- Philadelphia County [pre-registration](https://phillyfightingcovid.com/vaccine)
+- Bucks County [pre-registration](https://buckscovid.powerappsportals.us/Vaccine-Registration/)
+- Chester County [pre-registration](https://docs.google.com/forms/d/e/1FAIpQLSdl8K8S2Mkpe1aGyDOeq8y51mZTNJb0dmkosypQu3p10xQVzw/viewform)
+- Delaware County [pre-registration](https://docs.google.com/forms/d/e/1FAIpQLSdl8K8S2Mkpe1aGyDOeq8y51mZTNJb0dmkosypQu3p10xQVzw/viewform)
+- Lebanon County [pre-registration](https://www.lcdes.org/vaccinate/)
+- Montgomery County [pre-registration](https://www.montcopa.org/3660/COVID-19-Vaccine)
 
 <br />
 
 ## I'm eligible. How do I get the vaccine?
+
 <br />
 <table class="table table-striped">
   <thead class="thead-dark"><tr><th>Group</th><th>Instructions</th></tr></thead>
