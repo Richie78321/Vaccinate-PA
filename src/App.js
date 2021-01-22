@@ -13,7 +13,7 @@ function App() {
       <SiteNavbar />
       <Switch>
         <Route path="/additional-info">
-          <div className="container mt-4">
+          <div className="container-lg mt-4">
             <MarkdownFromPath markdownPath={additionalInfoMarkdownPath} />
           </div>
         </Route>

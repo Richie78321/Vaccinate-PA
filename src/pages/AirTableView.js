@@ -3,7 +3,7 @@ import AirTable from "../components/AirTable";
 
 export default function AirTableView() {
   return (
-    <div className="container mt-5">
+    <div className="container-fluid mt-4">
       <h1>Pennsylvania COVID-19 Vaccine Availability</h1>
       <p>
         As of January 19th, 2021, Pennsylvania has approved giving the COVID-19
