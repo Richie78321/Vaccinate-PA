@@ -17,7 +17,9 @@ function App() {
           <Switch>
             <Route path="/additional-resources">
               <div className="container-lg mt-4">
-                <MarkdownFromPath markdownPath={additionalResourcesMarkdownPath} />
+                <MarkdownFromPath
+                  markdownPath={additionalResourcesMarkdownPath}
+                />
               </div>
             </Route>
             <Route path="/about-us">
