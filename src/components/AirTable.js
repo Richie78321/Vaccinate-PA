@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typeahead } from 'react-bootstrap-typeahead';
+import { Typeahead } from "react-bootstrap-typeahead";
 import counties from "../content/counties.json";
 
 function checkHashURLForCountyFilter() {
@@ -15,9 +15,12 @@ function checkHashURLForCountyFilter() {
 }
 
 export default function AirTable() {
-  const [countyFilter, setCountyFilter] = useState(checkHashURLForCountyFilter());
+  const [countyFilter, setCountyFilter] = useState(
+    checkHashURLForCountyFilter()
+  );
 
-  let airtableURL = "https://airtable.com/embed/shr1fCiGy7sVnNixq?backgroundColor=grayLight&viewControls=on";
+  let airtableURL =
+    "https://airtable.com/embed/shr1fCiGy7sVnNixq?backgroundColor=grayLight&viewControls=on";
   if (countyFilter) {
     airtableURL += `&filter_County=${countyFilter}`;
   }
