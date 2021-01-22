@@ -9,6 +9,7 @@
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
+    "react-bootstrap-typeahead": "^5.1.4",
     "react-dom": "^17.0.1",
     "react-ga": "^3.3.0",
     "react-markdown": "^5.0.3",
