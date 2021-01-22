@@ -38,6 +38,7 @@ export default function AirTable() {
             setCountyFilter(selected[0]);
           }
         }}
+        clearButton
       />
       <iframe
         title="All County Airtable Embed"
