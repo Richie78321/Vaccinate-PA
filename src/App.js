@@ -5,23 +5,33 @@ import AirTableView from "./pages/AirTableView";
 import Footer from "./components/Footer";
 import MarkdownFromPath from "./components/MardownFromPath";
 
-import additionalInfoMarkdownPath from "./content/additional-info.md";
+import additionalResourcesMarkdownPath from "./content/additional-resources.md";
+import aboutUsMarkdownPath from "./content/about-us.md";
 
 function App() {
   return (
     <Router>
-      <SiteNavbar />
-      <Switch>
-        <Route path="/additional-info">
-          <div className="container-lg mt-4">
-            <MarkdownFromPath markdownPath={additionalInfoMarkdownPath} />
-          </div>
-        </Route>
-        <Route path="/">
-          <AirTableView />
-        </Route>
-      </Switch>
-      <Footer />
+      <main className="d-flex flex-column h-100">
+        <SiteNavbar />
+        <div className="flex-grow-1">
+          <Switch>
+            <Route path="/additional-resources">
+              <div className="container-lg mt-4">
+                <MarkdownFromPath markdownPath={additionalResourcesMarkdownPath} />
+              </div>
+            </Route>
+            <Route path="/about-us">
+              <div className="container-lg mt-4">
+                <MarkdownFromPath markdownPath={aboutUsMarkdownPath} />
+              </div>
+            </Route>
+            <Route path="/">
+              <AirTableView />
+            </Route>
+          </Switch>
+        </div>
+        <Footer />
+      </main>
     </Router>
   );
 }

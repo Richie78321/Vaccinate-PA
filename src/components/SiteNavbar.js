@@ -17,8 +17,11 @@ export default function SiteNavbar() {
           <Nav.Link as={Link} to="/availability">
             Vaccine Availability
           </Nav.Link>
-          <Nav.Link as={Link} to="/additional-info">
-            Additional Info
+          <Nav.Link as={Link} to="/additional-resources">
+            Additional Resources
+          </Nav.Link>
+          <Nav.Link as={Link} to="/about-us">
+            About Us
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
