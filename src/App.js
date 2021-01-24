@@ -12,8 +12,8 @@ function App() {
   return (
     <Router>
       <main className="d-flex flex-column h-100">
-        <SiteNavbar />
         <div className="flex-grow-1">
+          <SiteNavbar />
           <Switch>
             <Route path="/additional-resources">
               <div className="container-lg mt-4">
