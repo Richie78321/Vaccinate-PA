@@ -14,7 +14,7 @@ export default function AirTableView() {
       </p>
       <p>
         Contact&nbsp;
-        <a href="mailto:zmwang622@gmail.com">Ming</a>
+        <a href="mailto:andrea.tunhi@gmail.com">Andrea</a>
         &nbsp;or&nbsp;
         <a href="mailto:rubinsteinseth@gmail.com">Seth</a>
         &nbsp;for more info.
