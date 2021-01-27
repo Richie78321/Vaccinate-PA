@@ -33,6 +33,7 @@ export default function Footer() {
         <p className="text-center">
           Made with {HeartIcon} by volunteer Pennsylvanians and others.
         </p>
+        <p className="text-center"><a target="_blank" rel="noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdjPA82AIaW2Bo7daEUQfxRdVRsUQS3d2aWz3a26EdaSeTPUA/viewform">Please let us know if you've found this site useful or have some feedback.</a></p>
         <small>
           This site was put together by volunteers using our best efforts to
           assemble readily available data from public sources. This site does
