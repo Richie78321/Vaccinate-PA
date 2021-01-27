@@ -1,3 +1,7 @@
+---
+title: Additional Resources
+---
+
 # Additional Resources
 
 _Updated as of January 22_
