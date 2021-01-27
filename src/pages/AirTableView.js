@@ -18,7 +18,8 @@ export default function AirTableView() {
         ,&nbsp;<a href="mailto:andrea.tunhi@gmail.com">Andrea</a>
         ,&nbsp;
         <a href="mailto:rubinsteinseth@gmail.com">Seth</a>
-        ,&nbsp;or visit our <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
+        ,&nbsp;or visit our{" "}
+        <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
       </p>
       <h4 className="mt-5">Find information about your county below:</h4>
       <AirTable />
