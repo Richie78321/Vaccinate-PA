@@ -2,6 +2,13 @@ import { FaCheckCircle, FaTimesCircle, FaQuestionCircle } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { AVAILABILITY_STATUS } from "../utils/Data";
 import moment from "moment";
+import Linkify from "react-linkify";
+
+const linkDecorator = (href, text, key) => (
+  <a href={href} key={key} target="_blank" rel="noreferrer">
+    {text}
+  </a>
+);
 
 export default function AirTableCard({ location }) {
   const { Name, County, Address } = location.fields;
@@ -76,7 +83,7 @@ export default function AirTableCard({ location }) {
                 <BsInfoCircle size="1.25em" className="mr-1" />{" "}
                 <span className="align-middle">
                   <span className="font-weight-bold">Latest info:</span>{" "}
-                  {reportNotes}
+                  <Linkify componentDecorator={linkDecorator}>{reportNotes}</Linkify>
                 </span>
               </span>
             </li>
