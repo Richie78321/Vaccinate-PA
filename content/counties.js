@@ -65,7 +65,7 @@ const counties = [
   "Wayne County",
   "Westmoreland County",
   "Wyoming County",
-  "York County"
+  "York County",
 ];
 
 export default counties;

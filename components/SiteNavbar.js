@@ -24,9 +24,7 @@ export default function SiteNavbar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Link href="/">
-            <Nav.Link href="/">
-              County Search
-            </Nav.Link>
+            <Nav.Link href="/">County Search</Nav.Link>
           </Link>
           <Link href="/additional-resources">
             <Nav.Link href="/additional-resources">
@@ -34,9 +32,7 @@ export default function SiteNavbar() {
             </Nav.Link>
           </Link>
           <Link href="/about-us">
-            <Nav.Link href="/about-us">
-              About Us
-            </Nav.Link>
+            <Nav.Link href="/about-us">About Us</Nav.Link>
           </Link>
         </Nav>
       </Navbar.Collapse>

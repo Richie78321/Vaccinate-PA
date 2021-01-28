@@ -1,4 +1,4 @@
-import Layout from '../layouts/Layout';
+import Layout from "../layouts/Layout";
 import ReactMarkdown from "react-markdown/with-html";
 import matter from "gray-matter";
 import fs from "fs";
@@ -22,13 +22,13 @@ export default function MarkdownPage({ meta, markdownText }) {
         />
       </div>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps({ params }) {
-  const markdownPath = path.join(process.cwd(), `content/${params.mdfile}.md`)
-  const fileContents = fs.readFileSync(markdownPath).toString()
-  const { data, content } = matter(fileContents)
+  const markdownPath = path.join(process.cwd(), `content/${params.mdfile}.md`);
+  const fileContents = fs.readFileSync(markdownPath).toString();
+  const { data, content } = matter(fileContents);
 
   return {
     props: {
@@ -41,12 +41,12 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   return {
     paths: [
-      { 
-        params: { mdfile: "about-us" }
+      {
+        params: { mdfile: "about-us" },
       },
-      { 
-        params: { mdfile: "additional-resources" }
-      }
+      {
+        params: { mdfile: "additional-resources" },
+      },
     ],
     fallback: false,
   };
