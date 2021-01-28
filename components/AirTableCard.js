@@ -10,6 +10,8 @@ export default function AirTableCard({ location }) {
     Address,
   } = location.fields;
 
+  const phoneNumber = location.fields['Phone number'];
+
   const latestReportTimeRaw = location.fields['Latest report'];
   const latestReportTimeText = latestReportTimeRaw ? moment(latestReportTimeRaw).fromNow() : null;
 
@@ -47,6 +49,10 @@ export default function AirTableCard({ location }) {
               <div className="col-sm-8 col-md-10">
                 <h5 className="mb-0 card-title text-truncate">{Name}</h5>
                 <p className="my-0 text-truncate">
+                  <a href={`tel:${phoneNumber}`}>
+                    <small>{phoneNumber}</small>
+                  </a>
+                  <span className="text-muted">{" | "}</span>
                   <a target="_blank" rel="noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(Address)}`}>
                     <small>{Address}</small>
                   </a>
