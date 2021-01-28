@@ -13,10 +13,12 @@ const linkDecorator = (href, text, key) => (
 export default function AirTableCard({ location }) {
   const { Name, County, Address } = location.fields;
 
-  const phoneNumber = location.fields['Phone number'];
+  const phoneNumber = location.fields["Phone number"];
 
-  const latestReportTimeRaw = location.fields['Latest report'];
-  const latestReportTimeText = latestReportTimeRaw ? moment(latestReportTimeRaw).fromNow() : null;
+  const latestReportTimeRaw = location.fields["Latest report"];
+  const latestReportTimeText = latestReportTimeRaw
+    ? moment(latestReportTimeRaw).fromNow()
+    : null;
 
   const reportNoteList = location.fields["Latest report notes"];
   const reportNotes =
@@ -62,7 +64,13 @@ export default function AirTableCard({ location }) {
                     <small>{phoneNumber}</small>
                   </a>
                   <span className="text-muted">{" | "}</span>
-                  <a target="_blank" rel="noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(Address)}`}>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                      Address
+                    )}`}
+                  >
                     <small>{Address}</small>
                   </a>
                 </p>
