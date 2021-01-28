@@ -91,7 +91,9 @@ export default function AirTableCard({ location }) {
                 <BsInfoCircle size="1.25em" className="mr-1" />{" "}
                 <span className="align-middle">
                   <span className="font-weight-bold">Latest info:</span>{" "}
-                  <Linkify componentDecorator={linkDecorator}>{reportNotes}</Linkify>
+                  <Linkify componentDecorator={linkDecorator}>
+                    {reportNotes}
+                  </Linkify>
                 </span>
               </span>
             </li>
