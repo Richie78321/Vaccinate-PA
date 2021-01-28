@@ -9,16 +9,17 @@ export default function Index() {
       <div className="container-fluid mt-4">
         <h1>Pennsylvania COVID-19 Vaccine Availability</h1>
         <p>
-          As of January 19th, 2021, Pennsylvania has approved giving the COVID-19
-          vaccine to people age 65 and older. We are a volunteer team calling
-          hospitals and pharmacies to identify which facilities are currently
-          administering vaccines. This website will be updated daily to reflect
-          the latest information we are able to gather.
+          As of January 19th, 2021, Pennsylvania has approved giving the
+          COVID-19 vaccine to people age 65 and older. We are a volunteer team
+          calling hospitals and pharmacies to identify which facilities are
+          currently administering vaccines. This website will be updated daily
+          to reflect the latest information we are able to gather.
         </p>
         <p>
           Contact&nbsp;
           <a href="mailto:vaccinatepa2021@gmail.com">the VaccinatePA team</a>
-          &nbsp;or visit our <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
+          &nbsp;or visit our{" "}
+          <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
         <h2 className="mt-3">Search for your county here:</h2>
         <CountySearch />

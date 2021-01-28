@@ -1,6 +1,6 @@
-import { Typeahead } from "react-bootstrap-typeahead"
-import counties from "../content/counties"
-import { useRouter } from "next/router"
+import { Typeahead } from "react-bootstrap-typeahead";
+import counties from "../content/counties";
+import { useRouter } from "next/router";
 
 export default function CountySearch() {
   const router = useRouter();
@@ -17,5 +17,5 @@ export default function CountySearch() {
       }}
       clearButton
     />
-  )
+  );
 }
