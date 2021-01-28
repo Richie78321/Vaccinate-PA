@@ -21,7 +21,7 @@ export default function Index() {
           &nbsp;or visit our{" "}
           <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
-        <h2 className="mt-3">Search for your county here:</h2>
+        <h2 className="mt-3"><strong>(Recommended)</strong> Search for your county here:</h2>
         <CountySearch />
         <h4 className="mt-5">View all county information below:</h4>
         <AirTableEmbed />
