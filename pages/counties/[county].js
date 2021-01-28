@@ -1,10 +1,14 @@
-import AirTable from "../../components/AirTable";
+import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
 import Layout from "../../layouts/Layout";
+import { getCountyLocations } from "../../utils/Data";
+import { FaCheckCircle, FaTimesCircle, FaQuestionCircle } from "react-icons/fa";
 
-export default function CountyPage({ county }) {
+export default function CountyPage({ county, locations }) {
+  const [ locationsAvailable, locationsNotAvailable, locationsUnconfirmed ] = locations;
+
   return (
-    <Layout title={county + " Availability"}>
+    <Layout title={county + " Vaccine Availability"}>
       <div className="container-fluid mt-4">
         <h1>{county} COVID-19 Vaccine Availability</h1>
         <p>
@@ -19,18 +23,53 @@ export default function CountyPage({ county }) {
           <a href="mailto:vaccinatepa2021@gmail.com">the VaccinatePA team</a>
           &nbsp;or visit our <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
-        <h4 className="mt-5">Find information about {county} below:</h4>
-        <AirTable county={county} />
+        <div className="d-flex flex-column">
+          { locationsAvailable.length > 0 ?
+            <>
+              <h4 className="text-success font-weight-bold mb-3">
+                <FaCheckCircle /> <span className="align-middle">Vaccines reported available</span>
+              </h4>
+              {locationsAvailable.map((location) => 
+              <div key={location.id} className="my-1">
+                <AirTableCard location={location} />
+              </div>)}
+            </>: null }
+          { locationsNotAvailable.length > 0 ?
+            <>
+              <h4 className="text-danger font-weight-bold my-3">
+                <FaTimesCircle /> <span className="align-middle">Vaccines reported unavailable</span>
+              </h4>
+              {locationsNotAvailable.map((location) => 
+              <div key={location.id} className="my-1">
+                <AirTableCard location={location} />
+              </div>)}
+            </>: null }
+          { locationsUnconfirmed.length > 0 ?
+            <>
+              <h4 className="text-black font-weight-bold my-3">
+                <FaQuestionCircle /> <span className="align-middle">Uncontacted locations</span>
+              </h4>
+              {locationsUnconfirmed.map((location) => 
+              <div key={location.id} className="my-1">
+                <AirTableCard location={location} />
+              </div>)}
+            </>: null }
+        </div>
       </div>
     </Layout>
   )
 }
 
 export async function getStaticProps({ params }) {
+  const countyDecoded = params.county.replace("_", " ");
+  const countyLocations = await getCountyLocations(countyDecoded);
+
   return { 
     props: {
-      county: params.county.replace("_", " "),
-    }
+      county: countyDecoded,
+      locations: countyLocations,
+    },
+    revalidate: 600, // 10 minutes
   };
 }
 

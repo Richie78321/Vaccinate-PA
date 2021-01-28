@@ -1,5 +1,5 @@
 import React from "react";
-import AirTable from "../components/AirTable";
+import AirTableEmbed from "../components/AirTableEmbed";
 import CountySearch from "../components/CountySearch";
 import Layout from "../layouts/Layout";
 
@@ -20,10 +20,10 @@ export default function Index() {
           <a href="mailto:vaccinatepa2021@gmail.com">the VaccinatePA team</a>
           &nbsp;or visit our <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
-        <h3 className="mt-3">Search for your county here:</h3>
+        <h2 className="mt-3">Search for your county here:</h2>
         <CountySearch />
         <h4 className="mt-5">View all county information below:</h4>
-        <AirTable />
+        <AirTableEmbed />
       </div>
     </Layout>
   );
