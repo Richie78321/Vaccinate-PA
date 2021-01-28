@@ -53,7 +53,7 @@ export default function AirTableCard({ location }) {
                 </p>
               </div>
               {latestReportTimeText ? <div className="col-sm-4 col-md-2 text-right">
-                <span className="badge badge-pill badge-light font-weight-normal">Updated {latestReportTimeText}</span>
+                <span className="badge badge-pill badge-light font-weight-normal text-wrap">Updated {latestReportTimeText}</span>
               </div> : null}
             </div>
           </li>
