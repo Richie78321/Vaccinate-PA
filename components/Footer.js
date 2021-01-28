@@ -1,5 +1,3 @@
-import React from "react";
-
 const HeartIcon = (
   <svg
     aria-hidden="true"

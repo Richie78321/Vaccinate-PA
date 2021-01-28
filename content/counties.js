@@ -1,4 +1,4 @@
-[
+const counties = [
   "Adams County",
   "Allegheny County",
   "Armstrong County",
@@ -66,4 +66,6 @@
   "Westmoreland County",
   "Wyoming County",
   "York County"
-]
+];
+
+export default counties;
