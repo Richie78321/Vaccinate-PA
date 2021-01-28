@@ -3,6 +3,7 @@ import counties from "../../content/counties";
 import Layout from "../../layouts/Layout";
 import { getCountyLocations } from "../../utils/Data";
 import { FaCheckCircle, FaTimesCircle, FaQuestionCircle } from "react-icons/fa";
+import Link from "next/link"
 
 export default function CountyPage({ county, locations }) {
   const [ locationsAvailable, locationsNotAvailable, locationsUnconfirmed ] = locations;
@@ -24,6 +25,11 @@ export default function CountyPage({ county, locations }) {
           &nbsp;or visit our <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
         <div className="d-flex flex-column">
+          { locationsAvailable.length === 0 && locationsNotAvailable.length === 0 && locationsUnconfirmed.length === 0 ?
+            <>
+              <h2 className="text-center mt-5">We currently have no locations for {county} on record.</h2>
+              <h2 className="text-center">You can view all counties <Link href="/">here</Link>.</h2>
+            </>: null }
           { locationsAvailable.length > 0 ?
             <>
               <h4 className="text-success font-weight-bold mb-3">
