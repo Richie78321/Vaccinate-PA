@@ -6,5 +6,5 @@ You can visit the live site [here](https://vaccinatepa.org/).
 
 ```
 yarn install
-yarn start
+yarn dev
 ```
