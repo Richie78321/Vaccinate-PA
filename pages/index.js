@@ -21,11 +21,14 @@ export default function Index() {
           &nbsp;or visit our{" "}
           <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
-        <h2 className="mt-3">
-          <strong>(Recommended)</strong> Search for your county here:
-        </h2>
-        <CountySearch />
-        <h4 className="mt-5">View all county information below:</h4>
+        <div className="alert alert-primary mt-3 mb-5 py-4">
+          <h2>
+            <strong>(Recommended)</strong> Search for your county here:
+          </h2>
+          <CountySearch />
+        </div>
+        <p className="mt-4 alert alert-secondary text-center">If you have a missing location to report, or think we have incorrect information, <a target="_blank" rel="noreferrer" href="https://airtable.com/shr7z01kc7h1ogP5R">please let us know.</a></p>
+        <h4 className="mt-4">View all county information below:</h4>
         <AirTableEmbed />
       </div>
     </Layout>

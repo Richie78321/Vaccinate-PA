@@ -2,7 +2,7 @@ import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
 import Layout from "../../layouts/Layout";
 import { getCountyLocations } from "../../utils/Data";
-import { FaCheckCircle, FaTimesCircle, FaQuestionCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimesCircle, FaQuestionCircle, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 
 export default function CountyPage({ county, locations }) {
@@ -14,7 +14,14 @@ export default function CountyPage({ county, locations }) {
 
   return (
     <Layout title={county + " Vaccine Availability"}>
-      <div className="container-fluid mt-4">
+      <div className="container-fluid mt-3">
+        <div className="ml-1 mb-2">
+          <Link href="/">
+            <a>
+              <FaArrowLeft /> <span className="align-middle">View all counties</span>
+            </a>
+          </Link>
+        </div>
         <h1>{county} COVID-19 Vaccine Availability</h1>
         <p>
           As of January 19th, 2021, Pennsylvania has approved giving the
@@ -29,6 +36,7 @@ export default function CountyPage({ county, locations }) {
           &nbsp;or visit our{" "}
           <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
+        <p className="alert alert-secondary text-center">If you have a missing location to report, or think we have incorrect information, <a target="_blank" rel="noreferrer" href="https://airtable.com/shr7z01kc7h1ogP5R">please let us know.</a></p>
         <div className="d-flex flex-column">
           {locationsAvailable.length === 0 &&
           locationsNotAvailable.length === 0 &&
