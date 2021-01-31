@@ -11,6 +11,10 @@ export default function CountySearch({ searchRef }) {
             console.log("Latitude is :", position.coords.latitude);
             console.log("Longitude is :", position.coords.longitude);
         });
+
+        if (searchRef.current) {
+            searchRef.current.focus();
+        }
     };
 
     return (
