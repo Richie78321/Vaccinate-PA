@@ -135,11 +135,9 @@ const countyPositions = {
   "Wayne County": { lng: -88.4197678, lat: 38.4251958 },
   "Westmoreland County": { lng: -79.4873204, lat: 40.2930159 },
   "Wyoming County": { lng: -76.019111, lat: 41.5179097 },
-  "York County": { lng: -76.7008946, lat: 39.9067499 }
+  "York County": { lng: -76.7008946, lat: 39.9067499 },
 };
 
 export default counties;
 
-export {
-  countyPositions,
-};
+export { countyPositions };
