@@ -10,6 +10,20 @@ const linkDecorator = (href, text, key) => (
   </a>
 );
 
+const displayPhoneNumber = (phone) => {
+  if (!phone) {
+    return "N/A";
+  } else {
+    var cleaned = ("" + phone).replace(/\D/g, "");
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
+    } else {
+      return phone;
+    }
+  }
+};
+
 export default function AirTableCard({ location }) {
   const { Name, County, Address } = location.fields;
 
@@ -61,7 +75,7 @@ export default function AirTableCard({ location }) {
                 <h5 className="mb-0 card-title text-truncate">{Name}</h5>
                 <p className="my-0 text-truncate">
                   <a href={`tel:${phoneNumber}`}>
-                    <small>{phoneNumber}</small>
+                    <small>{displayPhoneNumber(phoneNumber)}</small>
                   </a>
                   <span className="text-muted">{" | "}</span>
                   <a
