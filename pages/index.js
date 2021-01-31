@@ -27,8 +27,8 @@ export default function Index() {
           </h2>
           <CountySearch />
         </div>
-        <p className="mt-4 alert alert-secondary text-center">If you have a missing location to report, or think we have incorrect information, <a target="_blank" rel="noreferrer" href="https://airtable.com/shr7z01kc7h1ogP5R">please let us know.</a></p>
         <h4 className="mt-4">View all county information below:</h4>
+        <p className="mt-4 alert alert-secondary text-center">If you have a missing location to report, or think we have incorrect information, <a target="_blank" rel="noreferrer" href="https://airtable.com/shr7z01kc7h1ogP5R">please let us know.</a></p>
         <AirTableEmbed />
       </div>
     </Layout>
