@@ -11,7 +11,9 @@ import {
 import Link from "next/link";
 
 function titleCase(str) {
-  return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+  return str.replace(/(^|\s)\S/g, function (t) {
+    return t.toUpperCase();
+  });
 }
 
 export default function CountyPage({ county, locations }) {
@@ -124,15 +126,15 @@ export async function getServerSideProps({ params }) {
   if (!counties.includes(countyDecoded)) {
     return {
       notFound: true,
-    }
+    };
   }
-  
+
   const countyLocations = await getCountyLocations(countyDecoded);
 
   return {
     props: {
       county: countyDecoded,
       locations: countyLocations,
-    }
+    },
   };
 }
