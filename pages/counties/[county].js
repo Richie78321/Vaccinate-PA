@@ -10,6 +10,10 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 
+function titleCase(str) {
+  return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+}
+
 export default function CountyPage({ county, locations }) {
   const [
     locationsAvailable,
@@ -115,24 +119,20 @@ export default function CountyPage({ county, locations }) {
   );
 }
 
-export async function getStaticProps({ params }) {
-  const countyDecoded = params.county.replace("_", " ");
+export async function getServerSideProps({ params }) {
+  const countyDecoded = titleCase(params.county.replace("_", " "));
+  if (!counties.includes(countyDecoded)) {
+    return {
+      notFound: true,
+    }
+  }
+  
   const countyLocations = await getCountyLocations(countyDecoded);
 
   return {
     props: {
       county: countyDecoded,
       locations: countyLocations,
-    },
-    revalidate: 600, // 10 minutes
-  };
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: counties.map((county) => ({
-      params: { county: county.replace(" ", "_") },
-    })),
-    fallback: false,
+    }
   };
 }

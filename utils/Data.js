@@ -1,4 +1,9 @@
 import Airtable from "airtable";
+import NodeCache from "node-cache";
+
+const airtableCache = new NodeCache({
+  stdTTL: 60, // One minute
+});
 
 Airtable.configure({ apiKey: process.env.AIRTABLE_KEY });
 
@@ -47,19 +52,23 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
 }
 
 export async function getCountyLocations(county) {
-  const countyLocations = (
-    await Airtable.base("appdsheneg5ii1EnQ")("Locations")
-      .select({
-        filterByFormula: `County = "${county}"`,
-        sort: [
-          {
-            field: "Latest report",
-            direction: "desc",
-          },
-        ],
-      })
-      .all()
-  ).map((record) => record._rawJson);
+  let countyLocations = airtableCache.get(county);
+  if (countyLocations == undefined) {
+    countyLocations = (
+      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+        .select({
+          filterByFormula: `County = "${county}"`,
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        })
+        .all()
+    ).map((record) => record._rawJson);
+    airtableCache.set(county, countyLocations);
+  }
 
   for (let i = 0; i < countyLocations.length; i++) {
     countyLocations[i].availabilityStatus = getAvailabilityStatus(
