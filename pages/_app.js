@@ -1,7 +1,23 @@
 import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
+import "nprogress/nprogress.css";
+import Router from 'next/router';
 import Head from "next/head";
+import NProgress from 'nprogress';
+
+// Configure loading progress bar
+NProgress.configure({ showSpinner: true });
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
+
 
 function MyApp({ Component, pageProps }) {
   return (
