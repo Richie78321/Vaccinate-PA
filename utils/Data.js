@@ -2,7 +2,7 @@ import Airtable from "airtable";
 import NodeCache from "node-cache";
 
 const airtableCache = new NodeCache({
-  stdTTL: 60, // One minute
+  stdTTL: 600, // Ten minutes
 });
 
 Airtable.configure({ apiKey: process.env.AIRTABLE_KEY });
