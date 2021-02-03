@@ -3,25 +3,3 @@ body,
 #__next {
   height: 100%;
 }
-
-.flex {
-  display: flex;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.CountySuggestion {
-  background-color: #FCD34D;
-}
-
-/* County link */
-.CountyLink {
-  background: white;
-  display: block;
-  text-decoration: none;
-  color: black;
-  border-radius: 0.375rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 20px 2px;
-}
