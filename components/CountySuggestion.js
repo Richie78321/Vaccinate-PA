@@ -3,14 +3,11 @@ import Link from "next/link";
 import CountyLink from "./CountyLink";
 
 const FindMyCounty = ({ searchRef }) => {
-  const onClick = useCallback(
-    () => {
-      if (searchRef.current) {
-        searchRef.current.focus();
-      }
-    },
-    [searchRef],
-  );
+  const onClick = useCallback(() => {
+    if (searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [searchRef]);
 
   return (
     <>
@@ -38,8 +35,16 @@ export default function CountySuggestion({ searchRef }) {
         <div className="col-md-6">
           <h4 className="mb-3">More information about vaccine availability</h4>
           <p>
-            As of January 19th, 2021, the State of Pennsylvania has approved giving the COVID-19 vaccine to people age 65 and older. Pennsylvania's statewide COVID-19 vaccination program has been evolving rapidly. You can find more information and links to government websites <Link href="/additional-resources">here</Link>. We are a community-led website and do not represent the government or any healthcare provider.
-            <p className="mt-3"><Link href="/about-us">About VaccinatePA →</Link></p>
+            As of January 19th, 2021, the State of Pennsylvania has approved
+            giving the COVID-19 vaccine to people age 65 and older.
+            Pennsylvania's statewide COVID-19 vaccination program has been
+            evolving rapidly. You can find more information and links to
+            government websites <Link href="/additional-resources">here</Link>.
+            We are a community-led website and do not represent the government
+            or any healthcare provider.
+            <p className="mt-3">
+              <Link href="/about-us">About VaccinatePA →</Link>
+            </p>
           </p>
         </div>
         <div className="order-md-first col-12 col-md-6">
@@ -64,7 +69,7 @@ export default function CountySuggestion({ searchRef }) {
       </div>
       <style jsx>{`
         .county-suggestions {
-          background-color: #FCD34D;
+          background-color: #fcd34d;
         }
       `}</style>
     </div>

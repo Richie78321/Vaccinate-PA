@@ -5,9 +5,7 @@ export default function CountyLink({ county }) {
   return (
     <>
       <Link href={url}>
-        <a className="county-link rounded py-2 px-3 mb-3">
-          {county}
-        </a>
+        <a className="county-link rounded py-2 px-3 mb-3">{county}</a>
       </Link>
       <style jsx>{`
         .county-link {

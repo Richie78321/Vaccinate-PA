@@ -15,20 +15,20 @@ export default function Index() {
         </h1>
         <CountySearch searchRef={countySearchRef} />
         <p className="mt-4">
-          We are a volunteer team calling
-          hospitals and pharmacies to identify which facilities are currently
-          administering vaccines. This website will be updated daily to reflect
-          the latest information we are able to gather.
+          We are a volunteer team calling hospitals and pharmacies to identify
+          which facilities are currently administering vaccines. This website
+          will be updated daily to reflect the latest information we are able to
+          gather.
         </p>
         <p>
           Contact&nbsp;
           <a href="mailto:vaccinatepa2021@gmail.com">the VaccinatePA team</a>
-          &nbsp;or visit our <a href="https://twitter.com/VaccinatePA">
-            Twitter
-          </a>{" "}
-          for more info.
+          &nbsp;or visit our{" "}
+          <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
-        <div className="my-4"><CountySuggestion searchRef={countySearchRef} /></div>
+        <div className="my-4">
+          <CountySuggestion searchRef={countySearchRef} />
+        </div>
         <h4 className="mt-4">View all county information below:</h4>
         <p className="mt-4 alert alert-secondary text-center">
           If you have a missing location to report, or think we have incorrect
