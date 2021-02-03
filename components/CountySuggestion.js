@@ -44,10 +44,10 @@ export default function CountySuggestion() {
     <div>
       <CountySearch searchRef={searchRef} />
       <p className="mt-4">
-        We are a volunteer team calling
-        hospitals and pharmacies to identify which facilities are currently
-        administering vaccines. This website will be updated daily to reflect
-        the latest information we are able to gather.
+        We are a volunteer team calling hospitals and pharmacies to identify
+        which facilities are currently administering vaccines. This website will
+        be updated daily to reflect the latest information we are able to
+        gather.
       </p>
       <p>
         Contact&nbsp;
@@ -60,10 +60,20 @@ export default function CountySuggestion() {
       <div className="CountySuggestion px-3 px-sm-5 mt-5 mb-5 py-4">
         <div className="row">
           <div className="col-md-6">
-            <h4 className="mb-3">More information about vaccine availability</h4>
+            <h4 className="mb-3">
+              More information about vaccine availability
+            </h4>
             <p>
-              As of January 19th, 2021, the State of Pennsylvania has approved giving the COVID-19 vaccine to people age 65 and older. Pennsylvania's statewide COVID-19 vaccination program has been evolving rapidly. You can find more information and links to government websites <Link href="/additional-resources">here</Link>. We are a community-led website and do not represent the government or any healthcare provider.
-              <p className="mt-3 underline"><Link href="/about-us">About VaccinatePA →</Link></p>
+              As of January 19th, 2021, the State of Pennsylvania has approved
+              giving the COVID-19 vaccine to people age 65 and older.
+              Pennsylvania's statewide COVID-19 vaccination program has been
+              evolving rapidly. You can find more information and links to
+              government websites <Link href="/additional-resources">here</Link>
+              . We are a community-led website and do not represent the
+              government or any healthcare provider.
+              <p className="mt-3 underline">
+                <Link href="/about-us">About VaccinatePA →</Link>
+              </p>
             </p>
           </div>
           <div className="order-md-first col-12 col-md-6">
