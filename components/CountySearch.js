@@ -5,17 +5,18 @@ import { useRouter } from "next/router";
 export default function CountySearch({ searchRef }) {
   const router = useRouter();
 
-  const onButtonClick = () => {
-    // TODO: on clicking this button figure out closest county and go there
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
+  // Removed until completes a search, for UX clarity
+  // const onButtonClick = () => {
+  //   // TODO: on clicking this button figure out closest county and go there
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     console.log("Latitude is :", position.coords.latitude);
+  //     console.log("Longitude is :", position.coords.longitude);
+  //   });
 
-    if (searchRef.current) {
-      searchRef.current.focus();
-    }
-  };
+  //   if (searchRef.current) {
+  //     searchRef.current.focus();
+  //   }
+  // };
 
   return (
     <div className="flex mt-3">
@@ -33,9 +34,6 @@ export default function CountySearch({ searchRef }) {
           clearButton
         />
       </div>
-      <button onClick={onButtonClick} className="ml-3 btn btn-info">
-        Find vaccine
-      </button>
     </div>
   );
 }
