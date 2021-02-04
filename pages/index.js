@@ -27,7 +27,9 @@ export default function Index() {
           <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
         </p>
         <p>
-          Interested in volunteering? Please <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">sign up here</a>, and we will reach out to you.
+          Interested in volunteering? Please{" "}
+          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">sign up here</a>, and we
+          will reach out to you.
         </p>
         <div className="my-4">
           <CountySuggestion searchRef={countySearchRef} />
