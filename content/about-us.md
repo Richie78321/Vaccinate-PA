@@ -21,7 +21,7 @@ By centralizing information on which locations have vaccine inventory, we help e
 
 ### Can I help?
 
-Absolutely! This is a grassroots effort, led by a small team of passionate volunteers across Pennsylvania. We'd love your help. Email us at [vaccinatePA2021@gmail.com](mailto:vaccinatePA2021@gmail.com) if you would like to help, and we’ll reply promptly.
+Absolutely! This is a grassroots effort, led by a small team of passionate volunteers across Pennsylvania. We'd love your help. Please [sign up here](https://forms.gle/5vyDk2tTjYUTMTXu6), and we will reach out to you.
 
 <br />
 
