@@ -1,4 +1,9 @@
-import { FaCheckCircle, FaTimesCircle, FaQuestionCircle, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaTimesCircle,
+  FaQuestionCircle,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { AVAILABILITY_STATUS } from "../utils/Data";
 import moment from "moment";
@@ -77,11 +82,16 @@ export default function AirTableCard({ location }) {
                   {/* <a href={`tel:${phoneNumber}`}>
                     <small>{displayPhoneNumber(phoneNumber)}</small>
                   </a>*/}
-                  {Website ?
+                  {Website ? (
                     <>
-                      <a href={Website} target="_blank" rel="noreferrer"><small>Visit Website <FaExternalLinkAlt size=".85em" /></small></a>
+                      <a href={Website} target="_blank" rel="noreferrer">
+                        <small>
+                          Visit Website <FaExternalLinkAlt size=".85em" />
+                        </small>
+                      </a>
                       <span className="text-muted">{" | "}</span>
-                    </> : null}
+                    </>
+                  ) : null}
                   <a
                     target="_blank"
                     rel="noreferrer"
