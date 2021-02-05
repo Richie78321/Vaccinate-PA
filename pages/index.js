@@ -21,10 +21,8 @@ export default function Index() {
           gather.
         </p>
         <p>
-          Contact&nbsp;
-          <a href="mailto:vaccinatepa2021@gmail.com">the VaccinatePA team</a>
-          &nbsp;or visit our{" "}
-          <a href="https://twitter.com/VaccinatePA">Twitter</a> for more info.
+          Follow us on{" "}
+          <a href="https://twitter.com/VaccinatePA">Twitter</a> for more information.
         </p>
         <p>
           Interested in volunteering? Please{" "}
