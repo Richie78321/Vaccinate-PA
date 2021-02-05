@@ -74,10 +74,10 @@ export default function AirTableCard({ location }) {
               <div className="col-sm-8 col-md-10">
                 <h5 className="mb-0 card-title text-truncate">{Name}</h5>
                 <p className="my-0 text-truncate">
-                  <a href={`tel:${phoneNumber}`}>
+                  {/* <a href={`tel:${phoneNumber}`}>
                     <small>{displayPhoneNumber(phoneNumber)}</small>
                   </a>
-                  <span className="text-muted">{" | "}</span>
+                  <span className="text-muted">{" | "}</span> */}
                   <a
                     target="_blank"
                     rel="noreferrer"
