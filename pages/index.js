@@ -21,8 +21,8 @@ export default function Index() {
           gather.
         </p>
         <p>
-          Follow us on{" "}
-          <a href="https://twitter.com/VaccinatePA">Twitter</a> for more information.
+          Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> for
+          more information.
         </p>
         <p>
           Interested in volunteering? Please{" "}
