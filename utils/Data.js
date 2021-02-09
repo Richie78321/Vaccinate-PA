@@ -76,13 +76,13 @@ export async function getCountyLocations(county) {
     );
   }
 
-
   return {
     allLocations: countyLocations,
     noConfirmationUncontacted: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value &&
-        location.fields['Number of reports'] === 0,
+        location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.UNKNOWN.value &&
+        location.fields["Number of reports"] === 0
     ),
     noAvailability: countyLocations.filter(
       (location) =>
@@ -90,8 +90,9 @@ export async function getCountyLocations(county) {
     ),
     noConfirmation: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value &&
-        location.fields['Number of reports'] > 0,
+        location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.UNKNOWN.value &&
+        location.fields["Number of reports"] > 0
     ),
     availableWaitlist: countyLocations.filter(
       (location) =>
@@ -99,7 +100,8 @@ export async function getCountyLocations(county) {
     ),
     availableAppointment: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.APPOINTMENT.value
+        location.availabilityStatus.value ===
+        AVAILABILITY_STATUS.APPOINTMENT.value
     ),
     availableWalkIn: countyLocations.filter(
       (location) =>

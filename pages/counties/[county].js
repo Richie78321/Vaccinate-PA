@@ -41,7 +41,7 @@ export default function CountyPage({ county, locations }) {
       messageIcon: <FaQuestionCircle />,
       message: "Availability varies / no confirmation",
       messageColor: "text-black",
-      locations: locations.noConfirmation
+      locations: locations.noConfirmation,
     },
     {
       messageIcon: <FaTimesCircle />,
@@ -54,7 +54,7 @@ export default function CountyPage({ county, locations }) {
       message: "Uncontacted",
       messageColor: "text-dark",
       locations: locations.noConfirmationUncontacted,
-    }
+    },
   ];
 
   return (
@@ -102,22 +102,25 @@ export default function CountyPage({ county, locations }) {
               </h2>
             </>
           ) : null}
-          {locationGroups.map((locationGroup) => (
-            locationGroup.locations.length > 0 ? 
+          {locationGroups.map((locationGroup) =>
+            locationGroup.locations.length > 0 ? (
               <>
-                <h4 className={locationGroup.messageColor + " font-weight-bold mt-3"}>
+                <h4
+                  className={
+                    locationGroup.messageColor + " font-weight-bold mt-3"
+                  }
+                >
                   {locationGroup.messageIcon}{" "}
-                  <span className="align-middle">
-                    {locationGroup.message}
-                  </span>
+                  <span className="align-middle">{locationGroup.message}</span>
                 </h4>
                 {locationGroup.locations.map((location) => (
                   <div key={location.id} className="my-1">
                     <AirTableCard location={location} />
                   </div>
                 ))}
-              </> : null
-          ))}
+              </>
+            ) : null
+          )}
         </div>
       </div>
     </Layout>
