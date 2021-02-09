@@ -35,7 +35,21 @@ export default function Index() {
         </div>
         <h4 className="mt-4">View all county information below:</h4>
         <p className="mt-4 alert alert-secondary text-center">
-          <b>We appreciate your patience as we are rapidly adding more volunteers to help us update information on this site.</b> The site will be updated daily as we gather more information. If you would like to help volunteer to obtain updated vaccine availability information, please <a href="https://forms.gle/5vyDk2tTjYUTMTXu6" target="_blank" rel="noreferrer">sign up to volunteer here</a>.
+          <b>
+            We appreciate your patience as we are rapidly adding more volunteers
+            to help us update information on this site.
+          </b>{" "}
+          The site will be updated daily as we gather more information. If you
+          would like to help volunteer to obtain updated vaccine availability
+          information, please{" "}
+          <a
+            href="https://forms.gle/5vyDk2tTjYUTMTXu6"
+            target="_blank"
+            rel="noreferrer"
+          >
+            sign up to volunteer here
+          </a>
+          .
         </p>
         <p className="mt-2 alert alert-secondary text-center">
           If you have a missing location to report, or think we have incorrect
