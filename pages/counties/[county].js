@@ -33,7 +33,7 @@ export default function CountyPage({ county, locations }) {
     },
     {
       messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist reported available",
+      message: "Vaccine waitlist signup reported available",
       messageColor: "text-info",
       locations: locations.availableWaitlist,
     },
