@@ -1,5 +1,6 @@
 import { createRef } from "react";
 import AirTableEmbed from "../components/AirTableEmbed";
+import InTheMedia from "../components/InTheMedia";
 import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
 import Layout from "../layouts/Layout";
@@ -63,6 +64,7 @@ export default function Index() {
           </a>
         </p>
         <AirTableEmbed />
+        <InTheMedia />
       </div>
     </Layout>
   );
