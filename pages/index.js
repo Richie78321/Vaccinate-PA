@@ -1,5 +1,6 @@
 import { createRef, useCallback } from "react";
 import AirTableEmbed from "../components/AirTableEmbed";
+import InTheMedia from "../components/InTheMedia";
 import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
 import Layout from "../layouts/Layout";
