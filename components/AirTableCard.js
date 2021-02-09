@@ -2,6 +2,7 @@ import {
   FaCheckCircle,
   FaTimesCircle,
   FaQuestionCircle,
+  FaClipboardList,
   FaExternalLinkAlt,
 } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
@@ -45,19 +46,42 @@ export default function AirTableCard({ location }) {
 
   const availabilityStatus = location.availabilityStatus;
   let availabilityTag;
+  // TODO : Fix this ugly if-else block that I don't have time to address right now.
   if (availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value) {
     availabilityTag = (
       <span className="text-dark font-weight-bold">
         <FaQuestionCircle size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">No confirmation / unknown</span>
+        <span className="align-middle">
+          {location.fields["Number of reports"] > 0 ?
+            "Availability varies / no confirmation" :
+            "Uncontacted"}
+        </span>
       </span>
     );
-  } else if (availabilityStatus.isAvailable) {
+  } else if (availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value) {
     availabilityTag = (
       <span className="text-success font-weight-bold">
         <FaCheckCircle size="1.25em" className="mr-1" />{" "}
         <span className="align-middle">
-          Vaccines available ({availabilityStatus.display})
+          Vaccines available
+        </span>
+      </span>
+    );
+  } else if (availabilityStatus.value === AVAILABILITY_STATUS.APPOINTMENT.value) {
+    availabilityTag = (
+      <span className="text-success font-weight-bold">
+        <FaCheckCircle size="1.25em" className="mr-1" />{" "}
+        <span className="align-middle">
+          Vaccines available (With Appointment Only)
+        </span>
+      </span>
+    );
+  } else if (availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value) {
+    availabilityTag = (
+      <span className="text-info font-weight-bold">
+        <FaClipboardList size="1.25em" className="mr-1" />{" "}
+        <span className="align-middle">
+          Vaccine waitlist available
         </span>
       </span>
     );

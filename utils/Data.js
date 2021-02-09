@@ -76,18 +76,34 @@ export async function getCountyLocations(county) {
     );
   }
 
-  return [
-    countyLocations.filter(
-      (location) => location.availabilityStatus.isAvailable
-    ),
-    countyLocations.filter(
+
+  return {
+    allLocations: countyLocations,
+    noConfirmationUncontacted: countyLocations.filter(
       (location) =>
-        !location.availabilityStatus.isAvailable &&
-        location.availabilityStatus.value !== AVAILABILITY_STATUS.UNKNOWN.value
+        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value &&
+        location.fields['Number of reports'] === 0,
     ),
-    countyLocations.filter(
+    noAvailability: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
+        location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
     ),
-  ];
+    noConfirmation: countyLocations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value &&
+        location.fields['Number of reports'] > 0,
+    ),
+    availableWaitlist: countyLocations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
+    ),
+    availableAppointment: countyLocations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.APPOINTMENT.value
+    ),
+    availableWalkIn: countyLocations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
+    ),
+  };
 }
