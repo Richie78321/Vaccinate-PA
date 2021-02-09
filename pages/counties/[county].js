@@ -43,7 +43,7 @@ export default function CountyPage({ county, locations }) {
           to reflect the latest information we are able to gather.
         </p>
         <p>
-          Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> for
+          Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> and like us on <a href="https://www.facebook.com/vaccinatepa">Facebook</a> for
           more information.
         </p>
         <p className="alert alert-secondary text-center">
