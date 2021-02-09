@@ -124,3 +124,5 @@ dist
 ### others
 /scripts/gcred.json
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode
+
+.DS_Store
