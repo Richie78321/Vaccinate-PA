@@ -7,6 +7,7 @@ import {
   FaTimesCircle,
   FaQuestionCircle,
   FaArrowLeft,
+  FaClipboardList,
 } from "react-icons/fa";
 import Link from "next/link";
 
@@ -17,11 +18,44 @@ function titleCase(str) {
 }
 
 export default function CountyPage({ county, locations }) {
-  const [
-    locationsAvailable,
-    locationsNotAvailable,
-    locationsUnconfirmed,
-  ] = locations;
+  const locationGroups = [
+    {
+      messageIcon: <FaCheckCircle />,
+      message: "Vaccines reported available",
+      messageColor: "text-success",
+      locations: locations.availableWalkIn,
+    },
+    {
+      messageIcon: <FaCheckCircle />,
+      message: "Vaccines reported available with appointment",
+      messageColor: "text-success",
+      locations: locations.availableAppointment,
+    },
+    {
+      messageIcon: <FaClipboardList />,
+      message: "Vaccine waitlist signup reported available",
+      messageColor: "text-info",
+      locations: locations.availableWaitlist,
+    },
+    {
+      messageIcon: <FaQuestionCircle />,
+      message: "Availability varies / no confirmation",
+      messageColor: "text-black",
+      locations: locations.noConfirmation,
+    },
+    {
+      messageIcon: <FaTimesCircle />,
+      message: "Vaccines reported unavailable",
+      messageColor: "text-danger",
+      locations: locations.noAvailability,
+    },
+    {
+      messageIcon: <FaQuestionCircle />,
+      message: "Uncontacted",
+      messageColor: "text-dark",
+      locations: locations.noConfirmationUncontacted,
+    },
+  ];
 
   return (
     <Layout title={county + " Vaccine Availability"}>
@@ -59,9 +93,7 @@ export default function CountyPage({ county, locations }) {
           </a>
         </p>
         <div className="d-flex flex-column">
-          {locationsAvailable.length === 0 &&
-          locationsNotAvailable.length === 0 &&
-          locationsUnconfirmed.length === 0 ? (
+          {locations.allLocations.length <= 0 ? (
             <>
               <h2 className="text-center mt-5">
                 We currently have no locations for {county} on record.
@@ -71,49 +103,25 @@ export default function CountyPage({ county, locations }) {
               </h2>
             </>
           ) : null}
-          {locationsAvailable.length > 0 ? (
-            <>
-              <h4 className="text-success font-weight-bold mb-3">
-                <FaCheckCircle />{" "}
-                <span className="align-middle">
-                  Vaccines reported available
-                </span>
-              </h4>
-              {locationsAvailable.map((location) => (
-                <div key={location.id} className="my-1">
-                  <AirTableCard location={location} />
-                </div>
-              ))}
-            </>
-          ) : null}
-          {locationsNotAvailable.length > 0 ? (
-            <>
-              <h4 className="text-danger font-weight-bold my-3">
-                <FaTimesCircle />{" "}
-                <span className="align-middle">
-                  Vaccines reported unavailable
-                </span>
-              </h4>
-              {locationsNotAvailable.map((location) => (
-                <div key={location.id} className="my-1">
-                  <AirTableCard location={location} />
-                </div>
-              ))}
-            </>
-          ) : null}
-          {locationsUnconfirmed.length > 0 ? (
-            <>
-              <h4 className="text-black font-weight-bold my-3">
-                <FaQuestionCircle />{" "}
-                <span className="align-middle">Uncontacted locations</span>
-              </h4>
-              {locationsUnconfirmed.map((location) => (
-                <div key={location.id} className="my-1">
-                  <AirTableCard location={location} />
-                </div>
-              ))}
-            </>
-          ) : null}
+          {locationGroups.map((locationGroup) =>
+            locationGroup.locations.length > 0 ? (
+              <>
+                <h4
+                  className={
+                    locationGroup.messageColor + " font-weight-bold mt-3"
+                  }
+                >
+                  {locationGroup.messageIcon}{" "}
+                  <span className="align-middle">{locationGroup.message}</span>
+                </h4>
+                {locationGroup.locations.map((location) => (
+                  <div key={location.id} className="my-1">
+                    <AirTableCard location={location} />
+                  </div>
+                ))}
+              </>
+            ) : null
+          )}
         </div>
       </div>
     </Layout>
