@@ -72,7 +72,7 @@ export default function AirTableCard({ location }) {
       <span className="text-success font-weight-bold">
         <FaCheckCircle size="1.25em" className="mr-1" />{" "}
         <span className="align-middle">
-          Vaccines available (With Appointment Only)
+          Vaccines available (With Appointment)
         </span>
       </span>
     );
@@ -80,7 +80,7 @@ export default function AirTableCard({ location }) {
     availabilityTag = (
       <span className="text-info font-weight-bold">
         <FaClipboardList size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">Vaccine waitlist available</span>
+        <span className="align-middle">Vaccine waitlist signup available</span>
       </span>
     );
   } else {
