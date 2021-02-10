@@ -20,11 +20,7 @@ function titleCase(str) {
 function LocationGroup({ locationGroup }) {
   return locationGroup.locations.length > 0 ? (
     <div>
-      <h4
-        className={
-          locationGroup.messageColor + " font-weight-bold mt-3"
-        }
-      >
+      <h4 className={locationGroup.messageColor + " font-weight-bold mt-3"}>
         {locationGroup.messageIcon}{" "}
         <span className="align-middle">{locationGroup.message}</span>
       </h4>
@@ -58,7 +54,7 @@ export default function CountyPage({ county, locations }) {
       locations: locations.recentLocations.availableWaitlist,
     },
   ];
-  
+
   const outdatedLocationGroups = [
     {
       messageIcon: <FaCheckCircle />,
@@ -161,7 +157,8 @@ export default function CountyPage({ county, locations }) {
               </h2>
             </>
           ) : null}
-          {recentLocationGroups.some((locationGroup) => locationGroup.locations.length > 0) ?
+          {recentLocationGroups.some(
+            (locationGroup) => locationGroup.locations.length > 0) ?
             <>
               <h4 className="mb-0 font-weight-normal"><u>Recent availability:</u></h4>
               {recentLocationGroups.map((locationGroup) => <LocationGroup key={locationGroup.message} locationGroup={locationGroup} />)}

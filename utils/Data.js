@@ -107,10 +107,20 @@ export async function getCountyLocations(county) {
   }
 
   const outdatedThreshold = new Date();
-  outdatedThreshold.setDate(outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD);
+  outdatedThreshold.setDate(
+    outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+  );
 
-  const allRecentLocations = countyLocations.filter((location) => location.fields['Latest report'] && Date.parse(location.fields['Latest report']) > outdatedThreshold);
-  const allOutdatedLocations = countyLocations.filter((location) => location.fields['Latest report'] && Date.parse(location.fields['Latest report']) <= outdatedThreshold);
+  const allRecentLocations = countyLocations.filter(
+    (location) =>
+      location.fields["Latest report"] &&
+      Date.parse(location.fields["Latest report"]) > outdatedThreshold
+  );
+  const allOutdatedLocations = countyLocations.filter(
+    (location) =>
+      location.fields["Latest report"] &&
+      Date.parse(location.fields["Latest report"]) <= outdatedThreshold
+  );
   return {
     allLocations: countyLocations,
     allRecentLocations: allRecentLocations,
@@ -118,7 +128,8 @@ export async function getCountyLocations(county) {
     recentLocations: {
       availableWaitlist: allRecentLocations.filter(
         (location) =>
-          location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.WAITLIST.value
       ),
       availableAppointment: allRecentLocations.filter(
         (location) =>
@@ -127,13 +138,15 @@ export async function getCountyLocations(county) {
       ),
       availableWalkIn: allRecentLocations.filter(
         (location) =>
-          location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.WALK_IN.value
       ),
     },
     outdatedLocations: {
       availableWaitlist: allOutdatedLocations.filter(
         (location) =>
-          location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.WAITLIST.value
       ),
       availableAppointment: allOutdatedLocations.filter(
         (location) =>
@@ -142,7 +155,8 @@ export async function getCountyLocations(county) {
       ),
       availableWalkIn: allOutdatedLocations.filter(
         (location) =>
-          location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.WALK_IN.value
       ),
     },
     noConfirmationUncontacted: countyLocations.filter(
