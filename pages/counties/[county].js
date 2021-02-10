@@ -122,7 +122,7 @@ export default function CountyPage({ county, locations }) {
           ) : null}
           {locationGroups.map((locationGroup) =>
             locationGroup.locations.length > 0 ? (
-              <>
+              <div key={locationGroup.message}>
                 <h4
                   className={
                     locationGroup.messageColor + " font-weight-bold mt-3"
@@ -136,7 +136,7 @@ export default function CountyPage({ county, locations }) {
                     <AirTableCard location={location} />
                   </div>
                 ))}
-              </>
+              </div>
             ) : null
           )}
         </div>

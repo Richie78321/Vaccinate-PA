@@ -1,6 +1,10 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
 
+const airtableBackupCache = new NodeCache({
+  deleteOnExpire: false,
+  stdTTL: 0,
+});
 const airtableCache = new NodeCache({
   stdTTL: 600, // Ten minutes
 });
@@ -34,6 +38,33 @@ export const AVAILABILITY_STATUS = {
   },
 };
 
+export async function fetchAirtableData(cacheKeyword, airtableQuery) {
+  let data = airtableCache.get(cacheKeyword);
+  if (data == undefined) {
+    try {
+      data = await airtableQuery.all();
+
+      airtableCache.set(cacheKeyword, data);
+      airtableBackupCache.set(cacheKeyword, data);
+    } catch (error) {
+      console.error(error);
+
+      // Attempt to load from backup cache.
+      data = airtableBackupCache.get(cacheKeyword);
+
+      if (data == undefined) {
+        throw error;
+      } else {
+        // Reset the main cache to backup.
+        console.log("Setting cache to backup.");
+        airtableCache.set(cacheKeyword, data);
+      }
+    }
+  }
+
+  return data;
+}
+
 // TODO: Not ideal, should look to change this in the AirTable soon.
 export function getAvailabilityStatus(vaccinesAvailableString) {
   if (vaccinesAvailableString) {
@@ -52,23 +83,18 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
 }
 
 export async function getCountyLocations(county) {
-  let countyLocations = airtableCache.get(county);
-  if (countyLocations == undefined) {
-    countyLocations = (
-      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
-        .select({
-          filterByFormula: `County = "${county}"`,
-          sort: [
-            {
-              field: "Latest report",
-              direction: "desc",
-            },
-          ],
-        })
-        .all()
-    ).map((record) => record._rawJson);
-    airtableCache.set(county, countyLocations);
-  }
+  const countyLocations = (
+    await fetchAirtableData(county, Airtable.base("appdsheneg5ii1EnQ")("Locations")
+    .select({
+      filterByFormula: `County = "${county}"`,
+      sort: [
+        {
+          field: "Latest report",
+          direction: "desc",
+        },
+      ],
+    }))
+  ).map((record) => record._rawJson);
 
   for (let i = 0; i < countyLocations.length; i++) {
     countyLocations[i].availabilityStatus = getAvailabilityStatus(
