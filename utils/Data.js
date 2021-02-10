@@ -86,16 +86,18 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
 
 export async function getCountyLocations(county) {
   const countyLocations = (
-    await fetchAirtableData(county, Airtable.base("appdsheneg5ii1EnQ")("Locations")
-    .select({
-      filterByFormula: `County = "${county}"`,
-      sort: [
-        {
-          field: "Latest report",
-          direction: "desc",
-        },
-      ],
-    }))
+    await fetchAirtableData(
+      county,
+      Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
+        filterByFormula: `County = "${county}"`,
+        sort: [
+          {
+            field: "Latest report",
+            direction: "desc",
+          },
+        ],
+      })
+    )
   ).map((record) => record._rawJson);
 
   for (let i = 0; i < countyLocations.length; i++) {
