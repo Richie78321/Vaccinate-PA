@@ -17,25 +17,66 @@ function titleCase(str) {
   });
 }
 
+function LocationGroup({ locationGroup }) {
+  return locationGroup.locations.length > 0 ? (
+    <div>
+      <h4
+        className={
+          locationGroup.messageColor + " font-weight-bold mt-3"
+        }
+      >
+        {locationGroup.messageIcon}{" "}
+        <span className="align-middle">{locationGroup.message}</span>
+      </h4>
+      {locationGroup.locations.map((location) => (
+        <div key={location.id} className="my-1">
+          <AirTableCard location={location} />
+        </div>
+      ))}
+    </div>
+  ) : null;
+}
+
 export default function CountyPage({ county, locations }) {
-  const locationGroups = [
+  const recentLocationGroups = [
     {
       messageIcon: <FaCheckCircle />,
       message: "Vaccines reported available",
       messageColor: "text-success",
-      locations: locations.availableWalkIn,
+      locations: locations.recentLocations.availableWalkIn,
     },
     {
       messageIcon: <FaCheckCircle />,
       message: "Vaccines reported available with appointment",
       messageColor: "text-success",
-      locations: locations.availableAppointment,
+      locations: locations.recentLocations.availableAppointment,
     },
     {
       messageIcon: <FaClipboardList />,
       message: "Vaccine waitlist signup reported available",
       messageColor: "text-info",
-      locations: locations.availableWaitlist,
+      locations: locations.recentLocations.availableWaitlist,
+    },
+  ];
+  
+  const outdatedLocationGroups = [
+    {
+      messageIcon: <FaCheckCircle />,
+      message: "Vaccines reported available",
+      messageColor: "text-success",
+      locations: locations.outdatedLocations.availableWalkIn,
+    },
+    {
+      messageIcon: <FaCheckCircle />,
+      message: "Vaccines reported available with appointment",
+      messageColor: "text-success",
+      locations: locations.outdatedLocations.availableAppointment,
+    },
+    {
+      messageIcon: <FaClipboardList />,
+      message: "Vaccine waitlist signup reported available",
+      messageColor: "text-info",
+      locations: locations.outdatedLocations.availableWaitlist,
     },
     {
       messageIcon: <FaQuestionCircle />,
@@ -120,25 +161,16 @@ export default function CountyPage({ county, locations }) {
               </h2>
             </>
           ) : null}
-          {locationGroups.map((locationGroup) =>
-            locationGroup.locations.length > 0 ? (
-              <div key={locationGroup.message}>
-                <h4
-                  className={
-                    locationGroup.messageColor + " font-weight-bold mt-3"
-                  }
-                >
-                  {locationGroup.messageIcon}{" "}
-                  <span className="align-middle">{locationGroup.message}</span>
-                </h4>
-                {locationGroup.locations.map((location) => (
-                  <div key={location.id} className="my-1">
-                    <AirTableCard location={location} />
-                  </div>
-                ))}
-              </div>
-            ) : null
-          )}
+          {recentLocationGroups.some((locationGroup) => locationGroup.locations.length > 0) ?
+            <>
+              <h4 className="mb-0 font-weight-normal"><u>Recent reports:</u></h4>
+              {recentLocationGroups.map((locationGroup) => <LocationGroup key={locationGroup.message} locationGroup={locationGroup} />)}
+            </> : null}
+          {outdatedLocationGroups.some((locationGroup) => locationGroup.locations.length > 0) ?
+            <>
+              <h4 className="mt-4 mb-0 font-weight-normal"><u>Potentially outdated reports:</u></h4>
+              {outdatedLocationGroups.map((locationGroup) => <LocationGroup key={locationGroup.message} locationGroup={locationGroup} />)}
+            </> : null}
         </div>
       </div>
     </Layout>

@@ -1,6 +1,8 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
 
+const OUTDATED_DAYS_THRESHOLD = 3;
+
 const airtableBackupCache = new NodeCache({
   deleteOnExpire: false,
   stdTTL: 0,
@@ -102,8 +104,45 @@ export async function getCountyLocations(county) {
     );
   }
 
+  const outdatedThreshold = new Date();
+  outdatedThreshold.setDate(outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD);
+
+  const allRecentLocations = countyLocations.filter((location) => location.fields['Latest report'] && Date.parse(location.fields['Latest report']) > outdatedThreshold);
+  const allOutdatedLocations = countyLocations.filter((location) => location.fields['Latest report'] && Date.parse(location.fields['Latest report']) <= outdatedThreshold);
   return {
     allLocations: countyLocations,
+    allRecentLocations: allRecentLocations,
+    allOutdatedLocations: allOutdatedLocations,
+    recentLocations: {
+      availableWaitlist: allRecentLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
+      ),
+      availableAppointment: allRecentLocations.filter(
+        (location) =>
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.APPOINTMENT.value
+      ),
+      availableWalkIn: allRecentLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
+      ),
+    },
+    outdatedLocations: {
+      availableWaitlist: allOutdatedLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
+      ),
+      availableAppointment: allOutdatedLocations.filter(
+        (location) =>
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.APPOINTMENT.value
+      ),
+      availableWalkIn: allOutdatedLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
+      ),
+    },
     noConfirmationUncontacted: countyLocations.filter(
       (location) =>
         location.availabilityStatus.value ===
@@ -119,19 +158,6 @@ export async function getCountyLocations(county) {
         location.availabilityStatus.value ===
           AVAILABILITY_STATUS.UNKNOWN.value &&
         location.fields["Number of reports"] > 0
-    ),
-    availableWaitlist: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
-    ),
-    availableAppointment: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value ===
-        AVAILABILITY_STATUS.APPOINTMENT.value
-    ),
-    availableWalkIn: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
     ),
   };
 }
