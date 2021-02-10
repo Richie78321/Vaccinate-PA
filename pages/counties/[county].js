@@ -163,12 +163,12 @@ export default function CountyPage({ county, locations }) {
           ) : null}
           {recentLocationGroups.some((locationGroup) => locationGroup.locations.length > 0) ?
             <>
-              <h4 className="mb-0 font-weight-normal"><u>Recent reports:</u></h4>
+              <h4 className="mb-0 font-weight-normal"><u>Recent availability:</u></h4>
               {recentLocationGroups.map((locationGroup) => <LocationGroup key={locationGroup.message} locationGroup={locationGroup} />)}
             </> : null}
           {outdatedLocationGroups.some((locationGroup) => locationGroup.locations.length > 0) ?
             <>
-              <h4 className="mt-4 mb-0 font-weight-normal"><u>Potentially outdated reports:</u></h4>
+              <h4 className="mt-4 mb-0 font-weight-normal"><u>All reports:</u></h4>
               {outdatedLocationGroups.map((locationGroup) => <LocationGroup key={locationGroup.message} locationGroup={locationGroup} />)}
             </> : null}
         </div>
