@@ -35,8 +35,10 @@ export default function Index() {
         </p>
         <p>
           Interested in volunteering? Please{" "}
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">sign up to volunteer here</a>, and we
-          will reach out to you.
+          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
+            sign up to volunteer here
+          </a>
+          , and we will reach out to you.
         </p>
         <div className="my-4">
           <CountySuggestion searchRef={countySearchRef} />

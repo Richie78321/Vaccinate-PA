@@ -107,10 +107,10 @@ export default function CountyPage({ county, locations }) {
         </div>
         <h1 className="mb-4">{county} COVID-19 Vaccine Availability</h1>
         <p>
-          We are a volunteer team
-          calling hospitals and pharmacies to identify which facilities are
-          currently administering vaccines. This website will be updated daily
-          to reflect the latest information we are able to gather.
+          We are a volunteer team calling hospitals and pharmacies to identify
+          which facilities are currently administering vaccines. This website
+          will be updated daily to reflect the latest information we are able to
+          gather.
         </p>
         <p>
           Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> and
@@ -119,8 +119,10 @@ export default function CountyPage({ county, locations }) {
         </p>
         <p>
           Interested in volunteering? Please{" "}
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">sign up to volunteer here</a>, and we
-          will reach out to you.
+          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
+            sign up to volunteer here
+          </a>
+          , and we will reach out to you.
         </p>
         <p className="alert alert-secondary text-center">
           If you have a missing location to report, or think we have incorrect
