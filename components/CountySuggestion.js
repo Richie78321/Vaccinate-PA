@@ -31,7 +31,7 @@ const FindMyCounty = ({ searchRef }) => {
 export default function CountySuggestion({ searchRef }) {
   return (
     <div className="rounded county-suggestions px-3 px-sm-5 py-4">
-      <h4>View vaccine locations by county</h4>
+      <h4>Click your county to view vaccine locations</h4>
       <div className="row mt-4">
         <div className="col-md-6 col-lg-4">
           <CountyLink county="Allegheny County" />
