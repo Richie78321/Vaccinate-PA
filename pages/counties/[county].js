@@ -105,10 +105,9 @@ export default function CountyPage({ county, locations }) {
             </a>
           </Link>
         </div>
-        <h1>{county} COVID-19 Vaccine Availability</h1>
+        <h1 className="mb-4">{county} COVID-19 Vaccine Availability</h1>
         <p>
-          As of January 19th, 2021, Pennsylvania has approved giving the
-          COVID-19 vaccine to people age 65 and older. We are a volunteer team
+          We are a volunteer team
           calling hospitals and pharmacies to identify which facilities are
           currently administering vaccines. This website will be updated daily
           to reflect the latest information we are able to gather.
@@ -118,22 +117,10 @@ export default function CountyPage({ county, locations }) {
           like us on <a href="https://www.facebook.com/vaccinatepa">Facebook</a>{" "}
           for more information.
         </p>
-        <p className="mt-4 alert alert-secondary text-center">
-          <b>
-            We appreciate your patience as we are rapidly adding more volunteers
-            to help us update information on this site.
-          </b>{" "}
-          The site will be updated daily as we gather more information. If you
-          would like to help volunteer to obtain updated vaccine availability
-          information, please{" "}
-          <a
-            href="https://forms.gle/5vyDk2tTjYUTMTXu6"
-            target="_blank"
-            rel="noreferrer"
-          >
-            sign up to volunteer here
-          </a>
-          .
+        <p>
+          Interested in volunteering? Please{" "}
+          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">sign up to volunteer here</a>, and we
+          will reach out to you.
         </p>
         <p className="alert alert-secondary text-center">
           If you have a missing location to report, or think we have incorrect
