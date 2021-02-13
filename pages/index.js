@@ -1,4 +1,4 @@
-import { createRef } from "react";
+import { createRef, useCallback } from "react";
 import AirTableEmbed from "../components/AirTableEmbed";
 import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
@@ -6,6 +6,14 @@ import Layout from "../layouts/Layout";
 
 export default function Index() {
   const countySearchRef = createRef();
+
+  const onClickFindCounty = useCallback(() => {
+    if (countySearchRef.current) {
+      countySearchRef.current.focus();
+    }
+
+    return false;
+  }, [countySearchRef]);
 
   return (
     <Layout title="Vaccine Availability">
@@ -33,36 +41,10 @@ export default function Index() {
         <div className="my-4">
           <CountySuggestion searchRef={countySearchRef} />
         </div>
-        <h4 className="mt-4">View all county information below:</h4>
-        <p className="mt-4 alert alert-secondary text-center">
-          <b>
-            We appreciate your patience as we are rapidly adding more volunteers
-            to help us update information on this site.
-          </b>{" "}
-          The site will be updated daily as we gather more information. If you
-          would like to help volunteer to obtain updated vaccine availability
-          information, please{" "}
-          <a
-            href="https://forms.gle/5vyDk2tTjYUTMTXu6"
-            target="_blank"
-            rel="noreferrer"
-          >
-            sign up to volunteer here
-          </a>
-          .
-        </p>
-        <p className="mt-2 alert alert-secondary text-center">
-          If you have a missing location to report, or think we have incorrect
-          information,{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://airtable.com/shr7z01kc7h1ogP5R"
-          >
-            please let us know.
-          </a>
-        </p>
-        <AirTableEmbed />
+        <div className="mt-5 alert alert-secondary text-center">
+          Please note that all vaccine availability information
+          has been moved to individual county pages. You can search for your county above or by <a href="#" onClick={onClickFindCounty}>clicking here.</a>
+        </div>
       </div>
     </Layout>
   );

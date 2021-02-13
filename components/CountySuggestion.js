@@ -31,40 +31,30 @@ const FindMyCounty = ({ searchRef }) => {
 export default function CountySuggestion({ searchRef }) {
   return (
     <div className="rounded county-suggestions px-3 px-sm-5 py-4">
-      <div className="row">
-        <div className="col-md-6">
-          <h4 className="mb-3">More information about vaccine availability</h4>
-          <p>
-            As of January 19th, 2021, the State of Pennsylvania has approved
-            giving the COVID-19 vaccine to people age 65 and older.
-            Pennsylvania's statewide COVID-19 vaccination program has been
-            evolving rapidly. You can find more information and links to
-            government websites <Link href="/additional-resources">here</Link>.
-            We are a community-led website and do not represent the government
-            or any healthcare provider.
-            <p className="mt-3">
-              <Link href="/about-us">About VaccinatePA →</Link>
-            </p>
-          </p>
+      <h4>View vaccine locations by county</h4>
+      <div className="row mt-4">
+        <div className="col-md-6 col-lg-4">
+          <CountyLink county="Allegheny County" />
+          <CountyLink county="Montgomery County" />
+          <CountyLink county="Bucks County" />
+          <CountyLink county="Delaware County" />
         </div>
-        <div className="order-md-first col-12 col-md-6">
-          <h4>Vaccine locations by county</h4>
-          <div className="row mt-4">
-            <div className="col-lg-6">
-              <CountyLink county="Allegheny County" />
-              <CountyLink county="Montgomery County" />
-              <CountyLink county="Bucks County" />
-              <CountyLink county="Delaware County" />
-            </div>
-            <div className="col-lg-6">
-              <div className="d-none d-md-block">
-                <CountyLink county="Lancaster County" />
-                <CountyLink county="Chester County" />
-                <CountyLink county="York County" />
-              </div>
-              <FindMyCounty searchRef={searchRef} />
-            </div>
+        <div className="col-md-6 col-lg-4">
+          <CountyLink county="Lancaster County" />
+          <CountyLink county="Chester County" />
+          <CountyLink county="York County" />
+          <div className="d-none d-lg-block">
+            <CountyLink county="Berks County" />
           </div>
+          <div className="d-block d-lg-none">
+            <FindMyCounty searchRef={searchRef} />
+          </div>
+        </div>
+        <div className="col-lg-4 d-none d-lg-block">
+          <CountyLink county="Westmoreland County" />
+          <CountyLink county="Lehigh County" />
+          <CountyLink county="Luzerne County" />
+          <FindMyCounty searchRef={searchRef} />
         </div>
       </div>
       <style jsx>{`
