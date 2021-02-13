@@ -42,8 +42,11 @@ export default function Index() {
           <CountySuggestion searchRef={countySearchRef} />
         </div>
         <div className="mt-5 alert alert-secondary text-center">
-          Please note that all vaccine availability information
-          has been moved to individual county pages. You can search for your county above or by <a href="#" onClick={onClickFindCounty}>clicking here.</a>
+          Please note that all vaccine availability information has been moved
+          to individual county pages. You can search for your county above or by{" "}
+          <a href="#" onClick={onClickFindCounty}>
+            clicking here.
+          </a>
         </div>
       </div>
     </Layout>
