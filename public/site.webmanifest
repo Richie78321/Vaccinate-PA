@@ -1,6 +1,7 @@
 {
   "name": "VaccinatePA",
   "short_name": "VaccinatePA",
+  "description": "Find Vaccine Availability in PA",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
