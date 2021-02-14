@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }) {
           property="og:description"
           content="Find Vaccine Availability in PA"
         />
-        <meta property="og:image" content="/social_media_header.png" />
+        <meta property="og:image" content="https://vaccinatepa.org/social_media_header.png" />
         <meta property="og:url" content="https://vaccinatepa.org" />
         {/* Twitter Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
