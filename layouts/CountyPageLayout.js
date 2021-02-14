@@ -6,12 +6,18 @@ export default function CountyPageLayout({ county, children }) {
     <Layout title={county + " Vaccine Availability"}>
       <Head>
         {/* Open Graph / Facebook */}
-        <meta property="og:description" content={`Find Vaccine Availability in ${county}, PA`} />
+        <meta
+          property="og:description"
+          content={`Find Vaccine Availability in ${county}, PA`}
+        />
 
         {/* Twitter Card */}
-        <meta property="twitter:description" content={`Find Vaccine Availability in ${county}, PA`} />
+        <meta
+          property="twitter:description"
+          content={`Find Vaccine Availability in ${county}, PA`}
+        />
       </Head>
       {children}
     </Layout>
-  )
+  );
 }
