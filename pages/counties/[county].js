@@ -1,6 +1,6 @@
 import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
-import Layout from "../../layouts/Layout";
+import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations } from "../../utils/Data";
 import {
   FaCheckCircle,
@@ -95,7 +95,7 @@ export default function CountyPage({ county, locations }) {
   ];
 
   return (
-    <Layout title={county + " Vaccine Availability"}>
+    <CountyPageLayout county={county}>
       <div className="container-fluid mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">
@@ -178,7 +178,7 @@ export default function CountyPage({ county, locations }) {
           ) : null}
         </div>
       </div>
-    </Layout>
+    </CountyPageLayout>
   );
 }
 
