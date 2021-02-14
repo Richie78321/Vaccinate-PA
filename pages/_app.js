@@ -59,21 +59,24 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Social Media Meta Tags */}
-        <meta property="og:site_name" content="VaccinatePA" />
-        <meta property="og:title" content="VaccinatePA" />
-        <meta
-          property="og:description"
-          content="Find Vaccine Availability in PA"
-        />
-        <meta
-          property="og:image"
-          content="https://vaccinatepa.org/social_media_header.png"
-        />
-        <meta property="og:url" content="https://vaccinatepa.org" />
-        {/* Twitter Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@VaccinatePA"></meta>
+
+
+        {/* Primary Meta Tags */}
+        <meta name="description" content="Find Vaccine Availability in PA" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vaccinatepa.org/" />
+        <meta property="og:title" content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability" />
+        <meta property="og:description" content="Find Vaccine Availability in PA" />
+        <meta property="og:image" content="https://vaccinatepa.org/social_media_header.png" />
+
+        {/* Twitter Card */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://vaccinatepa.org/" />
+        <meta property="twitter:title" content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability" />
+        <meta property="twitter:description" content="Find Vaccine Availability in PA" />
+        <meta property="twitter:image" content="https://vaccinatepa.org/social_media_header.png" />
         <meta
           name="twitter:image:alt"
           content="Find vaccines in Pennsylvania with our volunteer-run site"
