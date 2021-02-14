@@ -65,13 +65,19 @@ function MyApp({ Component, pageProps }) {
         {/* Social Media Meta Tags */}
         <meta property="og:site_name" content="VaccinatePA" />
         <meta property="og:title" content="VaccinatePA" />
-        <meta property="og:description" content="Find Vaccine Availability in PA" />
+        <meta
+          property="og:description"
+          content="Find Vaccine Availability in PA"
+        />
         <meta property="og:image" content="/social_media_header.png" />
         <meta property="og:url" content="https://vaccinatepa.org" />
         {/* Twitter Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@VaccinatePA"></meta>
-        <meta name="twitter:image:alt" content="Find vaccines in Pennsylvania with our volunteer-run site" />
+        <meta
+          name="twitter:image:alt"
+          content="Find vaccines in Pennsylvania with our volunteer-run site"
+        />
       </Head>
       <main className="d-flex flex-column h-100">
         <Component {...pageProps} />
