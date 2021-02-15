@@ -32,7 +32,7 @@ const displayPhoneNumber = (phone) => {
 
 function AvailabilityTag({ availabilityStatus, numReports }) {
   // TODO : Fix this ugly if-else block that I don't have time to address right now.
-  switch(availabilityStatus.value) {
+  switch (availabilityStatus.value) {
     case AVAILABILITY_STATUS.WALK_IN.value:
       return (
         <span className="text-success font-weight-bold">
@@ -53,7 +53,9 @@ function AvailabilityTag({ availabilityStatus, numReports }) {
       return (
         <span className="text-info font-weight-bold">
           <FaClipboardList size="1.25em" className="mr-1" />{" "}
-          <span className="align-middle">Vaccine waitlist signup available</span>
+          <span className="align-middle">
+            Vaccine waitlist signup available
+          </span>
         </span>
       );
     case AVAILABILITY_STATUS.NO.value:
@@ -75,9 +77,7 @@ function AvailabilityTag({ availabilityStatus, numReports }) {
         <span className="text-dark font-weight-bold">
           <FaQuestionCircle size="1.25em" className="mr-1" />{" "}
           <span className="align-middle">
-            {numReports > 0
-              ? "No confirmation"
-              : "Uncontacted"}
+            {numReports > 0 ? "No confirmation" : "Uncontacted"}
           </span>
         </span>
       );
@@ -142,7 +142,12 @@ export default function AirTableCard({ location }) {
               ) : null}
             </div>
           </li>
-          <li className="list-group-item"><AvailabilityTag availabilityStatus={availabilityStatus} numReports={location.fields["Number of reports"]} /></li>
+          <li className="list-group-item">
+            <AvailabilityTag
+              availabilityStatus={availabilityStatus}
+              numReports={location.fields["Number of reports"]}
+            />
+          </li>
           {reportNotes.length > 0 ? (
             <li className="list-group-item">
               <span className="text-black">

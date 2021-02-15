@@ -172,8 +172,7 @@ export async function getCountyLocations(county) {
     ),
     noConfirmation: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.UNKNOWN.value
+        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
     ),
   };
 }
