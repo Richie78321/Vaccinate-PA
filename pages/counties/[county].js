@@ -39,8 +39,12 @@ function LatestReportsReceived({ latestReportedLocation }) {
     const latestReportTimeRaw = latestReportedLocation.fields["Latest report"];
     if (latestReportTimeRaw) {
       return (
-        <span className="badge badge-primary font-weight-normal text-wrap" style={{ fontSize: "100%" }}>
-          Latest report for county received {moment(latestReportTimeRaw).fromNow()}
+        <span
+          className="badge badge-primary font-weight-normal text-wrap"
+          style={{ fontSize: "100%" }}
+        >
+          Latest report for county received{" "}
+          {moment(latestReportTimeRaw).fromNow()}
         </span>
       );
     }
@@ -50,7 +54,8 @@ function LatestReportsReceived({ latestReportedLocation }) {
 }
 
 export default function CountyPage({ county, locations }) {
-  const latestReportedLocation = locations.allLocations.length > 0 ? locations.allLocations[0] : null;
+  const latestReportedLocation =
+    locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
   const recentLocationGroups = [
     {
@@ -125,7 +130,9 @@ export default function CountyPage({ county, locations }) {
         </div>
         <h1 className="mb-2">{county} COVID-19 Vaccine Availability</h1>
         <div className="mb-3">
-          <LatestReportsReceived latestReportedLocation={latestReportedLocation} />
+          <LatestReportsReceived
+            latestReportedLocation={latestReportedLocation}
+          />
         </div>
         <p>
           We are a volunteer team calling hospitals and pharmacies to identify
