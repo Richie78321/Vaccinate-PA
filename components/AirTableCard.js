@@ -30,10 +30,64 @@ const displayPhoneNumber = (phone) => {
   }
 };
 
+function AvailabilityTag({ availabilityStatus, numReports }) {
+  // TODO : Fix this ugly if-else block that I don't have time to address right now.
+  switch(availabilityStatus.value) {
+    case AVAILABILITY_STATUS.WALK_IN.value:
+      return (
+        <span className="text-success font-weight-bold">
+          <FaCheckCircle size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">Vaccines available</span>
+        </span>
+      );
+    case AVAILABILITY_STATUS.APPOINTMENT.value:
+      return (
+        <span className="text-success font-weight-bold">
+          <FaCheckCircle size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">
+            Vaccines available (With Appointment)
+          </span>
+        </span>
+      );
+    case AVAILABILITY_STATUS.WAITLIST.value:
+      return (
+        <span className="text-info font-weight-bold">
+          <FaClipboardList size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">Vaccine waitlist signup available</span>
+        </span>
+      );
+    case AVAILABILITY_STATUS.NO.value:
+      return (
+        <span className="text-danger font-weight-bold">
+          <FaTimesCircle size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">Vaccines not available</span>
+        </span>
+      );
+    case AVAILABILITY_STATUS.VARIES.value:
+      return (
+        <span className="text-dark font-weight-bold">
+          <FaQuestionCircle size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">Availability varies</span>
+        </span>
+      );
+    default:
+      return (
+        <span className="text-dark font-weight-bold">
+          <FaQuestionCircle size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">
+            {numReports > 0
+              ? "No confirmation"
+              : "Uncontacted"}
+          </span>
+        </span>
+      );
+  }
+}
+
 export default function AirTableCard({ location }) {
   const { Name, County, Address, Website } = location.fields;
 
-  const phoneNumber = location.fields["Phone number"];
+  // const phoneNumber = location.fields["Phone number"];
 
   const latestReportTimeRaw = location.fields["Latest report"];
   const latestReportTimeText = latestReportTimeRaw
@@ -45,52 +99,6 @@ export default function AirTableCard({ location }) {
     reportNoteList && reportNoteList[0] ? reportNoteList[0].trim() : "";
 
   const availabilityStatus = location.availabilityStatus;
-  let availabilityTag;
-  // TODO : Fix this ugly if-else block that I don't have time to address right now.
-  if (availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value) {
-    availabilityTag = (
-      <span className="text-dark font-weight-bold">
-        <FaQuestionCircle size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">
-          {location.fields["Number of reports"] > 0
-            ? "Availability varies / no confirmation"
-            : "Uncontacted"}
-        </span>
-      </span>
-    );
-  } else if (availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value) {
-    availabilityTag = (
-      <span className="text-success font-weight-bold">
-        <FaCheckCircle size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">Vaccines available</span>
-      </span>
-    );
-  } else if (
-    availabilityStatus.value === AVAILABILITY_STATUS.APPOINTMENT.value
-  ) {
-    availabilityTag = (
-      <span className="text-success font-weight-bold">
-        <FaCheckCircle size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">
-          Vaccines available (With Appointment)
-        </span>
-      </span>
-    );
-  } else if (availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value) {
-    availabilityTag = (
-      <span className="text-info font-weight-bold">
-        <FaClipboardList size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">Vaccine waitlist signup available</span>
-      </span>
-    );
-  } else {
-    availabilityTag = (
-      <span className="text-danger font-weight-bold">
-        <FaTimesCircle size="1.25em" className="mr-1" />{" "}
-        <span className="align-middle">Vaccines not available</span>
-      </span>
-    );
-  }
 
   return (
     <>
@@ -134,7 +142,7 @@ export default function AirTableCard({ location }) {
               ) : null}
             </div>
           </li>
-          <li className="list-group-item">{availabilityTag}</li>
+          <li className="list-group-item"><AvailabilityTag availabilityStatus={availabilityStatus} numReports={location.fields["Number of reports"]} /></li>
           {reportNotes.length > 0 ? (
             <li className="list-group-item">
               <span className="text-black">

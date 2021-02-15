@@ -160,11 +160,9 @@ export async function getCountyLocations(county) {
           AVAILABILITY_STATUS.WALK_IN.value
       ),
     },
-    noConfirmationUncontacted: countyLocations.filter(
+    availabilityVaries: countyLocations.filter(
       (location) =>
-        location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.UNKNOWN.value &&
-        location.fields["Number of reports"] === 0
+        location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
     ),
     noAvailability: countyLocations.filter(
       (location) =>
@@ -173,8 +171,7 @@ export async function getCountyLocations(county) {
     noConfirmation: countyLocations.filter(
       (location) =>
         location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.UNKNOWN.value &&
-        location.fields["Number of reports"] > 0
+          AVAILABILITY_STATUS.UNKNOWN.value
     ),
   };
 }

@@ -76,9 +76,9 @@ export default function CountyPage({ county, locations }) {
     },
     {
       messageIcon: <FaQuestionCircle />,
-      message: "Availability varies / no confirmation",
-      messageColor: "text-black",
-      locations: locations.noConfirmation,
+      message: "Availability varies",
+      messageColor: "text-dark",
+      locations: locations.availabilityVaries,
     },
     {
       messageIcon: <FaTimesCircle />,
@@ -88,9 +88,9 @@ export default function CountyPage({ county, locations }) {
     },
     {
       messageIcon: <FaQuestionCircle />,
-      message: "Uncontacted",
+      message: "No confirmation / uncontacted",
       messageColor: "text-dark",
-      locations: locations.noConfirmationUncontacted,
+      locations: locations.noConfirmation,
     },
   ];
 
