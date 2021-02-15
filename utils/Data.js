@@ -20,20 +20,21 @@ export const AVAILABILITY_STATUS = {
     isAvailable: false,
   },
   NO: { value: 1, string: "No", isAvailable: false },
+  VARIES: { value: 2, string: "Availability varies", isAvailable: false },
   APPOINTMENT: {
-    value: 2,
+    value: 3,
     string: "Yes, with appointment only",
     display: "With Appointment Only",
     isAvailable: true,
   },
   WALK_IN: {
-    value: 3,
+    value: 4,
     string: "Yes, walk-ins accepted",
     display: "Walk-ins Accepted",
     isAvailable: true,
   },
   WAITLIST: {
-    value: 4,
+    value: 5,
     string: "Waitlist Only",
     display: "Waitlist Only",
     isAvailable: true,
@@ -78,7 +79,7 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
       }
     }
 
-    throw `Encountered unknown availability status: '${vaccinesAvailableString}'`;
+    console.log(`Encountered unknown availability status: '${vaccinesAvailableString}'`);
   }
 
   return AVAILABILITY_STATUS.UNKNOWN;
