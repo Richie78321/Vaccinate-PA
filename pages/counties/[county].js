@@ -9,6 +9,7 @@ import {
   FaArrowLeft,
   FaClipboardList,
 } from "react-icons/fa";
+import moment from "moment";
 import Link from "next/link";
 
 function titleCase(str) {
@@ -33,7 +34,24 @@ function LocationGroup({ locationGroup }) {
   ) : null;
 }
 
+function LatestReportsReceived({ latestReportedLocation }) {
+  if (latestReportedLocation) {
+    const latestReportTimeRaw = latestReportedLocation.fields["Latest report"];
+    if (latestReportTimeRaw) {
+      return (
+        <span className="badge badge-primary font-weight-normal text-wrap" style={{ fontSize: "100%" }}>
+          Latest report for county received {moment(latestReportTimeRaw).fromNow()}
+        </span>
+      );
+    }
+  }
+
+  return null;
+}
+
 export default function CountyPage({ county, locations }) {
+  const latestReportedLocation = locations.allLocations.length > 0 ? locations.allLocations[0] : null;
+
   const recentLocationGroups = [
     {
       messageIcon: <FaCheckCircle />,
@@ -105,7 +123,10 @@ export default function CountyPage({ county, locations }) {
             </a>
           </Link>
         </div>
-        <h1 className="mb-4">{county} COVID-19 Vaccine Availability</h1>
+        <h1 className="mb-2">{county} COVID-19 Vaccine Availability</h1>
+        <div className="mb-3">
+          <LatestReportsReceived latestReportedLocation={latestReportedLocation} />
+        </div>
         <p>
           We are a volunteer team calling hospitals and pharmacies to identify
           which facilities are currently administering vaccines. This website
