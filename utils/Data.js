@@ -79,7 +79,9 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
       }
     }
 
-    console.log(`Encountered unknown availability status: '${vaccinesAvailableString}'`);
+    console.log(
+      `Encountered unknown availability status: '${vaccinesAvailableString}'`
+    );
   }
 
   return AVAILABILITY_STATUS.UNKNOWN;
