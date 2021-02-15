@@ -128,7 +128,7 @@ export default function CountyPage({ county, locations }) {
             </a>
           </Link>
         </div>
-        <h1 className="mb-2">{county} COVID-19 Vaccine Availability</h1>
+        <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
         <div className="mb-3">
           <LatestReportsReceived
             latestReportedLocation={latestReportedLocation}
