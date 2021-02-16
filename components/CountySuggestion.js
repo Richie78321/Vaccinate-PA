@@ -73,9 +73,9 @@ export default function CountySuggestion({ searchRef }) {
             COVID-19 vaccination program has been evolving rapidly. You can find
             more information and links to government websites{" "}
             <Link href="/additional-resources">here</Link>.
-            <p className="mt-3">
-              <Link href="/about-us">About VaccinatePA →</Link>
-            </p>
+          </p>
+          <p>
+            <Link href="/about-us">About VaccinatePA →</Link>
           </p>
         </div>
       </div>
