@@ -85,7 +85,7 @@ function AvailabilityTag({ availabilityStatus, numReports }) {
 }
 
 export default function AirTableCard({ location }) {
-  const { Name, County, Address, Website } = location.fields;
+  const { Name, County } = location.fields;
 
   // const phoneNumber = location.fields["Phone number"];
 
@@ -93,6 +93,16 @@ export default function AirTableCard({ location }) {
   const latestReportTimeText = latestReportTimeRaw
     ? moment(latestReportTimeRaw).fromNow()
     : null;
+
+  const addressTextRaw = location.fields['Address'];
+  
+  let address = addressTextRaw ? addressTextRaw.trim() : null;
+  // Greater than 1 because AirTable populates empty addresses with a single comma.
+  if (address.length <= 1) {
+    address = null;
+  }
+
+  const website = location.fields['Website'] ? location.fields['Website'].trim() : null;
 
   const reportNoteList = location.fields["Latest report notes"];
   const reportNotes =
@@ -112,9 +122,9 @@ export default function AirTableCard({ location }) {
                   {/* <a href={`tel:${phoneNumber}`}>
                     <small>{displayPhoneNumber(phoneNumber)}</small>
                   </a>*/}
-                  {Website ? (
+                  {website ? (
                     <>
-                      <a href={Website} target="_blank" rel="noreferrer">
+                      <a href={website} target="_blank" rel="noreferrer">
                         <small>
                           Visit Website <FaExternalLinkAlt size=".85em" />
                         </small>
@@ -122,15 +132,17 @@ export default function AirTableCard({ location }) {
                       <span className="text-muted">{" | "}</span>
                     </>
                   ) : null}
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                      Address
-                    )}`}
-                  >
-                    <small>{Address}</small>
-                  </a>
+                  {address ? (
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                        address
+                      )}`}
+                    >
+                      <small>{address}</small>
+                    </a>
+                  ) : null}
                 </p>
               </div>
               {latestReportTimeText ? (
