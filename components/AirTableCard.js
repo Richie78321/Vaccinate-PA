@@ -94,15 +94,17 @@ export default function AirTableCard({ location }) {
     ? moment(latestReportTimeRaw).fromNow()
     : null;
 
-  const addressTextRaw = location.fields['Address'];
-  
+  const addressTextRaw = location.fields["Address"];
+
   let address = addressTextRaw ? addressTextRaw.trim() : null;
   // Greater than 1 because AirTable populates empty addresses with a single comma.
   if (address.length <= 1) {
     address = null;
   }
 
-  const website = location.fields['Website'] ? location.fields['Website'].trim() : null;
+  const website = location.fields["Website"]
+    ? location.fields["Website"].trim()
+    : null;
 
   const reportNoteList = location.fields["Latest report notes"];
   const reportNotes =
