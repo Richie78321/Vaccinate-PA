@@ -24,17 +24,42 @@ export default function Index() {
           <h1 className="text-center" id="landing-title">
             Pennsylvania COVID-19 Vaccine Availability
           </h1>
-          <div id="search-bar" className="container"><CountySearch searchRef={countySearchRef} /></div>
+          <div id="search-bar" className="container">
+            <CountySearch searchRef={countySearchRef} />
+          </div>
           <div className="container-md">
-            <div id="site-info" className="row justify-content-center align-items-center">
+            <div
+              id="site-info"
+              className="row justify-content-center align-items-center"
+            >
               <div className="mx-5 mx-sm-0 col-sm-5 col-lg-4">
-                <Image src="/images/front_page_illustration.jpeg" layout="responsive" width={203} height={166} />
+                <Image
+                  src="/images/front_page_illustration.jpeg"
+                  layout="responsive"
+                  width={203}
+                  height={166}
+                />
               </div>
               <div className="mt-4 col-sm-6 col-lg-5 ml-sm-3 mt-sm-0 text-center text-sm-left">
-                We are a volunteer team calling hospitals and pharmacies to identify which facilities are currently administering vaccines. This website will be updated daily to reflect the latest information we are able to gather.
+                We are a volunteer team calling hospitals and pharmacies to
+                identify which facilities are currently administering vaccines.
+                This website will be updated daily to reflect the latest
+                information we are able to gather.
                 <div id="social-icons" className="mt-2 mt-sm-1">
-                  <a href="https://twitter.com/VaccinatePA" target="_blank" rel="noreferrer"><FaTwitter size="1.5em" /></a>{" "}
-                  <a href="https://www.facebook.com/vaccinatepa" target="_blank" rel="noreferrer"><FaFacebook className="ml-2" size="1.5em" /></a>
+                  <a
+                    href="https://twitter.com/VaccinatePA"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <FaTwitter size="1.5em" />
+                  </a>{" "}
+                  <a
+                    href="https://www.facebook.com/vaccinatepa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <FaFacebook className="ml-2" size="1.5em" />
+                  </a>
                 </div>
               </div>
             </div>

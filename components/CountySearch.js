@@ -2,13 +2,22 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
 import { useRouter } from "next/router";
 
-function CountySearchInput({ inputRef, referenceElementRef, className, ...inputProps }) {
+function CountySearchInput({
+  inputRef,
+  referenceElementRef,
+  className,
+  ...inputProps
+}) {
   return (
     <div id="search-input" className="">
-      <input className={"border py-2 px-3 rounded-pill" + className} {...inputProps} ref={(input) => {
-        inputRef(input);
-        referenceElementRef(input);
-      }} />
+      <input
+        className={"border py-2 px-3 rounded-pill" + className}
+        {...inputProps}
+        ref={(input) => {
+          inputRef(input);
+          referenceElementRef(input);
+        }}
+      />
       <style jsx>{`
         #search-input input {
           font-size: 115%;

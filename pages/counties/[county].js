@@ -137,8 +137,7 @@ export default function CountyPage({ county, locations }) {
         <p>
           Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> and
           like us on <a href="https://www.facebook.com/vaccinatepa">Facebook</a>{" "}
-          for more information.
-          Interested in volunteering? Please{" "}
+          for more information. Interested in volunteering? Please{" "}
           <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
             sign up to volunteer here
           </a>
