@@ -135,17 +135,9 @@ export default function CountyPage({ county, locations }) {
           />
         </div>
         <p>
-          We are a volunteer team calling hospitals and pharmacies to identify
-          which facilities are currently administering vaccines. This website
-          will be updated daily to reflect the latest information we are able to
-          gather.
-        </p>
-        <p>
           Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> and
           like us on <a href="https://www.facebook.com/vaccinatepa">Facebook</a>{" "}
           for more information.
-        </p>
-        <p>
           Interested in volunteering? Please{" "}
           <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
             sign up to volunteer here
