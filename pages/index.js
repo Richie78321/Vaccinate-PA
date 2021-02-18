@@ -19,15 +19,17 @@ export default function Index() {
 
   return (
     <Layout title="Vaccine Availability">
-      <div className="container-fluid mt-4">
+      <div className="mt-4">
         <div id="landing-header">
-          <h1 className="text-center" id="landing-title">
-            Pennsylvania COVID-19 Vaccine Availability
-          </h1>
+          <div className="container-fluid">
+            <h1 className="text-center" id="landing-title">
+              Pennsylvania COVID-19 Vaccine Availability
+            </h1>
+          </div>
           <div id="search-bar" className="container">
             <CountySearch searchRef={countySearchRef} />
           </div>
-          <div className="container-md">
+          <div className="container-fluid container-md">
             <div
               id="site-info"
               className="row justify-content-center align-items-center"
