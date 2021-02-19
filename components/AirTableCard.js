@@ -31,18 +31,17 @@ const linkDecorator = (href, text, key) => (
 // };
 
 function toTitleCase(str) {
-  return str.replace(
-    /\w\S*/g,
-    function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }
-  );
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
 
-function RequirementTag({requirementList, label, pluralLabel}) {
+function RequirementTag({ requirementList, label, pluralLabel }) {
   let requirementString = toTitleCase(requirementList.join(", ").trim());
   if (label && pluralLabel) {
-    requirementString += ` ${requirementList.length > 1 ? pluralLabel : label} Only`;
+    requirementString += ` ${
+      requirementList.length > 1 ? pluralLabel : label
+    } Only`;
   } else {
     requirementString += " Only";
   }
@@ -148,8 +147,9 @@ export default function AirTableCard({ location }) {
       label: "County",
       pluralLabel: "Counties",
     },
-  ].filter(({ requirementList }) => requirementList && requirementList.length > 0);
-
+  ].filter(
+    ({ requirementList }) => requirementList && requirementList.length > 0
+  );
 
   return (
     <>
@@ -202,14 +202,17 @@ export default function AirTableCard({ location }) {
             />
           </li>
           {requirements.length > 0 ? (
-              <li className="list-group-item py-0">
-                <div className="row requirements">
-                  {requirements.map((requirement) => (
-                    <RequirementTag key={requirement.requirementList} {...requirement} />
-                  ))}
-                </div>
-              </li>
-            ) : null}
+            <li className="list-group-item py-0">
+              <div className="row requirements">
+                {requirements.map((requirement) => (
+                  <RequirementTag
+                    key={requirement.requirementList}
+                    {...requirement}
+                  />
+                ))}
+              </div>
+            </li>
+          ) : null}
           {reportNotes.length > 0 ? (
             <li className="list-group-item">
               <span className="text-black">

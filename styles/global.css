@@ -5,12 +5,12 @@ body,
 }
 
 .requirements div:not(:last-child) {
-  border-right: 1px solid #DEDEDE;
+  border-right: 1px solid #dedede;
 }
 
 @media screen and (max-width: 767px) {
   .requirements div:not(:last-child) {
     border: none;
-    border-bottom: 1px solid #DEDEDE;
+    border-bottom: 1px solid #dedede;
   }
 }
