@@ -205,7 +205,7 @@ export default function AirTableCard({ location }) {
               <li className="list-group-item py-0">
                 <div className="row requirements">
                   {requirements.map((requirement) => (
-                    <RequirementTag key={requirement} {...requirement} />
+                    <RequirementTag key={requirement.requirementList} {...requirement} />
                   ))}
                 </div>
               </li>
