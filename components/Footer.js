@@ -1,3 +1,5 @@
+import { FaTwitter, FaFacebook } from "react-icons/fa";
+
 const HeartIcon = (
   <svg
     aria-hidden="true"
@@ -28,6 +30,22 @@ export default function Footer() {
   return (
     <div className="mt-5 py-4 bg-light text-muted">
       <div className="container">
+        <div id="social-icons" className="mx-auto text-center mb-3">
+          <a
+            href="https://twitter.com/VaccinatePA"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaTwitter size="1.5em" />
+          </a>{" "}
+          <a
+            href="https://www.facebook.com/vaccinatepa"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaFacebook className="ml-4" size="1.5em" />
+          </a>
+        </div>
         <p className="text-center">
           Made with {HeartIcon} by volunteer Pennsylvanians and others.
         </p>
@@ -40,6 +58,13 @@ export default function Footer() {
             Please let us know if you've found this site useful or have some
             feedback.
           </a>
+        </p>
+        <p className="text-center">
+          Interested in volunteering? Please{" "}
+          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
+            sign up to volunteer here
+          </a>
+          , and we will reach out to you.
         </p>
         <small>
           This site was put together by volunteers using our best efforts to

@@ -26,7 +26,7 @@ function LocationGroup({ locationGroup }) {
         <span className="align-middle">{locationGroup.message}</span>
       </h4>
       {locationGroup.locations.map((location) => (
-        <div key={location.id} className="my-1">
+        <div key={location.id} className="my-3">
           <AirTableCard location={location} />
         </div>
       ))}
@@ -119,7 +119,7 @@ export default function CountyPage({ county, locations }) {
 
   return (
     <CountyPageLayout county={county}>
-      <div className="container-fluid mt-3">
+      <div className="container-fluid container-xl mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">
             <a>
@@ -129,21 +129,13 @@ export default function CountyPage({ county, locations }) {
           </Link>
         </div>
         <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
-        <div className="mb-3">
+        <div className="mb-5">
           <LatestReportsReceived
             latestReportedLocation={latestReportedLocation}
           />
         </div>
-        <p>
-          Follow us on <a href="https://twitter.com/VaccinatePA">Twitter</a> and
-          like us on <a href="https://www.facebook.com/vaccinatepa">Facebook</a>{" "}
-          for more information. Interested in volunteering? Please{" "}
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
-            sign up to volunteer here
-          </a>
-          , and we will reach out to you.
-        </p>
-        <p className="alert alert-secondary text-center">
+
+        <p className="alert alert-light text-center mb-3 border">
           If you have a missing location to report, or think we have incorrect
           information,{" "}
           <a
@@ -169,9 +161,9 @@ export default function CountyPage({ county, locations }) {
             (locationGroup) => locationGroup.locations.length > 0
           ) ? (
             <>
-              <h4 className="mb-0 font-weight-normal">
+              <h3 className="mb-0 font-weight-normal">
                 <u>Recent availability:</u>
-              </h4>
+              </h3>
               {recentLocationGroups.map((locationGroup) => (
                 <LocationGroup
                   key={locationGroup.message}
@@ -184,9 +176,9 @@ export default function CountyPage({ county, locations }) {
             (locationGroup) => locationGroup.locations.length > 0
           ) ? (
             <>
-              <h4 className="mt-4 mb-0 font-weight-normal">
+              <h3 className="mt-4 mb-0 font-weight-normal">
                 <u>All reports:</u>
-              </h4>
+              </h3>
               {outdatedLocationGroups.map((locationGroup) => (
                 <LocationGroup
                   key={locationGroup.message}
