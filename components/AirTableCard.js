@@ -16,32 +16,42 @@ const linkDecorator = (href, text, key) => (
   </a>
 );
 
-const displayPhoneNumber = (phone) => {
-  if (!phone) {
-    return "N/A";
-  } else {
-    var cleaned = ("" + phone).replace(/\D/g, "");
-    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-      return "(" + match[1] + ") " + match[2] + "-" + match[3];
-    } else {
-      return phone;
-    }
-  }
-};
+// const displayPhoneNumber = (phone) => {
+//   if (!phone) {
+//     return "N/A";
+//   } else {
+//     var cleaned = ("" + phone).replace(/\D/g, "");
+//     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+//     if (match) {
+//       return "(" + match[1] + ") " + match[2] + "-" + match[3];
+//     } else {
+//       return phone;
+//     }
+//   }
+// };
 
-const getCommaSeparatedList = (items) => {
-  const lowercaseString = items.join(", ").trim().toLowerCase() + ' only';
-  return lowercaseString[0].toUpperCase() + lowercaseString.slice(1);
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  );
 }
 
-// These are all multi selects, so they'll either be null (no data) or an array
-const getOptionalAdditionalInfo = (additionalInfo) => {
-  if (additionalInfo) {
-    return getCommaSeparatedList(additionalInfo);
+function RequirementTag({requirementList, label, pluralLabel}) {
+  let requirementString = toTitleCase(requirementList.join(", ").trim());
+  if (label && pluralLabel) {
+    requirementString += ` ${requirementList.length > 1 ? pluralLabel : label} Only`;
   } else {
-    return null; 
+    requirementString += " Only";
   }
+
+  return (
+    <div className="col-md-4 col-12 px-3 py-2 d-flex align-items-center">
+      {requirementString}
+    </div>
+  );
 }
 
 function AvailabilityTag({ availabilityStatus, numReports }) {
@@ -126,17 +136,20 @@ export default function AirTableCard({ location }) {
 
   const availabilityStatus = location.availabilityStatus;
 
-  const ageRequirement = getOptionalAdditionalInfo(location.fields.age_requirement);
-  const occupationRequirement = getOptionalAdditionalInfo(location.fields.occupation_requirement);
-  const countyRequirement = getOptionalAdditionalInfo(location.fields.eligible_counties);
+  const requirements = [
+    {
+      requirementList: location.fields.age_requirement,
+    },
+    {
+      requirementList: location.fields.occupation_requirement,
+    },
+    {
+      requirementList: location.fields.eligible_counties,
+      label: "County",
+      pluralLabel: "Counties",
+    },
+  ].filter(({ requirementList }) => requirementList && requirementList.length > 0);
 
-  // TODO: We could order these so that they are always in the same spot (e.g. age | occupation | location )
-  // but this would often mean empty sections on the left.
-  // If we want the data to always flow left to right, we could choose to leave out the null values in the below array.
-  // The tradeoff here is that data could end up in different locations depending on the specific card, which might
-  // make things harder to scan.
-  const allAdditionalRequirements = [ageRequirement, occupationRequirement, countyRequirement];
-  const additionalRequirementsToDisplay = allAdditionalRequirements.filter((req) => req != null);
 
   return (
     <>
@@ -188,21 +201,15 @@ export default function AirTableCard({ location }) {
               numReports={location.fields["Number of reports"]}
             />
           </li>
-          { additionalRequirementsToDisplay.length > 0 && (
-            <li className="list-group-item py-0">
-              <div className="row additional-requirements">
-                {
-                  additionalRequirementsToDisplay.map((req) => {
-                    return (
-                      <div className="col-md-4 col-12 px-3 py-2 d-flex align-items-center" key={req}>
-                        {req}
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            </li>
-          ) }
+          {requirements.length > 0 ? (
+              <li className="list-group-item py-0">
+                <div className="row requirements">
+                  {requirements.map((requirement) => (
+                    <RequirementTag key={requirement} {...requirement} />
+                  ))}
+                </div>
+              </li>
+            ) : null}
           {reportNotes.length > 0 ? (
             <li className="list-group-item">
               <span className="text-black">

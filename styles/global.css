@@ -4,12 +4,12 @@ body,
   height: 100%;
 }
 
-.additional-requirements div:not(:last-child) {
+.requirements div:not(:last-child) {
   border-right: 1px solid #DEDEDE;
 }
 
 @media screen and (max-width: 767px) {
-  .additional-requirements div:not(:last-child) {
+  .requirements div:not(:last-child) {
     border: none;
     border-bottom: 1px solid #DEDEDE;
   }
