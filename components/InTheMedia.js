@@ -53,7 +53,7 @@ export default function InTheMedia() {
 
   return (
     <div className="container mt-5">
-      <h4 className="text-center mb-3">In the Media</h4>
+      <h3 className="text-center mb-3">In the Media</h3>
       <div className="row align-items-center mb-3 px-4">
         {media.map((media_instance) => (
           <div key={media_instance.href} className="col-12 col-sm-6 col-md-4">
