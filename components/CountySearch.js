@@ -9,9 +9,9 @@ function CountySearchInput({
   ...inputProps
 }) {
   return (
-    <div id="search-input" className="">
+    <div id="search-input">
       <input
-        className={"border py-2 px-3 rounded-pill" + className}
+        className={"border py-2 pr-3 rounded-pill" + className}
         {...inputProps}
         ref={(input) => {
           inputRef(input);
@@ -19,10 +19,14 @@ function CountySearchInput({
         }}
       />
       <style jsx>{`
-        #search-input input {
+        #search-input input  {
           font-size: 115%;
           width: 100%;
           border: none;
+          background-image: url(/search_icon.svg);
+          background-repeat: no-repeat;
+          padding-left: 38px;
+          background-position: 12px 50%;
         }
 
         #search-input input:focus {
