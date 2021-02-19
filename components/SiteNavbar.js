@@ -1,10 +1,13 @@
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Nav, Navbar } from "react-bootstrap";
+import { useRouter } from 'next/router'
 import Link from "next/link";
 
 export default function SiteNavbar() {
+  const router = useRouter();
+  const pathName = router.asPath;
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar expand="lg" className="border-bottom">
       <Link href="/">
         <Navbar.Brand href="/">
           <div>
@@ -21,8 +24,8 @@ export default function SiteNavbar() {
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+      <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+        <Nav variant="pills" activeKey={pathName}>
           <Link href="/">
             <Nav.Link href="/">County Search</Nav.Link>
           </Link>
