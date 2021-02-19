@@ -19,7 +19,7 @@ function CountySearchInput({
         }}
       />
       <style jsx>{`
-        #search-input input  {
+        #search-input input {
           font-size: 115%;
           width: 100%;
           border: none;
