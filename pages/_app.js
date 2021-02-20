@@ -21,8 +21,8 @@ Router.onRouteChangeError = () => {
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/*Google Analytics*/}
       <Head>
+        {/*Google Analytics*/}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-58446605-2"
@@ -38,6 +38,8 @@ function MyApp({ Component, pageProps }) {
               `,
           }}
         />
+        {/* Google Optimize */}
+        <script async src="https://www.googleoptimize.com/optimize.js?id=OPT-KF854K7"></script>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
