@@ -31,3 +31,10 @@ body,
     border-bottom: 1px solid #dedede;
   }
 }
+
+@media screen and (max-width: 992px) {
+  .nav-pills > a {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}

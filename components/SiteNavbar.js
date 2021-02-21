@@ -7,7 +7,7 @@ export default function SiteNavbar() {
   const pathName = router.asPath;
 
   return (
-    <Navbar expand="md" className="border-bottom">
+    <Navbar expand="lg" className="border-bottom">
       <Link href="/">
         <Navbar.Brand href="/">
           <div>

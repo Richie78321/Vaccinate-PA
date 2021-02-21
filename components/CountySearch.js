@@ -1,6 +1,5 @@
 import { Typeahead } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
-import { useRouter } from "next/router";
 
 function CountySearchInput({
   inputRef,
@@ -37,21 +36,25 @@ function CountySearchInput({
   );
 }
 
-export default function CountySearch({ searchRef }) {
-  const router = useRouter();
+export default function CountySearch({ searchRef, onSearch, setTopCountyOption }) {
+  const onChange = () => {
+    if (searchRef.current && searchRef.current.items.length > 0) {
+      const topCountyOption = searchRef.current.items[0];
+      setTopCountyOption(topCountyOption);
+    }
+  }
 
   return (
     <Typeahead
       id="county-filter-selection"
+      className="flex-grow-1"
       ref={searchRef}
       placeholder="Search for your county..."
       options={counties}
-      onChange={(selected) => {
-        if (selected && selected.length > 0) {
-          router.push(`counties/${selected[0].replace(" ", "_")}`);
-        }
-      }}
+      onChange={(selected) => onSearch(selected)}
       renderInput={(props) => <CountySearchInput {...props} />}
+      onInputChange={onChange}
+      onFocus={onChange}
       clearButton
       highlightOnlyResult
     />

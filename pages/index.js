@@ -1,13 +1,17 @@
-import { createRef, useCallback } from "react";
+import { createRef, useCallback, useState } from "react";
 import InTheMedia from "../components/InTheMedia";
 import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
 import Layout from "../layouts/Layout";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
+import { Button } from "react-bootstrap"
 
 export default function Index() {
   const countySearchRef = createRef();
+  const router = useRouter();
+  const [topCountyOption, setTopCountyOption] = useState(null);
 
   const onClickFindCounty = useCallback(() => {
     if (countySearchRef.current) {
@@ -16,6 +20,18 @@ export default function Index() {
 
     return false;
   }, [countySearchRef]);
+
+  const goToCountyIfNotNull = (counties) => {
+    if (counties && counties.length > 0) {
+      router.push(`counties/${counties[0].replace(" ", "_")}`);
+    }
+  }
+
+  const onFindVaccineClick = () => {
+    if (topCountyOption) {
+      goToCountyIfNotNull([topCountyOption]);
+    }
+  }
 
   return (
     <Layout title="Vaccine Availability">
@@ -26,8 +42,22 @@ export default function Index() {
               Pennsylvania COVID-19 Vaccine Availability
             </h1>
           </div>
-          <div id="search-bar" className="container">
-            <CountySearch searchRef={countySearchRef} />
+          <div id="search-bar" className="container d-flex flex-md-row flex-column px-4">
+            <CountySearch
+              className="flex-grow-1"
+              searchRef={countySearchRef}
+              onSearch={goToCountyIfNotNull}
+              setTopCountyOption={setTopCountyOption}
+            />
+            <div className="ml-md-2 my-3 my-md-0 mx-md-0 mx-auto">
+              <Button
+                variant="warning"
+                className="rounded-pill h-100"
+                onClick={(onFindVaccineClick)}
+              >
+                Find Vaccine
+              </Button>
+            </div>
           </div>
           <div className="container-fluid container-md">
             <div
