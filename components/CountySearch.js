@@ -3,7 +3,7 @@ import { Typeahead, Hint } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
 import { useRouter } from "next/router";
 import { Button } from "react-bootstrap";
- 
+
 function CountySearchInput({
   inputRef,
   referenceElementRef,
@@ -65,9 +65,12 @@ export default function CountySearch({ searchRef }) {
     }
   }, [searchRef, router]);
 
-  const onTypeaheadSelect = useCallback((selected) => {
-    onSelect(selected, router);
-  }, [router])
+  const onTypeaheadSelect = useCallback(
+    (selected) => {
+      onSelect(selected, router);
+    },
+    [router]
+  );
 
   return (
     <div className="d-flex flex-row">
@@ -84,7 +87,11 @@ export default function CountySearch({ searchRef }) {
         />
       </div>
       <div>
-        <Button variant="warning" className="rounded-pill h-100 ml-2 px-4" onClick={onClickFindVaccine}>
+        <Button
+          variant="warning"
+          className="rounded-pill h-100 ml-2 px-4"
+          onClick={onClickFindVaccine}
+        >
           Find <span className="d-none d-sm-inline">Vaccine</span>
         </Button>
       </div>
