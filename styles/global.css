@@ -8,6 +8,23 @@ body,
   border-right: 1px solid #dedede;
 }
 
+.nav-link {
+  color: #000 !important;
+}
+
+.nav-link:hover {
+  color: #4c4c4c !important;
+}
+
+.navbar-brand h2 {
+  color: #183054 !important;
+}
+
+.nav-pills .active {
+  background-color: #f3f4f6 !important;
+  color: #000 !important;
+}
+
 @media screen and (max-width: 767px) {
   .requirements div:not(:last-child) {
     border: none;

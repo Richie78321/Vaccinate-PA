@@ -7,7 +7,7 @@ export default function SiteNavbar() {
   const pathName = router.asPath;
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar expand="md" className="border-bottom">
       <Link href="/">
         <Navbar.Brand href="/">
           <div>
@@ -17,7 +17,7 @@ export default function SiteNavbar() {
               src="/images/VaccinatePALogo.svg"
               height="40"
             />
-            <h2 className="d-inline align-middle mb-0 text-warning font-weight-bold">
+            <h2 className="d-inline align-middle mb-0 font-weight-bold" id="brand-name">
               VaccinatePA
             </h2>
           </div>
@@ -25,19 +25,21 @@ export default function SiteNavbar() {
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto" activeKey={pathName}>
-          <Link href="/">
-            <Nav.Link href="/">County Search</Nav.Link>
-          </Link>
-          <Link href="/additional-resources">
-            <Nav.Link href="/additional-resources">
-              Additional Resources
-            </Nav.Link>
-          </Link>
-          <Link href="/about-us">
-            <Nav.Link href="/about-us">About Us</Nav.Link>
-          </Link>
-        </Nav>
+        <div className="mt-2 mt-md-0 ml-auto">
+          <Nav variant="pills" activeKey={pathName}>
+            <Link href="/">
+              <Nav.Link href="/" className="main-nav-link px-3">County Search</Nav.Link>
+            </Link>
+            <Link href="/additional-resources">
+              <Nav.Link href="/additional-resources" className="main-nav-link px-3">
+                Additional Resources
+              </Nav.Link>
+            </Link>
+            <Link href="/about-us">
+              <Nav.Link href="/about-us" className="main-nav-link px-3">About Us</Nav.Link>
+            </Link>
+          </Nav>
+        </div>
       </Navbar.Collapse>
     </Navbar>
   );
