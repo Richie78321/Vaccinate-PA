@@ -36,12 +36,16 @@ function LocationGroup({ locationGroup }) {
 }
 
 const CountyLinks = ({ countyLinks }) => {
-  let countyCovidInfoLink = countyLinks['County COVID Information'] ? countyLinks['County COVID Information'].trim() : null;
+  let countyCovidInfoLink = countyLinks["County COVID Information"]
+    ? countyLinks["County COVID Information"].trim()
+    : null;
   if (countyCovidInfoLink && countyCovidInfoLink.length <= 0) {
     countyCovidInfoLink = countyCovidInfoLink.trim();
   }
 
-  let countyPreregistrationLink = countyLinks['County COVID Preregistration'] ? countyLinks['County COVID Preregistration'].trim() : null;
+  let countyPreregistrationLink = countyLinks["County COVID Preregistration"]
+    ? countyLinks["County COVID Preregistration"].trim()
+    : null;
   if (countyPreregistrationLink && countyPreregistrationLink.length <= 0) {
     countyPreregistrationLink = null;
   }
@@ -51,14 +55,20 @@ const CountyLinks = ({ countyLinks }) => {
       {countyCovidInfoLink ? (
         <div>
           <a target="_blank" href={countyCovidInfoLink}>
-            Official {countyLinks.County} COVID-19 <span className="text-nowrap">Information <FaExternalLinkAlt size=".85em" /></span>
+            Official {countyLinks.County} COVID-19{" "}
+            <span className="text-nowrap">
+              Information <FaExternalLinkAlt size=".85em" />
+            </span>
           </a>
         </div>
       ) : null}
       {countyPreregistrationLink ? (
         <div>
           <a target="_blank" href={countyPreregistrationLink}>
-            Official {countyLinks.County} Vaccine <span className="text-nowrap">Preregistration <FaExternalLinkAlt size=".85em" /></span>
+            Official {countyLinks.County} Vaccine{" "}
+            <span className="text-nowrap">
+              Preregistration <FaExternalLinkAlt size=".85em" />
+            </span>
           </a>
         </div>
       ) : null}
