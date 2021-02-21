@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Typeahead, Hint } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
 import { useRouter } from "next/router";
-import { Button } from "react-bootstrap";
-
+import { Button, Form } from "react-bootstrap";
+ 
 function CountySearchInput({
   inputRef,
   referenceElementRef,
@@ -54,23 +54,30 @@ function onSelect(selected, router) {
 export default function CountySearch({ searchRef }) {
   const router = useRouter();
 
+  const [invalidSubmit, setInvalidSubmit] = useState(false);
+
+  const onInputChange = useCallback(() => {
+    if (invalidSubmit) {
+      setInvalidSubmit(false);
+    }
+  }, [invalidSubmit]);
+
   const onClickFindVaccine = useCallback(() => {
     if (searchRef.current.getInput().value.length > 0) {
       if (searchRef.current.items && searchRef.current.items.length > 0) {
         // Treat closest match as selected item
         onSelect(searchRef.current.items, router);
+      } else {
+        setInvalidSubmit(true);
       }
     } else {
       searchRef.current.focus();
     }
   }, [searchRef, router]);
 
-  const onTypeaheadSelect = useCallback(
-    (selected) => {
-      onSelect(selected, router);
-    },
-    [router]
-  );
+  const onTypeaheadSelect = useCallback((selected) => {
+    onSelect(selected, router);
+  }, [router])
 
   return (
     <div className="d-flex flex-row">
@@ -84,17 +91,21 @@ export default function CountySearch({ searchRef }) {
           renderInput={(props) => <CountySearchInput {...props} />}
           clearButton
           highlightOnlyResult
+          onInputChange={onInputChange}
+          className={invalidSubmit ? "is-invalid" : ""}
         />
+        <Form.Control.Feedback type="invalid" className="ml-2">Could not find that county. Please double-check your spelling.</Form.Control.Feedback>
       </div>
-      <div>
-        <Button
-          variant="warning"
-          className="rounded-pill h-100 ml-2 px-4"
-          onClick={onClickFindVaccine}
-        >
+      <div id="find-vaccine-button">
+        <Button  variant="warning" className="rounded-pill ml-2 px-4 h-100" onClick={onClickFindVaccine}>
           Find <span className="d-none d-sm-inline">Vaccine</span>
         </Button>
       </div>
+      <style jsx>{`
+        #find-vaccine-button {
+          height: 45px;
+        }
+      `}</style>
     </div>
   );
 }
