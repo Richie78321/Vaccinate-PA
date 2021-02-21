@@ -87,7 +87,7 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
-export async function getCountySpecificInfo(county) {
+export async function getCountyLinks(county) {
   const countyLinks = await fetchAirtableData(
     "county-links",
     Airtable.base("appdsheneg5ii1EnQ")("Counties").select()
