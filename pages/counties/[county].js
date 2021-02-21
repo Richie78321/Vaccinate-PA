@@ -1,13 +1,14 @@
 import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
-import { getCountyLocations } from "../../utils/Data";
+import { getCountyLocations, getCountyLinks } from "../../utils/Data";
 import {
   FaCheckCircle,
   FaTimesCircle,
   FaQuestionCircle,
   FaArrowLeft,
   FaClipboardList,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
@@ -34,6 +35,37 @@ function LocationGroup({ locationGroup }) {
   ) : null;
 }
 
+const CountyLinks = ({ countyLinks }) => {
+  let countyCovidInfoLink = countyLinks['County COVID Information'] ? countyLinks['County COVID Information'].trim() : null;
+  if (countyCovidInfoLink && countyCovidInfoLink.length <= 0) {
+    countyCovidInfoLink = countyCovidInfoLink.trim();
+  }
+
+  let countyPreregistrationLink = countyLinks['County COVID Preregistration'] ? countyLinks['County COVID Preregistration'].trim() : null;
+  if (countyPreregistrationLink && countyPreregistrationLink.length <= 0) {
+    countyPreregistrationLink = null;
+  }
+
+  return (
+    <>
+      {countyCovidInfoLink ? (
+        <div>
+          <a target="_blank" href={countyCovidInfoLink}>
+            Official {countyLinks.County} COVID-19 <span className="text-nowrap">Information <FaExternalLinkAlt size=".85em" /></span>
+          </a>
+        </div>
+      ) : null}
+      {countyPreregistrationLink ? (
+        <div>
+          <a target="_blank" href={countyPreregistrationLink}>
+            Official {countyLinks.County} Vaccine <span className="text-nowrap">Preregistration <FaExternalLinkAlt size=".85em" /></span>
+          </a>
+        </div>
+      ) : null}
+    </>
+  );
+};
+
 function LatestReportsReceived({ latestReportedLocation }) {
   if (latestReportedLocation) {
     const latestReportTimeRaw = latestReportedLocation.fields["Latest report"];
@@ -53,7 +85,7 @@ function LatestReportsReceived({ latestReportedLocation }) {
   return null;
 }
 
-export default function CountyPage({ county, locations }) {
+export default function CountyPage({ county, countyLinks, locations }) {
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
@@ -129,10 +161,15 @@ export default function CountyPage({ county, locations }) {
           </Link>
         </div>
         <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
-        <div className="mb-5">
-          <LatestReportsReceived
-            latestReportedLocation={latestReportedLocation}
-          />
+        <div className="mb-5 row">
+          <div className="col-md-6">
+            <LatestReportsReceived
+              latestReportedLocation={latestReportedLocation}
+            />
+          </div>
+          <div className="mt-2 col-md-6 text-md-right mt-md-0">
+            <CountyLinks countyLinks={countyLinks} />
+          </div>
         </div>
 
         <p className="alert alert-light text-center mb-3 border">
@@ -202,10 +239,12 @@ export async function getServerSideProps({ params }) {
   }
 
   const countyLocations = await getCountyLocations(countyDecoded);
+  const countyLinks = await getCountyLinks(countyDecoded);
 
   return {
     props: {
       county: countyDecoded,
+      countyLinks: countyLinks,
       locations: countyLocations,
     },
   };

@@ -87,6 +87,23 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
+export async function getCountyLinks(county) {
+  const countyLinks = await fetchAirtableData(
+    "county-links",
+    Airtable.base("appdsheneg5ii1EnQ")("Counties").select()
+  );
+
+  const countySpecificInfo = countyLinks
+    .map((record) => record._rawJson)
+    .filter((record) => record.fields.County === county);
+
+  if (countySpecificInfo.length > 0) {
+    return countySpecificInfo[0].fields;
+  } else {
+    return {};
+  }
+}
+
 export async function getCountyLocations(county) {
   const countyLocations = (
     await fetchAirtableData(
