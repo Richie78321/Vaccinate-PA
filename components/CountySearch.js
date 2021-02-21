@@ -36,13 +36,17 @@ function CountySearchInput({
   );
 }
 
-export default function CountySearch({ searchRef, onSearch, setTopCountyOption }) {
+export default function CountySearch({
+  searchRef,
+  onSearch,
+  setTopCountyOption,
+}) {
   const onChange = () => {
     if (searchRef.current && searchRef.current.items.length > 0) {
       const topCountyOption = searchRef.current.items[0];
       setTopCountyOption(topCountyOption);
     }
-  }
+  };
 
   return (
     <Typeahead

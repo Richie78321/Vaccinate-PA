@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
-import { Button } from "react-bootstrap"
+import { Button } from "react-bootstrap";
 
 export default function Index() {
   const countySearchRef = createRef();
@@ -25,13 +25,13 @@ export default function Index() {
     if (counties && counties.length > 0) {
       router.push(`counties/${counties[0].replace(" ", "_")}`);
     }
-  }
+  };
 
   const onFindVaccineClick = () => {
     if (topCountyOption) {
       goToCountyIfNotNull([topCountyOption]);
     }
-  }
+  };
 
   return (
     <Layout title="Vaccine Availability">
@@ -42,7 +42,10 @@ export default function Index() {
               Pennsylvania COVID-19 Vaccine Availability
             </h1>
           </div>
-          <div id="search-bar" className="container d-flex flex-md-row flex-column px-4">
+          <div
+            id="search-bar"
+            className="container d-flex flex-md-row flex-column px-4"
+          >
             <CountySearch
               className="flex-grow-1"
               searchRef={countySearchRef}
@@ -53,7 +56,7 @@ export default function Index() {
               <Button
                 variant="warning"
                 className="rounded-pill h-100"
-                onClick={(onFindVaccineClick)}
+                onClick={onFindVaccineClick}
               >
                 Find Vaccine
               </Button>
