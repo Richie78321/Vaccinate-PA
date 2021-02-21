@@ -54,7 +54,7 @@ const CountyLinks = ({ countyLinks }) => {
     <ul className="pl-4">
       {countyCovidInfoLink ? (
         <li>
-          <a target="_blank" href={countyCovidInfoLink}>
+          <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
             Official {countyLinks.County} COVID-19{" "}
             <span className="text-nowrap">
               Information <FaExternalLinkAlt size=".85em" />
@@ -64,7 +64,7 @@ const CountyLinks = ({ countyLinks }) => {
       ) : null}
       {countyPreregistrationLink ? (
         <li>
-          <a target="_blank" href={countyPreregistrationLink}>
+          <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
             Official {countyLinks.County} Vaccine{" "}
             <span className="text-nowrap">
               Preregistration <FaExternalLinkAlt size=".85em" />
