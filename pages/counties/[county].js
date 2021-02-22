@@ -1,4 +1,4 @@
-import LocationGroup from '../../components/LocationGroup';
+import LocationGroupCategories from '../../components/LocationGroupCategories';
 import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
@@ -83,63 +83,70 @@ export default function CountyPage({ county, countyLinks, locations }) {
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
-  const recentLocationGroups = [
+  const locationGroupCategories = [
     {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableWalkIn,
+      categoryTitle: "Recent availability",
+      locationGroups: [
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available",
+          messageColor: "text-success",
+          locations: locations.recentLocations.availableWalkIn,
+        },
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available with appointment",
+          messageColor: "text-success",
+          locations: locations.recentLocations.availableAppointment,
+        },
+        {
+          messageIcon: <FaClipboardList />,
+          message: "Vaccine waitlist signup reported available",
+          messageColor: "text-info",
+          locations: locations.recentLocations.availableWaitlist,
+        },
+      ],
     },
     {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.recentLocations.availableWaitlist,
-    },
-  ];
-
-  const outdatedLocationGroups = [
-    {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableWalkIn,
-    },
-    {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.outdatedLocations.availableWaitlist,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "Availability varies",
-      messageColor: "text-dark",
-      locations: locations.availabilityVaries,
-    },
-    {
-      messageIcon: <FaTimesCircle />,
-      message: "Vaccines reported unavailable",
-      messageColor: "text-danger",
-      locations: locations.noAvailability,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "No confirmation / uncontacted",
-      messageColor: "text-dark",
-      locations: locations.noConfirmation,
+      categoryTitle: "All reports",
+      locationGroups: [
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available",
+          messageColor: "text-success",
+          locations: locations.outdatedLocations.availableWalkIn,
+        },
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available with appointment",
+          messageColor: "text-success",
+          locations: locations.outdatedLocations.availableAppointment,
+        },
+        {
+          messageIcon: <FaClipboardList />,
+          message: "Vaccine waitlist signup reported available",
+          messageColor: "text-info",
+          locations: locations.outdatedLocations.availableWaitlist,
+        },
+        {
+          messageIcon: <FaQuestionCircle />,
+          message: "Availability varies",
+          messageColor: "text-dark",
+          locations: locations.availabilityVaries,
+        },
+        {
+          messageIcon: <FaTimesCircle />,
+          message: "Vaccines reported unavailable",
+          messageColor: "text-danger",
+          locations: locations.noAvailability,
+        },
+        {
+          messageIcon: <FaQuestionCircle />,
+          message: "No confirmation / uncontacted",
+          messageColor: "text-dark",
+          locations: locations.noConfirmation,
+        },
+      ],
     },
   ];
 
@@ -163,7 +170,6 @@ export default function CountyPage({ county, countyLinks, locations }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-
         <p className="alert alert-light text-center mb-3 border">
           If you have a missing location to report, or think we have incorrect
           information,{" "}
@@ -175,48 +181,7 @@ export default function CountyPage({ county, countyLinks, locations }) {
             please let us know.
           </a>
         </p>
-        <div className="d-flex flex-column">
-          {locations.allLocations.length <= 0 ? (
-            <>
-              <h2 className="text-center mt-5">
-                We currently have no locations for {county} on record.
-              </h2>
-              <h2 className="text-center">
-                You can view all counties <Link href="/">here</Link>.
-              </h2>
-            </>
-          ) : null}
-          {recentLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mb-0 font-weight-normal">
-                <u>Recent availability:</u>
-              </h3>
-              {recentLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
-          {outdatedLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mt-4 mb-0 font-weight-normal">
-                <u>All reports:</u>
-              </h3>
-              {outdatedLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
-        </div>
+        <LocationGroupCategories locationGroupCategories={locationGroupCategories} />
       </div>
     </CountyPageLayout>
   );
