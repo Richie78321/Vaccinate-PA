@@ -1,6 +1,22 @@
 import PropTypes from 'prop-types';
 import LocationGroup from './LocationGroup';
 
+function LocationGroupCategory({ locationGroupCategory }) {
+  return locationGroupCategory.locationGroups.some((locationGroup) => locationGroup.locations.length > 0) ? (
+    <div className="mb-4">
+      <h3 className="mb-0 font-weight-normal">
+        <u>{locationGroupCategory.categoryTitle}:</u>
+      </h3>
+      {locationGroupCategory.locationGroups.map((locationGroup) => (
+        <LocationGroup
+          key={locationGroup.message}
+          locationGroup={locationGroup}
+        />
+      ))}
+    </div>
+  ) : null;
+}
+
 export default function LocationGroupCategories({ locationGroupCategories }) {
   const hasLocations = locationGroupCategories.some((locationGroupCategory) =>
     locationGroupCategory.locationGroups.some((locationGroup) => locationGroup.locations)
@@ -19,17 +35,7 @@ export default function LocationGroupCategories({ locationGroupCategories }) {
         </>
       ) : null}
       {locationGroupCategories.map((locationGroupCategory) => (
-        <div key={locationGroupCategory.categoryTitle} className="mb-4">
-          <h3 className="mb-0 font-weight-normal">
-            <u>{locationGroupCategory.categoryTitle}:</u>
-          </h3>
-          {locationGroupCategory.locationGroups.map((locationGroup) => (
-            <LocationGroup
-              key={locationGroup.message}
-              locationGroup={locationGroup}
-            />
-          ))}
-        </div>
+        <LocationGroupCategory key={locationGroupCategory.categoryTitle} locationGroupCategory={locationGroupCategory} />
       ))}
     </div>
   )
