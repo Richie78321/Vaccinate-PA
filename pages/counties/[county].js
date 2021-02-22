@@ -1,4 +1,4 @@
-import LocationGroupCategories from '../../components/LocationGroupCategories';
+import LocationGroupCategories from "../../components/LocationGroupCategories";
 import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
@@ -181,7 +181,9 @@ export default function CountyPage({ county, countyLinks, locations }) {
             please let us know.
           </a>
         </p>
-        <LocationGroupCategories locationGroupCategories={locationGroupCategories} />
+        <LocationGroupCategories
+          locationGroupCategories={locationGroupCategories}
+        />
       </div>
     </CountyPageLayout>
   );

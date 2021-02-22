@@ -1,5 +1,5 @@
 import AirTableCard from "./AirTableCard";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function LocationGroup({ locationGroup }) {
   return locationGroup.locations.length > 0 ? (

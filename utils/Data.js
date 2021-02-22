@@ -91,11 +91,16 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
 }
 
 export async function getCountyLinks(county) {
-  const countyLinks = (await cacheData(
-    "county-links",
-    async () => (await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all()).map((record) => record._rawJson),
-    3600 // One hour
-  )).filter((record) => record.fields.County === county);
+  const countyLinks = (
+    await cacheData(
+      "county-links",
+      async () =>
+        (
+          await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all()
+        ).map((record) => record._rawJson),
+      3600 // One hour
+    )
+  ).filter((record) => record.fields.County === county);
 
   if (countyLinks.length > 0) {
     return countyLinks[0].fields;
@@ -107,171 +112,182 @@ export async function getCountyLinks(county) {
 // TODO : Both this and the lat long location function are in need of a serious
 // refactor WRT the location groups and categories.
 export function getCountyLocations(county) {
-  return cacheData(
-    county,
-    async () => {
-      const countyLocations = (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
-        filterByFormula: `County = "${county}"`,
-        sort: [
-          {
-            field: "Latest report",
-            direction: "desc",
-          },
-        ],
-      }).all()).map((record) => record._rawJson);
+  return cacheData(county, async () => {
+    const countyLocations = (
+      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+        .select({
+          filterByFormula: `County = "${county}"`,
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        })
+        .all()
+    ).map((record) => record._rawJson);
 
-      for (let i = 0; i < countyLocations.length; i++) {
-        countyLocations[i].availabilityStatus = getAvailabilityStatus(
-          countyLocations[i].fields["Vaccines available?"]
-        );
-      }
-    
-      const outdatedThreshold = new Date();
-      outdatedThreshold.setDate(
-        outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+    for (let i = 0; i < countyLocations.length; i++) {
+      countyLocations[i].availabilityStatus = getAvailabilityStatus(
+        countyLocations[i].fields["Vaccines available?"]
       );
-    
-      const allRecentLocations = countyLocations.filter(
-        (location) =>
-          location.fields["Latest report"] &&
-          Date.parse(location.fields["Latest report"]) > outdatedThreshold
-      );
-      const allOutdatedLocations = countyLocations.filter(
-        (location) =>
-          location.fields["Latest report"] &&
-          Date.parse(location.fields["Latest report"]) <= outdatedThreshold
-      );
-      return {
-        allLocations: countyLocations,
-        allRecentLocations: allRecentLocations,
-        allOutdatedLocations: allOutdatedLocations,
-        recentLocations: {
-          availableWaitlist: allRecentLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.WAITLIST.value
-          ),
-          availableAppointment: allRecentLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.APPOINTMENT.value
-          ),
-          availableWalkIn: allRecentLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.WALK_IN.value
-          ),
-        },
-        outdatedLocations: {
-          availableWaitlist: allOutdatedLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.WAITLIST.value
-          ),
-          availableAppointment: allOutdatedLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.APPOINTMENT.value
-          ),
-          availableWalkIn: allOutdatedLocations.filter(
-            (location) =>
-              location.availabilityStatus.value ===
-              AVAILABILITY_STATUS.WALK_IN.value
-          ),
-        },
-        availabilityVaries: countyLocations.filter(
-          (location) =>
-            location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
-        ),
-        noAvailability: countyLocations.filter(
-          (location) =>
-            location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
-        ),
-        noConfirmation: countyLocations.filter(
-          (location) =>
-            location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
-        ),
-      };
     }
-  );
+
+    const outdatedThreshold = new Date();
+    outdatedThreshold.setDate(
+      outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+    );
+
+    const allRecentLocations = countyLocations.filter(
+      (location) =>
+        location.fields["Latest report"] &&
+        Date.parse(location.fields["Latest report"]) > outdatedThreshold
+    );
+    const allOutdatedLocations = countyLocations.filter(
+      (location) =>
+        location.fields["Latest report"] &&
+        Date.parse(location.fields["Latest report"]) <= outdatedThreshold
+    );
+    return {
+      allLocations: countyLocations,
+      allRecentLocations: allRecentLocations,
+      allOutdatedLocations: allOutdatedLocations,
+      recentLocations: {
+        availableWaitlist: allRecentLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.WAITLIST.value
+        ),
+        availableAppointment: allRecentLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.APPOINTMENT.value
+        ),
+        availableWalkIn: allRecentLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.WALK_IN.value
+        ),
+      },
+      outdatedLocations: {
+        availableWaitlist: allOutdatedLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.WAITLIST.value
+        ),
+        availableAppointment: allOutdatedLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.APPOINTMENT.value
+        ),
+        availableWalkIn: allOutdatedLocations.filter(
+          (location) =>
+            location.availabilityStatus.value ===
+            AVAILABILITY_STATUS.WALK_IN.value
+        ),
+      },
+      availabilityVaries: countyLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
+      ),
+      noAvailability: countyLocations.filter(
+        (location) =>
+          location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
+      ),
+      noConfirmation: countyLocations.filter(
+        (location) =>
+          location.availabilityStatus.value ===
+          AVAILABILITY_STATUS.UNKNOWN.value
+      ),
+    };
+  });
 }
 
 export function getLatLongLocations(latitude, longitude) {
   // Could employ some sort of lat-long discretization in the future if further
   // caching is necessary. Definitely overkill for now.
-  return cacheData(
-    `${latitude}-${longitude}`,
-    async () => {
-      // Uses hours instead of days because AirTable's rounding for days is too
-      // lenient and some display as "4 days ago" on frontend.
-      const allAvailability = (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
-        filterByFormula: `
+  return cacheData(`${latitude}-${longitude}`, async () => {
+    // Uses hours instead of days because AirTable's rounding for days is too
+    // lenient and some display as "4 days ago" on frontend.
+    const allAvailability = (
+      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+        .select({
+          filterByFormula: `
           AND(
             {Latest report},
-            DATETIME_DIFF(TODAY(), {Latest report}, 'hours') <= ${OUTDATED_DAYS_THRESHOLD * 24},
+            DATETIME_DIFF(TODAY(), {Latest report}, 'hours') <= ${
+              OUTDATED_DAYS_THRESHOLD * 24
+            },
             {Latitude},
             {Longitude},
             NOT({Vaccines available?} = 'No')
           )
         `,
-        sort: [
-          {
-            field: "Latest report",
-            direction: "desc",
-          },
-        ]
-      }).all())
-          .map((record) => record._rawJson);
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        })
+        .all()
+    ).map((record) => record._rawJson);
 
-      for (let i = 0; i < allAvailability.length; i++) {
-        allAvailability[i].availabilityStatus = getAvailabilityStatus(
-          allAvailability[i].fields["Vaccines available?"]
-        );
-      }
-      
-      const start = {latitude, longitude};
-      for (let i = 0; i < allAvailability.length; i++) {
-        allAvailability[i].distanceMiles = haversine(start, {
-            latitude: allAvailability[i].fields.Latitude,
-            longitude: allAvailability[i].fields.Longitude,
-          },
-          { unit: 'mile' },
-        );
-      }
-      
-      const locationDistanceBuckets = [];
-      for (let i = 0; i < LOCATION_MILE_THRESHOLDS.length; i++) {
-        let locationsWithinBucket;
-        if (i == 0) {
-          locationsWithinBucket = allAvailability.filter((location) => location.distanceMiles <= LOCATION_MILE_THRESHOLDS[i]);
-        } else {
-          locationsWithinBucket = allAvailability.filter((location) => 
-              location.distanceMiles <= LOCATION_MILE_THRESHOLDS[i] && location.distanceMiles > LOCATION_MILE_THRESHOLDS[i - 1]);
-        }
-
-        locationDistanceBuckets.push({
-          mileThreshold: LOCATION_MILE_THRESHOLDS[i],
-          locations: {
-            availableWaitlist: locationsWithinBucket.filter(
-              (location) =>
-                location.availabilityStatus.value ===
-                AVAILABILITY_STATUS.WAITLIST.value
-            ),
-            availableAppointment: locationsWithinBucket.filter(
-              (location) =>
-                location.availabilityStatus.value ===
-                AVAILABILITY_STATUS.APPOINTMENT.value
-            ),
-            availableWalkIn: locationsWithinBucket.filter(
-              (location) =>
-                location.availabilityStatus.value ===
-                AVAILABILITY_STATUS.WALK_IN.value
-            ),
-          },
-        });
-      }
-
-      return locationDistanceBuckets;
+    for (let i = 0; i < allAvailability.length; i++) {
+      allAvailability[i].availabilityStatus = getAvailabilityStatus(
+        allAvailability[i].fields["Vaccines available?"]
+      );
     }
-  );
+
+    const start = { latitude, longitude };
+    for (let i = 0; i < allAvailability.length; i++) {
+      allAvailability[i].distanceMiles = haversine(
+        start,
+        {
+          latitude: allAvailability[i].fields.Latitude,
+          longitude: allAvailability[i].fields.Longitude,
+        },
+        { unit: "mile" }
+      );
+    }
+
+    const locationDistanceBuckets = [];
+    for (let i = 0; i < LOCATION_MILE_THRESHOLDS.length; i++) {
+      let locationsWithinBucket;
+      if (i == 0) {
+        locationsWithinBucket = allAvailability.filter(
+          (location) => location.distanceMiles <= LOCATION_MILE_THRESHOLDS[i]
+        );
+      } else {
+        locationsWithinBucket = allAvailability.filter(
+          (location) =>
+            location.distanceMiles <= LOCATION_MILE_THRESHOLDS[i] &&
+            location.distanceMiles > LOCATION_MILE_THRESHOLDS[i - 1]
+        );
+      }
+
+      locationDistanceBuckets.push({
+        mileThreshold: LOCATION_MILE_THRESHOLDS[i],
+        locations: {
+          availableWaitlist: locationsWithinBucket.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WAITLIST.value
+          ),
+          availableAppointment: locationsWithinBucket.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.APPOINTMENT.value
+          ),
+          availableWalkIn: locationsWithinBucket.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WALK_IN.value
+          ),
+        },
+      });
+    }
+
+    return locationDistanceBuckets;
+  });
 }

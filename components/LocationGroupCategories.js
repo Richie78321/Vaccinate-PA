@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
-import LocationGroup from './LocationGroup';
+import PropTypes from "prop-types";
+import LocationGroup from "./LocationGroup";
 
 function LocationGroupCategory({ locationGroupCategory }) {
-  return locationGroupCategory.locationGroups.some((locationGroup) => locationGroup.locations.length > 0) ? (
+  return locationGroupCategory.locationGroups.some(
+    (locationGroup) => locationGroup.locations.length > 0
+  ) ? (
     <div className="mb-4">
       <h3 className="mb-0 font-weight-normal">
         <u>{locationGroupCategory.categoryTitle}:</u>
@@ -19,9 +21,11 @@ function LocationGroupCategory({ locationGroupCategory }) {
 
 export default function LocationGroupCategories({ locationGroupCategories }) {
   const hasLocations = locationGroupCategories.some((locationGroupCategory) =>
-    locationGroupCategory.locationGroups.some((locationGroup) => locationGroup.locations)
+    locationGroupCategory.locationGroups.some(
+      (locationGroup) => locationGroup.locations
+    )
   );
-  
+
   return (
     <div className="d-flex flex-column">
       {!hasLocations ? (
@@ -35,15 +39,21 @@ export default function LocationGroupCategories({ locationGroupCategories }) {
         </>
       ) : null}
       {locationGroupCategories.map((locationGroupCategory) => (
-        <LocationGroupCategory key={locationGroupCategory.categoryTitle} locationGroupCategory={locationGroupCategory} />
+        <LocationGroupCategory
+          key={locationGroupCategory.categoryTitle}
+          locationGroupCategory={locationGroupCategory}
+        />
       ))}
     </div>
-  )
+  );
 }
 
 LocationGroupCategories.propTypes = {
-  locationGroupCategories: PropTypes.arrayOf(PropTypes.shape({
-    categoryTitle: PropTypes.string.isRequired,
-    locationGroups: PropTypes.arrayOf(LocationGroup.propTypes.locationGroup).isRequired,
-  })).isRequired
-}
+  locationGroupCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      categoryTitle: PropTypes.string.isRequired,
+      locationGroups: PropTypes.arrayOf(LocationGroup.propTypes.locationGroup)
+        .isRequired,
+    })
+  ).isRequired,
+};

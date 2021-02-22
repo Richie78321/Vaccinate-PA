@@ -2,37 +2,39 @@ import LocationGroupCategories from "../../components/LocationGroupCategories";
 import Layout from "../../layouts/Layout";
 import Link from "next/link";
 import { getLatLongLocations } from "../../utils/Data";
-import {
-  FaCheckCircle,
-  FaClipboardList,
-  FaArrowLeft,
-} from "react-icons/fa";
+import { FaCheckCircle, FaClipboardList, FaArrowLeft } from "react-icons/fa";
 
-export default function LatLongPage({ latitude, longitude, locationDistanceBuckets }) {
-  const locationGroupCategories = locationDistanceBuckets.map((locationDistanceBucket) => ({
-    categoryTitle: `Recent availability within ${locationDistanceBucket.mileThreshold} miles`,
-    locationGroups: [
-      {
-        messageIcon: <FaCheckCircle />,
-        message: "Vaccines reported available",
-        messageColor: "text-success",
-        locations: locationDistanceBucket.locations.availableWalkIn,
-      },
-      {
-        messageIcon: <FaCheckCircle />,
-        message: "Vaccines reported available with appointment",
-        messageColor: "text-success",
-        locations: locationDistanceBucket.locations.availableAppointment,
-      },
-      {
-        messageIcon: <FaClipboardList />,
-        message: "Vaccine waitlist signup reported available",
-        messageColor: "text-info",
-        locations: locationDistanceBucket.locations.availableWaitlist,
-      },
-    ],
-  }));
-  
+export default function LatLongPage({
+  latitude,
+  longitude,
+  locationDistanceBuckets,
+}) {
+  const locationGroupCategories = locationDistanceBuckets.map(
+    (locationDistanceBucket) => ({
+      categoryTitle: `Recent availability within ${locationDistanceBucket.mileThreshold} miles`,
+      locationGroups: [
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available",
+          messageColor: "text-success",
+          locations: locationDistanceBucket.locations.availableWalkIn,
+        },
+        {
+          messageIcon: <FaCheckCircle />,
+          message: "Vaccines reported available with appointment",
+          messageColor: "text-success",
+          locations: locationDistanceBucket.locations.availableAppointment,
+        },
+        {
+          messageIcon: <FaClipboardList />,
+          message: "Vaccine waitlist signup reported available",
+          messageColor: "text-info",
+          locations: locationDistanceBucket.locations.availableWaitlist,
+        },
+      ],
+    })
+  );
+
   return (
     <Layout title="Vaccine Availability by Location">
       <div className="container-fluid container-xl mt-3">
@@ -56,10 +58,12 @@ export default function LatLongPage({ latitude, longitude, locationDistanceBucke
             please let us know.
           </a>
         </p>
-        <LocationGroupCategories locationGroupCategories={locationGroupCategories} />
+        <LocationGroupCategories
+          locationGroupCategories={locationGroupCategories}
+        />
       </div>
     </Layout>
-  )
+  );
 }
 
 export async function getServerSideProps({ params }) {
@@ -79,14 +83,17 @@ export async function getServerSideProps({ params }) {
       notFound: true,
     };
   }
-  
-  const locationDistanceBuckets = await getLatLongLocations(latitude, longitude);
+
+  const locationDistanceBuckets = await getLatLongLocations(
+    latitude,
+    longitude
+  );
 
   return {
     props: {
       latitude,
       longitude,
       locationDistanceBuckets,
-    }
+    },
   };
 }
