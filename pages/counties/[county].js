@@ -1,4 +1,4 @@
-import AirTableCard from "../../components/AirTableCard";
+import LocationGroup from '../../components/LocationGroup';
 import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
@@ -17,22 +17,6 @@ function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
     return t.toUpperCase();
   });
-}
-
-function LocationGroup({ locationGroup }) {
-  return locationGroup.locations.length > 0 ? (
-    <div>
-      <h4 className={locationGroup.messageColor + " font-weight-bold mt-3"}>
-        {locationGroup.messageIcon}{" "}
-        <span className="align-middle">{locationGroup.message}</span>
-      </h4>
-      {locationGroup.locations.map((location) => (
-        <div key={location.id} className="my-3">
-          <AirTableCard location={location} />
-        </div>
-      ))}
-    </div>
-  ) : null;
 }
 
 const CountyLinks = ({ countyLinks }) => {
