@@ -3,11 +3,11 @@ import NodeCache from "node-cache";
 
 const OUTDATED_DAYS_THRESHOLD = 3;
 
-const airtableBackupCache = new NodeCache({
+const backupDataCache = new NodeCache({
   deleteOnExpire: false,
   stdTTL: 0,
 });
-const airtableCache = new NodeCache({
+const dataCache = new NodeCache({
   stdTTL: 600, // Ten minutes
 });
 
@@ -41,26 +41,26 @@ export const AVAILABILITY_STATUS = {
   },
 };
 
-export async function fetchAirtableData(cacheKeyword, airtableQuery) {
-  let data = airtableCache.get(cacheKeyword);
+export async function cacheData(cacheKeyword, query) {
+  let data = dataCache.get(cacheKeyword);
   if (data == undefined) {
     try {
-      data = await airtableQuery.all();
+      data = await query();
 
-      airtableCache.set(cacheKeyword, data);
-      airtableBackupCache.set(cacheKeyword, data);
+      dataCache.set(cacheKeyword, data);
+      backupDataCache.set(cacheKeyword, data);
     } catch (error) {
       console.error(error);
 
       // Attempt to load from backup cache.
-      data = airtableBackupCache.get(cacheKeyword);
+      data = backupDataCache.get(cacheKeyword);
 
       if (data == undefined) {
         throw error;
       } else {
         // Reset the main cache to backup.
         console.log("Setting cache to backup.");
-        airtableCache.set(cacheKeyword, data);
+        dataCache.set(cacheKeyword, data);
       }
     }
   }
@@ -87,28 +87,28 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
-export async function getCountyLinks(county) {
-  const countyLinks = await fetchAirtableData(
+export function getCountyLinks(county) {
+  return cacheData(
     "county-links",
-    Airtable.base("appdsheneg5ii1EnQ")("Counties").select()
+    async () => {
+      const countyLinks = (await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all())
+          .map((record) => record._rawJson)
+          .filter((record) => record.fields.County === county);
+
+      if (countyLinks.length > 0) {
+        return countyLinks[0].fields;
+      } else {
+        return {};
+      }
+    },
   );
-
-  const countySpecificInfo = countyLinks
-    .map((record) => record._rawJson)
-    .filter((record) => record.fields.County === county);
-
-  if (countySpecificInfo.length > 0) {
-    return countySpecificInfo[0].fields;
-  } else {
-    return {};
-  }
 }
 
-export async function getCountyLocations(county) {
-  const countyLocations = (
-    await fetchAirtableData(
-      county,
-      Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
+export function getCountyLocations(county) {
+  return cacheData(
+    county,
+    async () => {
+      const countyLocations = (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
         filterByFormula: `County = "${county}"`,
         sort: [
           {
@@ -116,80 +116,80 @@ export async function getCountyLocations(county) {
             direction: "desc",
           },
         ],
-      })
-    )
-  ).map((record) => record._rawJson);
+      }).all()).map((record) => record._rawJson);
 
-  for (let i = 0; i < countyLocations.length; i++) {
-    countyLocations[i].availabilityStatus = getAvailabilityStatus(
-      countyLocations[i].fields["Vaccines available?"]
-    );
-  }
-
-  const outdatedThreshold = new Date();
-  outdatedThreshold.setDate(
-    outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+      for (let i = 0; i < countyLocations.length; i++) {
+        countyLocations[i].availabilityStatus = getAvailabilityStatus(
+          countyLocations[i].fields["Vaccines available?"]
+        );
+      }
+    
+      const outdatedThreshold = new Date();
+      outdatedThreshold.setDate(
+        outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+      );
+    
+      const allRecentLocations = countyLocations.filter(
+        (location) =>
+          location.fields["Latest report"] &&
+          Date.parse(location.fields["Latest report"]) > outdatedThreshold
+      );
+      const allOutdatedLocations = countyLocations.filter(
+        (location) =>
+          location.fields["Latest report"] &&
+          Date.parse(location.fields["Latest report"]) <= outdatedThreshold
+      );
+      return {
+        allLocations: countyLocations,
+        allRecentLocations: allRecentLocations,
+        allOutdatedLocations: allOutdatedLocations,
+        recentLocations: {
+          availableWaitlist: allRecentLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WAITLIST.value
+          ),
+          availableAppointment: allRecentLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.APPOINTMENT.value
+          ),
+          availableWalkIn: allRecentLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WALK_IN.value
+          ),
+        },
+        outdatedLocations: {
+          availableWaitlist: allOutdatedLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WAITLIST.value
+          ),
+          availableAppointment: allOutdatedLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.APPOINTMENT.value
+          ),
+          availableWalkIn: allOutdatedLocations.filter(
+            (location) =>
+              location.availabilityStatus.value ===
+              AVAILABILITY_STATUS.WALK_IN.value
+          ),
+        },
+        availabilityVaries: countyLocations.filter(
+          (location) =>
+            location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
+        ),
+        noAvailability: countyLocations.filter(
+          (location) =>
+            location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
+        ),
+        noConfirmation: countyLocations.filter(
+          (location) =>
+            location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
+        ),
+      };
+    }
   );
-
-  const allRecentLocations = countyLocations.filter(
-    (location) =>
-      location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) > outdatedThreshold
-  );
-  const allOutdatedLocations = countyLocations.filter(
-    (location) =>
-      location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) <= outdatedThreshold
-  );
-  return {
-    allLocations: countyLocations,
-    allRecentLocations: allRecentLocations,
-    allOutdatedLocations: allOutdatedLocations,
-    recentLocations: {
-      availableWaitlist: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WAITLIST.value
-      ),
-      availableAppointment: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.APPOINTMENT.value
-      ),
-      availableWalkIn: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WALK_IN.value
-      ),
-    },
-    outdatedLocations: {
-      availableWaitlist: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WAITLIST.value
-      ),
-      availableAppointment: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.APPOINTMENT.value
-      ),
-      availableWalkIn: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WALK_IN.value
-      ),
-    },
-    availabilityVaries: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
-    ),
-    noAvailability: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
-    ),
-    noConfirmation: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
-    ),
-  };
 }
