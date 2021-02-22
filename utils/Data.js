@@ -1,5 +1,6 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
+import haversine from "haversine";
 
 const OUTDATED_DAYS_THRESHOLD = 3;
 
@@ -87,22 +88,18 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
-export function getCountyLinks(county) {
-  return cacheData(
+export async function getCountyLinks(county) {
+  const countyLinks = (await cacheData(
     "county-links",
-    async () => {
-      const countyLinks = (await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all())
-          .map((record) => record._rawJson)
-          .filter((record) => record.fields.County === county);
-
-      if (countyLinks.length > 0) {
-        return countyLinks[0].fields;
-      } else {
-        return {};
-      }
-    },
+    async () => (await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all()).map((record) => record._rawJson),
     3600 // One hour
-  );
+  )).filter((record) => record.fields.County === county);
+
+  if (countyLinks.length > 0) {
+    return countyLinks[0].fields;
+  } else {
+    return {};
+  }
 }
 
 export function getCountyLocations(county) {
@@ -195,6 +192,3 @@ export function getCountyLocations(county) {
   );
 }
 
-export function getLatLongLocations(latitude, longitude) {
-  return cacheData()
-}
