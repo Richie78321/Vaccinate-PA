@@ -37,30 +37,30 @@ export default function CountySuggestion({ searchRef }) {
             <h4>Click your county to view vaccine locations</h4>
             <div className="row mt-4">
               <div className="col-lg-6 col-xl-4 text-truncate">
+                <CountyLink county="Philadelphia County" />
                 <CountyLink county="Allegheny County" />
                 <CountyLink county="Montgomery County" />
                 <CountyLink county="Bucks County" />
-                <CountyLink county="Delaware County" />
               </div>
               <div className="col-lg-6 d-block d-xl-none text-truncate">
                 <div className="d-none d-md-block">
+                  <CountyLink county="Delaware County" />
                   <CountyLink county="Lancaster County" />
                   <CountyLink county="Chester County" />
-                  <CountyLink county="York County" />
                 </div>
                 <FindMyCounty searchRef={searchRef} />
               </div>
               {/* Additional column for wider displays. */}
               <div className="col-lg-6 col-xl-4 d-none d-xl-block text-truncate">
+                <CountyLink county="Delaware County" />
                 <CountyLink county="Lancaster County" />
                 <CountyLink county="Chester County" />
                 <CountyLink county="York County" />
-                <CountyLink county="Berks County" />
               </div>
               <div className="col-lg-6 col-xl-4 d-none d-xl-block text-truncate">
+                <CountyLink county="Berks County" />
                 <CountyLink county="Westmoreland County" />
                 <CountyLink county="Lehigh County" />
-                <CountyLink county="Luzerne County" />
                 <FindMyCounty searchRef={searchRef} />
               </div>
             </div>
