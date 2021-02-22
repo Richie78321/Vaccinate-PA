@@ -41,14 +41,14 @@ export const AVAILABILITY_STATUS = {
   },
 };
 
-export async function cacheData(cacheKeyword, query) {
+export async function cacheData(cacheKeyword, query, ttl) {
   let data = dataCache.get(cacheKeyword);
   if (data == undefined) {
     try {
       data = await query();
 
-      dataCache.set(cacheKeyword, data);
-      backupDataCache.set(cacheKeyword, data);
+      dataCache.set(cacheKeyword, data, ttl);
+      backupDataCache.set(cacheKeyword, data, ttl);
     } catch (error) {
       console.error(error);
 
@@ -60,7 +60,7 @@ export async function cacheData(cacheKeyword, query) {
       } else {
         // Reset the main cache to backup.
         console.log("Setting cache to backup.");
-        dataCache.set(cacheKeyword, data);
+        dataCache.set(cacheKeyword, data, ttl);
       }
     }
   }
@@ -101,6 +101,7 @@ export function getCountyLinks(county) {
         return {};
       }
     },
+    3600 // One hour
   );
 }
 
@@ -192,4 +193,8 @@ export function getCountyLocations(county) {
       };
     }
   );
+}
+
+export function getLatLongLocations(latitude, longitude) {
+  return cacheData()
 }
