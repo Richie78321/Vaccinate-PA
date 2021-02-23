@@ -21,8 +21,7 @@ export default function InTheMedia() {
     {
       href:
         "https://www.wearecentralpa.com/news/local-news/vaccinatepa-a-one-stop-search-engine-for-covid-19-vaccines/",
-      title:
-        "VaccinatePA: a one-stop search engine for COVID-19 vaccines",
+      title: "VaccinatePA: a one-stop search engine for COVID-19 vaccines",
       imagePath: "/images/WTAJ.jpg",
       immageAlt: "WTAJ CBS Altoona",
     },
