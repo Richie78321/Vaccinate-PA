@@ -20,11 +20,10 @@ export default function InTheMedia() {
     },
     {
       href:
-        "https://www.post-gazette.com/local/region/2021/02/07/Stressed-Pennsylvanians-COVID-19-vaccination/stories/202102070138",
-      title:
-        "‘It’s ridiculous’: Stressed Pennsylvanians craving easier path to COVID-19 vaccination",
-      imagePath: "/images/PittsburghPostGazette.jpg",
-      immageAlt: "Pittsburgh Post Gazette",
+        "https://www.wearecentralpa.com/news/local-news/vaccinatepa-a-one-stop-search-engine-for-covid-19-vaccines/",
+      title: "VaccinatePA: a one-stop search engine for COVID-19 vaccines",
+      imagePath: "/images/WTAJ.jpg",
+      immageAlt: "WTAJ CBS Altoona",
     },
     {
       href:
