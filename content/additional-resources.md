@@ -24,5 +24,4 @@ People working or living in specific counties may be able to complete a pre-regi
 - Bucks County [pre-registration](https://buckscovid.powerappsportals.us/Vaccine-Registration/)
 - Chester County [pre-registration](https://chesco.seamlessdocs.com/f/chescovac)
 - Delaware County [pre-registration](https://chesco.seamlessdocs.com/f/delcovac)
-- Lebanon County [pre-registration](https://www.lcdes.org/vaccinate/)
 - Montgomery County [pre-registration](https://www.montcopa.org/3660/COVID-19-Vaccine)
