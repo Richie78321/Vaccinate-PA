@@ -1,5 +1,5 @@
 import { FaTwitter, FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai"
+import { AiFillInstagram } from "react-icons/ai";
 
 const HeartIcon = (
   <svg

@@ -5,7 +5,7 @@ import CountySearch from "../components/CountySearch";
 import Layout from "../layouts/Layout";
 import Image from "next/image";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai"
+import { AiFillInstagram } from "react-icons/ai";
 
 export default function Index() {
   const countySearchRef = createRef();
