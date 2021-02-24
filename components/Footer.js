@@ -1,4 +1,5 @@
 import { FaTwitter, FaFacebook } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
 
 const HeartIcon = (
   <svg
@@ -37,13 +38,21 @@ export default function Footer() {
             rel="noreferrer"
           >
             <FaTwitter size="1.5em" />
-          </a>{" "}
+          </a>
           <a
             href="https://www.facebook.com/vaccinatepa"
             target="_blank"
             rel="noreferrer"
+            className="mx-4"
           >
-            <FaFacebook className="ml-4" size="1.5em" />
+            <FaFacebook size="1.5em" />
+          </a>
+          <a
+            href="https://www.instagram.com/vaccinatepaorg/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <AiFillInstagram size="1.75em" />
           </a>
         </div>
         <p className="text-center">
