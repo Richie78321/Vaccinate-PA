@@ -31,25 +31,26 @@ const linkDecorator = (href, text, key) => (
 //   }
 // };
 
-function toTitleCase(str) {
-  return str.replace(/\w\S*/g, function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-
-function RequirementTag({ requirementList, label, pluralLabel }) {
-  let requirementString = toTitleCase(requirementList.join(", ").trim());
-  if (label && pluralLabel) {
-    requirementString += ` ${
-      requirementList.length > 1 ? pluralLabel : label
-    } Only`;
+function RequirementTag({ requirementList, beforeLabel, pluralBeforeLabel, afterLabel, pluralAfterLabel }) {  
+  const requirementString = requirementList.join(", ").trim();
+  
+  let endLabel;
+  if (afterLabel) {
+    endLabel = pluralAfterLabel && requirementList.length > 1 ? pluralAfterLabel : afterLabel;
   } else {
-    requirementString += " Only";
+    endLabel = null;
+  }
+
+  let beginningLabel;
+  if (beforeLabel) {
+    beginningLabel = pluralBeforeLabel && requirementList.length > 1 ? pluralBeforeLabel : beforeLabel;
+  } else {
+    beginningLabel = null;
   }
 
   return (
     <div className="col-md-4 col-12 px-3 py-2 d-flex align-items-center">
-      {requirementString}
+      {beginningLabel}{" "}{requirementString}{" "}{endLabel}
     </div>
   );
 }
@@ -139,15 +140,27 @@ export default function AirTableCard({ location }) {
   const requirements = [
     {
       requirementList: location.fields.age_requirement,
+      afterLabel: "Only",
     },
     {
       requirementList: location.fields.occupation_requirement,
+      afterLabel: "Only",
     },
     {
       requirementList: location.fields.eligible_counties,
-      label: "County",
-      pluralLabel: "Counties",
+      afterLabel: "County Only",
+      pluralAfterLabel: "Counties Only",
     },
+    {
+      requirementList: location.fields.dose_type,
+      beforeLabel: "Providing",
+    },
+    {
+      requirementList: location.fields.eligible_phases,
+      beforeLabel: "Phase",
+      pluralBeforeLabel: "Phases",
+      afterLabel: "Only",
+    }
   ].filter(
     ({ requirementList }) => requirementList && requirementList.length > 0
   );
