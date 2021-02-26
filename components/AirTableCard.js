@@ -31,26 +31,38 @@ const linkDecorator = (href, text, key) => (
 //   }
 // };
 
-function RequirementTag({ requirementList, beforeLabel, pluralBeforeLabel, afterLabel, pluralAfterLabel }) {  
+function RequirementTag({
+  requirementList,
+  beforeLabel,
+  pluralBeforeLabel,
+  afterLabel,
+  pluralAfterLabel,
+}) {
   const requirementString = requirementList.join(", ").trim();
-  
+
   let endLabel;
   if (afterLabel) {
-    endLabel = pluralAfterLabel && requirementList.length > 1 ? pluralAfterLabel : afterLabel;
+    endLabel =
+      pluralAfterLabel && requirementList.length > 1
+        ? pluralAfterLabel
+        : afterLabel;
   } else {
     endLabel = null;
   }
 
   let beginningLabel;
   if (beforeLabel) {
-    beginningLabel = pluralBeforeLabel && requirementList.length > 1 ? pluralBeforeLabel : beforeLabel;
+    beginningLabel =
+      pluralBeforeLabel && requirementList.length > 1
+        ? pluralBeforeLabel
+        : beforeLabel;
   } else {
     beginningLabel = null;
   }
 
   return (
     <div className="col-md-4 col-12 px-3 py-2 d-flex align-items-center">
-      {beginningLabel}{" "}{requirementString}{" "}{endLabel}
+      {beginningLabel} {requirementString} {endLabel}
     </div>
   );
 }
@@ -160,7 +172,7 @@ export default function AirTableCard({ location }) {
       beforeLabel: "Phase",
       pluralBeforeLabel: "Phases",
       afterLabel: "Only",
-    }
+    },
   ].filter(
     ({ requirementList }) => requirementList && requirementList.length > 0
   );
