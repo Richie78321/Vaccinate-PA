@@ -3,7 +3,8 @@ import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
 import {
-  FaCheckCircle,
+  FaWalking,
+  FaCalendarAlt,
   FaTimesCircle,
   FaQuestionCircle,
   FaArrowLeft,
@@ -101,13 +102,13 @@ export default function CountyPage({ county, countyLinks, locations }) {
 
   const recentLocationGroups = [
     {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available",
+      messageIcon: <FaWalking />,
+      message: "Vaccines reported available walk-in",
       messageColor: "text-success",
       locations: locations.recentLocations.availableWalkIn,
     },
     {
-      messageIcon: <FaCheckCircle />,
+      messageIcon: <FaCalendarAlt />,
       message: "Vaccines reported available with appointment",
       messageColor: "text-success",
       locations: locations.recentLocations.availableAppointment,
@@ -122,13 +123,13 @@ export default function CountyPage({ county, countyLinks, locations }) {
 
   const outdatedLocationGroups = [
     {
-      messageIcon: <FaCheckCircle />,
-      message: "Vaccines reported available",
+      messageIcon: <FaWalking />,
+      message: "Vaccines reported available walk-in",
       messageColor: "text-success",
       locations: locations.outdatedLocations.availableWalkIn,
     },
     {
-      messageIcon: <FaCheckCircle />,
+      messageIcon: <FaCalendarAlt />,
       message: "Vaccines reported available with appointment",
       messageColor: "text-success",
       locations: locations.outdatedLocations.availableAppointment,

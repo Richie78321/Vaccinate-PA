@@ -1,5 +1,6 @@
 import {
-  FaCheckCircle,
+  FaWalking,
+  FaCalendarAlt,
   FaTimesCircle,
   FaQuestionCircle,
   FaClipboardList,
@@ -59,16 +60,16 @@ function AvailabilityTag({ availabilityStatus, numReports }) {
     case AVAILABILITY_STATUS.WALK_IN.value:
       return (
         <span className="text-success font-weight-bold">
-          <FaCheckCircle size="1.25em" className="mr-1" />{" "}
-          <span className="align-middle">Vaccines available</span>
+          <FaWalking size="1.25em" className="mr-1" />{" "}
+          <span className="align-middle">Vaccines available walk-in</span>
         </span>
       );
     case AVAILABILITY_STATUS.APPOINTMENT.value:
       return (
         <span className="text-success font-weight-bold">
-          <FaCheckCircle size="1.25em" className="mr-1" />{" "}
+          <FaCalendarAlt size="1.25em" className="mr-1" />{" "}
           <span className="align-middle">
-            Vaccines available (With Appointment)
+            Vaccines available with appointment
           </span>
         </span>
       );
