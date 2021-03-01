@@ -55,6 +55,22 @@ export default function Footer() {
             <AiFillInstagram size="1.75em" />
           </a>
         </div>
+        <div className="mx-auto text-center my-3">
+            <a href="?lang=en#googtrans(en|en)" className="notranslate" data-lang="en">
+              English
+            </a>
+            {" · "}
+            <a href="?lang=es#googtrans(en|es)" className="notranslate" data-lang="es">
+              Español
+            </a>
+            {" · "}
+            <a href="?lang=zh#googtrans(en|zh-CN)" className="notranslate" data-lang="zh">
+              简体中文
+            </a>
+        </div>
+        <div className="mx-auto text-center my-3">
+          <div id="google_translate_element"></div>
+        </div>
         <p className="text-center">
           Made with {HeartIcon} by volunteer Pennsylvanians and others.
         </p>
