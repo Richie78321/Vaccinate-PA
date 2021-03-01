@@ -56,17 +56,29 @@ export default function Footer() {
           </a>
         </div>
         <div className="mx-auto text-center my-3">
-            <a href="?lang=en#googtrans(en|en)" className="notranslate" data-lang="en">
-              English
-            </a>
-            {" · "}
-            <a href="?lang=es#googtrans(en|es)" className="notranslate" data-lang="es">
-              Español
-            </a>
-            {" · "}
-            <a href="?lang=zh#googtrans(en|zh-CN)" className="notranslate" data-lang="zh">
-              简体中文
-            </a>
+          <a
+            href="?lang=en#googtrans(en|en)"
+            className="notranslate"
+            data-lang="en"
+          >
+            English
+          </a>
+          {" · "}
+          <a
+            href="?lang=es#googtrans(en|es)"
+            className="notranslate"
+            data-lang="es"
+          >
+            Español
+          </a>
+          {" · "}
+          <a
+            href="?lang=zh#googtrans(en|zh-CN)"
+            className="notranslate"
+            data-lang="zh"
+          >
+            简体中文
+          </a>
         </div>
         <div className="mx-auto text-center my-3">
           <div id="google_translate_element"></div>
