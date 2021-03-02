@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
+import TranslationOptions from "../../components/TranslationOptions";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -180,7 +181,9 @@ export default function CountyPage({ county, countyLinks, locations }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-
+        <div className="text-center mb-2">
+          <TranslationOptions />
+        </div>
         <p className="alert alert-light text-center mb-3 border">
           If you have a missing location to report, or think we have incorrect
           information,{" "}
