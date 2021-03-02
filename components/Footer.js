@@ -1,5 +1,6 @@
 import { FaTwitter, FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import GoogleTranslateWidget from "./GoogleTranslateWidget";
 
 const HeartIcon = (
   <svg
@@ -84,7 +85,9 @@ export default function Footer() {
               简体中文
             </a>
           </div>
-          <div className="mt-3 mx-auto mx-sm-0 mt-sm-0" id="google_translate_element"></div>
+          <div className="mt-3 mx-auto mx-sm-0 mt-sm-0">
+            <GoogleTranslateWidget />
+          </div>
         </div>
         <p className="text-center">
           <a

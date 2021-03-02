@@ -107,18 +107,6 @@ function MyApp({ Component, pageProps }) {
             `,
           }}
         ></script>
-
-        <script
-          type="text/javascript"
-          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-        ></script>
-
-        <link
-          type="text/css"
-          rel="stylesheet"
-          charSet="UTF-8"
-          href="https://translate.googleapis.com/translate_static/css/translateelement.css"
-        />
       </Head>
       <main className="d-flex flex-column h-100">
         <Component {...pageProps} />
