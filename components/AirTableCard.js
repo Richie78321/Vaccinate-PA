@@ -36,8 +36,11 @@ function formatWebsite(website) {
 
   // Ensure the website has a protocol defined (otherwise redirects to local page)
   // https://stackoverflow.com/questions/3543187/prepending-http-to-a-url-that-doesnt-already-contain-http
-  if (websiteFormatted.indexOf('://') === -1 && websiteFormatted.indexOf('mailto:') === -1) {
-    websiteFormatted = 'http://' + websiteFormatted;
+  if (
+    websiteFormatted.indexOf("://") === -1 &&
+    websiteFormatted.indexOf("mailto:") === -1
+  ) {
+    websiteFormatted = "http://" + websiteFormatted;
   }
 
   return websiteFormatted;
