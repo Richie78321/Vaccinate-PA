@@ -1,5 +1,5 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
 export default function GoogleTranslateWidget() {
   return (
@@ -18,5 +18,5 @@ export default function GoogleTranslateWidget() {
       </Head>
       <div id="google_translate_element"></div>
     </>
-  )
+  );
 }

@@ -10,5 +10,5 @@ export default function TranslationLayout({ children, ...otherProps }) {
       </div>
       {children}
     </Layout>
-  )
+  );
 }
