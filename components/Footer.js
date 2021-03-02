@@ -58,6 +58,37 @@ export default function Footer() {
         <p className="text-center">
           Made with {HeartIcon} by volunteer Pennsylvanians and others.
         </p>
+        <div className="my-3 d-flex flex-column flex-sm-row justify-content-center">
+          <div className="align-self-center text-center px-sm-4">
+            <a
+              href="?lang=en#googtrans(en|en)"
+              className="notranslate"
+              data-lang="en"
+            >
+              English
+            </a>
+            {" · "}
+            <a
+              href="?lang=es#googtrans(en|es)"
+              className="notranslate"
+              data-lang="es"
+            >
+              Español
+            </a>
+            {" · "}
+            <a
+              href="?lang=zh#googtrans(en|zh-CN)"
+              className="notranslate"
+              data-lang="zh"
+            >
+              简体中文
+            </a>
+          </div>
+          <div
+            className="mt-3 mx-auto mx-sm-0 mt-sm-0"
+            id="google_translate_element"
+          ></div>
+        </div>
         <p className="text-center">
           <a
             target="_blank"
