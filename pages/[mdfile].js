@@ -1,4 +1,4 @@
-import Layout from "../layouts/Layout";
+import TranslationLayout from "../layouts/TranslationLayout";
 import ReactMarkdown from "react-markdown/with-html";
 import matter from "gray-matter";
 import fs from "fs";
@@ -12,8 +12,8 @@ const customMarkdownRenderers = {
 
 export default function MarkdownPage({ meta, markdownText }) {
   return (
-    <Layout title={meta.title}>
-      <div className="container-lg mt-4 text-break">
+    <TranslationLayout title={meta.title}>
+      <div className="container-lg text-break mt-1">
         <ReactMarkdown
           linkTarget="_blank"
           source={markdownText}
@@ -21,7 +21,7 @@ export default function MarkdownPage({ meta, markdownText }) {
           allowDangerousHtml={true}
         />
       </div>
-    </Layout>
+    </TranslationLayout>
   );
 }
 

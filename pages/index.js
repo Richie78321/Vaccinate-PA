@@ -2,45 +2,17 @@ import { createRef } from "react";
 import InTheMedia from "../components/InTheMedia";
 import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
-import Layout from "../layouts/Layout";
+import TranslationLayout from "../layouts/TranslationLayout";
 import Image from "next/image";
-import { FaTwitter, FaFacebook, FaAngleDoubleDown } from "react-icons/fa";
+import { FaTwitter, FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 
 export default function Index() {
   const countySearchRef = createRef();
 
   return (
-    <Layout title="Vaccine Availability">
+    <TranslationLayout title="Vaccine Availability">
       <div className="mt-3">
-        <div className="text-center text-sm-right mr-sm-4">
-          <a
-            href="?lang=en#googtrans(en|en)"
-            className="notranslate"
-            data-lang="en"
-          >
-            English
-          </a>
-          {" · "}
-          <a
-            href="?lang=es#googtrans(en|es)"
-            className="notranslate"
-            data-lang="es"
-          >
-            Español
-          </a>
-          {" · "}
-          <a
-            href="?lang=zh#googtrans(en|zh-CN)"
-            className="notranslate"
-            data-lang="zh"
-          >
-            简体中文
-          </a>
-          <a href="#google_translate_element" className="ml-1">
-            <FaAngleDoubleDown />
-          </a>
-        </div>
         <div id="landing-header">
           <div className="container-fluid">
             <h1 className="text-center" id="landing-title">
@@ -121,6 +93,6 @@ export default function Index() {
           margin-bottom: 80px;
         }
       `}</style>
-    </Layout>
+    </TranslationLayout>
   );
 }
