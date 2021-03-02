@@ -5,6 +5,9 @@ import "nprogress/nprogress.css";
 import Router from "next/router";
 import Head from "next/head";
 import NProgress from "nprogress";
+import patchDOMForGoogleTranslate from "../utils/patchDOMForGoogleTranslate";
+
+patchDOMForGoogleTranslate();
 
 // Configure loading progress bar
 NProgress.configure({ showSpinner: true });
@@ -92,6 +95,29 @@ function MyApp({ Component, pageProps }) {
         <meta
           name="twitter:image:alt"
           content="Find vaccines in Pennsylvania with our volunteer-run site"
+        />
+
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+              }
+            `,
+          }}
+        ></script>
+
+        <script
+          type="text/javascript"
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        ></script>
+
+        <link
+          type="text/css"
+          rel="stylesheet"
+          charSet="UTF-8"
+          href="https://translate.googleapis.com/translate_static/css/translateelement.css"
         />
       </Head>
       <main className="d-flex flex-column h-100">
