@@ -31,6 +31,18 @@ const linkDecorator = (href, text, key) => (
 //   }
 // };
 
+function formatWebsite(website) {
+  let websiteFormatted = website.trim();
+
+  // Ensure the website has a protocol defined (otherwise redirects to local page)
+  // https://stackoverflow.com/questions/3543187/prepending-http-to-a-url-that-doesnt-already-contain-http
+  if (websiteFormatted.indexOf('://') === -1 && websiteFormatted.indexOf('mailto:') === -1) {
+    websiteFormatted = 'http://' + websiteFormatted;
+  }
+
+  return websiteFormatted;
+}
+
 function RequirementTag({
   requirementList,
   beforeLabel,
@@ -139,8 +151,8 @@ export default function AirTableCard({ location }) {
     address = null;
   }
 
-  const website = location.fields["Website"]
-    ? location.fields["Website"].trim()
+  let website = location.fields["Website"]
+    ? formatWebsite(location.fields["Website"])
     : null;
 
   const reportNoteList = location.fields["Latest report notes"];
