@@ -1,5 +1,3 @@
-import { FaAngleDoubleDown } from "react-icons/fa";
-
 export default function TranslationOptions() {
   return (
     <>
@@ -25,9 +23,6 @@ export default function TranslationOptions() {
         data-lang="zh"
       >
         简体中文
-      </a>
-      <a href="#google_translate_element" className="ml-1">
-        <FaAngleDoubleDown />
       </a>
     </>
   );
