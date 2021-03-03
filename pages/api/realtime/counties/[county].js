@@ -1,5 +1,7 @@
 import { countyCodes } from '../../../../content/counties';
- 
+import '../../../../realtime-api/realtimeData';
+import { getCounty } from '../../../../realtime-api/realtimeData';
+
 export default function handler(req, res) {
   let {
     query: { county },
@@ -12,7 +14,13 @@ export default function handler(req, res) {
       status: 400,
       message: "Unknown county code.",
     });
+    
+    return;
   }
 
-  res.status(200).end("Valid county code.");
+  res.status(200).json({
+    status: 200,
+    message: "Retrieved realtime county data.",
+    locations: getCounty(county),
+  })
 }
