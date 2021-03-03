@@ -76,7 +76,7 @@ export default function Index() {
       </div>
       <style jsx>{`
         #landing-header {
-          margin-top: 15px;
+          margin-top: 20px;
           margin-bottom: 80px;
         }
 

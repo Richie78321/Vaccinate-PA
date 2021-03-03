@@ -13,7 +13,7 @@ const customMarkdownRenderers = {
 export default function MarkdownPage({ meta, markdownText }) {
   return (
     <TranslationLayout title={meta.title}>
-      <div className="container-lg text-break mt-1">
+      <div className="container-lg text-break mt-2">
         <ReactMarkdown
           linkTarget="_blank"
           source={markdownText}
