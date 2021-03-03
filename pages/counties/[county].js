@@ -14,6 +14,8 @@ import {
 import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
+import ClientSideOnly from "../../components/ClientSideOnly";
+import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -195,6 +197,9 @@ export default function CountyPage({ county, countyLinks, locations }) {
             please let us know.
           </a>
         </p>
+        <ClientSideOnly>
+          <RealtimeCountyLocations county={county} />
+        </ClientSideOnly>
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
             <>
