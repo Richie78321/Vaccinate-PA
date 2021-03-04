@@ -17,7 +17,64 @@ const endpoints = [
   'https://www.vaccinespotter.org/api/v0/stores/PA/walmart.json',
 ];
 
+// TODO : Move this to AirTable
+const brands = {
+  albertsons: {
+    appointmentLink: "https://www.mhealthappointments.com/covidappt",
+    name: "Safeway, Albertsons Pharmacy",
+  },
+  cvs: {
+    appointmentLink: "https://www.cvs.com/immunizations/covid-19-vaccine",
+    name: "CVS Pharmacy",
+  },
+  rite_aid: {
+    appointmentLink: "https://www.riteaid.com/pharmacy/covid-qualifier",
+    name: "Rite AID",
+  },
+  sams_club: {
+    appointmentLink: "https://www.samsclub.com/pharmacy/immunization/form?imzType=covid",
+    name: "Sam's Club",
+  },
+  walgreens: {
+    appointmentLink: "https://www.walgreens.com/findcare/vaccination/covid-19/location-screening",
+    name: "Walgreens",
+  },
+  walmart: {
+    appointmentLink: "https://www.walmart.com/pharmacy/clinical-services/immunization/scheduled?imzType=covid",
+    name: "Walmart",
+  },
+}
+
 const fccLocationToCountyEndpoint = "https://geo.fcc.gov/api/census/block/find?";
+
+function consolidateAppointments(appointments) {
+  const appointmentsByTime = {};
+  appointments.forEach((appointment) => {
+    if (appointment.time) {
+      let appointmentFormattedTime = new Date(appointment.time);
+      // Only consider day.
+      appointmentFormattedTime.setHours(0, 0, 0, 0);
+      appointmentFormattedTime = appointmentFormattedTime.toISOString();
+      
+      const consolidatedAppointment = appointmentsByTime[appointmentFormattedTime];
+      
+      if (consolidatedAppointment) {
+        consolidatedAppointment.num++;
+        if (!consolidatedAppointment.types.includes(appointment.type)) {
+          consolidatedAppointment.types.push(appointment.type);
+        }
+      } else {
+        appointmentsByTime[appointmentFormattedTime] = {
+          time: appointmentFormattedTime,
+          num: 1,
+          types: [appointment?.type],
+        };
+      }
+    }
+  })
+
+  return Object.values(appointmentsByTime);
+}
 
 export async function fetchLocations() {
   const locationsList = (await Promise.all(endpoints.map((endpoint) => {
@@ -29,6 +86,18 @@ export async function fetchLocations() {
     location.appointments_last_fetched_date = Date.parse(location.appointments_last_fetched);
   });
   locationsList.sort((a, b) => b.appointments_last_fetched_date.valueOf() - a.appointments_last_fetched_date.valueOf())
+
+  locationsList.forEach((location) => {
+    if (brands[location.brand]) {
+      location.brand_info = brands[location.brand];
+    }
+  })
+
+  locationsList.forEach((location) => {
+    if (location.appointments && location.appointments.length > 0) {
+      location.appointments = consolidateAppointments(location.appointments);
+    }
+  })
 
   await Promise.all(locationsList.map(async (location) => {
     location.countyCode = await getLocationCountyCode(location);

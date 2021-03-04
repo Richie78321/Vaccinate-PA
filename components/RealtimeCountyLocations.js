@@ -2,6 +2,7 @@ import { Component } from "react";
 import moment from "moment";
 import BeatLoader from "react-spinners/BeatLoader";
 import { ImSpinner2 } from "react-icons/im";
+import RealtimeLocationCard from "./RealtimeLocationCard";
 
 const DEFAULT_REFRESH_TIME = 60000; // One minute
 const REALTIME_API = "/api/realtime/counties/";
@@ -70,20 +71,23 @@ export default class RealtimeCountyLocations extends Component {
       );
     }
 
-    return (
-      <>
-        <div>
-          <h3 className="font-weight-normal"><u>Realtime Availability:</u></h3>
-          <div className="d-flex flex-row">
-            <div><ImSpinner2 className="rotating" /></div>
-            <div className="ml-1" style={{ fontSize: "110%" }}>Last updated {moment(lastUpdated).format('h:mma')}</div>
-          </div>
+    if (locations.length <= 0) {
+      return null;
+    }
 
-          {locations.map((location) => (
-            <p key={location.id}>{location.address}</p>
-          ))}
+    return (
+      <div className="mb-5">
+        <h3 className="font-weight-normal"><u>Realtime Availability:</u></h3>
+        <div className="d-flex flex-row">
+          <div><ImSpinner2 className="rotating" /></div>
+          <div className="ml-1" style={{ fontSize: "110%" }}>Last updated {moment(lastUpdated).format('h:mma')}</div>
         </div>
-      </>
+        {locations.map((location) => (
+          <div key={location.id} className="my-3">
+            <RealtimeLocationCard location={location} />
+          </div>
+        ))}
+      </div>
     );
   }
 }
