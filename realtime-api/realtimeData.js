@@ -9,13 +9,15 @@ const vaccineSpotterCache = new NodeCache({
 vaccineSpotterCache.on("expired", refreshVaccineSpotter);
 
 function refreshVaccineSpotter(key, value, resolve, reject) {
-  fetchLocations().then((locations) => {
-    console.log(`Updated vaccine spotter data (key=${key})`);
-    vaccineSpotterCache.set(key, locations);
-    if (resolve) resolve(locations);
-  }).catch((err) => {
-    if (reject) reject();
-  });
+  fetchLocations()
+    .then((locations) => {
+      console.log(`Updated vaccine spotter data (key=${key})`);
+      vaccineSpotterCache.set(key, locations);
+      if (resolve) resolve(locations);
+    })
+    .catch((err) => {
+      if (reject) reject();
+    });
 }
 
 export async function getCounty(countyCode) {
@@ -23,7 +25,11 @@ export async function getCounty(countyCode) {
   if (!latestCached) {
     // Request the realtime data if it has not already been loaded. This may be problematic if
     // there is a huge spike of requests following a server startup.
-    return (await new Promise((resolve, reject) => refreshVaccineSpotter("latest", null, resolve, reject)))[countyCode];
+    return (
+      await new Promise((resolve, reject) =>
+        refreshVaccineSpotter("latest", null, resolve, reject)
+      )
+    )[countyCode];
   } else {
     return latestCached[countyCode];
   }

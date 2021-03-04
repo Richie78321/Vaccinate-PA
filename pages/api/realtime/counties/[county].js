@@ -1,6 +1,6 @@
-import { countyCodes } from '../../../../content/counties';
-import '../../../../realtime-api/realtimeData';
-import { getCounty } from '../../../../realtime-api/realtimeData';
+import { countyCodes } from "../../../../content/counties";
+import "../../../../realtime-api/realtimeData";
+import { getCounty } from "../../../../realtime-api/realtimeData";
 
 export default async function handler(req, res) {
   let {
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       status: 400,
       message: "Unknown county code.",
     });
-    
+
     return;
   }
 
