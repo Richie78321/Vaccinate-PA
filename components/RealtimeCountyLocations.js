@@ -30,7 +30,12 @@ export default class RealtimeCountyLocations extends Component {
 
   componentDidMount() {
     this.fetchUpdatedLocations();
-    this.reloadInterval = setInterval(this.fetchUpdatedLocations.bind(this), this.props.refreshSeconds ? this.props.refreshSeconds * 1000 : DEFAULT_REFRESH_TIME);
+    this.reloadInterval = setInterval(
+      this.fetchUpdatedLocations.bind(this),
+      this.props.refreshSeconds
+        ? this.props.refreshSeconds * 1000
+        : DEFAULT_REFRESH_TIME
+    );
   }
 
   componentWillUnmount() {
@@ -54,14 +59,11 @@ export default class RealtimeCountyLocations extends Component {
           });
         }
       })
-      .catch((err) => { }) // TODO : Consider implications of failed request.
+      .catch((err) => {}); // TODO : Consider implications of failed request.
   }
 
   render() {
-    const {
-      lastUpdated,
-      locations
-    } = this.state;
+    const { lastUpdated, locations } = this.state;
 
     if (!lastUpdated) {
       return (
@@ -77,10 +79,16 @@ export default class RealtimeCountyLocations extends Component {
 
     return (
       <div className="mb-5">
-        <h3 className="font-weight-normal"><u>Realtime Availability:</u></h3>
+        <h3 className="font-weight-normal">
+          <u>Realtime Availability:</u>
+        </h3>
         <div className="d-flex flex-row">
-          <div><ImSpinner2 className="rotating" /></div>
-          <div className="ml-1" style={{ fontSize: "110%" }}>Last updated {moment(lastUpdated).format('h:mma')}</div>
+          <div>
+            <ImSpinner2 className="rotating" />
+          </div>
+          <div className="ml-1" style={{ fontSize: "110%" }}>
+            Last updated {moment(lastUpdated).format("h:mma")}
+          </div>
         </div>
         {locations.map((location) => (
           <div key={location.id} className="my-3">

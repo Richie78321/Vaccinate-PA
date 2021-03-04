@@ -8,12 +8,11 @@ const vaccineSpotterCache = new NodeCache({
 });
 vaccineSpotterCache.on("expired", refreshVaccineSpotter);
 
-
 function refreshVaccineSpotter(key, value) {
   fetchLocations().then((locations) => {
     console.log(`Updated vaccine spotter data (key=${key})`);
     vaccineSpotterCache.set(key, locations);
-  })
+  });
 }
 
 export function getCounty(countyCode) {
