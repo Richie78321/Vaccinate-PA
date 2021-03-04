@@ -79,7 +79,6 @@ export default class RealtimeCountyLocations extends Component {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
         if (resp?.locations) {
           this.setState({
             lastUpdated: Date.now(),
