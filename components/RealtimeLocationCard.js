@@ -1,5 +1,20 @@
 import moment from "moment";
 import { FaCalendarAlt, FaExternalLinkAlt } from "react-icons/fa";
+import { BsInfoCircle } from "react-icons/bs";
+
+// Smelly af but works for now.
+const brandInstructions = {
+  "walgreens": enterZipCodeInstructions,
+  "rite_aid": enterZipCodeInstructions,
+}
+
+function enterZipCodeInstructions(location) {
+  if (!location.postal_code) {
+    return null;
+  }
+
+  return <span>Enter the zip code <b>{location.postal_code}</b> when searching for appointments. Look for the location with a matching address.</span>
+}
 
 function toTitleCase(str) {
   return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
@@ -26,6 +41,11 @@ export default function RealtimeLocationCard({ location }) {
     })
   }
 
+  let instructions = null;
+  if (location.brand && brandInstructions[location.brand]) {
+    instructions = brandInstructions[location.brand](location);
+  }
+
   return (
     <>
       <div className="location-card card">
@@ -39,7 +59,7 @@ export default function RealtimeLocationCard({ location }) {
                     <>
                       <a href={website} target="_blank" rel="noreferrer">
                         <small>
-                          Visit Website <FaExternalLinkAlt size=".85em" />
+                          Schedule Appointment <FaExternalLinkAlt size=".85em" />
                         </small>
                       </a>
                       <span className="text-muted">{" | "}</span>
@@ -75,6 +95,17 @@ export default function RealtimeLocationCard({ location }) {
               </span>
             </span>
           </li>
+          {instructions ? (
+            <li className="list-group-item">
+              <span className="text-black">
+                <BsInfoCircle size="1.25em" className="mr-1" />{" "}
+                <span className="align-middle">
+                  <span className="font-weight-bold">Scheduling Instructions:</span>{" "}
+                  {brandInstructions[location.brand](location)}
+                </span>
+              </span>
+            </li>
+          ) : null}
           {appointments && appointments.length > 0 ? appointments.map((appointment, index) => (
             <li key={index} className="list-group-item">
               <span className="badge badge-light mr-2 font-weight-normal">{appointment.num} Appointments</span>
