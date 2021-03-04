@@ -77,7 +77,7 @@ export default function RealtimeLocationCard({ location }) {
           </li>
           {appointments && appointments.length > 0 ? appointments.map((appointment, index) => (
             <li key={index} className="list-group-item">
-              <span className="badge badge-secondary mr-2">{appointment.num}</span>
+              <span className="badge badge-light mr-2 font-weight-normal">{appointment.num} Appointments</span>
               {moment(appointment.time).format("dddd, MMMM Do")}
               {appointment.types ? ": " + appointment.types.join(" & ") : null}
             </li>
