@@ -3,40 +3,12 @@ import moment from "moment";
 import BeatLoader from "react-spinners/BeatLoader";
 import { ImSpinner2 } from "react-icons/im";
 import RealtimeLocationCard from "./RealtimeLocationCard";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import ReactTooltip from "react-tooltip";
 
 const DEFAULT_REFRESH_TIME = 60000; // One minute
 const REALTIME_API = "/api/realtime/counties/";
 
 function countyToCountyCode(county) {
   return county.split(" ")[0].toLowerCase();
-}
-
-function RealtimeDataTooltip() {
-  return (
-    <small className="mx-2 text-muted">
-      <a data-tip data-for="realtimeDataTip">
-        <AiOutlineInfoCircle size="0.9em" />
-      </a>
-      <ReactTooltip
-        id="realtimeDataTip"
-        delayHide={1000}
-        effect="solid"
-        clickable
-      >
-        This information is sourced from{" "}
-        <a
-          href="https://www.vaccinespotter.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          VaccineSpotter.org
-        </a>{" "}
-        and is updated every minute.
-      </ReactTooltip>
-    </small>
-  );
 }
 
 export default class RealtimeCountyLocations extends Component {
@@ -106,10 +78,22 @@ export default class RealtimeCountyLocations extends Component {
 
     return (
       <div className="mb-5">
-        <h3 className="font-weight-normal">
+        <h3 className="font-weight-normal mb-0">
           <u>Realtime Availability:</u>
-          <RealtimeDataTooltip />
         </h3>
+        <p className="mb-1">
+          <small>
+            This information is sourced from{" "}
+            <a
+              href="https://www.vaccinespotter.org/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              VaccineSpotter.org
+            </a>{" "}
+            and is updated every minute.
+          </small>
+        </p>
         <div className="d-flex flex-row">
           <div>
             <ImSpinner2 className="rotating" />
