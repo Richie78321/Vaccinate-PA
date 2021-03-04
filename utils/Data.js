@@ -109,7 +109,7 @@ export async function getCountyLocations(county) {
     await fetchAirtableData(
       county,
       Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
-        filterByFormula: `County = "${county}"`,
+        filterByFormula: `AND(County = "${county}", NOT({Do Not Display}))`,
         sort: [
           {
             field: "Latest report",
