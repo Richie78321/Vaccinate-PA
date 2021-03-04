@@ -48,6 +48,8 @@ export default function RealtimeLocationCard({ location }) {
   const appointments = location.appointments;
   if (appointments) {
     appointments.forEach((appointment) => {
+      console.log(appointment.time);
+      console.log(moment(appointment.time).format("dddd, MMMM Do"));
       formatAppointment(appointment);
     });
   }
@@ -120,7 +122,7 @@ export default function RealtimeLocationCard({ location }) {
               </span>
             </li>
           ) : null}
-          {appointments && appointments.length > 0
+          {/* {appointments && appointments.length > 0
             ? appointments.map((appointment, index) => (
                 <li key={index} className="list-group-item">
                   <span className="badge badge-light mr-2 font-weight-normal">
@@ -132,7 +134,7 @@ export default function RealtimeLocationCard({ location }) {
                     : null}
                 </li>
               ))
-            : null}
+            : null} */}
         </ul>
       </div>
       <style jsx>{`
