@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import NodeCache from "node-cache";
 import { countyCodes } from "../content/counties";
+import moment from "moment";
 
 // TODO : Could come up with a better way of storing this information.
 const locationToCountyCache = new NodeCache({
@@ -55,10 +56,7 @@ function consolidateAppointments(appointments) {
   const appointmentsByTime = {};
   appointments.forEach((appointment) => {
     if (appointment.time) {
-      let appointmentFormattedTime = new Date(appointment.time);
-      // Only consider day.
-      appointmentFormattedTime.setHours(0, 0, 0, 0);
-      appointmentFormattedTime = appointmentFormattedTime.toISOString();
+      let appointmentFormattedTime = moment(appointment.time).startOf('day').toISOString();
 
       const consolidatedAppointment =
         appointmentsByTime[appointmentFormattedTime];
