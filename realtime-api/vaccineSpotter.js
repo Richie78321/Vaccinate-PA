@@ -56,7 +56,9 @@ function consolidateAppointments(appointments) {
   const appointmentsByTime = {};
   appointments.forEach((appointment) => {
     if (appointment.time) {
-      let appointmentFormattedTime = moment(appointment.time).startOf('day').toISOString();
+      let appointmentFormattedTime = moment(appointment.time)
+        .startOf("day")
+        .toISOString();
 
       const consolidatedAppointment =
         appointmentsByTime[appointmentFormattedTime];
