@@ -52,10 +52,15 @@ export default class RealtimeCountyLocations extends Component {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp?.locations) {
+          const updateTime = Date.now();
           this.setState({
-            lastUpdated: Date.now(),
+            lastUpdated: updateTime,
             locations: resp.locations,
           });
+
+          if (resp.locations.length > 0) {
+            this.props.updateLatestReportTime(resp.locations[0].appointments_last_fetched);
+          }
         }
       })
       .catch((err) => {}); // TODO : Consider implications of failed request.

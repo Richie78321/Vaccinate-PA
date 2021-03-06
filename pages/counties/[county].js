@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
@@ -80,26 +81,36 @@ const CountyLinks = ({ countyLinks }) => {
   );
 };
 
-function LatestReportsReceived({ latestReportedLocation }) {
+function LatestReportsReceived({ latestRealtimeReport, latestReportedLocation }) {
   if (latestReportedLocation) {
-    const latestReportTimeRaw = latestReportedLocation.fields["Latest report"];
-    if (latestReportTimeRaw) {
-      return (
-        <span
-          className="badge badge-primary font-weight-normal text-wrap"
-          style={{ fontSize: "100%" }}
-        >
-          Latest report for county received{" "}
-          {moment(latestReportTimeRaw).fromNow()}
-        </span>
-      );
+    let latestReportTime = moment(latestReportedLocation.fields["Latest report"]);
+
+    if (latestRealtimeReport) {
+      const latestRealtimeReportTime = moment(latestRealtimeReport);
+      if (latestRealtimeReportTime.isAfter(latestReportTime)) {
+        latestReportTime = latestRealtimeReportTime;
+      }
     }
+
+    return (
+      <span
+        className="badge badge-primary font-weight-normal text-wrap"
+        style={{ fontSize: "100%" }}
+      >
+        Latest report for county received{" "}
+        {latestReportTime.fromNow()}
+      </span>
+    );
   }
 
   return null;
 }
 
 export default function CountyPage({ county, countyLinks, locations }) {
+  // This might be smelly. Using to avoid spilling realtime data
+  // fetching into an otherwise SSR component.
+  const [latestRealtimeReport, setLatestRealtimeReport] = useState(null);
+
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
@@ -177,6 +188,7 @@ export default function CountyPage({ county, countyLinks, locations }) {
         <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
         <div className="mb-5">
           <LatestReportsReceived
+            latestRealtimeReport={latestRealtimeReport}
             latestReportedLocation={latestReportedLocation}
           />
           <div className="mt-2">
@@ -198,7 +210,7 @@ export default function CountyPage({ county, countyLinks, locations }) {
           </a>
         </p>
         <ClientSideOnly>
-          <RealtimeCountyLocations county={county} />
+          <RealtimeCountyLocations updateLatestReportTime={latestRealtimeReport => setLatestRealtimeReport(latestRealtimeReport)} county={county} />
         </ClientSideOnly>
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
