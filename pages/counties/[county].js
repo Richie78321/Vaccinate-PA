@@ -81,9 +81,14 @@ const CountyLinks = ({ countyLinks }) => {
   );
 };
 
-function LatestReportsReceived({ latestRealtimeReport, latestReportedLocation }) {
+function LatestReportsReceived({
+  latestRealtimeReport,
+  latestReportedLocation,
+}) {
   if (latestReportedLocation) {
-    let latestReportTime = moment(latestReportedLocation.fields["Latest report"]);
+    let latestReportTime = moment(
+      latestReportedLocation.fields["Latest report"]
+    );
 
     if (latestRealtimeReport) {
       const latestRealtimeReportTime = moment(latestRealtimeReport);
@@ -97,8 +102,7 @@ function LatestReportsReceived({ latestRealtimeReport, latestReportedLocation })
         className="badge badge-primary font-weight-normal text-wrap"
         style={{ fontSize: "100%" }}
       >
-        Latest report for county received{" "}
-        {latestReportTime.fromNow()}
+        Latest report for county received {latestReportTime.fromNow()}
       </span>
     );
   }
@@ -210,7 +214,12 @@ export default function CountyPage({ county, countyLinks, locations }) {
           </a>
         </p>
         <ClientSideOnly>
-          <RealtimeCountyLocations updateLatestReportTime={latestRealtimeReport => setLatestRealtimeReport(latestRealtimeReport)} county={county} />
+          <RealtimeCountyLocations
+            updateLatestReportTime={(latestRealtimeReport) =>
+              setLatestRealtimeReport(latestRealtimeReport)
+            }
+            county={county}
+          />
         </ClientSideOnly>
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (

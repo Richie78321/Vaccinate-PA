@@ -59,7 +59,9 @@ export default class RealtimeCountyLocations extends Component {
           });
 
           if (resp.locations.length > 0) {
-            this.props.updateLatestReportTime(resp.locations[0].appointments_last_fetched);
+            this.props.updateLatestReportTime(
+              resp.locations[0].appointments_last_fetched
+            );
           }
         }
       })
