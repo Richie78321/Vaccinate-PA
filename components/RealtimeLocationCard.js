@@ -48,8 +48,6 @@ export default function RealtimeLocationCard({ location }) {
   const appointments = location.appointments;
   if (appointments) {
     appointments.forEach((appointment) => {
-      console.log(appointment.time);
-      console.log(moment(appointment.time).format("dddd, MMMM Do"));
       formatAppointment(appointment);
     });
   }

@@ -81,7 +81,7 @@ export default class RealtimeCountyLocations extends Component {
         <h3 className="font-weight-normal mb-0">
           <u>Realtime Availability:</u>
         </h3>
-        <p className="mb-1">
+        <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
           <small>
             This information is sourced from{" "}
             <a
