@@ -3,7 +3,7 @@ import Head from "next/head";
 import patchDOMForGoogleTranslate from "../utils/patchDOMForGoogleTranslate";
 
 // The interface for the google translate widget is extremely weird.
-// WHen you load the google translate script, you provide a global function
+// When you load the google translate script, you provide a global function
 // as a parameter which is then called on script load. Since the script loading
 // does not execute on every page load, we have to do this weird stuff.
 export default function GoogleTranslateWidget() {
