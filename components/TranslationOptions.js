@@ -41,6 +41,6 @@ export default function TranslationOptions() {
           简体中文
         </a>
       </span>
-    );  
+    );
   }
 }
