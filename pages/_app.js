@@ -5,114 +5,113 @@ import "nprogress/nprogress.css";
 import Router from "next/router";
 import Head from "next/head";
 import NProgress from "nprogress";
-import patchDOMForGoogleTranslate from "../utils/patchDOMForGoogleTranslate";
-
-patchDOMForGoogleTranslate();
 
 // Configure loading progress bar
 NProgress.configure({ showSpinner: true });
 Router.onRouteChangeStart = () => {
-  NProgress.start();
+    NProgress.start();
 };
 Router.onRouteChangeComplete = () => {
-  NProgress.done();
+    NProgress.done();
 };
 Router.onRouteChangeError = () => {
-  NProgress.done();
+    NProgress.done();
 };
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        {/*Google Analytics*/}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-58446605-2"
-        />
+    return (
+        <>
+            <Head>
+                {/*Google Analytics*/}
+                <script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-58446605-2"
+                />
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', 'UA-58446605-2');
               `,
-          }}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    }}
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="32x32"
+                    href="/favicon-32x32.png"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="16x16"
+                    href="/favicon-16x16.png"
+                />
+                <link rel="manifest" href="/site.webmanifest" />
+                <link
+                    rel="mask-icon"
+                    href="/safari-pinned-tab.svg"
+                    color="#5bbad5"
+                />
+                <meta name="msapplication-TileColor" content="#da532c" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
 
-        {/* Primary Meta Tags */}
-        <meta name="description" content="Find Vaccine Availability in PA" />
+                {/* Primary Meta Tags */}
+                <meta
+                    name="description"
+                    content="Find Vaccine Availability in PA"
+                />
 
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://vaccinatepa.org/" />
-        <meta
-          property="og:title"
-          content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
-        />
-        <meta
-          property="og:description"
-          content="Find Vaccine Availability in PA"
-        />
-        <meta
-          property="og:image"
-          content="https://vaccinatepa.org/social_media_header.png"
-        />
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://vaccinatepa.org/" />
+                <meta
+                    property="og:title"
+                    content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
+                />
+                <meta
+                    property="og:description"
+                    content="Find Vaccine Availability in PA"
+                />
+                <meta
+                    property="og:image"
+                    content="https://vaccinatepa.org/social_media_header.png"
+                />
 
-        {/* Twitter Card */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://vaccinatepa.org/" />
-        <meta
-          property="twitter:title"
-          content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
-        />
-        <meta
-          property="twitter:description"
-          content="Find Vaccine Availability in PA"
-        />
-        <meta
-          property="twitter:image"
-          content="https://vaccinatepa.org/social_media_header.png"
-        />
-        <meta
-          name="twitter:image:alt"
-          content="Find vaccines in Pennsylvania with our volunteer-run site"
-        />
-
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-              }
-            `,
-          }}
-        ></script>
-      </Head>
-      <main className="d-flex flex-column h-100">
-        <Component {...pageProps} />
-      </main>
-    </>
-  );
+                {/* Twitter Card */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta
+                    property="twitter:url"
+                    content="https://vaccinatepa.org/"
+                />
+                <meta
+                    property="twitter:title"
+                    content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
+                />
+                <meta
+                    property="twitter:description"
+                    content="Find Vaccine Availability in PA"
+                />
+                <meta
+                    property="twitter:image"
+                    content="https://vaccinatepa.org/social_media_header.png"
+                />
+                <meta
+                    name="twitter:image:alt"
+                    content="Find vaccines in Pennsylvania with our volunteer-run site"
+                />
+            </Head>
+            <main className="d-flex flex-column h-100">
+                <Component {...pageProps} />
+            </main>
+        </>
+    );
 }
 
 export default MyApp;
