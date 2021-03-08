@@ -29,7 +29,7 @@ export default function GoogleTranslateWidget() {
                 return s.getAttribute("data-google-translate");
             }).length > 0;
 
-        // Do some Next JS optimizations, we check to see if the script tag
+        // Due to some Next JS optimizations, we check to see if the script tag
         // was already added for this page or not, if it isn't, we load it,
         // otherwise we init the google translate element.
         if (hasGoogleTranslateScript) {
