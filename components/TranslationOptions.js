@@ -7,14 +7,14 @@ export default function TranslationOptions() {
 
   if (!menuExpanded) {
     return (
-      <a href="#" onClick={onClickCallback}>
+      <a href="#" onClick={onClickCallback} className="ml-2">
         <span className="align-middle">Translate</span>
         <IoIosGlobe size="1.25em" style={{ marginLeft: "2px" }} />
       </a>
     );
   } else {
     return (
-      <div>
+      <span className="align-middle ml-2">
         <a
           href="?lang=en#googtrans(en|en)"
           className="notranslate"
@@ -38,7 +38,7 @@ export default function TranslationOptions() {
         >
           简体中文
         </a>
-      </div>
+      </span>
     );  
   }
 }
