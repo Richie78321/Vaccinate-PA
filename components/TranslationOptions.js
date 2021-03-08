@@ -3,7 +3,11 @@ import { useState, useCallback } from "react";
 
 export default function TranslationOptions() {
   const [menuExpanded, setMenuExpanded] = useState(false);
-  const onClickCallback = useCallback(() => setMenuExpanded(true), [
+  const onClickCallback = useCallback((e) => {
+    setMenuExpanded(true);
+    e.preventDefault();
+  }
+    , [
     setMenuExpanded,
   ]);
 
