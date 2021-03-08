@@ -188,6 +188,9 @@ export default function CountyPage({ county, countyLinks, locations }) {
               <span className="align-middle">View all counties</span>
             </a>
           </Link>
+          <div className="float-right">
+            <TranslationOptions />
+          </div>
         </div>
         <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
         <div className="mb-5">
@@ -198,9 +201,6 @@ export default function CountyPage({ county, countyLinks, locations }) {
           <div className="mt-2">
             <CountyLinks countyLinks={countyLinks} />
           </div>
-        </div>
-        <div className="text-center mb-2">
-          <TranslationOptions />
         </div>
         <p className="alert alert-light text-center mb-3 border">
           If you have a missing location to report, or think we have incorrect
