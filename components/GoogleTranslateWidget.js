@@ -10,7 +10,6 @@ export default function GoogleTranslateWidget() {
   useEffect(() => {
     const googleTranslateElementInit = () => {
       patchDOMForGoogleTranslate();
-      console.log("yo");
       new google.translate.TranslateElement(
         { pageLanguage: "en" },
         "google_translate_element"
