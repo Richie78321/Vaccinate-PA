@@ -3,7 +3,9 @@ import { useState, useCallback } from "react";
 
 export default function TranslationOptions() {
   const [menuExpanded, setMenuExpanded] = useState(false);
-  const onClickCallback = useCallback(() => setMenuExpanded(true), [setMenuExpanded]);
+  const onClickCallback = useCallback(() => setMenuExpanded(true), [
+    setMenuExpanded,
+  ]);
 
   if (!menuExpanded) {
     return (
@@ -39,6 +41,6 @@ export default function TranslationOptions() {
           简体中文
         </a>
       </div>
-    );  
+    );
   }
 }
