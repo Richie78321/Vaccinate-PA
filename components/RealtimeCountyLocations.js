@@ -110,7 +110,7 @@ export default class RealtimeCountyLocations extends Component {
           </div>
         </div>
         {locations.map((location) => (
-          <div key={location.id} className="my-3">
+          <div key={location.properties.id} className="my-3">
             <RealtimeLocationCard location={location} />
           </div>
         ))}
