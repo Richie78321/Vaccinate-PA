@@ -44,10 +44,10 @@ function consolidateAppointments(appointments) {
 }
 
 export async function fetchLocations() {
-  const locationsList = (await fetch(endpoint).then((resp) => resp.json()))
-    .features
-    .filter((location) => location.properties?.appointments_available);
-  
+  const locationsList = (
+    await fetch(endpoint).then((resp) => resp.json())
+  ).features.filter((location) => location.properties?.appointments_available);
+
   locationsList.forEach((location) => {
     location.properties.appointments_last_fetched_date = Date.parse(
       location.properties.appointments_last_fetched
@@ -61,8 +61,13 @@ export async function fetchLocations() {
   );
 
   locationsList.forEach((location) => {
-    if (location.properties.appointments && location.properties.appointments.length > 0) {
-      location.properties.appointments = consolidateAppointments(location.properties.appointments);
+    if (
+      location.properties.appointments &&
+      location.properties.appointments.length > 0
+    ) {
+      location.properties.appointments = consolidateAppointments(
+        location.properties.appointments
+      );
     }
   });
 
@@ -102,7 +107,9 @@ async function getLocationCountyCode(location) {
   )?.County?.name.toLowerCase();
 
   if (!locationCountyCode) {
-    console.log(`Failed to find a county for location ${location.properties.id}`);
+    console.log(
+      `Failed to find a county for location ${location.properties.id}`
+    );
   }
 
   locationToCountyCache.set(location.properties.id, locationCountyCode);

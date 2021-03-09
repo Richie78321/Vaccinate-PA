@@ -15,8 +15,8 @@ function enterZipCodeInstructions(location) {
 
   return (
     <span>
-      Enter the zip code <b>{location.properties.postal_code}</b> when searching for
-      appointments. Look for the location with a matching address.
+      Enter the zip code <b>{location.properties.postal_code}</b> when searching
+      for appointments. Look for the location with a matching address.
     </span>
   );
 }
@@ -53,7 +53,10 @@ export default function RealtimeLocationCard({ location }) {
   }
 
   let instructions = null;
-  if (location.properties.provider && brandInstructions[location.properties.provider]) {
+  if (
+    location.properties.provider &&
+    brandInstructions[location.properties.provider]
+  ) {
     instructions = brandInstructions[location.properties.provider](location);
   }
 
