@@ -9,13 +9,13 @@ const brandInstructions = {
 };
 
 function enterZipCodeInstructions(location) {
-  if (!location.postal_code) {
+  if (!location.properties.postal_code) {
     return null;
   }
 
   return (
     <span>
-      Enter the zip code <b>{location.postal_code}</b> when searching for
+      Enter the zip code <b>{location.properties.postal_code}</b> when searching for
       appointments. Look for the location with a matching address.
     </span>
   );
@@ -36,16 +36,16 @@ function formatAppointment(appointment) {
 }
 
 export default function RealtimeLocationCard({ location }) {
-  const website = location?.brand_info?.appointmentLink;
-  const address = `${location.address}, ${location.city} ${location.postal_code}`;
-  const latestReportTimeText = location.appointments_last_fetched
-    ? moment(location.appointments_last_fetched).fromNow()
+  const website = location?.properties?.url;
+  const address = `${location.properties.address}, ${location.properties.city} ${location.properties.postal_code}`;
+  const latestReportTimeText = location.properties.appointments_last_fetched
+    ? moment(location.properties.appointments_last_fetched).fromNow()
     : null;
-  const name = location.brand_info.name
-    ? location.brand_info.name
-    : location.name;
+  const name = location.properties.provider_brand_name
+    ? location.properties.provider_brand_name
+    : location.properties.name;
 
-  const appointments = location.appointments;
+  const appointments = location.properties.appointments;
   if (appointments) {
     appointments.forEach((appointment) => {
       formatAppointment(appointment);
@@ -53,8 +53,8 @@ export default function RealtimeLocationCard({ location }) {
   }
 
   let instructions = null;
-  if (location.brand && brandInstructions[location.brand]) {
-    instructions = brandInstructions[location.brand](location);
+  if (location.properties.provider && brandInstructions[location.properties.provider]) {
+    instructions = brandInstructions[location.properties.provider](location);
   }
 
   return (
@@ -115,7 +115,7 @@ export default function RealtimeLocationCard({ location }) {
                   <span className="font-weight-bold">
                     Scheduling Instructions:
                   </span>{" "}
-                  {brandInstructions[location.brand](location)}
+                  {instructions}
                 </span>
               </span>
             </li>
