@@ -16,6 +16,7 @@ function refreshVaccineSpotter(key, value, resolve, reject) {
       if (resolve) resolve(locations);
     })
     .catch((err) => {
+      console.error(err);
       if (reject) reject();
     });
 }

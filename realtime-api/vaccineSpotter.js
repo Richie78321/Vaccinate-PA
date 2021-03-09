@@ -9,45 +9,7 @@ const locationToCountyCache = new NodeCache({
   stdTTL: 0, // Never expire
 });
 
-const endpoints = [
-  "https://www.vaccinespotter.org/api/v0/stores/PA/albertsons.json",
-  "https://www.vaccinespotter.org/api/v0/stores/PA/cvs.json",
-  "https://www.vaccinespotter.org/api/v0/stores/PA/rite_aid.json",
-  "https://www.vaccinespotter.org/api/v0/stores/PA/sams_club.json",
-  "https://www.vaccinespotter.org/api/v0/stores/PA/walgreens.json",
-  "https://www.vaccinespotter.org/api/v0/stores/PA/walmart.json",
-];
-
-// TODO : Move this to AirTable
-const brands = {
-  albertsons: {
-    appointmentLink: "https://www.mhealthappointments.com/covidappt",
-    name: "Safeway, Albertsons Pharmacy",
-  },
-  cvs: {
-    appointmentLink: "https://www.cvs.com/immunizations/covid-19-vaccine",
-    name: "CVS Pharmacy",
-  },
-  rite_aid: {
-    appointmentLink: "https://www.riteaid.com/pharmacy/covid-qualifier",
-    name: "Rite AID",
-  },
-  sams_club: {
-    appointmentLink:
-      "https://www.samsclub.com/pharmacy/immunization/form?imzType=covid",
-    name: "Sam's Club",
-  },
-  walgreens: {
-    appointmentLink:
-      "https://www.walgreens.com/findcare/vaccination/covid-19/location-screening",
-    name: "Walgreens",
-  },
-  walmart: {
-    appointmentLink:
-      "https://www.walmart.com/pharmacy/clinical-services/immunization/scheduled?imzType=covid",
-    name: "Walmart",
-  },
-};
+const endpoint = "https://www.vaccinespotter.org/api/v0/states/PA.json";
 
 const fccLocationToCountyEndpoint =
   "https://geo.fcc.gov/api/census/block/find?";
@@ -82,41 +44,31 @@ function consolidateAppointments(appointments) {
 }
 
 export async function fetchLocations() {
-  const locationsList = (
-    await Promise.all(
-      endpoints.map((endpoint) => {
-        return fetch(endpoint).then((resp) => resp.json());
-      })
-    )
-  )
-    .flat()
-    .filter((location) => location.appointments_available);
+  const locationsList = (await fetch(endpoint).then((resp) => resp.json()))
+    .features
+    .filter((location) => location.properties?.appointments_available);
+  
   locationsList.forEach((location) => {
-    location.appointments_last_fetched_date = Date.parse(
-      location.appointments_last_fetched
+    location.properties.appointments_last_fetched_date = Date.parse(
+      location.properties.appointments_last_fetched
     );
   });
+
   locationsList.sort(
     (a, b) =>
-      b.appointments_last_fetched_date.valueOf() -
-      a.appointments_last_fetched_date.valueOf()
+      b.properties.appointments_last_fetched_date.valueOf() -
+      a.properties.appointments_last_fetched_date.valueOf()
   );
 
   locationsList.forEach((location) => {
-    if (brands[location.brand]) {
-      location.brand_info = brands[location.brand];
-    }
-  });
-
-  locationsList.forEach((location) => {
-    if (location.appointments && location.appointments.length > 0) {
-      location.appointments = consolidateAppointments(location.appointments);
+    if (location.properties.appointments && location.properties.appointments.length > 0) {
+      location.properties.appointments = consolidateAppointments(location.properties.appointments);
     }
   });
 
   await Promise.all(
     locationsList.map(async (location) => {
-      location.countyCode = await getLocationCountyCode(location);
+      location.properties.countyCode = await getLocationCountyCode(location);
     }, locationsList)
   );
 
@@ -126,14 +78,14 @@ export async function fetchLocations() {
   countyCodes.forEach((countyCode) => (locationsDict[countyCode] = []));
 
   locationsList.forEach((location) => {
-    locationsDict[location.countyCode]?.push(location);
+    locationsDict[location.properties.countyCode]?.push(location);
   });
 
   return locationsDict;
 }
 
 async function getLocationCountyCode(location) {
-  let locationCountyCode = locationToCountyCache.get(location.id);
+  let locationCountyCode = locationToCountyCache.get(location.properties.id);
   if (locationCountyCode !== undefined) {
     return locationCountyCode;
   }
@@ -142,14 +94,18 @@ async function getLocationCountyCode(location) {
     await fetch(
       fccLocationToCountyEndpoint +
         new URLSearchParams({
-          latitude: location.latitude,
-          longitude: location.longitude,
+          latitude: location.geometry.coordinates[1],
+          longitude: location.geometry.coordinates[0],
           format: "json",
         }).toString()
     ).then((resp) => resp.json())
   )?.County?.name.toLowerCase();
 
-  locationToCountyCache.set(location.id, locationCountyCode);
+  if (!locationCountyCode) {
+    console.log(`Failed to find a county for location ${location.properties.id}`);
+  }
+
+  locationToCountyCache.set(location.properties.id, locationCountyCode);
 
   return locationCountyCode;
 }
