@@ -125,7 +125,7 @@ module.exports = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: [ 'dotenv/config' ],
+  setupFiles: ["dotenv/config"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
@@ -173,7 +173,7 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "\\.js$": ["babel-jest", { "configFile": "./babel-test.config.js" }],
+    "\\.js$": ["babel-jest", { configFile: "./babel-test.config.js" }],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
