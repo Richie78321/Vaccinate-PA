@@ -131,7 +131,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
       </CountyPageLayout>
     );
   }
-  
+
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
@@ -294,7 +294,10 @@ export async function getServerSideProps({ params }) {
   }
 
   try {
-    var [countyLocations, countyLinks] = await Promise.all([getCountyLocations(countyDecoded),  getCountyLinks(countyDecoded)]);
+    var [countyLocations, countyLinks] = await Promise.all([
+      getCountyLocations(countyDecoded),
+      getCountyLinks(countyDecoded),
+    ]);
   } catch (error) {
     console.error(error);
     return {
@@ -302,7 +305,7 @@ export async function getServerSideProps({ params }) {
         county: countyDecoded,
         error: true,
       },
-    }
+    };
   }
 
   return {
