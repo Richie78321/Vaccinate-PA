@@ -118,7 +118,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
 
   if (error) {
     return (
-      <CountyPageLayout>
+      <CountyPageLayout county={county}>
         <div className="text-center">
           <h1 className="mt-5">We are currently experiencing an outage.</h1>
           <p>This normally only lasts a few minutes. Please check back soon!</p>
