@@ -17,6 +17,7 @@ import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
+import { Button } from "react-bootstrap";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -110,11 +111,27 @@ function LatestReportsReceived({
   return null;
 }
 
-export default function CountyPage({ county, countyLinks, locations }) {
+export default function CountyPage({ county, countyLinks, locations, error }) {
   // This might be smelly. Using to avoid spilling realtime data
   // fetching into an otherwise SSR component.
   const [latestRealtimeReport, setLatestRealtimeReport] = useState(null);
 
+  if (error) {
+    return (
+      <CountyPageLayout>
+        <div className="text-center">
+          <h1 className="mt-5">We are currently experiencing an outage.</h1>
+          <p>This normally only lasts a few minutes. Please check back soon!</p>
+          <Link href="/">
+            <Button variant="warning" className="rounded-pill my-2">
+              Go Back Home
+            </Button>
+          </Link>
+        </div>
+      </CountyPageLayout>
+    );
+  }
+  
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
@@ -276,8 +293,17 @@ export async function getServerSideProps({ params }) {
     };
   }
 
-  const countyLocations = await getCountyLocations(countyDecoded);
-  const countyLinks = await getCountyLinks(countyDecoded);
+  try {
+    var [countyLocations, countyLinks] = await Promise.all([getCountyLocations(countyDecoded),  getCountyLinks(countyDecoded)]);
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        county: countyDecoded,
+        error: true,
+      },
+    }
+  }
 
   return {
     props: {
