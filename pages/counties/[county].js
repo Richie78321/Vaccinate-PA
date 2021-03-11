@@ -92,8 +92,10 @@ function LatestReportsReceived({
       latestReportedLocation.fields["Latest report"]
     );
 
+    console.log(latestRealtimeReport);
     if (latestRealtimeReport) {
       const latestRealtimeReportTime = moment(latestRealtimeReport);
+      console.log("Here")
       if (latestRealtimeReportTime.isAfter(latestReportTime)) {
         latestReportTime = latestRealtimeReportTime;
       }
