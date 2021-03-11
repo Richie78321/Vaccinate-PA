@@ -6,13 +6,31 @@ import { BsInfoCircle } from "react-icons/bs";
 const brandInstructions = {
   walgreens: (location) => (
     <>
-      <span className="text-nowrap"><a href="https://drive.google.com/file/d/1aZmz5lYQ2eh2PeALw1FrqPSJjOYJStK-/view?usp=sharing" target="_blank" rel="noreferrer">View More <FaExternalLinkAlt size=".75em" /></a></span>{" | "}
+      <span className="text-nowrap">
+        <a
+          href="https://drive.google.com/file/d/1aZmz5lYQ2eh2PeALw1FrqPSJjOYJStK-/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View More <FaExternalLinkAlt size=".75em" />
+        </a>
+      </span>
+      {" | "}
       <ZipCodeInstructions location={location} />
     </>
   ),
   rite_aid: (location) => (
     <>
-      <span className="text-nowrap"><a href="https://drive.google.com/file/d/1h2PRp_kNFGGuieq9KIAwIkGYB1ohJYP5/view?usp=sharing" target="_blank" rel="noreferrer">View More <FaExternalLinkAlt size=".75em" /></a></span>{" | "}
+      <span className="text-nowrap">
+        <a
+          href="https://drive.google.com/file/d/1h2PRp_kNFGGuieq9KIAwIkGYB1ohJYP5/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View More <FaExternalLinkAlt size=".75em" />
+        </a>
+      </span>
+      {" | "}
       <ZipCodeInstructions location={location} />
     </>
   ),
@@ -125,9 +143,7 @@ export default function RealtimeLocationCard({ location }) {
               <span className="text-black">
                 <BsInfoCircle size="1.25em" className="mr-1" />{" "}
                 <span className="align-middle">
-                  <span className="font-weight-bold">
-                    Scheduling Tips:
-                  </span>{" "}
+                  <span className="font-weight-bold">Scheduling Tips:</span>{" "}
                   {instructions}
                 </span>
               </span>
