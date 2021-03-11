@@ -60,7 +60,7 @@ export default class RealtimeCountyLocations extends Component {
 
           if (resp.locations.length > 0) {
             this.props.updateLatestReportTime(
-              resp.locations[0].appointments_last_fetched
+              resp.locations[0].properties?.appointments_last_fetched
             );
           }
         }
