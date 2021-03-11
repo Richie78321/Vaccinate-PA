@@ -80,7 +80,34 @@ export default class RealtimeCountyLocations extends Component {
     }
 
     if (locations.length <= 0) {
-      return null;
+      return (
+        <div className="mb-4">
+          <h3 className="font-weight-normal mb-0">
+            <u>Realtime Availability:</u>
+          </h3>
+          <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
+            <small>
+              Appointment availability for select pharmacies is sourced from{" "}
+              <a
+                href="https://www.vaccinespotter.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                VaccineSpotter.org
+              </a>{" "}
+              and is updated every minute.
+            </small>
+          </p>
+          <div className="d-flex flex-row">
+            <div>
+              <ImSpinner2 className="rotating" />
+            </div>
+            <div className="ml-1" style={{ fontSize: "110%" }}>
+              Last checked {moment(lastUpdated).format("h:mma")}
+            </div>
+          </div>
+        </div>
+      )
     }
 
     return (
