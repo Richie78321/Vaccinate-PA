@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: "Retrieved realtime county data.",
+    message: "Retrieved real-time county data. For scrapers, please use the public https://www.vaccinespotter.org/api/.",
     locations: await getCounty(county),
   });
 }
