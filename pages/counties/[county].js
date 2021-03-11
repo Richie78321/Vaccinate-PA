@@ -11,6 +11,7 @@ import {
   FaArrowLeft,
   FaClipboardList,
   FaExternalLinkAlt,
+  FaRegClock,
 } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
@@ -103,7 +104,7 @@ function LatestReportsReceived({
         className="badge badge-primary font-weight-normal text-wrap"
         style={{ fontSize: "100%" }}
       >
-        Latest report for county received {latestReportTime.fromNow()}
+        <FaRegClock size="1.00em" />{" "}<span className="align-middle">Latest report for county received {latestReportTime.fromNow()}</span>
       </span>
     );
   }
