@@ -107,7 +107,7 @@ export default class RealtimeCountyLocations extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     return (
