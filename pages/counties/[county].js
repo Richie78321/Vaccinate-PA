@@ -104,7 +104,10 @@ function LatestReportsReceived({
         className="badge badge-primary font-weight-normal text-wrap"
         style={{ fontSize: "100%" }}
       >
-        <FaRegClock size="1.00em" />{" "}<span className="align-middle">Latest report for county received {latestReportTime.fromNow()}</span>
+        <FaRegClock size="1.00em" />{" "}
+        <span className="align-middle">
+          Latest report for county received {latestReportTime.fromNow()}
+        </span>
       </span>
     );
   }
