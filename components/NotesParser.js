@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Linkify from "react-linkify";
 
 const linkDecorator = (href, text, key) => (
@@ -15,9 +15,10 @@ export default function NotesParser({ notes }) {
     <Linkify componentDecorator={linkDecorator}>
       {notesNewlineSplit.map((paragraph, index) => (
         <span key={index}>
-          {paragraph}<br />
+          {paragraph}
+          <br />
         </span>
       ))}
     </Linkify>
-  )
+  );
 }
