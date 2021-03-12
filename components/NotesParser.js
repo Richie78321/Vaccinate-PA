@@ -8,6 +8,7 @@ const linkDecorator = (href, text, key) => (
 );
 
 export default function NotesParser({ notes }) {
+  notes = notes.replaceAll("\\n", "\n");
   const notesNewlineSplit = notes.split('\n');
 
   return (
