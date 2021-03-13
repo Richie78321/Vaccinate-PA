@@ -8,9 +8,17 @@ const linkDecorator = (href, text, key) => (
 );
 
 export default function NotesParser({ notes }) {
+  notes = notes.split("\\n").join('\n');
+  const notesNewlineSplit = notes.split('\n');
+
   return (
     <Linkify componentDecorator={linkDecorator}>
-      {notes}
+      {notesNewlineSplit.map((paragraph, index) => (
+        <span key={index}>
+          {paragraph}
+          <br />
+        </span>
+      ))}
     </Linkify>
   );
 }

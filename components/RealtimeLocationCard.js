@@ -58,7 +58,7 @@ function toTitleCase(str) {
 function formatAppointment(appointment) {
   if (appointment.types) {
     appointment.types = appointment.types.map((type) =>
-      toTitleCase(type.replaceAll("_", " "))
+      toTitleCase(type.split("_").join(" "))
     );
   }
 }
