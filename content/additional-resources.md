@@ -3,6 +3,7 @@ title: Additional Resources
 ---
 
 # Additional Resources
+
 _Updated as of March 12th_
 
 For the latest **official** **updates** and **eligibility information** from the Pennsylvania Department of Health, visit here: [https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx](https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx)
