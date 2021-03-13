@@ -8,9 +8,5 @@ const linkDecorator = (href, text, key) => (
 );
 
 export default function NotesParser({ notes }) {
-  return (
-    <Linkify componentDecorator={linkDecorator}>
-      {notes}
-    </Linkify>
-  );
+  return <Linkify componentDecorator={linkDecorator}>{notes}</Linkify>;
 }
