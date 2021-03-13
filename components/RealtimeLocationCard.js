@@ -49,19 +49,19 @@ function ZipCodeInstructions({ location }) {
   );
 }
 
-function toTitleCase(str) {
-  return str.replace(/(^|\s)\S/g, function (t) {
-    return t.toUpperCase();
-  });
-}
+// function toTitleCase(str) {
+//   return str.replace(/(^|\s)\S/g, function (t) {
+//     return t.toUpperCase();
+//   });
+// }
 
-function formatAppointment(appointment) {
-  if (appointment.types) {
-    appointment.types = appointment.types.map((type) =>
-      toTitleCase(type.split("_").join(" "))
-    );
-  }
-}
+// function formatAppointment(appointment) {
+//   if (appointment.types) {
+//     appointment.types = appointment.types.map((type) =>
+//       toTitleCase(type.split("_").join(" "))
+//     );
+//   }
+// }
 
 export default function RealtimeLocationCard({ location }) {
   const website = location?.properties?.url;
@@ -74,11 +74,11 @@ export default function RealtimeLocationCard({ location }) {
     : location.properties.name;
 
   const appointments = location.properties.appointments;
-  if (appointments) {
-    appointments.forEach((appointment) => {
-      formatAppointment(appointment);
-    });
-  }
+  // if (appointments) {
+  //   appointments.forEach((appointment) => {
+  //     formatAppointment(appointment);
+  //   });
+  // }
 
   let instructions = null;
   if (
@@ -150,18 +150,21 @@ export default function RealtimeLocationCard({ location }) {
             </li>
           ) : null}
           {appointments && appointments.length > 0
-            ? appointments.map((appointment, index) => (
-                <li key={index} className="list-group-item">
-                  <span className="badge badge-light mr-2 font-weight-normal">
+            ? (
+              <li className="list-group-item">
+                {appointments.map((appointment, index) => (
+                  <div key={index}>
+                    <span className="badge badge-light mr-2 font-weight-normal">
                     {appointment.num} Appointments
-                  </span>
-                  {moment.utc(appointment.time).format("dddd, MMMM Do")}
-                  {appointment.types
-                    ? ": " + appointment.types.join(" & ")
-                    : null}
-                </li>
-              ))
-            : null}
+                    </span>
+                    {moment.utc(appointment.time).format("dddd, MMMM Do")}
+                    {/* {appointment.types
+                      ? ": " + appointment.types.join(" & ")
+                      : null} */}
+                  </div>
+                ))}
+              </li>
+            ) : null}
         </ul>
       </div>
       <style jsx>{`
