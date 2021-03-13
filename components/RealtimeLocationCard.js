@@ -149,22 +149,21 @@ export default function RealtimeLocationCard({ location }) {
               </span>
             </li>
           ) : null}
-          {appointments && appointments.length > 0
-            ? (
-              <li className="list-group-item">
-                {appointments.map((appointment, index) => (
-                  <div key={index}>
-                    <span className="badge badge-light mr-2 font-weight-normal">
+          {appointments && appointments.length > 0 ? (
+            <li className="list-group-item">
+              {appointments.map((appointment, index) => (
+                <div key={index}>
+                  <span className="badge badge-light mr-2 font-weight-normal">
                     {appointment.num} Appointments
-                    </span>
-                    {moment.utc(appointment.time).format("dddd, MMMM Do")}
-                    {/* {appointment.types
+                  </span>
+                  {moment.utc(appointment.time).format("dddd, MMMM Do")}
+                  {/* {appointment.types
                       ? ": " + appointment.types.join(" & ")
                       : null} */}
-                  </div>
-                ))}
-              </li>
-            ) : null}
+                </div>
+              ))}
+            </li>
+          ) : null}
         </ul>
       </div>
       <style jsx>{`
