@@ -3,6 +3,7 @@ title: Additional Resources
 ---
 
 # Additional Resources
+_Updated as of March 12th_
 
 For the latest **official** **updates** and **eligibility information** from the Pennsylvania Department of Health, visit here: [https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx](https://www.health.pa.gov/topics/disease/coronavirus/Pages/Vaccine.aspx)
 
@@ -19,9 +20,3 @@ See **[HERE](https://docs.google.com/spreadsheets/d/1VVtxya-i9Tka6-uhrLvXPan9qqp
 The list of locations with active vaccine inventory is changing frequently. Our volunteer team calls these locations daily and publishes onto this website which locations have vaccines and how eligible Pennsylvanians can make an appointment. [Search for your county ](https://vaccinatepa.org/)to see that information. (This list of facilities comes from the Pennsylvania Dept of Health’s [official vaccine page](https://www.pa.gov/guides/get-vaccinated/#Step2FindaVaccineProvider).)
 
 It remains difficult even for eligible Pennsylvanians to obtain a vaccine due to vaccine supply shortages. We will continue to update this website as more and more locations receive vaccine supply.
-
-### Data on vaccine shipments
-
-We are also analyzing and visualizing the data, provided by PA Dept of Health, on the shipments of vaccines across the state. See **[here](https://docs.google.com/spreadsheets/d/11yyHrz0Q46NVBoHL9uP7W266Hvm_09_-FAZYwEhiJGM/edit#gid=1116579145)** for data on how many vaccine shipments have been received weekly across PA, and visit **[here](https://docs.google.com/spreadsheets/d/1KVCR3e9_G6edmEJmAEoXrOfYL7TDJ_Ww_pTBHVWNPHM/edit#gid=2037211880)** to see vaccine shipment data for each healthcare provider in your chosen county.
-
-![](https://i.imgur.com/Wq31T82.png)
