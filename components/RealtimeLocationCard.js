@@ -34,6 +34,22 @@ const brandInstructions = {
       <ZipCodeInstructions location={location} />
     </>
   ),
+  weis: (location) => (
+    <>
+      <span className="text-nowrap">
+        <a
+          href="https://drive.google.com/file/d/1L4gCp3cke2DmIiU-014GrGyhopre2L_M/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View More <FaExternalLinkAlt size=".75em" />
+        </a>
+      </span>
+      {" | "}
+      <ZipCodeInstructions location={location} />
+    </>
+  ),
+  wegmans: (location) => <ZipCodeInstructions location={location} />
 };
 
 function ZipCodeInstructions({ location }) {
