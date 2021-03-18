@@ -49,7 +49,7 @@ const brandInstructions = {
       <ZipCodeInstructions location={location} />
     </>
   ),
-  wegmans: (location) => <ZipCodeInstructions location={location} />
+  wegmans: (location) => <ZipCodeInstructions location={location} />,
 };
 
 function ZipCodeInstructions({ location }) {
