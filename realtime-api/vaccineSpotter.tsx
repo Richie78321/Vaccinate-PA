@@ -3,26 +3,62 @@ import NodeCache from "node-cache";
 import { countyCodes } from "../content/counties";
 import moment from "moment";
 
+interface ExpandedAppointment {
+  time: string,
+  type: string,
+}
+
+interface ConsolidatedAppointment {
+  num: number,
+  time: string,
+  types: string[],
+}
+
+interface RealtimeLocation {
+  geometry: {
+    coordinates: [
+      number?,
+      number?,
+    ],
+  },
+  properties: {
+    id: number,
+    url: string,
+    city: string,
+    name: string,
+    state: string,
+    address: string,
+    provider: string,
+    postal_code: string,
+    appointments: ConsolidatedAppointment[] | ExpandedAppointment[],
+    appointments_available: boolean,
+    appointments_last_fetched: string,
+    appointments_last_fetched_date?: number,
+    countyCode?: string,
+  },
+
+}
+
 // TODO : Could come up with a better way of storing this information.
 const locationToCountyCache = new NodeCache({
   deleteOnExpire: false,
   stdTTL: 0, // Never expire
 });
 
-const endpoint = "https://www.vaccinespotter.org/api/v0/states/PA.json";
+const endpoint: string = "https://www.vaccinespotter.org/api/v0/states/PA.json";
 
-const fccLocationToCountyEndpoint =
+const fccLocationToCountyEndpoint: string =
   "https://geo.fcc.gov/api/census/block/find?";
 
-function consolidateAppointments(appointments) {
-  const appointmentsByTime = {};
+function consolidateAppointments(appointments: ExpandedAppointment[]): ConsolidatedAppointment[] {
+  const appointmentsByTime: { [key: string]: ConsolidatedAppointment } = {};
   appointments.forEach((appointment) => {
     if (appointment.time) {
-      let appointmentFormattedTime = moment(appointment.time)
+      let appointmentFormattedTime: string = moment(appointment.time)
         .startOf("day")
         .toISOString();
 
-      const consolidatedAppointment =
+      const consolidatedAppointment: ConsolidatedAppointment =
         appointmentsByTime[appointmentFormattedTime];
 
       if (consolidatedAppointment) {
@@ -43,8 +79,8 @@ function consolidateAppointments(appointments) {
   return Object.values(appointmentsByTime);
 }
 
-export async function fetchLocations() {
-  const locationsList = (
+export async function fetchLocations(): Promise<{ [key: string]: RealtimeLocation[] }> {
+  const locationsList: RealtimeLocation[] = (
     await fetch(endpoint).then((resp) => resp.json())
   ).features.filter((location) => location.properties?.appointments_available);
 
@@ -54,6 +90,7 @@ export async function fetchLocations() {
     );
   });
 
+  // Sort by latest
   locationsList.sort(
     (a, b) =>
       b.properties.appointments_last_fetched_date.valueOf() -
@@ -66,7 +103,7 @@ export async function fetchLocations() {
       location.properties.appointments.length > 0
     ) {
       location.properties.appointments = consolidateAppointments(
-        location.properties.appointments
+        location.properties.appointments as ExpandedAppointment[]
       );
     }
   });
@@ -89,8 +126,8 @@ export async function fetchLocations() {
   return locationsDict;
 }
 
-async function getLocationCountyCode(location) {
-  let locationCountyCode = locationToCountyCache.get(location.properties.id);
+async function getLocationCountyCode(location: RealtimeLocation): Promise<string> {
+  let locationCountyCode: string | undefined = locationToCountyCache.get(location.properties.id);
   if (locationCountyCode !== undefined) {
     return locationCountyCode;
   }
@@ -99,8 +136,8 @@ async function getLocationCountyCode(location) {
     await fetch(
       fccLocationToCountyEndpoint +
         new URLSearchParams({
-          latitude: location.geometry.coordinates[1],
-          longitude: location.geometry.coordinates[0],
+          latitude: location.geometry.coordinates[1]?.toString(),
+          longitude: location.geometry.coordinates[0]?.toString(),
           format: "json",
         }).toString()
     ).then((resp) => resp.json())
