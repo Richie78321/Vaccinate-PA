@@ -118,7 +118,7 @@ function LatestReportsReceived({
       >
         <FaRegClock size="1.00em" />{" "}
         <span className="align-middle">
-          Latest report for county received {latestReportTime.fromNow()}
+          Latest county report received {latestReportTime.fromNow()}
         </span>
       </span>
     );
