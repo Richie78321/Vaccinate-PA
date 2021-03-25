@@ -113,7 +113,7 @@ export default class RealtimeCountyLocations extends Component {
     return (
       <div className="mb-5">
         <h3 className="font-weight-normal mb-0">
-          <u>Realtime Availability:</u>
+          <u>Realtime availability:</u>
         </h3>
         <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
           <small>
