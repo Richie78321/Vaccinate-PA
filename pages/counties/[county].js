@@ -59,9 +59,9 @@ const CountyLinks = ({ countyLinks }) => {
   }
 
   return (
-    <>
+    <small>
       {countyCovidInfoLink ? (
-        <p className="mb-0">
+        <p className="county-link mb-2">
           <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
             Official {countyLinks.County}{" "}
             <span className="text-nowrap">
@@ -71,7 +71,7 @@ const CountyLinks = ({ countyLinks }) => {
         </p>
       ) : null}
       {countyPreregistrationLink ? (
-        <p className="mb-0">
+        <p className="county-link mb-2">
           <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
             Official {countyLinks.County} Vaccine{" "}
             <span className="text-nowrap">
@@ -80,7 +80,7 @@ const CountyLinks = ({ countyLinks }) => {
           </a>
         </p>
       ) : null}
-      <p className="mb-0">
+      <p className="county-link mb-2">
         <a
           target="_blank"
           rel="noreferrer"
@@ -92,7 +92,12 @@ const CountyLinks = ({ countyLinks }) => {
           </span>
         </a>
       </p>
-    </>
+      <style jsx>{`
+        .county-link {
+          line-height: 115%;
+        }
+      `}</style>
+    </small>
   );
 };
 
@@ -154,7 +159,8 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     labels: 'cta',
     color: 'white',
     enabled: true,
-    networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms', 'sharethis' ],
+    networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms' ],
+    radius: 4,
     size: 32,
     description: `${county} COVID-19 Vaccine Availability`,
     subject: 'VaccinatePA: Find COVID-19 Vaccine Availability',
@@ -245,7 +251,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
         <h2 className="mb-3 d-block d-sm-none">
           {county} COVID-19 Vaccine Availability
         </h2>
-        <div className="mb-5 row justify-content-between">
+        <div className="mb-4 row justify-content-between">
           <div className="col-12 col-md-auto">
             <LatestReportsReceived
               latestRealtimeReport={latestRealtimeReport}
@@ -256,7 +262,9 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-        <InlineShareButtons config={sharethisConfig} />
+        <div className="mb-3">
+          <InlineShareButtons config={sharethisConfig} />
+        </div>
         <ClientSideOnly>
           <RealtimeCountyLocations
             updateLatestReportTime={(latestRealtimeReport) =>
