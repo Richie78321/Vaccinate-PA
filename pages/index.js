@@ -6,6 +6,19 @@ import TranslationLayout from "../layouts/TranslationLayout";
 import Image from "next/image";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import {InlineShareButtons} from 'sharethis-reactjs';
+
+const sharethisConfig = {
+  alignment: 'center',
+  labels: 'cta',
+  color: 'white',
+  enabled: true,
+  networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms' ],
+  radius: 4,
+  size: 32,
+  subject: 'VaccinatePA: Find COVID-19 Vaccine Availability',
+  username: 'VaccinatePA',
+};
 
 export default function Index() {
   const countySearchRef = createRef();
@@ -67,6 +80,7 @@ export default function Index() {
             </div>
           </div>
         </div>
+        <InlineShareButtons config={sharethisConfig} />
         <div className="my-4">
           <CountySuggestion searchRef={countySearchRef} />
         </div>
@@ -76,8 +90,8 @@ export default function Index() {
       </div>
       <style jsx>{`
         #landing-header {
-          margin-top: 20px;
-          margin-bottom: 80px;
+          margin-top: 10px;
+          margin-bottom: 60px;
         }
 
         #search-bar {
