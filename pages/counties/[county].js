@@ -62,7 +62,7 @@ const CountyLinks = ({ countyLinks }) => {
       {countyCovidInfoLink ? (
         <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
-            {countyLinks.County}{" "}
+            Official {countyLinks.County}{" "}
             <span className="text-nowrap">
               Information <FaExternalLinkAlt size=".85em" />
             </span>
@@ -72,7 +72,7 @@ const CountyLinks = ({ countyLinks }) => {
       {countyPreregistrationLink ? (
         <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
-            {countyLinks.County} Vaccine{" "}
+            Official {countyLinks.County} Vaccine{" "}
             <span className="text-nowrap">
               Preregistration <FaExternalLinkAlt size=".85em" />
             </span>
