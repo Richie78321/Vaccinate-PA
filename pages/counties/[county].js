@@ -58,28 +58,28 @@ const CountyLinks = ({ countyLinks }) => {
   }
 
   return (
-    <ul className="pl-4">
+    <>
       {countyCovidInfoLink ? (
-        <li>
+        <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
-            Official {countyLinks.County} COVID-19{" "}
+            {countyLinks.County} {" "}
             <span className="text-nowrap">
               Information <FaExternalLinkAlt size=".85em" />
             </span>
           </a>
-        </li>
+        </p>
       ) : null}
       {countyPreregistrationLink ? (
-        <li>
+        <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
-            Official {countyLinks.County} Vaccine{" "}
+            {countyLinks.County} Vaccine {" "}
             <span className="text-nowrap">
               Preregistration <FaExternalLinkAlt size=".85em" />
             </span>
           </a>
-        </li>
+        </p>
       ) : null}
-    </ul>
+    </>
   );
 };
 
