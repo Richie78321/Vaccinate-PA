@@ -192,7 +192,7 @@ export default function AirTableCard({ location }) {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <div className="row">
-              <div className="col-sm-8 col-md-10">
+              <div className="col-auto">
                 <h5 className="mb-0 card-title text-truncate">{Name}</h5>
                 <p className="my-0 text-truncate">
                   {/* <a href={`tel:${phoneNumber}`}>
@@ -222,7 +222,7 @@ export default function AirTableCard({ location }) {
                 </p>
               </div>
               {latestReportTimeText ? (
-                <div className="col-sm-4 col-md-2 text-right">
+                <div className="ml-auto col-auto text-right">
                   <span className="badge badge-pill badge-light font-weight-normal text-wrap">
                     Updated {latestReportTimeText}
                   </span>

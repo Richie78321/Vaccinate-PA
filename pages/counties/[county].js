@@ -79,6 +79,18 @@ const CountyLinks = ({ countyLinks }) => {
           </a>
         </p>
       ) : null}
+      <p className="mb-0">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://airtable.com/shr7z01kc7h1ogP5R"
+        >
+          Report missing or incorrect {" "}
+          <span className="text-nowrap">
+            information <FaExternalLinkAlt size=".85em" />
+          </span>
+        </a>
+      </p>
     </>
   );
 };
@@ -214,26 +226,17 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
           </div>
         </div>
         <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
-        <div className="mb-5">
-          <LatestReportsReceived
-            latestRealtimeReport={latestRealtimeReport}
-            latestReportedLocation={latestReportedLocation}
-          />
-          <div className="mt-2">
+        <div className="mb-5 row justify-content-between">
+          <div className="col-12 col-md-auto">
+            <LatestReportsReceived
+              latestRealtimeReport={latestRealtimeReport}
+              latestReportedLocation={latestReportedLocation}
+            />
+          </div>
+          <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-        <p className="alert alert-light text-center mb-3 border">
-          If you have a missing location to report, or think we have incorrect
-          information,{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://airtable.com/shr7z01kc7h1ogP5R"
-          >
-            please let us know.
-          </a>
-        </p>
         <ClientSideOnly>
           <RealtimeCountyLocations
             updateLatestReportTime={(latestRealtimeReport) =>
