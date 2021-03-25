@@ -225,8 +225,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <TranslationOptions />
           </div>
         </div>
-        <h1 className="mb-3 d-none d-sm-block">{county} COVID-19 Vaccine Availability</h1>
-        <h2 className="mb-3 d-block d-sm-none">{county} COVID-19 Vaccine Availability</h2>
+        <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
         <div className="mb-5 row justify-content-between">
           <div className="col-12 col-md-auto">
             <LatestReportsReceived
