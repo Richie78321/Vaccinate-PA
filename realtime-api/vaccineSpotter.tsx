@@ -8,13 +8,13 @@ interface ExpandedAppointment {
   type: string,
 }
 
-interface ConsolidatedAppointment {
+export interface ConsolidatedAppointment {
   num: number,
   time: string,
   types: string[],
 }
 
-interface RealtimeLocation {
+export interface RealtimeLocation {
   geometry: {
     coordinates: [
       number?,
