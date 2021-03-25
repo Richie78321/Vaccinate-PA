@@ -1,6 +1,38 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
 
+interface AvailabilityStatus {
+  value: number,
+  string: string,
+  display?: string,
+  isAvailable: boolean,
+};
+
+interface CountyLinks {
+  'County Website'?: string,
+  'County COVID Information'?: string,
+  'County COVID Preregistration'?: string,
+}
+
+interface Location {
+  id: string,
+  fields: {
+    Name: string,
+    Website?: string,
+    County: string,
+    'Latest report'?: string,
+    'Vaccines available?'?: string[],
+    'Latest report notes'?: string[],
+    'Number of reports': number,
+    Address: string,
+  },
+  availabilityStatus?: AvailabilityStatus,
+};
+
+interface CountyLocations {
+  [key: string]: CountyLocations | Location[],
+}
+
 const OUTDATED_DAYS_THRESHOLD = 3;
 
 const airtableBackupCache = new NodeCache({
@@ -11,9 +43,10 @@ const airtableCache = new NodeCache({
   stdTTL: 600, // Ten minutes
 });
 
+// @ts-ignore
 Airtable.configure({ apiKey: process.env.AIRTABLE_KEY });
 
-export const AVAILABILITY_STATUS = {
+export const AVAILABILITY_STATUS: { [key: string]: AvailabilityStatus } = {
   UNKNOWN: {
     value: 0,
     string: "No confirmation / unknown",
@@ -41,7 +74,7 @@ export const AVAILABILITY_STATUS = {
   },
 };
 
-export async function fetchAirtableData(cacheKeyword, airtableQuery) {
+export async function fetchAirtableData(cacheKeyword: string, airtableQuery): Promise<any> {
   let data = airtableCache.get(cacheKeyword);
   if (data == undefined) {
     try {
@@ -69,7 +102,7 @@ export async function fetchAirtableData(cacheKeyword, airtableQuery) {
 }
 
 // TODO: Not ideal, should look to change this in the AirTable soon.
-export function getAvailabilityStatus(vaccinesAvailableString) {
+export function getAvailabilityStatus(vaccinesAvailableString: string[]): AvailabilityStatus {
   if (vaccinesAvailableString) {
     for (let statusValue in AVAILABILITY_STATUS) {
       if (
@@ -87,7 +120,7 @@ export function getAvailabilityStatus(vaccinesAvailableString) {
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
-export async function getCountyLinks(county) {
+export async function getCountyLinks(county: string): Promise<CountyLinks> {
   const countyLinks = await fetchAirtableData(
     "county-links",
     Airtable.base("appdsheneg5ii1EnQ")("Counties").select()
@@ -104,8 +137,8 @@ export async function getCountyLinks(county) {
   }
 }
 
-export async function getCountyLocations(county) {
-  const countyLocations = (
+export async function getCountyLocations(county: string): Promise<CountyLocations> {
+  const countyLocations: Location[] = (
     await fetchAirtableData(
       county,
       Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
@@ -126,21 +159,22 @@ export async function getCountyLocations(county) {
     );
   }
 
-  const outdatedThreshold = new Date();
+  const outdatedThreshold: Date = new Date();
   outdatedThreshold.setDate(
     outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
   );
 
-  const allRecentLocations = countyLocations.filter(
+  const allRecentLocations: Location[] = countyLocations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) > outdatedThreshold
+      Date.parse(location.fields["Latest report"]) > outdatedThreshold.getTime()
   );
-  const allOutdatedLocations = countyLocations.filter(
+  const allOutdatedLocations: Location[] = countyLocations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) <= outdatedThreshold
+      Date.parse(location.fields["Latest report"]) <= outdatedThreshold.getTime()
   );
+
   return {
     allLocations: countyLocations,
     allRecentLocations: allRecentLocations,
