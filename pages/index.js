@@ -6,18 +6,18 @@ import TranslationLayout from "../layouts/TranslationLayout";
 import Image from "next/image";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
-import {InlineShareButtons} from 'sharethis-reactjs';
+import { InlineShareButtons } from "sharethis-reactjs";
 
 const sharethisConfig = {
-  alignment: 'center',
-  labels: 'cta',
-  color: 'white',
+  alignment: "center",
+  labels: "cta",
+  color: "white",
   enabled: true,
-  networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms' ],
+  networks: ["facebook", "twitter", "reddit", "email", "sms"],
   radius: 4,
   size: 32,
-  subject: 'VaccinatePA: Find COVID-19 Vaccine Availability',
-  username: 'VaccinatePA',
+  subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
+  username: "VaccinatePA",
 };
 
 export default function Index() {
