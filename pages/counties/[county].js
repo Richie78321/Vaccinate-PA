@@ -19,6 +19,7 @@ import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
 import { Button } from "react-bootstrap";
+import {InlineShareButtons} from 'sharethis-reactjs';
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -148,6 +149,19 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     );
   }
 
+  const sharethisConfig = {
+    alignment: 'center',
+    labels: 'cta',
+    color: 'white',
+    enabled: true,
+    networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms', 'sharethis' ],
+    size: 32,
+    description: `${county} COVID-19 Vaccine Availability`,
+    subject: 'VaccinatePA: Find COVID-19 Vaccine Availability',
+    message: `Find ${county} and more COVID-19 vaccine availability here.`,
+    username: 'VaccinatePA',
+  };
+
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
@@ -242,6 +256,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
+        <InlineShareButtons config={sharethisConfig} />
         <ClientSideOnly>
           <RealtimeCountyLocations
             updateLatestReportTime={(latestRealtimeReport) =>
