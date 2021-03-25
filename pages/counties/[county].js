@@ -19,7 +19,7 @@ import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
 import { Button } from "react-bootstrap";
-import {InlineShareButtons} from 'sharethis-reactjs';
+import { InlineShareButtons } from "sharethis-reactjs";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -155,17 +155,17 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
   }
 
   const sharethisConfig = {
-    alignment: 'center',
-    labels: 'cta',
-    color: 'white',
+    alignment: "center",
+    labels: "cta",
+    color: "white",
     enabled: true,
-    networks: [ 'facebook', 'twitter', 'reddit', 'email', 'sms' ],
+    networks: ["facebook", "twitter", "reddit", "email", "sms"],
     radius: 4,
     size: 32,
     description: `${county} COVID-19 Vaccine Availability`,
-    subject: 'VaccinatePA: Find COVID-19 Vaccine Availability',
+    subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
     message: `Find ${county} and more COVID-19 vaccine availability here.`,
-    username: 'VaccinatePA',
+    username: "VaccinatePA",
   };
 
   const latestReportedLocation =
