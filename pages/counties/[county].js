@@ -62,7 +62,7 @@ const CountyLinks = ({ countyLinks }) => {
       {countyCovidInfoLink ? (
         <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
-            {countyLinks.County} {" "}
+            {countyLinks.County}{" "}
             <span className="text-nowrap">
               Information <FaExternalLinkAlt size=".85em" />
             </span>
@@ -72,7 +72,7 @@ const CountyLinks = ({ countyLinks }) => {
       {countyPreregistrationLink ? (
         <p className="mb-0">
           <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
-            {countyLinks.County} Vaccine {" "}
+            {countyLinks.County} Vaccine{" "}
             <span className="text-nowrap">
               Preregistration <FaExternalLinkAlt size=".85em" />
             </span>
@@ -85,7 +85,7 @@ const CountyLinks = ({ countyLinks }) => {
           rel="noreferrer"
           href="https://airtable.com/shr7z01kc7h1ogP5R"
         >
-          Report missing or incorrect {" "}
+          Report missing or incorrect{" "}
           <span className="text-nowrap">
             information <FaExternalLinkAlt size=".85em" />
           </span>
