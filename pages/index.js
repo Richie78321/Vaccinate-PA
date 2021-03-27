@@ -4,7 +4,7 @@ import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
 import TranslationLayout from "../layouts/TranslationLayout";
 import Image from "next/image";
-import {InlineShareButtons} from 'sharethis-reactjs';
+import { InlineShareButtons } from "sharethis-reactjs";
 
 const sharethisConfig = {
   alignment: "center",
