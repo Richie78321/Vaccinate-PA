@@ -2,50 +2,50 @@ import Airtable from "airtable";
 import NodeCache from "node-cache";
 
 interface AvailabilityStatus {
-  value: number,
-  string: string,
-  display?: string,
-  isAvailable: boolean,
-};
+  value: number;
+  string: string;
+  display?: string;
+  isAvailable: boolean;
+}
 
 interface CountyLinks {
-  'County Website'?: string,
-  'County COVID Information'?: string,
-  'County COVID Preregistration'?: string,
+  "County Website"?: string;
+  "County COVID Information"?: string;
+  "County COVID Preregistration"?: string;
 }
 
 interface Location {
-  id: string,
+  id: string;
   fields: {
-    Name: string,
-    Website?: string,
-    County: string,
-    'Latest report'?: string,
-    'Vaccines available?'?: string[],
-    'Latest report notes'?: string[],
-    'Number of reports': number,
-    Address: string,
-  },
-  availabilityStatus?: AvailabilityStatus,
-};
+    Name: string;
+    Website?: string;
+    County: string;
+    "Latest report"?: string;
+    "Vaccines available?"?: string[];
+    "Latest report notes"?: string[];
+    "Number of reports": number;
+    Address: string;
+  };
+  availabilityStatus?: AvailabilityStatus;
+}
 
 interface CountyLocations {
-  allLocations: Location[],
-  allRecentLocations: Location[],
-  allOutdatedLocations: Location[],
+  allLocations: Location[];
+  allRecentLocations: Location[];
+  allOutdatedLocations: Location[];
   recentLocations: {
-    availableWaitlist: Location[],
-    availableAppointment: Location[],
-    availableWalkIn: Location[],
-  },
+    availableWaitlist: Location[];
+    availableAppointment: Location[];
+    availableWalkIn: Location[];
+  };
   outdatedLocations: {
-    availableWaitlist: Location[],
-    availableAppointment: Location[],
-    availableWalkIn: Location[],
-  },
-  availabilityVaries: Location[],
-  noAvailability: Location[],
-  noConfirmation: Location[],
+    availableWaitlist: Location[];
+    availableAppointment: Location[];
+    availableWalkIn: Location[];
+  };
+  availabilityVaries: Location[];
+  noAvailability: Location[];
+  noConfirmation: Location[];
 }
 
 const OUTDATED_DAYS_THRESHOLD = 3;
@@ -89,7 +89,10 @@ export const AVAILABILITY_STATUS: { [key: string]: AvailabilityStatus } = {
   },
 };
 
-export async function fetchAirtableData(cacheKeyword: string, airtableQuery): Promise<any> {
+export async function fetchAirtableData(
+  cacheKeyword: string,
+  airtableQuery
+): Promise<any> {
   let data = airtableCache.get(cacheKeyword);
   if (data == undefined) {
     try {
@@ -117,7 +120,9 @@ export async function fetchAirtableData(cacheKeyword: string, airtableQuery): Pr
 }
 
 // TODO: Not ideal, should look to change this in the AirTable soon.
-export function getAvailabilityStatus(vaccinesAvailableString: string[]): AvailabilityStatus {
+export function getAvailabilityStatus(
+  vaccinesAvailableString: string[]
+): AvailabilityStatus {
   if (vaccinesAvailableString) {
     for (let statusValue in AVAILABILITY_STATUS) {
       if (
@@ -175,7 +180,7 @@ function organizeLocations(locations: Location[]): CountyLocations {
   outdatedThreshold.setDate(
     outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
   );
-  
+
   const allRecentLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
@@ -184,14 +189,14 @@ function organizeLocations(locations: Location[]): CountyLocations {
   const allOutdatedLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) <= outdatedThreshold.getTime()
+      Date.parse(location.fields["Latest report"]) <=
+        outdatedThreshold.getTime()
   );
 
   const separateAvailability = (locations) => ({
     availableWaitlist: locations.filter(
       (location) =>
-        location.availabilityStatus.value ===
-        AVAILABILITY_STATUS.WAITLIST.value
+        location.availabilityStatus.value === AVAILABILITY_STATUS.WAITLIST.value
     ),
     availableAppointment: locations.filter(
       (location) =>
@@ -200,11 +205,10 @@ function organizeLocations(locations: Location[]): CountyLocations {
     ),
     availableWalkIn: locations.filter(
       (location) =>
-        location.availabilityStatus.value ===
-        AVAILABILITY_STATUS.WALK_IN.value
+        location.availabilityStatus.value === AVAILABILITY_STATUS.WALK_IN.value
     ),
   });
-  
+
   return {
     allLocations: locations,
     allRecentLocations: allRecentLocations,
@@ -226,7 +230,9 @@ function organizeLocations(locations: Location[]): CountyLocations {
   };
 }
 
-export async function getCountyLocations(county: string): Promise<CountyLocations> {
+export async function getCountyLocations(
+  county: string
+): Promise<CountyLocations> {
   const countyLocations: Location[] = (
     await fetchAirtableData(
       county,

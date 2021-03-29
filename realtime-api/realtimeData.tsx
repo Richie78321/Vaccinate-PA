@@ -21,8 +21,12 @@ function refreshVaccineSpotter(key: string, value, resolve, reject): void {
     });
 }
 
-export async function getCounty(countyCode: string): Promise<RealtimeLocation[]> {
-  const latestCached: { [key: string]: RealtimeLocation[] } | undefined = vaccineSpotterCache.get("latest");
+export async function getCounty(
+  countyCode: string
+): Promise<RealtimeLocation[]> {
+  const latestCached:
+    | { [key: string]: RealtimeLocation[] }
+    | undefined = vaccineSpotterCache.get("latest");
   if (!latestCached) {
     // Request the realtime data if it has not already been loaded. This may be problematic if
     // there is a huge spike of requests following a server startup.
