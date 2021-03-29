@@ -257,7 +257,9 @@ export async function getCountyLocations(
     )
   ).map((record) => record._rawJson);
 
-  const countyLocationsProcessed: Location[] = preprocessLocations(countyLocations);
+  const countyLocationsProcessed: Location[] = preprocessLocations(
+    countyLocations
+  );
 
   return organizeLocations(countyLocationsProcessed);
 }
