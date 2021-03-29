@@ -172,7 +172,7 @@ function preprocessLocations(locations: RawLocation[]): Location[] {
       locations[i].fields["Vaccines available?"]
     );
 
-    (locations[i] as Location).isSupersite = locations[i]["Location type"] === "Supersite";
+    (locations[i] as Location).isSupersite = locations[i].fields["Location type"] === "Supersite";
   }
 
   return locations as Location[];
