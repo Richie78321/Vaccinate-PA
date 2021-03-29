@@ -190,12 +190,23 @@ export default function AirTableCard({ location }) {
 
   return (
     <>
-      <div className={isActiveSupersite ? "location-card card border-success" : "location-card card"}>
+      <div
+        className={
+          isActiveSupersite
+            ? "location-card card border-success"
+            : "location-card card"
+        }
+      >
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <div className="row">
               <div className="col-auto">
-                { isActiveSupersite ? <h6 className="card-title text-success mb-2"><FaStar size="1em" />{" "}<span className="align-middle">Mass Vaccination Site</span></h6> : null }
+                {isActiveSupersite ? (
+                  <h6 className="card-title text-success mb-2">
+                    <FaStar size="1em" />{" "}
+                    <span className="align-middle">Mass Vaccination Site</span>
+                  </h6>
+                ) : null}
                 <h5 className="mb-0 card-title text-truncate">{Name}</h5>
                 <p className="my-0 text-truncate">
                   {/* <a href={`tel:${phoneNumber}`}>
