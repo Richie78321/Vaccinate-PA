@@ -4,8 +4,19 @@ import CountySuggestion from "../components/CountySuggestion";
 import CountySearch from "../components/CountySearch";
 import TranslationLayout from "../layouts/TranslationLayout";
 import Image from "next/image";
-import { FaTwitter, FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
+import { InlineShareButtons } from "sharethis-reactjs";
+
+const sharethisConfig = {
+  alignment: "center",
+  labels: "cta",
+  color: "white",
+  enabled: true,
+  networks: ["facebook", "twitter", "reddit", "email", "sms"],
+  radius: 4,
+  size: 32,
+  subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
+  username: "VaccinatePA",
+};
 
 export default function Index() {
   const countySearchRef = createRef();
@@ -40,33 +51,11 @@ export default function Index() {
                 identify which facilities are currently administering vaccines.
                 This website will be updated daily to reflect the latest
                 information we are able to gather.
-                <div id="social-icons" className="mt-2 mt-sm-1">
-                  <a
-                    href="https://twitter.com/VaccinatePA"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <FaTwitter size="1.5em" />
-                  </a>
-                  <a
-                    href="https://www.facebook.com/vaccinatepa"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <FaFacebook className="ml-2" size="1.5em" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/vaccinatepaorg/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <AiFillInstagram className="ml-2" size="1.75em" />
-                  </a>
-                </div>
               </div>
             </div>
           </div>
         </div>
+        <InlineShareButtons config={sharethisConfig} />
         <div className="my-4">
           <CountySuggestion searchRef={countySearchRef} />
         </div>
@@ -76,8 +65,8 @@ export default function Index() {
       </div>
       <style jsx>{`
         #landing-header {
-          margin-top: 20px;
-          margin-bottom: 80px;
+          margin-top: 10px;
+          margin-bottom: 60px;
         }
 
         #search-bar {

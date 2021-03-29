@@ -19,6 +19,7 @@ import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
 import { Button } from "react-bootstrap";
+import { InlineShareButtons } from "sharethis-reactjs";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -58,28 +59,45 @@ const CountyLinks = ({ countyLinks }) => {
   }
 
   return (
-    <ul className="pl-4">
+    <small>
       {countyCovidInfoLink ? (
-        <li>
+        <p className="county-link mb-2">
           <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
-            Official {countyLinks.County} COVID-19{" "}
+            Official {countyLinks.County}{" "}
             <span className="text-nowrap">
               Information <FaExternalLinkAlt size=".85em" />
             </span>
           </a>
-        </li>
+        </p>
       ) : null}
       {countyPreregistrationLink ? (
-        <li>
+        <p className="county-link mb-2">
           <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
             Official {countyLinks.County} Vaccine{" "}
             <span className="text-nowrap">
               Preregistration <FaExternalLinkAlt size=".85em" />
             </span>
           </a>
-        </li>
+        </p>
       ) : null}
-    </ul>
+      <p className="county-link mb-2">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://airtable.com/shr7z01kc7h1ogP5R"
+        >
+          Report missing or incorrect{" "}
+          <span className="text-nowrap">
+            information <FaExternalLinkAlt size=".85em" />
+          </span>
+        </a>
+      </p>
+      <style jsx>{`
+        .county-link {
+          line-height: 115%;
+        }
+      `}</style>
+    </small>
   );
 };
 
@@ -106,7 +124,7 @@ function LatestReportsReceived({
       >
         <FaRegClock size="1.00em" />{" "}
         <span className="align-middle">
-          Latest report for county received {latestReportTime.fromNow()}
+          Latest county report received {latestReportTime.fromNow()}
         </span>
       </span>
     );
@@ -135,6 +153,20 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
       </CountyPageLayout>
     );
   }
+
+  const sharethisConfig = {
+    alignment: "center",
+    labels: "cta",
+    color: "white",
+    enabled: true,
+    networks: ["facebook", "twitter", "reddit", "email", "sms"],
+    radius: 4,
+    size: 32,
+    description: `${county} COVID-19 Vaccine Availability`,
+    subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
+    message: `Find ${county} and more COVID-19 vaccine availability here.`,
+    username: "VaccinatePA",
+  };
 
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
@@ -213,27 +245,26 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <TranslationOptions />
           </div>
         </div>
-        <h1 className="mb-3">{county} COVID-19 Vaccine Availability</h1>
-        <div className="mb-5">
-          <LatestReportsReceived
-            latestRealtimeReport={latestRealtimeReport}
-            latestReportedLocation={latestReportedLocation}
-          />
-          <div className="mt-2">
+        <h1 className="mb-3 d-none d-sm-block">
+          {county} COVID-19 Vaccine Availability
+        </h1>
+        <h2 className="mb-3 d-block d-sm-none">
+          {county} COVID-19 Vaccine Availability
+        </h2>
+        <div className="mb-4 row justify-content-between">
+          <div className="col-12 col-md-auto">
+            <LatestReportsReceived
+              latestRealtimeReport={latestRealtimeReport}
+              latestReportedLocation={latestReportedLocation}
+            />
+          </div>
+          <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-        <p className="alert alert-light text-center mb-3 border">
-          If you have a missing location to report, or think we have incorrect
-          information,{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://airtable.com/shr7z01kc7h1ogP5R"
-          >
-            please let us know.
-          </a>
-        </p>
+        <div className="mb-3">
+          <InlineShareButtons config={sharethisConfig} />
+        </div>
         <ClientSideOnly>
           <RealtimeCountyLocations
             updateLatestReportTime={(latestRealtimeReport) =>

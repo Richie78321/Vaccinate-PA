@@ -23,6 +23,7 @@
     "react-linkify": "^1.0.0-alpha",
     "react-markdown": "^5.0.3",
     "react-spinners": "^0.10.6",
+    "sharethis-reactjs": "^1.6.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
