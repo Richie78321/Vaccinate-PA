@@ -172,7 +172,8 @@ function preprocessLocations(locations: RawLocation[]): Location[] {
       locations[i].fields["Vaccines available?"]
     );
 
-    (locations[i] as Location).isSupersite = locations[i].fields["Location type"] === "Supersite";
+    (locations[i] as Location).isSupersite =
+      locations[i].fields["Location type"] === "Supersite";
   }
 
   return locations as Location[];
@@ -257,7 +258,9 @@ export async function getCountyLocations(
     )
   ).map((record) => record._rawJson);
 
-  const countyLocationsProcessed: Location[] = preprocessLocations(countyLocations);
+  const countyLocationsProcessed: Location[] = preprocessLocations(
+    countyLocations
+  );
 
   return organizeLocations(countyLocationsProcessed);
 }
