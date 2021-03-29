@@ -30,7 +30,22 @@ interface Location {
 };
 
 interface CountyLocations {
-  [key: string]: CountyLocations | Location[],
+  allLocations: Location[],
+  allRecentLocations: Location[],
+  allOutdatedLocations: Location[],
+  recentLocations: {
+    availableWaitlist: Location[],
+    availableAppointment: Location[],
+    availableWalkIn: Location[],
+  },
+  outdatedLocations: {
+    availableWaitlist: Location[],
+    availableAppointment: Location[],
+    availableWalkIn: Location[],
+  },
+  availabilityVaries: Location[],
+  noAvailability: Location[],
+  noConfirmation: Location[],
 }
 
 const OUTDATED_DAYS_THRESHOLD = 3;
@@ -137,6 +152,80 @@ export async function getCountyLinks(county: string): Promise<CountyLinks> {
   }
 }
 
+/**
+ * Preprocess locations fetched from AirTable.
+ * @param locations The list of locations fetched from AirTable.
+ */
+function preprocessLocations(locations: Location[]): void {
+  for (let i = 0; i < locations.length; i++) {
+    locations[i].availabilityStatus = getAvailabilityStatus(
+      locations[i].fields["Vaccines available?"]
+    );
+  }
+}
+
+/**
+ * Organize locations based on time and availability status for easier frontend
+ * consumption.
+ * @param locations The list of locations.
+ * @returns Returns an organized list of locations.
+ */
+function organizeLocations(locations: Location[]): CountyLocations {
+  const outdatedThreshold: Date = new Date();
+  outdatedThreshold.setDate(
+    outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
+  );
+  
+  const allRecentLocations: Location[] = locations.filter(
+    (location) =>
+      location.fields["Latest report"] &&
+      Date.parse(location.fields["Latest report"]) > outdatedThreshold.getTime()
+  );
+  const allOutdatedLocations: Location[] = locations.filter(
+    (location) =>
+      location.fields["Latest report"] &&
+      Date.parse(location.fields["Latest report"]) <= outdatedThreshold.getTime()
+  );
+
+  const separateAvailability = (locations) => ({
+    availableWaitlist: locations.filter(
+      (location) =>
+        location.availabilityStatus.value ===
+        AVAILABILITY_STATUS.WAITLIST.value
+    ),
+    availableAppointment: locations.filter(
+      (location) =>
+        location.availabilityStatus.value ===
+        AVAILABILITY_STATUS.APPOINTMENT.value
+    ),
+    availableWalkIn: locations.filter(
+      (location) =>
+        location.availabilityStatus.value ===
+        AVAILABILITY_STATUS.WALK_IN.value
+    ),
+  });
+  
+  return {
+    allLocations: locations,
+    allRecentLocations: allRecentLocations,
+    allOutdatedLocations: allOutdatedLocations,
+    recentLocations: separateAvailability(allRecentLocations),
+    outdatedLocations: separateAvailability(allRecentLocations),
+    availabilityVaries: locations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
+    ),
+    noAvailability: locations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
+    ),
+    noConfirmation: locations.filter(
+      (location) =>
+        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
+    ),
+  };
+}
+
 export async function getCountyLocations(county: string): Promise<CountyLocations> {
   const countyLocations: Location[] = (
     await fetchAirtableData(
@@ -153,77 +242,7 @@ export async function getCountyLocations(county: string): Promise<CountyLocation
     )
   ).map((record) => record._rawJson);
 
-  for (let i = 0; i < countyLocations.length; i++) {
-    countyLocations[i].availabilityStatus = getAvailabilityStatus(
-      countyLocations[i].fields["Vaccines available?"]
-    );
-  }
+  preprocessLocations(countyLocations);
 
-  const outdatedThreshold: Date = new Date();
-  outdatedThreshold.setDate(
-    outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
-  );
-
-  const allRecentLocations: Location[] = countyLocations.filter(
-    (location) =>
-      location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) > outdatedThreshold.getTime()
-  );
-  const allOutdatedLocations: Location[] = countyLocations.filter(
-    (location) =>
-      location.fields["Latest report"] &&
-      Date.parse(location.fields["Latest report"]) <= outdatedThreshold.getTime()
-  );
-
-  return {
-    allLocations: countyLocations,
-    allRecentLocations: allRecentLocations,
-    allOutdatedLocations: allOutdatedLocations,
-    recentLocations: {
-      availableWaitlist: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WAITLIST.value
-      ),
-      availableAppointment: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.APPOINTMENT.value
-      ),
-      availableWalkIn: allRecentLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WALK_IN.value
-      ),
-    },
-    outdatedLocations: {
-      availableWaitlist: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WAITLIST.value
-      ),
-      availableAppointment: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.APPOINTMENT.value
-      ),
-      availableWalkIn: allOutdatedLocations.filter(
-        (location) =>
-          location.availabilityStatus.value ===
-          AVAILABILITY_STATUS.WALK_IN.value
-      ),
-    },
-    availabilityVaries: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
-    ),
-    noAvailability: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.NO.value
-    ),
-    noConfirmation: countyLocations.filter(
-      (location) =>
-        location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
-    ),
-  };
+  return organizeLocations(countyLocations);
 }
