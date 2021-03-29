@@ -30,7 +30,7 @@ interface RawLocation {
 }
 
 interface Location extends RawLocation {
-  isSupersite: boolean;
+  isActiveSupersite: boolean;
   availabilityStatus: AvailabilityStatus;
 }
 
@@ -172,7 +172,7 @@ function preprocessLocations(locations: RawLocation[]): Location[] {
       locations[i].fields["Vaccines available?"]
     );
 
-    (locations[i] as Location).isSupersite = locations[i].fields["Location type"] === "Supersite";
+    (locations[i] as Location).isActiveSupersite = locations[i].fields["Location type"] === "Supersite" && (locations[i] as Location).availabilityStatus.isAvailable;
   }
 
   return locations as Location[];
@@ -223,7 +223,7 @@ function organizeLocations(locations: Location[]): CountyLocations {
     allRecentLocations: allRecentLocations,
     allOutdatedLocations: allOutdatedLocations,
     recentLocations: separateAvailability(allRecentLocations),
-    outdatedLocations: separateAvailability(allRecentLocations),
+    outdatedLocations: separateAvailability(allOutdatedLocations),
     availabilityVaries: locations.filter(
       (location) =>
         location.availabilityStatus.value === AVAILABILITY_STATUS.VARIES.value
