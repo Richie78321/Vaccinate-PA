@@ -14,7 +14,7 @@ interface CountyLinks {
   "County COVID Preregistration"?: string;
 }
 
-interface Location {
+interface RawLocation {
   id: string;
   fields: {
     Name: string;
@@ -25,8 +25,13 @@ interface Location {
     "Latest report notes"?: string[];
     "Number of reports": number;
     Address: string;
+    "Location type"?: string;
   };
-  availabilityStatus?: AvailabilityStatus;
+}
+
+interface Location extends RawLocation {
+  isSupersite: boolean;
+  availabilityStatus: AvailabilityStatus;
 }
 
 interface CountyLocations {
@@ -159,14 +164,18 @@ export async function getCountyLinks(county: string): Promise<CountyLinks> {
 
 /**
  * Preprocess locations fetched from AirTable.
- * @param locations The list of locations fetched from AirTable.
+ * @param locations The list of raw locations fetched from AirTable.
  */
-function preprocessLocations(locations: Location[]): void {
+function preprocessLocations(locations: RawLocation[]): Location[] {
   for (let i = 0; i < locations.length; i++) {
-    locations[i].availabilityStatus = getAvailabilityStatus(
+    (locations[i] as Location).availabilityStatus = getAvailabilityStatus(
       locations[i].fields["Vaccines available?"]
     );
+
+    (locations[i] as Location).isSupersite = locations[i]["Location type"] === "Supersite";
   }
+
+  return locations as Location[];
 }
 
 /**
@@ -233,7 +242,7 @@ function organizeLocations(locations: Location[]): CountyLocations {
 export async function getCountyLocations(
   county: string
 ): Promise<CountyLocations> {
-  const countyLocations: Location[] = (
+  const countyLocations: RawLocation[] = (
     await fetchAirtableData(
       county,
       Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
@@ -248,7 +257,7 @@ export async function getCountyLocations(
     )
   ).map((record) => record._rawJson);
 
-  preprocessLocations(countyLocations);
+  const countyLocationsProcessed: Location[] = preprocessLocations(countyLocations);
 
-  return organizeLocations(countyLocations);
+  return organizeLocations(countyLocationsProcessed);
 }
