@@ -1,61 +1,7 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
 import haversine from "haversine";
-
-interface AvailabilityStatus {
-  value: number;
-  string: string;
-  display?: string;
-  isAvailable: boolean;
-}
-
-interface CountyLinks {
-  "County Website"?: string;
-  "County COVID Information"?: string;
-  "County COVID Preregistration"?: string;
-}
-
-interface RawLocation {
-  id: string;
-  fields: {
-    Name: string;
-    Website?: string;
-    County: string;
-    "Latest report"?: string;
-    "Vaccines available?"?: string[];
-    "Latest report notes"?: string[];
-    "Number of reports": number;
-    Address: string;
-    "Location type"?: string;
-    Latitude?: number;
-    Longitude?: number;
-  };
-}
-
-interface Location extends RawLocation {
-  isActiveSupersite: boolean;
-  availabilityStatus: AvailabilityStatus;
-  distanceMiles?: number;
-}
-
-interface CountyLocations {
-  allLocations: Location[];
-  allRecentLocations: Location[];
-  allOutdatedLocations: Location[];
-  recentLocations: {
-    availableWaitlist: Location[];
-    availableAppointment: Location[];
-    availableWalkIn: Location[];
-  };
-  outdatedLocations: {
-    availableWaitlist: Location[];
-    availableAppointment: Location[];
-    availableWalkIn: Location[];
-  };
-  availabilityVaries: Location[];
-  noAvailability: Location[];
-  noConfirmation: Location[];
-}
+import { OrganizedLocations, Location, RawLocation, CountyLinks, AvailabilityStatus } from "./DataTypes";
 
 const OUTDATED_DAYS_THRESHOLD = 3;
 
@@ -192,7 +138,7 @@ function preprocessLocations(locations: RawLocation[]): Location[] {
  * @param locations The list of locations.
  * @returns Returns an organized list of locations.
  */
-function organizeLocations(locations: Location[]): CountyLocations {
+function organizeLocations(locations: Location[]): OrganizedLocations {
   const outdatedThreshold: Date = new Date();
   outdatedThreshold.setDate(
     outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD
@@ -286,7 +232,7 @@ export async function getNearbyLocations(lat: number, long: number, distance: nu
 
 export function getCountyLocations(
   county: string
-): Promise<CountyLocations> {
+): Promise<OrganizedLocations> {
   return fetchAirtableData(
     county,
     async () => {

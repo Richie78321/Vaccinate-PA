@@ -1,15 +1,10 @@
 import { useState } from "react";
 import counties from "../../content/counties";
-import LocationGroups from "../../components/LocationGroups";
+import { StandardLocationGroups } from "../../components/LocationGroups";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
 import {
-  FaWalking,
-  FaCalendarAlt,
-  FaTimesCircle,
-  FaQuestionCircle,
   FaArrowLeft,
-  FaClipboardList,
   FaExternalLinkAlt,
   FaRegClock,
 } from "react-icons/fa";
@@ -155,66 +150,6 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
-  const recentLocationGroups = [
-    {
-      messageIcon: <FaWalking />,
-      message: "Vaccines reported available walk-in",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableWalkIn,
-    },
-    {
-      messageIcon: <FaCalendarAlt />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.recentLocations.availableWaitlist,
-    },
-  ];
-
-  const outdatedLocationGroups = [
-    {
-      messageIcon: <FaWalking />,
-      message: "Vaccines reported available walk-in",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableWalkIn,
-    },
-    {
-      messageIcon: <FaCalendarAlt />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.outdatedLocations.availableWaitlist,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "Availability varies",
-      messageColor: "text-dark",
-      locations: locations.availabilityVaries,
-    },
-    {
-      messageIcon: <FaTimesCircle />,
-      message: "Vaccines reported unavailable",
-      messageColor: "text-danger",
-      locations: locations.noAvailability,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "No confirmation / uncontacted",
-      messageColor: "text-dark",
-      locations: locations.noConfirmation,
-    },
-  ];
-
   return (
     <CountyPageLayout county={county}>
       <div className="container-fluid container-xl mt-3">
@@ -273,8 +208,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
                 </h2>
               </>
           ) : null}
-          <LocationGroups locationGroups={recentLocationGroups} header="Recent availability" />
-          <LocationGroups locationGroups={outdatedLocationGroups} header="All reports" />
+          <StandardLocationGroups locations={locations} />
         </div>
       </div>
     </CountyPageLayout>
