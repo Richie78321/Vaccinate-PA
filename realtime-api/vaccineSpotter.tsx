@@ -33,6 +33,7 @@ export interface RealtimeLocation {
     appointments_last_fetched_date?: number;
     countyCode?: string;
   };
+  distanceMiles?: number;
 }
 
 // TODO : Could come up with a better way of storing this information.

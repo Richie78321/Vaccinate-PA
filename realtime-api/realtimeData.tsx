@@ -1,5 +1,6 @@
 import NodeCache from "node-cache";
 import { RealtimeLocation, fetchLocations } from "./vaccineSpotter";
+import haversine from "haversine";
 
 const vaccineSpotterCache = new NodeCache({
   deleteOnExpire: false,
@@ -21,9 +22,7 @@ function refreshVaccineSpotter(key: string, value, resolve, reject): void {
     });
 }
 
-export async function getCounty(
-  countyCode: string
-): Promise<RealtimeLocation[]> {
+async function getLatestCached(): Promise<{ [key: string]: RealtimeLocation[] }> {
   const latestCached:
     | { [key: string]: RealtimeLocation[] }
     | undefined = vaccineSpotterCache.get("latest");
@@ -34,8 +33,38 @@ export async function getCounty(
       await new Promise((resolve, reject) =>
         refreshVaccineSpotter("latest", null, resolve, reject)
       )
-    )[countyCode];
+    );
   } else {
-    return latestCached[countyCode];
+    return latestCached;
   }
+}
+
+export async function getCounty(
+  countyCode: string
+): Promise<RealtimeLocation[]> {
+  return (await getLatestCached())[countyCode];
+}
+
+function getDistance(lat: number, long: number, location: RealtimeLocation): number {
+  return haversine({
+    latitude: lat,
+    longitude: long,
+  }, {
+    latitude: location.geometry.coordinates[1],
+    longitude: location.geometry.coordinates[0],
+  }, {unit: 'mile'});
+}
+
+export async function getNearbyLocations(lat: number, long: number, distance: number): Promise<RealtimeLocation[]> {
+  const allLocations = (await getLatestCached())["all"];
+
+  const locationsWithCoordinates = allLocations.filter((location) => 
+      location.geometry?.coordinates && location.geometry?.coordinates.length >= 2 && location.geometry?.coordinates.every((value) => value)
+  );
+
+  locationsWithCoordinates.forEach((location) => {
+    location.distanceMiles = Math.floor(getDistance(lat, long, location) * 10) / 10;
+  });
+
+  return locationsWithCoordinates.filter((location) => location.distanceMiles <= distance);
 }
