@@ -117,7 +117,7 @@ export default class RealtimeCountyLocations extends Component {
         </h3>
         <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
           <small>
-            Appointment availability for select pharmacies is sourced from{" "}
+            Realtime availability is sourced from{" "}
             <a
               href="https://www.vaccinespotter.org/"
               target="_blank"
