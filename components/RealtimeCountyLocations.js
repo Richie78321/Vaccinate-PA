@@ -102,7 +102,8 @@ export default class RealtimeCountyLocations extends Component {
             <ImSpinner2 className="rotating" />
           </div>
           <div className="ml-1" style={{ fontSize: "110%" }}>
-            Last { locations.length <= 0 ? "checked" : "updated" } {moment(lastUpdated).format("h:mma")}
+            Last {locations.length <= 0 ? "checked" : "updated"}{" "}
+            {moment(lastUpdated).format("h:mma")}
           </div>
         </div>
         {locations.map((location) => (
