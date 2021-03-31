@@ -29,4 +29,4 @@ In addition, seniors in Southwestern PA specifically may find helpful [these res
 
 ### Data on vaccine shipments
 
-Data nerds and policy analysts: See **[here](https://docs.google.com/spreadsheets/d/11yyHrz0Q46NVBoHL9uP7W266Hvm_09_-FAZYwEhiJGM/edit#gid=1116579145)** for data on how many vaccine shipments have been received weekly across PA, and visit **[here](https://docs.google.com/spreadsheets/d/1KVCR3e9_G6edmEJmAEoXrOfYL7TDJ_Ww_pTBHVWNPHM/edit#gid=2037211880)** to see vaccine shipment data for each healthcare provider in your chosen county. 
+Data nerds and policy analysts: See **[here](https://docs.google.com/spreadsheets/d/11yyHrz0Q46NVBoHL9uP7W266Hvm_09_-FAZYwEhiJGM/edit#gid=1116579145)** for data on how many vaccine shipments have been received weekly across PA, and visit **[here](https://docs.google.com/spreadsheets/d/1KVCR3e9_G6edmEJmAEoXrOfYL7TDJ_Ww_pTBHVWNPHM/edit#gid=2037211880)** to see vaccine shipment data for each healthcare provider in your chosen county.
