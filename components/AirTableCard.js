@@ -8,7 +8,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
-import { AVAILABILITY_STATUS } from "../utils/Data";
+import { AVAILABILITY_STATUS } from "../utils/DataLocal";
 import moment from "moment";
 import NotesParser from "./NotesParser";
 
