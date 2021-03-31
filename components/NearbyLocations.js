@@ -1,11 +1,35 @@
 import { Component } from 'react'
 import { organizeLocations } from "../utils/DataLocal";
 import { StandardLocationGroups } from './LocationGroups';
+import {
+  FaRegClock,
+} from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import DataAnnouncements from './DataAnnouncements';
+import moment from "moment";
 
 const DISTANCE_OPTIONS_MILES = [5, 10, 15, 25, 50, 75, 100, 150];
 const LOCATIONS_API = "/api/nearby";
+
+function LatestReportsReceived({ locations }) {
+  if (!locations || locations.length <= 0) {
+    return null;
+  }
+
+  const latestReportTime = moment(locations[0].fields["Latest report"], true);
+
+  return (
+    <span
+      className="badge badge-primary font-weight-normal text-wrap"
+      style={{ fontSize: "100%" }}
+    >
+      <FaRegClock size="1.00em" />{" "}
+      <span className="align-middle">
+        Latest report received {latestReportTime.fromNow()}
+      </span>
+    </span>
+  )
+}
 
 export default class NearbyLocations extends Component {
   constructor(props) {
@@ -64,6 +88,9 @@ export default class NearbyLocations extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state.distanceMiles != prevState.distanceMiles) {
+      // Reload data. Cancel ongoing requests if needed.
+      this.abortController.abort();
+      this.abortController = new AbortController();
       this.fetchLocations();
     }
   }
@@ -85,8 +112,11 @@ export default class NearbyLocations extends Component {
 
     return (
       <div>
+        {!this.state.loading ? (
+          <LatestReportsReceived locations={this.state.locations.allLocations} />
+        ) : null }
         <div className="form-group">
-          <h4 className="font-weight-normal text-center">
+          <h4 className="font-weight-normal text-center mt-3 mb-5">
             Search within{" "}
             <select id="distanceMiles" name="distanceMiles" value={this.state.distanceMiles} onChange={this.handleDistanceChange.bind(this)}>
               {DISTANCE_OPTIONS_MILES.map((distance) => <option key={distance}>{distance}</option>)}
