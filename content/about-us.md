@@ -34,3 +34,7 @@ Yes, we’d love to hear from you; feel free to reach out to us at: [vaccinatePA
 ### Where is all of this information coming from?
 
 We received the list of vaccination sites from the PA Department of Health. Our team of volunteers is calling those sites to identify current vaccine availability at those facilities. Of course, this information may change frequently and is not guaranteed to be accurate, but we aim to centralize information as recently-updated as possible and provide residents with an effective starting point to identify their options.
+
+### Where does real-time availability information come from?
+
+Real-time availability information for select pharmacies comes from [VaccineSpotter.org](https://www.vaccinespotter.org/). Please note that _only_ real-time availability is sourced from VaccineSpotter. All other vaccine availability information is sourced from our lovely team of volunteer callers.
