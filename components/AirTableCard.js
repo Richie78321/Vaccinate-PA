@@ -135,6 +135,7 @@ export default function AirTableCard({ location }) {
   const { Name, County } = location.fields;
 
   // const phoneNumber = location.fields["Phone number"];
+  const distanceMiles = location.distanceMiles;
 
   const latestReportTimeRaw = location.fields["Latest report"];
   const latestReportTimeText = latestReportTimeRaw
@@ -219,6 +220,13 @@ export default function AirTableCard({ location }) {
                           Visit Website <FaExternalLinkAlt size=".85em" />
                         </small>
                       </a>
+                      <span className="text-muted d-none d-sm-inline">{" | "}</span>
+                      <br className="d-block d-sm-none" />
+                    </>
+                  ) : null}
+                  {distanceMiles ? (
+                    <>
+                      <small>~{Math.round(distanceMiles)} miles away</small>
                       <span className="text-muted">{" | "}</span>
                     </>
                   ) : null}
