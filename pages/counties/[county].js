@@ -14,7 +14,7 @@ import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
 import { Button } from "react-bootstrap";
-import { InlineShareButtons } from "sharethis-reactjs";
+import DataAnnouncements from "../../components/DataAnnouncements";
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -181,14 +181,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-        <p className="text-center">
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
-            Volunteer with us!
-          </a>
-        </p>
-        <div className="mb-3">
-          <InlineShareButtons config={sharethisConfig} />
-        </div>
+        <DataAnnouncements sharethisConfig={sharethisConfig} />
         <ClientSideOnly>
           <RealtimeCountyLocations
             updateLatestReportTime={(latestRealtimeReport) =>
