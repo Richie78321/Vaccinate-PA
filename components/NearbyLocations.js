@@ -86,13 +86,13 @@ export default class NearbyLocations extends Component {
     return (
       <div>
         <div className="form-group">
-          <h5 className="font-weight-normal text-center text-md-left">
+          <h4 className="font-weight-normal text-center">
             Search within{" "}
             <select id="distanceMiles" name="distanceMiles" value={this.state.distanceMiles} onChange={this.handleDistanceChange.bind(this)}>
               {DISTANCE_OPTIONS_MILES.map((distance) => <option key={distance}>{distance}</option>)}
             </select>
             {" "}miles.
-          </h5>
+          </h4>
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
         {this.state.loading ? (
