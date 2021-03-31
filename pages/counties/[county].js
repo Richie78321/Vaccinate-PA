@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
+import LocationGroups from "../../components/LocationGroups";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
 import {
@@ -25,22 +25,6 @@ function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
     return t.toUpperCase();
   });
-}
-
-function LocationGroup({ locationGroup }) {
-  return locationGroup.locations.length > 0 ? (
-    <div>
-      <h4 className={locationGroup.messageColor + " font-weight-bold mt-3"}>
-        {locationGroup.messageIcon}{" "}
-        <span className="align-middle">{locationGroup.message}</span>
-      </h4>
-      {locationGroup.locations.map((location) => (
-        <div key={location.id} className="my-3">
-          <AirTableCard location={location} />
-        </div>
-      ))}
-    </div>
-  ) : null;
 }
 
 const CountyLinks = ({ countyLinks }) => {
@@ -280,45 +264,17 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
         </ClientSideOnly>
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
-            <>
-              <h2 className="text-center mt-5">
-                We currently have no locations for {county} on record.
-              </h2>
-              <h2 className="text-center">
-                You can view all counties <Link href="/">here</Link>.
-              </h2>
-            </>
+              <>
+                <h2 className="text-center mt-5">
+                  We currently have no locations for {county} on record.
+                </h2>
+                <h2 className="text-center">
+                  You can view all counties <Link href="/">here</Link>.
+                </h2>
+              </>
           ) : null}
-          {recentLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mb-0 font-weight-normal">
-                <u>Recent availability:</u>
-              </h3>
-              {recentLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
-          {outdatedLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mt-4 mb-0 font-weight-normal">
-                <u>All reports:</u>
-              </h3>
-              {outdatedLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
+          <LocationGroups locationGroups={recentLocationGroups} header="Recent availability" />
+          <LocationGroups locationGroups={outdatedLocationGroups} header="All reports" />
         </div>
       </div>
     </CountyPageLayout>

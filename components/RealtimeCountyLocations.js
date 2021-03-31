@@ -81,7 +81,7 @@ export default class RealtimeCountyLocations extends Component {
     }
 
     return (
-      <div className={locations.length <= 0 ? "mb-3" : "mb-5"}>
+      <div className={locations.length <= 0 ? "mb-0" : "mb-2"}>
         <h3 className="font-weight-normal mb-0">
           <u>Realtime availability:</u>
         </h3>
