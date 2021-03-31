@@ -3,6 +3,7 @@ import { organizeLocations } from "../utils/DataLocal";
 import { StandardLocationGroups } from './LocationGroups';
 import {
   FaRegClock,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import DataAnnouncements from './DataAnnouncements';
@@ -112,9 +113,34 @@ export default class NearbyLocations extends Component {
 
     return (
       <div>
-        {!this.state.loading ? (
-          <LatestReportsReceived locations={this.state.locations.allLocations} />
-        ) : null }
+        <div className="mb-4 row justify-content-between">
+          <div className="col-12 col-md-auto">
+            {!this.state.loading ? (
+              <LatestReportsReceived locations={this.state.locations.allLocations} />
+            ) : null }
+          </div>
+          <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
+            <small>
+              <p className="county-link mb-2">
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://airtable.com/shr7z01kc7h1ogP5R"
+                >
+                  Report missing or incorrect{" "}
+                  <span className="text-nowrap">
+                    information <FaExternalLinkAlt size=".85em" />
+                  </span>
+                </a>
+              </p>
+              <style jsx>{`
+                .county-link {
+                  line-height: 115%;
+                }
+              `}</style>
+            </small>
+          </div>
+        </div>
         <div className="form-group">
           <h4 className="font-weight-normal text-center mt-3 mb-5">
             Search within{" "}
@@ -130,7 +156,17 @@ export default class NearbyLocations extends Component {
             <BeatLoader size="0.5em" /> Loading...
           </div>
         ) : (
-          <StandardLocationGroups locations={this.state.locations} />
+          <>
+            {this.state.locations.allLocations.length <= 0 ? (
+                <>
+                  <h2 className="text-center mt-5">
+                    We currently have no locations that match your query.
+                  </h2>
+                  <p className="text-center">Consider selecting a larger mile radius above.</p>
+                </>
+            ) : null}
+            <StandardLocationGroups locations={this.state.locations} />
+          </>
         )}
       </div>
     );
