@@ -95,7 +95,7 @@ export default function CountySearch({ searchRef }) {
         <Typeahead
           id="county-filter-selection"
           ref={searchRef}
-          placeholder="Search for your county or zip code..."
+          placeholder="Enter ZIP or county..."
           options={options}
           onChange={onTypeaheadSelect}
           renderInput={(props) => <CountySearchInput {...props} />}
