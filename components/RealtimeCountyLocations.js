@@ -89,7 +89,7 @@ export default class RealtimeCountyLocations extends Component {
           <small>
             Realtime availability is updated every minute.{" "}
             <Link href="/about-us#where-does-real-time-availability-information-come-from-">
-              Learn more.
+              Learn more
             </Link>
           </small>
         </p>
