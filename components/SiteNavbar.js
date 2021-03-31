@@ -32,7 +32,7 @@ export default function SiteNavbar() {
           <Nav variant="pills" activeKey={pathName}>
             <Link href="/">
               <Nav.Link href="/" className="main-nav-link px-3">
-                County Search
+                Search
               </Nav.Link>
             </Link>
             <Link href="/additional-resources">
