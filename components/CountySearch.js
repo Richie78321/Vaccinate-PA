@@ -50,7 +50,7 @@ function CountySearchInput({
 
 function onSelect(selected, router) {
   if (selected && selected.length > 0) {
-    if (counties.includes(selected)) {
+    if (counties.includes(selected[0])) {
       router.push(`counties/${selected[0].replace(" ", "_")}`);
     } else {
       router.push(`zips/${selected[0]}`);
