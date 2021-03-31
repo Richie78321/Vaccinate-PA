@@ -3,6 +3,7 @@ import moment from "moment";
 import BeatLoader from "react-spinners/BeatLoader";
 import { ImSpinner2 } from "react-icons/im";
 import RealtimeLocationCard from "./RealtimeLocationCard";
+import Link from "next/link";
 
 const DEFAULT_REFRESH_TIME = 60000; // One minute
 const REALTIME_API = "/api/realtime/counties/";
@@ -86,15 +87,7 @@ export default class RealtimeCountyLocations extends Component {
         </h3>
         <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
           <small>
-            Realtime availability is sourced from{" "}
-            <a
-              href="https://www.vaccinespotter.org/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              VaccineSpotter.org
-            </a>{" "}
-            and is updated every minute.
+            Realtime availability is updated every minute. <Link href="/additional-resources#real-time-availability">Learn more.</Link>
           </small>
         </p>
         <div className="d-flex flex-row">

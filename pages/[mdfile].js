@@ -1,3 +1,4 @@
+import React from "react";
 import TranslationLayout from "../layouts/TranslationLayout";
 import ReactMarkdown from "react-markdown/with-html";
 import matter from "gray-matter";
@@ -8,7 +9,22 @@ const customMarkdownRenderers = {
   image: ({ alt, src, title }) => (
     <img alt={alt} src={src} title={title} className="img-fluid" />
   ),
+  heading: HeadingRenderer,
 };
+
+// https://github.com/remarkjs/react-markdown/issues/69
+function flatten(text, child) {
+  return typeof child === 'string'
+    ? text + child
+    : React.Children.toArray(child.props.children).reduce(flatten, text)
+}
+
+function HeadingRenderer(props) {
+  var children = React.Children.toArray(props.children)
+  var text = children.reduce(flatten, '')
+  var slug = text.toLowerCase().replace(/\W/g, '-')
+  return React.createElement('h' + props.level, {id: slug}, props.children)
+}
 
 export default function MarkdownPage({ meta, markdownText }) {
   return (
