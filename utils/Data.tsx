@@ -1,5 +1,6 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
+import haversine from "haversine";
 
 interface AvailabilityStatus {
   value: number;
@@ -26,12 +27,15 @@ interface RawLocation {
     "Number of reports": number;
     Address: string;
     "Location type"?: string;
+    Latitude?: number;
+    Longitude?: number;
   };
 }
 
 interface Location extends RawLocation {
   isActiveSupersite: boolean;
   availabilityStatus: AvailabilityStatus;
+  distanceMiles?: number;
 }
 
 interface CountyLocations {
@@ -241,6 +245,43 @@ function organizeLocations(locations: Location[]): CountyLocations {
         location.availabilityStatus.value === AVAILABILITY_STATUS.UNKNOWN.value
     ),
   };
+}
+
+function getDistance(lat: number, long: number, location: RawLocation): number {
+  return haversine({
+    latitude: lat,
+    longitude: long,
+  }, {
+    latitude: location.fields.Latitude,
+    longitude: location.fields.Longitude,
+  }, {unit: 'mile'});
+}
+
+export async function getNearbyLocations(lat: number, long: number, distance: number): Promise<Location[]> {
+  const allLocations: RawLocation[] = (
+    await fetchAirtableData(
+      "all",
+      async () => {
+        return (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
+          filterByFormula: `NOT({Do Not Display})`,
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        }).all()).map((record) => record._rawJson).filter((location) => (
+          location.fields.Latitude && location.fields.Longitude
+        ));
+      }
+    )
+  );
+
+  allLocations.forEach((location) => { location['distanceMiles'] = Math.floor(getDistance(lat, long, location) * 10) / 10 })
+
+  const locationsWithinDistance: RawLocation[] = allLocations.filter((location) => location['distanceMiles'] <= distance);
+
+  return preprocessLocations(locationsWithinDistance);
 }
 
 export function getCountyLocations(
