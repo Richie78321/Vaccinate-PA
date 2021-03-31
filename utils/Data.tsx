@@ -96,12 +96,12 @@ export const AVAILABILITY_STATUS: { [key: string]: AvailabilityStatus } = {
 
 export async function fetchAirtableData(
   cacheKeyword: string,
-  airtableQuery
+  query: () => Promise<any>,
 ): Promise<any> {
   let data = airtableCache.get(cacheKeyword);
   if (data == undefined) {
     try {
-      data = await airtableQuery.all();
+      data = await query();
 
       airtableCache.set(cacheKeyword, data);
       airtableBackupCache.set(cacheKeyword, data);
@@ -145,21 +145,23 @@ export function getAvailabilityStatus(
   return AVAILABILITY_STATUS.UNKNOWN;
 }
 
-export async function getCountyLinks(county: string): Promise<CountyLinks> {
-  const countyLinks = await fetchAirtableData(
-    "county-links",
-    Airtable.base("appdsheneg5ii1EnQ")("Counties").select()
+export function getCountyLinks(county: string): Promise<CountyLinks> {
+  return fetchAirtableData(
+    `county-links-${county}`,
+    async () => {
+      const countyLinks = await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all();
+
+      const countySpecificInfo = countyLinks
+        .map((record) => record._rawJson)
+        .filter((record) => record.fields.County === county);
+  
+      if (countySpecificInfo.length > 0) {
+        return countySpecificInfo[0].fields;
+      } else {
+        return {};
+      }
+    }
   );
-
-  const countySpecificInfo = countyLinks
-    .map((record) => record._rawJson)
-    .filter((record) => record.fields.County === county);
-
-  if (countySpecificInfo.length > 0) {
-    return countySpecificInfo[0].fields;
-  } else {
-    return {};
-  }
 }
 
 /**
@@ -241,13 +243,13 @@ function organizeLocations(locations: Location[]): CountyLocations {
   };
 }
 
-export async function getCountyLocations(
+export function getCountyLocations(
   county: string
 ): Promise<CountyLocations> {
-  const countyLocations: RawLocation[] = (
-    await fetchAirtableData(
-      county,
-      Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
+  return fetchAirtableData(
+    county,
+    async () => {
+      const countyLocations: RawLocation[] = (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
         filterByFormula: `AND(County = "${county}", NOT({Do Not Display}))`,
         sort: [
           {
@@ -255,13 +257,13 @@ export async function getCountyLocations(
             direction: "desc",
           },
         ],
-      })
-    )
-  ).map((record) => record._rawJson);
+      }).all()).map((record) => record._rawJson);
 
-  const countyLocationsProcessed: Location[] = preprocessLocations(
-    countyLocations
-  );
-
-  return organizeLocations(countyLocationsProcessed);
+      const countyLocationsProcessed: Location[] = preprocessLocations(
+        countyLocations
+      );
+    
+      return organizeLocations(countyLocationsProcessed);
+    }
+  )
 }
