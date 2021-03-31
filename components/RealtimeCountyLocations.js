@@ -79,39 +79,8 @@ export default class RealtimeCountyLocations extends Component {
       );
     }
 
-    if (locations.length <= 0) {
-      return (
-        <div className="mb-4">
-          <h3 className="font-weight-normal mb-0">
-            <u>Realtime availability:</u>
-          </h3>
-          <p className="mb-2" style={{ lineHeight: "100%", marginTop: "4px" }}>
-            <small>
-              Realtime availability is sourced from{" "}
-              <a
-                href="https://www.vaccinespotter.org/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                VaccineSpotter.org
-              </a>{" "}
-              and is updated every minute.
-            </small>
-          </p>
-          <div className="d-flex flex-row">
-            <div>
-              <ImSpinner2 className="rotating" />
-            </div>
-            <div className="ml-1" style={{ fontSize: "110%" }}>
-              Last checked {moment(lastUpdated).format("h:mma")}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
     return (
-      <div className="mb-5">
+      <div className={locations.length <= 0 ? "mb-3" : "mb-5"}>
         <h3 className="font-weight-normal mb-0">
           <u>Realtime availability:</u>
         </h3>
@@ -133,7 +102,7 @@ export default class RealtimeCountyLocations extends Component {
             <ImSpinner2 className="rotating" />
           </div>
           <div className="ml-1" style={{ fontSize: "110%" }}>
-            Last updated {moment(lastUpdated).format("h:mma")}
+            Last { locations.length <= 0 ? "checked" : "updated" } {moment(lastUpdated).format("h:mma")}
           </div>
         </div>
         {locations.map((location) => (
