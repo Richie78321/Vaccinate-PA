@@ -1,46 +1,25 @@
 import { useState } from "react";
-import AirTableCard from "../../components/AirTableCard";
 import counties from "../../content/counties";
+import { StandardLocationGroups } from "../../components/LocationGroups";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
-import {
-  FaWalking,
-  FaCalendarAlt,
-  FaTimesCircle,
-  FaQuestionCircle,
-  FaArrowLeft,
-  FaClipboardList,
-  FaExternalLinkAlt,
-  FaRegClock,
-} from "react-icons/fa";
+import { FaArrowLeft, FaExternalLinkAlt, FaRegClock } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
-import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
+import RealtimeLocations from "../../components/RealtimeLocations";
 import { Button } from "react-bootstrap";
-import { InlineShareButtons } from "sharethis-reactjs";
+import DataAnnouncements from "../../components/DataAnnouncements";
+
+function countyToCountyCode(county) {
+  return county.split(" ")[0].toLowerCase();
+}
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
     return t.toUpperCase();
   });
-}
-
-function LocationGroup({ locationGroup }) {
-  return locationGroup.locations.length > 0 ? (
-    <div>
-      <h4 className={locationGroup.messageColor + " font-weight-bold mt-3"}>
-        {locationGroup.messageIcon}{" "}
-        <span className="align-middle">{locationGroup.message}</span>
-      </h4>
-      {locationGroup.locations.map((location) => (
-        <div key={location.id} className="my-3">
-          <AirTableCard location={location} />
-        </div>
-      ))}
-    </div>
-  ) : null;
 }
 
 const CountyLinks = ({ countyLinks }) => {
@@ -171,66 +150,6 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
   const latestReportedLocation =
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
-  const recentLocationGroups = [
-    {
-      messageIcon: <FaWalking />,
-      message: "Vaccines reported available walk-in",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableWalkIn,
-    },
-    {
-      messageIcon: <FaCalendarAlt />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.recentLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.recentLocations.availableWaitlist,
-    },
-  ];
-
-  const outdatedLocationGroups = [
-    {
-      messageIcon: <FaWalking />,
-      message: "Vaccines reported available walk-in",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableWalkIn,
-    },
-    {
-      messageIcon: <FaCalendarAlt />,
-      message: "Vaccines reported available with appointment",
-      messageColor: "text-success",
-      locations: locations.outdatedLocations.availableAppointment,
-    },
-    {
-      messageIcon: <FaClipboardList />,
-      message: "Vaccine waitlist signup reported available",
-      messageColor: "text-info",
-      locations: locations.outdatedLocations.availableWaitlist,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "Availability varies",
-      messageColor: "text-dark",
-      locations: locations.availabilityVaries,
-    },
-    {
-      messageIcon: <FaTimesCircle />,
-      message: "Vaccines reported unavailable",
-      messageColor: "text-danger",
-      locations: locations.noAvailability,
-    },
-    {
-      messageIcon: <FaQuestionCircle />,
-      message: "No confirmation / uncontacted",
-      messageColor: "text-dark",
-      locations: locations.noConfirmation,
-    },
-  ];
-
   return (
     <CountyPageLayout county={county}>
       <div className="container-fluid container-xl mt-3">
@@ -262,18 +181,13 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             <CountyLinks countyLinks={countyLinks} />
           </div>
         </div>
-        <p className="text-center">
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">Volunteer with us!</a>
-        </p>
-        <div className="mb-3">
-          <InlineShareButtons config={sharethisConfig} />
-        </div>
+        <DataAnnouncements sharethisConfig={sharethisConfig} />
         <ClientSideOnly>
-          <RealtimeCountyLocations
+          <RealtimeLocations
             updateLatestReportTime={(latestRealtimeReport) =>
               setLatestRealtimeReport(latestRealtimeReport)
             }
-            county={county}
+            apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
           />
         </ClientSideOnly>
         <div className="d-flex flex-column">
@@ -287,36 +201,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
               </h2>
             </>
           ) : null}
-          {recentLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mb-0 font-weight-normal">
-                <u>Recent availability:</u>
-              </h3>
-              {recentLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
-          {outdatedLocationGroups.some(
-            (locationGroup) => locationGroup.locations.length > 0
-          ) ? (
-            <>
-              <h3 className="mt-4 mb-0 font-weight-normal">
-                <u>All reports:</u>
-              </h3>
-              {outdatedLocationGroups.map((locationGroup) => (
-                <LocationGroup
-                  key={locationGroup.message}
-                  locationGroup={locationGroup}
-                />
-              ))}
-            </>
-          ) : null}
+          <StandardLocationGroups locations={locations} />
         </div>
       </div>
     </CountyPageLayout>

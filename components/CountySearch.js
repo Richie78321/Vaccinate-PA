@@ -1,8 +1,11 @@
 import { useCallback, useState } from "react";
 import { Typeahead, Hint } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
+import zips from "../content/zips";
 import { useRouter } from "next/router";
 import { Button, Form } from "react-bootstrap";
+
+const options = counties.concat(zips);
 
 function CountySearchInput({
   inputRef,
@@ -47,7 +50,11 @@ function CountySearchInput({
 
 function onSelect(selected, router) {
   if (selected && selected.length > 0) {
-    router.push(`counties/${selected[0].replace(" ", "_")}`);
+    if (counties.includes(selected[0])) {
+      router.push(`counties/${selected[0].replace(" ", "_")}`);
+    } else {
+      router.push(`zips/${selected[0]}`);
+    }
   }
 }
 
@@ -88,8 +95,8 @@ export default function CountySearch({ searchRef }) {
         <Typeahead
           id="county-filter-selection"
           ref={searchRef}
-          placeholder="Search for your county..."
-          options={counties}
+          placeholder="Enter ZIP or county..."
+          options={options}
           onChange={onTypeaheadSelect}
           renderInput={(props) => <CountySearchInput {...props} />}
           clearButton
@@ -98,7 +105,8 @@ export default function CountySearch({ searchRef }) {
           className={invalidSubmit ? "is-invalid" : ""}
         />
         <Form.Control.Feedback type="invalid" className="ml-2">
-          Could not find that county. Please double-check your spelling.
+          Could not find what you're looking for. Please double-check your
+          spelling.
         </Form.Control.Feedback>
       </div>
       <div id="find-vaccine-button">

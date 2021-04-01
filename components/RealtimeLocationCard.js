@@ -104,13 +104,15 @@ export default function RealtimeLocationCard({ location }) {
     instructions = brandInstructions[location.properties.provider](location);
   }
 
+  const distanceMiles = location.distanceMiles;
+
   return (
     <>
       <div className="location-card card">
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <div className="row">
-              <div className="col-sm-8 col-md-10">
+              <div className="col-auto">
                 <h5 className="mb-0 card-title text-truncate">{name}</h5>
                 <p className="my-0 text-truncate">
                   {website ? (
@@ -121,6 +123,15 @@ export default function RealtimeLocationCard({ location }) {
                           <FaExternalLinkAlt size=".85em" />
                         </small>
                       </a>
+                      <span className="text-muted d-none d-sm-inline">
+                        {" | "}
+                      </span>
+                      <br className="d-block d-sm-none" />
+                    </>
+                  ) : null}
+                  {distanceMiles ? (
+                    <>
+                      <small>~{Math.round(distanceMiles)} miles away</small>
                       <span className="text-muted">{" | "}</span>
                     </>
                   ) : null}
@@ -138,7 +149,7 @@ export default function RealtimeLocationCard({ location }) {
                 </p>
               </div>
               {latestReportTimeText ? (
-                <div className="col-sm-4 col-md-2 text-right">
+                <div className="ml-auto col-auto text-right">
                   <span className="badge badge-pill badge-light font-weight-normal text-wrap">
                     Updated {latestReportTimeText}
                   </span>
