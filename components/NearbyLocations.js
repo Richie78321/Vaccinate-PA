@@ -13,24 +13,36 @@ import moment from "moment";
 const DISTANCE_OPTIONS_MILES = [5, 10, 15, 25, 50, 75, 100, 150];
 const LOCATIONS_API = "/api/nearby";
 
-function LatestReportsReceived({ locations }) {
-  if (!locations || locations.length <= 0) {
-    return null;
+function LatestReportsReceived({
+  latestRealtimeReport,
+  latestReportedLocation,
+}) {
+  if (latestReportedLocation) {
+    let latestReportTime = moment(
+      latestReportedLocation.fields["Latest report"]
+    );
+
+    if (latestRealtimeReport) {
+      const latestRealtimeReportTime = moment(latestRealtimeReport);
+      if (latestRealtimeReportTime.isAfter(latestReportTime)) {
+        latestReportTime = latestRealtimeReportTime;
+      }
+    }
+
+    return (
+      <span
+        className="badge badge-primary font-weight-normal text-wrap"
+        style={{ fontSize: "100%" }}
+      >
+        <FaRegClock size="1.00em" />{" "}
+        <span className="align-middle">
+          Latest report received {latestReportTime.fromNow()}
+        </span>
+      </span>
+    );
   }
 
-  const latestReportTime = moment(locations[0].fields["Latest report"], true);
-
-  return (
-    <span
-      className="badge badge-primary font-weight-normal text-wrap"
-      style={{ fontSize: "100%" }}
-    >
-      <FaRegClock size="1.00em" />{" "}
-      <span className="align-middle">
-        Latest report received {latestReportTime.fromNow()}
-      </span>
-    </span>
-  )
+  return null;
 }
 
 export default class NearbyLocations extends Component {
@@ -120,8 +132,8 @@ export default class NearbyLocations extends Component {
       <div>
         <div className="mb-4 row justify-content-between">
           <div className="col-12 col-md-auto">
-            {!this.state.loading ? (
-              <LatestReportsReceived locations={this.state.locations.allLocations} />
+            {!this.state.loading && this.state.locations.allLocations.length > 0 ? (
+              <LatestReportsReceived latestReportedLocation={this.state.locations.allLocations[0]} latestRealtimeReport={this.state.latestRealtimeReport} />
             ) : null }
           </div>
           <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
