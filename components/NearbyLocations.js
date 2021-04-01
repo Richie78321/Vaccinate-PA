@@ -6,6 +6,7 @@ import {
   FaExternalLinkAlt,
 } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
+import RealtimeLocations from "./RealtimeLocations";
 import DataAnnouncements from './DataAnnouncements';
 import moment from "moment";
 
@@ -38,6 +39,7 @@ export default class NearbyLocations extends Component {
 
     this.state = {
       loading: true,
+      latestRealtimeReport: null,
       locations: [],
       distanceMiles: 15,
     }
@@ -54,14 +56,17 @@ export default class NearbyLocations extends Component {
     this.fetchLocations();
   }
 
+  componentWillUnmount() {
+    // Abort ongoing fetch requests if there are any.
+    this.abortController.abort();
+  }
+
   fetchLocations() {
     const fetchParams = new URLSearchParams({
       lat: this.props.lat,
       long: this.props.long,
       distance: this.state.distanceMiles,
     });
-
-    console.log(this.state.distanceMiles);
 
     fetch(`${LOCATIONS_API}?${fetchParams}`, {
       signal: this.abortController.signal,
@@ -151,9 +156,21 @@ export default class NearbyLocations extends Component {
           </h4>
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
+        <RealtimeLocations
+            updateLatestReportTime={(latestRealtimeReport) =>
+              this.setState({
+                latestRealtimeReport,
+              })
+            }
+            apiURL={`/api/realtime/nearby?${new URLSearchParams({
+              lat: this.props.lat,
+              long: this.props.long,
+              distance: this.state.distanceMiles,
+            })}`}
+          />
         {this.state.loading ? (
           <div className="text-center my-4">
-            <BeatLoader size="0.5em" /> Loading...
+            <BeatLoader size="0.5em" /> Loading nearby locations...
           </div>
         ) : (
           <>

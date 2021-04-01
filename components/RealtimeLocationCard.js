@@ -104,6 +104,8 @@ export default function RealtimeLocationCard({ location }) {
     instructions = brandInstructions[location.properties.provider](location);
   }
 
+  const distanceMiles = location.distanceMiles;
+
   return (
     <>
       <div className="location-card card">
@@ -123,6 +125,12 @@ export default function RealtimeLocationCard({ location }) {
                       </a>
                       <span className="text-muted d-none d-sm-inline">{" | "}</span>
                       <br className="d-block d-sm-none" />
+                    </>
+                  ) : null}
+                  {distanceMiles ? (
+                    <>
+                      <small>~{Math.round(distanceMiles)} miles away</small>
+                      <span className="text-muted">{" | "}</span>
                     </>
                   ) : null}
                   {address ? (

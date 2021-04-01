@@ -12,9 +12,13 @@ import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
 import ClientSideOnly from "../../components/ClientSideOnly";
-import RealtimeCountyLocations from "../../components/RealtimeCountyLocations";
+import RealtimeLocations from "../../components/RealtimeLocations";
 import { Button } from "react-bootstrap";
 import DataAnnouncements from "../../components/DataAnnouncements";
+
+function countyToCountyCode(county) {
+  return county.split(" ")[0].toLowerCase();
+}
 
 function titleCase(str) {
   return str.replace(/(^|\s)\S/g, function (t) {
@@ -183,11 +187,11 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
         <ClientSideOnly>
-          <RealtimeCountyLocations
+          <RealtimeLocations
             updateLatestReportTime={(latestRealtimeReport) =>
               setLatestRealtimeReport(latestRealtimeReport)
             }
-            county={county}
+            apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
           />
         </ClientSideOnly>
         <div className="d-flex flex-column">

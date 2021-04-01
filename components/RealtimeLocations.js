@@ -6,13 +6,8 @@ import RealtimeLocationCard from "./RealtimeLocationCard";
 import Link from "next/link";
 
 const DEFAULT_REFRESH_TIME = 60000; // One minute
-const REALTIME_API = "/api/realtime/counties/";
 
-function countyToCountyCode(county) {
-  return county.split(" ")[0].toLowerCase();
-}
-
-export default class RealtimeCountyLocations extends Component {
+export default class RealtimeLocations extends Component {
   constructor(props) {
     super(props);
 
@@ -46,8 +41,7 @@ export default class RealtimeCountyLocations extends Component {
   }
 
   fetchUpdatedLocations() {
-    const fetchURL = REALTIME_API + countyToCountyCode(this.props.county);
-    fetch(fetchURL, {
+    fetch(this.props.apiURL, {
       signal: this.abortController.signal,
     })
       .then((resp) => resp.json())
@@ -67,6 +61,12 @@ export default class RealtimeCountyLocations extends Component {
         }
       })
       .catch((err) => {}); // TODO : Consider implications of failed request.
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.apiURL !== this.props.apiURL) {
+      this.fetchUpdatedLocations();
+    }
   }
 
   render() {
