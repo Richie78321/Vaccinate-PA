@@ -3,11 +3,7 @@ import counties from "../../content/counties";
 import { StandardLocationGroups } from "../../components/LocationGroups";
 import CountyPageLayout from "../../layouts/CountyPageLayout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
-import {
-  FaArrowLeft,
-  FaExternalLinkAlt,
-  FaRegClock,
-} from "react-icons/fa";
+import { FaArrowLeft, FaExternalLinkAlt, FaRegClock } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
@@ -196,14 +192,14 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
         </ClientSideOnly>
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
-              <>
-                <h2 className="text-center mt-5">
-                  We currently have no locations for {county} on record.
-                </h2>
-                <h2 className="text-center">
-                  You can view all counties <Link href="/">here</Link>.
-                </h2>
-              </>
+            <>
+              <h2 className="text-center mt-5">
+                We currently have no locations for {county} on record.
+              </h2>
+              <h2 className="text-center">
+                You can view all counties <Link href="/">here</Link>.
+              </h2>
+            </>
           ) : null}
           <StandardLocationGroups locations={locations} />
         </div>

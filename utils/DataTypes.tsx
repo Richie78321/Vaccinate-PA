@@ -31,10 +31,10 @@ export interface RawLocation {
 export interface ZipCode {
   id: string;
   fields: {
-    ZIP: number,
-    Latitude: number,
-    Longitude: number,
-  }
+    ZIP: number;
+    Latitude: number;
+    Longitude: number;
+  };
 }
 
 export interface Location extends RawLocation {

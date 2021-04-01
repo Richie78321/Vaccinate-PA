@@ -9,19 +9,19 @@ import {
 } from "react-icons/fa";
 
 export interface LocationGroupType {
-  messageIcon: any,
-  message: string,
-  messageColor: string,
-  locations: Location[],
+  messageIcon: any;
+  message: string;
+  messageColor: string;
+  locations: Location[];
 }
 
 interface LocationGroupsProps {
-  locationGroups: LocationGroupType[],
-  header: string,
+  locationGroups: LocationGroupType[];
+  header: string;
 }
 
 interface StandardLocationGroupsProps {
-  locations: OrganizedLocations,
+  locations: OrganizedLocations;
 }
 
 export function StandardLocationGroups(props: StandardLocationGroupsProps) {
@@ -89,19 +89,24 @@ export function StandardLocationGroups(props: StandardLocationGroupsProps) {
 
   return (
     <>
-      <LocationGroups locationGroups={recentLocationGroups} header="Recent availability" />
-      <LocationGroups locationGroups={outdatedLocationGroups} header="All reports" />
+      <LocationGroups
+        locationGroups={recentLocationGroups}
+        header="Recent availability"
+      />
+      <LocationGroups
+        locationGroups={outdatedLocationGroups}
+        header="All reports"
+      />
     </>
-  )
+  );
 }
 
 export default function LocationGroups(props: LocationGroupsProps) {
-  const {
-    locationGroups,
-    header
-  } = props;
+  const { locationGroups, header } = props;
 
-  if (!locationGroups.some((locationGroup) => locationGroup.locations.length > 0)) {
+  if (
+    !locationGroups.some((locationGroup) => locationGroup.locations.length > 0)
+  ) {
     return null;
   }
 
@@ -117,7 +122,7 @@ export default function LocationGroups(props: LocationGroupsProps) {
         />
       ))}
     </>
-  )
+  );
 }
 
 function LocationGroup({ locationGroup }) {

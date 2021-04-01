@@ -1,7 +1,14 @@
 import Airtable from "airtable";
 import NodeCache from "node-cache";
 import haversine from "haversine";
-import { OrganizedLocations, Location, RawLocation, CountyLinks, AvailabilityStatus, ZipCode } from "./DataTypes";
+import {
+  OrganizedLocations,
+  Location,
+  RawLocation,
+  CountyLinks,
+  AvailabilityStatus,
+  ZipCode,
+} from "./DataTypes";
 import { organizeLocations, AVAILABILITY_STATUS } from "./DataLocal";
 
 const airtableBackupCache = new NodeCache({
@@ -15,11 +22,9 @@ const airtableCache = new NodeCache({
 // @ts-ignore
 Airtable.configure({ apiKey: process.env.AIRTABLE_KEY });
 
-
-
 export async function fetchAirtableData(
   cacheKeyword: string,
-  query: () => Promise<any>,
+  query: () => Promise<any>
 ): Promise<any> {
   let data = airtableCache.get(cacheKeyword);
   if (data == undefined) {
@@ -69,22 +74,21 @@ export function getAvailabilityStatus(
 }
 
 export function getCountyLinks(county: string): Promise<CountyLinks> {
-  return fetchAirtableData(
-    `county-links-${county}`,
-    async () => {
-      const countyLinks = await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all();
+  return fetchAirtableData(`county-links-${county}`, async () => {
+    const countyLinks = await Airtable.base("appdsheneg5ii1EnQ")("Counties")
+      .select()
+      .all();
 
-      const countySpecificInfo = countyLinks
-        .map((record) => record._rawJson)
-        .filter((record) => record.fields.County === county);
-  
-      if (countySpecificInfo.length > 0) {
-        return countySpecificInfo[0].fields;
-      } else {
-        return {};
-      }
+    const countySpecificInfo = countyLinks
+      .map((record) => record._rawJson)
+      .filter((record) => record.fields.County === county);
+
+    if (countySpecificInfo.length > 0) {
+      return countySpecificInfo[0].fields;
+    } else {
+      return {};
     }
-  );
+  });
 }
 
 /**
@@ -106,51 +110,71 @@ function preprocessLocations(locations: RawLocation[]): Location[] {
 }
 
 function getDistance(lat: number, long: number, location: RawLocation): number {
-  return haversine({
-    latitude: lat,
-    longitude: long,
-  }, {
-    latitude: location.fields.Latitude,
-    longitude: location.fields.Longitude,
-  }, {unit: 'mile'});
+  return haversine(
+    {
+      latitude: lat,
+      longitude: long,
+    },
+    {
+      latitude: location.fields.Latitude,
+      longitude: location.fields.Longitude,
+    },
+    { unit: "mile" }
+  );
 }
 
-export async function getNearbyLocations(lat: number, long: number, distance: number): Promise<Location[]> {
-  const allLocations: RawLocation[] = (
-    await fetchAirtableData(
-      "all",
-      async () => {
-        return (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
-          filterByFormula: `NOT({Do Not Display})`,
-          sort: [
-            {
-              field: "Latest report",
-              direction: "desc",
-            },
-          ],
-        }).all()).map((record) => record._rawJson).filter((location) => (
-          location.fields.Latitude && location.fields.Longitude
-        ));
-      }
-    )
+export async function getNearbyLocations(
+  lat: number,
+  long: number,
+  distance: number
+): Promise<Location[]> {
+  const allLocations: RawLocation[] = await fetchAirtableData(
+    "all",
+    async () => {
+      return (
+        await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+          .select({
+            filterByFormula: `NOT({Do Not Display})`,
+            sort: [
+              {
+                field: "Latest report",
+                direction: "desc",
+              },
+            ],
+          })
+          .all()
+      )
+        .map((record) => record._rawJson)
+        .filter(
+          (location) => location.fields.Latitude && location.fields.Longitude
+        );
+    }
   );
 
-  allLocations.forEach((location) => { location['distanceMiles'] = Math.floor(getDistance(lat, long, location) * 10) / 10 })
+  allLocations.forEach((location) => {
+    location["distanceMiles"] =
+      Math.floor(getDistance(lat, long, location) * 10) / 10;
+  });
 
-  const locationsWithinDistance: RawLocation[] = allLocations.filter((location) => location['distanceMiles'] <= distance);
+  const locationsWithinDistance: RawLocation[] = allLocations.filter(
+    (location) => location["distanceMiles"] <= distance
+  );
 
   return preprocessLocations(locationsWithinDistance);
 }
 
-export async function getZipLatLong(zip: string): Promise<{ lat: number, long: number } | null> {
-  const zipCodes: ZipCode[] = (await fetchAirtableData(
-    zip,
-    async() => {
-      return (await Airtable.base("appdsheneg5ii1EnQ")("Zipcodes").select({
-        filterByFormula: `ZIP = ${zip}`,
-      }).all()).map((record) => record._rawJson);
-    }
-  ) as ZipCode[])
+export async function getZipLatLong(
+  zip: string
+): Promise<{ lat: number; long: number } | null> {
+  const zipCodes: ZipCode[] = (await fetchAirtableData(zip, async () => {
+    return (
+      await Airtable.base("appdsheneg5ii1EnQ")("Zipcodes")
+        .select({
+          filterByFormula: `ZIP = ${zip}`,
+        })
+        .all()
+    ).map((record) => record._rawJson);
+  })) as ZipCode[];
 
   if (zipCodes.length <= 0) {
     return null;
@@ -170,24 +194,25 @@ export async function getZipLatLong(zip: string): Promise<{ lat: number, long: n
 export function getCountyLocations(
   county: string
 ): Promise<OrganizedLocations> {
-  return fetchAirtableData(
-    county,
-    async () => {
-      const countyLocations: RawLocation[] = (await Airtable.base("appdsheneg5ii1EnQ")("Locations").select({
-        filterByFormula: `AND(County = "${county}", NOT({Do Not Display}))`,
-        sort: [
-          {
-            field: "Latest report",
-            direction: "desc",
-          },
-        ],
-      }).all()).map((record) => record._rawJson);
+  return fetchAirtableData(county, async () => {
+    const countyLocations: RawLocation[] = (
+      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+        .select({
+          filterByFormula: `AND(County = "${county}", NOT({Do Not Display}))`,
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        })
+        .all()
+    ).map((record) => record._rawJson);
 
-      const countyLocationsProcessed: Location[] = preprocessLocations(
-        countyLocations
-      );
-    
-      return organizeLocations(countyLocationsProcessed);
-    }
-  )
+    const countyLocationsProcessed: Location[] = preprocessLocations(
+      countyLocations
+    );
+
+    return organizeLocations(countyLocationsProcessed);
+  });
 }

@@ -123,7 +123,9 @@ export default function RealtimeLocationCard({ location }) {
                           <FaExternalLinkAlt size=".85em" />
                         </small>
                       </a>
-                      <span className="text-muted d-none d-sm-inline">{" | "}</span>
+                      <span className="text-muted d-none d-sm-inline">
+                        {" | "}
+                      </span>
                       <br className="d-block d-sm-none" />
                     </>
                   ) : null}

@@ -1,4 +1,11 @@
-import { OrganizedLocations, Location, RawLocation, CountyLinks, AvailabilityStatus, ZipCode } from "./DataTypes";
+import {
+  OrganizedLocations,
+  Location,
+  RawLocation,
+  CountyLinks,
+  AvailabilityStatus,
+  ZipCode,
+} from "./DataTypes";
 
 const OUTDATED_DAYS_THRESHOLD = 3;
 
@@ -36,7 +43,7 @@ export const AVAILABILITY_STATUS: { [key: string]: AvailabilityStatus } = {
  * @param locations The list of locations.
  * @returns Returns an organized list of locations.
  */
- export function organizeLocations(locations: Location[]): OrganizedLocations {
+export function organizeLocations(locations: Location[]): OrganizedLocations {
   const outdatedThreshold: Date = new Date();
   outdatedThreshold.setDate(
     outdatedThreshold.getDate() - OUTDATED_DAYS_THRESHOLD

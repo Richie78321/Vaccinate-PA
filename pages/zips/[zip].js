@@ -7,7 +7,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import { Button } from "react-bootstrap";
 
-export default function ZipPage({zip, lat, long, error}) {
+export default function ZipPage({ zip, lat, long, error }) {
   if (error) {
     return (
       <Layout title={`Vaccine Availability Near ${zip}`}>
@@ -24,30 +24,32 @@ export default function ZipPage({zip, lat, long, error}) {
     );
   }
 
-  return <Layout title={`Vaccine Availability Near ${zip}`}>
-    <div className="container-fluid container-xl mt-3">
-      <div className="ml-1 mb-2">
-        <Link href="/">
-          <a>
-            <FaArrowLeft />{" "}
-            <span className="align-middle">View all zip codes</span>
-          </a>
-        </Link>
-        <div className="float-right">
-          <TranslationOptions />
+  return (
+    <Layout title={`Vaccine Availability Near ${zip}`}>
+      <div className="container-fluid container-xl mt-3">
+        <div className="ml-1 mb-2">
+          <Link href="/">
+            <a>
+              <FaArrowLeft />{" "}
+              <span className="align-middle">View all zip codes</span>
+            </a>
+          </Link>
+          <div className="float-right">
+            <TranslationOptions />
+          </div>
         </div>
+        <h1 className="mb-3 d-none d-sm-block">
+          COVID-19 Vaccine Availability Near {zip}
+        </h1>
+        <h2 className="mb-3 d-block d-sm-none">
+          COVID-19 Vaccine Availability Near {zip}
+        </h2>
+        <ClientSideOnly>
+          <NearbyLocations lat={lat} long={long} />
+        </ClientSideOnly>
       </div>
-      <h1 className="mb-3 d-none d-sm-block">
-        COVID-19 Vaccine Availability Near {zip}
-      </h1>
-      <h2 className="mb-3 d-block d-sm-none">
-        COVID-19 Vaccine Availability Near {zip}
-      </h2>
-      <ClientSideOnly>
-        <NearbyLocations lat={lat} long={long} />
-      </ClientSideOnly>
-    </div>
-  </Layout>
+    </Layout>
+  );
 }
 
 export async function getServerSideProps({ params }) {
@@ -74,7 +76,7 @@ export async function getServerSideProps({ params }) {
   if (!zipLatLong) {
     return {
       notFound: true,
-    }
+    };
   }
 
   return {

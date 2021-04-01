@@ -105,7 +105,8 @@ export default function CountySearch({ searchRef }) {
           className={invalidSubmit ? "is-invalid" : ""}
         />
         <Form.Control.Feedback type="invalid" className="ml-2">
-          Could not find what you're looking for. Please double-check your spelling.
+          Could not find what you're looking for. Please double-check your
+          spelling.
         </Form.Control.Feedback>
       </div>
       <div id="find-vaccine-button">

@@ -27,7 +27,8 @@ export default async function handler(req, res) {
   if (isNaN(lat) || isNaN(long)) {
     res.status(400).json({
       status: 400,
-      message: "Invalid location. Expects valid (lat)itude (long)itude query parameters.",
+      message:
+        "Invalid location. Expects valid (lat)itude (long)itude query parameters.",
     });
 
     return;

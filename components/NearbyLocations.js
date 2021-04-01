@@ -1,13 +1,10 @@
-import { Component } from 'react'
+import { Component } from "react";
 import { organizeLocations } from "../utils/DataLocal";
-import { StandardLocationGroups } from './LocationGroups';
-import {
-  FaRegClock,
-  FaExternalLinkAlt,
-} from "react-icons/fa";
+import { StandardLocationGroups } from "./LocationGroups";
+import { FaRegClock, FaExternalLinkAlt } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import RealtimeLocations from "./RealtimeLocations";
-import DataAnnouncements from './DataAnnouncements';
+import DataAnnouncements from "./DataAnnouncements";
 import moment from "moment";
 
 const DISTANCE_OPTIONS_MILES = [5, 10, 15, 25, 50, 75, 100, 150];
@@ -54,14 +51,14 @@ export default class NearbyLocations extends Component {
       latestRealtimeReport: null,
       locations: [],
       distanceMiles: 15,
-    }
- 
+    };
+
     /**
      * Controller used to abort fetch requests if the React component is
      * unmounted during a request:
      * https://stackoverflow.com/questions/31061838/how-do-i-cancel-an-http-fetch-request
      */
-     this.abortController = new AbortController();
+    this.abortController = new AbortController();
   }
 
   componentDidMount() {
@@ -97,7 +94,7 @@ export default class NearbyLocations extends Component {
 
   handleDistanceChange(event) {
     if (this.state.distanceMiles != event.target.value) {
-      this.setState({ 
+      this.setState({
         loading: true,
         distanceMiles: event.target.value,
       });
@@ -112,7 +109,7 @@ export default class NearbyLocations extends Component {
       this.fetchLocations();
     }
   }
-  
+
   render() {
     const sharethisConfig = {
       alignment: "center",
@@ -132,9 +129,13 @@ export default class NearbyLocations extends Component {
       <div>
         <div className="mb-4 row justify-content-between">
           <div className="col-12 col-md-auto">
-            {!this.state.loading && this.state.locations.allLocations.length > 0 ? (
-              <LatestReportsReceived latestReportedLocation={this.state.locations.allLocations[0]} latestRealtimeReport={this.state.latestRealtimeReport} />
-            ) : null }
+            {!this.state.loading &&
+            this.state.locations.allLocations.length > 0 ? (
+              <LatestReportsReceived
+                latestReportedLocation={this.state.locations.allLocations[0]}
+                latestRealtimeReport={this.state.latestRealtimeReport}
+              />
+            ) : null}
           </div>
           <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
             <small>
@@ -161,25 +162,32 @@ export default class NearbyLocations extends Component {
         <div className="form-group">
           <h4 className="font-weight-normal text-center mt-3 mb-5">
             Search within{" "}
-            <select id="distanceMiles" name="distanceMiles" value={this.state.distanceMiles} onChange={this.handleDistanceChange.bind(this)}>
-              {DISTANCE_OPTIONS_MILES.map((distance) => <option key={distance}>{distance}</option>)}
-            </select>
-            {" "}miles.
+            <select
+              id="distanceMiles"
+              name="distanceMiles"
+              value={this.state.distanceMiles}
+              onChange={this.handleDistanceChange.bind(this)}
+            >
+              {DISTANCE_OPTIONS_MILES.map((distance) => (
+                <option key={distance}>{distance}</option>
+              ))}
+            </select>{" "}
+            miles.
           </h4>
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
         <RealtimeLocations
-            updateLatestReportTime={(latestRealtimeReport) =>
-              this.setState({
-                latestRealtimeReport,
-              })
-            }
-            apiURL={`/api/realtime/nearby?${new URLSearchParams({
-              lat: this.props.lat,
-              long: this.props.long,
-              distance: this.state.distanceMiles,
-            })}`}
-          />
+          updateLatestReportTime={(latestRealtimeReport) =>
+            this.setState({
+              latestRealtimeReport,
+            })
+          }
+          apiURL={`/api/realtime/nearby?${new URLSearchParams({
+            lat: this.props.lat,
+            long: this.props.long,
+            distance: this.state.distanceMiles,
+          })}`}
+        />
         {this.state.loading ? (
           <div className="text-center my-4">
             <BeatLoader size="0.5em" /> Loading nearby locations...
@@ -187,17 +195,19 @@ export default class NearbyLocations extends Component {
         ) : (
           <>
             {this.state.locations.allLocations.length <= 0 ? (
-                <>
-                  <h2 className="text-center mt-5">
-                    We currently have no locations that match your query.
-                  </h2>
-                  <p className="text-center">Consider selecting a larger mile radius above.</p>
-                </>
+              <>
+                <h2 className="text-center mt-5">
+                  We currently have no locations that match your query.
+                </h2>
+                <p className="text-center">
+                  Consider selecting a larger mile radius above.
+                </p>
+              </>
             ) : null}
             <StandardLocationGroups locations={this.state.locations} />
           </>
         )}
       </div>
     );
-  }  
+  }
 }
