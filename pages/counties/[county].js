@@ -1,7 +1,7 @@
 import { useState } from "react";
 import counties from "../../content/counties";
 import { StandardLocationGroups } from "../../components/LocationGroups";
-import CountyPageLayout from "../../layouts/CountyPageLayout";
+import Layout from "../../layouts/Layout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
 import { FaArrowLeft, FaExternalLinkAlt, FaRegClock } from "react-icons/fa";
 import moment from "moment";
@@ -119,7 +119,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
 
   if (error) {
     return (
-      <CountyPageLayout county={county}>
+      <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
         <div className="text-center">
           <h1 className="mt-5">We are currently experiencing an outage.</h1>
           <p>This normally only lasts a few minutes. Please check back soon!</p>
@@ -129,7 +129,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             </Button>
           </Link>
         </div>
-      </CountyPageLayout>
+      </Layout>
     );
   }
 
@@ -154,7 +154,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
   return (
-    <CountyPageLayout county={county}>
+    <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
       <div className="container-fluid container-xl mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">
@@ -207,7 +207,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
           <StandardLocationGroups locations={locations} />
         </div>
       </div>
-    </CountyPageLayout>
+    </Layout>
   );
 }
 
