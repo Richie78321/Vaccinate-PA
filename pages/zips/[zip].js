@@ -42,7 +42,10 @@ export default function ZipPage({ zip, lat, long, error }) {
   };
 
   return (
-    <Layout title={`Vaccine Availability Near ${zip}`} description={`Find Vaccine Availability near ${zip} and other ZIP codes`}>
+    <Layout
+      title={`Vaccine Availability Near ${zip}`}
+      description={`Find Vaccine Availability near ${zip} and other ZIP codes`}
+    >
       <div className="container-fluid container-xl mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">
