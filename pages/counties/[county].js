@@ -133,6 +133,8 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     );
   }
 
+  const shareURL = `https://vaccinatepa.org/counties/${county.replace(" ", "_")}`;
+
   const sharethisConfig = {
     alignment: "center",
     labels: "cta",
@@ -143,8 +145,9 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     size: 32,
     description: `${county} COVID-19 Vaccine Availability`,
     subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
-    message: `Find ${county} and more COVID-19 vaccine availability here.`,
+    message: `Find ${county} and more COVID-19 vaccine availability here: ${shareURL}`,
     username: "VaccinatePA",
+    url: shareURL,
   };
 
   const latestReportedLocation =

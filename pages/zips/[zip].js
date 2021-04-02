@@ -23,6 +23,23 @@ export default function ZipPage({ zip, lat, long, error }) {
       </Layout>
     );
   }
+  
+  const shareURL = `https://vaccinatepa.org/zips/${zip}`;
+
+  const sharethisConfig = {
+    alignment: "center",
+    labels: "cta",
+    color: "white",
+    enabled: true,
+    networks: ["facebook", "twitter", "reddit", "email", "sms"],
+    radius: 4,
+    size: 32,
+    description: `COVID-19 Vaccine Availability Near You`,
+    subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
+    message: `Find COVID-19 vaccine availability near ${zip} and more here: ${shareURL}`,
+    username: "VaccinatePA",
+    url: shareURL,
+  };
 
   return (
     <Layout title={`Vaccine Availability Near ${zip}`}>
@@ -45,7 +62,7 @@ export default function ZipPage({ zip, lat, long, error }) {
           COVID-19 Vaccine Availability Near {zip}
         </h2>
         <ClientSideOnly>
-          <NearbyLocations lat={lat} long={long} />
+          <NearbyLocations lat={lat} long={long} sharethisConfig={sharethisConfig} />
         </ClientSideOnly>
       </div>
     </Layout>

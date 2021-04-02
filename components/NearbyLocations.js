@@ -111,20 +111,6 @@ export default class NearbyLocations extends Component {
   }
 
   render() {
-    const sharethisConfig = {
-      alignment: "center",
-      labels: "cta",
-      color: "white",
-      enabled: true,
-      networks: ["facebook", "twitter", "reddit", "email", "sms"],
-      radius: 4,
-      size: 32,
-      description: `COVID-19 Vaccine Availability Near You`,
-      subject: "VaccinatePA: Find COVID-19 Vaccine Availability",
-      message: `Find COVID-19 vaccine availability near you.`,
-      username: "VaccinatePA",
-    };
-
     return (
       <div>
         <div className="mb-4 row justify-content-between">
@@ -175,7 +161,7 @@ export default class NearbyLocations extends Component {
             miles.
           </h4>
         </div>
-        <DataAnnouncements sharethisConfig={sharethisConfig} />
+        <DataAnnouncements sharethisConfig={this.props.sharethisConfig} />
         <RealtimeLocations
           updateLatestReportTime={(latestRealtimeReport) =>
             this.setState({
