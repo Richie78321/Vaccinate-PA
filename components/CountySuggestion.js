@@ -15,7 +15,7 @@ const FindMyCounty = ({ searchRef }) => {
         onClick={onClick}
         className="find-county-button text-white d-block rounded py-2 px-3 mb-3 text-decoration-none user-select-none"
       >
-        Find my county or zip
+        Find my county or ZIP
       </a>
       <style jsx>{`
         .find-county-button {
