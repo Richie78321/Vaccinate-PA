@@ -23,7 +23,7 @@ export default function ZipPage({ zip, lat, long, error }) {
       </Layout>
     );
   }
-  
+
   const shareURL = `https://vaccinatepa.org/zips/${zip}`;
 
   const sharethisConfig = {
@@ -62,7 +62,11 @@ export default function ZipPage({ zip, lat, long, error }) {
           COVID-19 Vaccine Availability Near {zip}
         </h2>
         <ClientSideOnly>
-          <NearbyLocations lat={lat} long={long} sharethisConfig={sharethisConfig} />
+          <NearbyLocations
+            lat={lat}
+            long={long}
+            sharethisConfig={sharethisConfig}
+          />
         </ClientSideOnly>
       </div>
     </Layout>
