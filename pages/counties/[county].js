@@ -157,7 +157,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
   return (
-    <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
+    <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county} and others`}>
       <div className="container-fluid container-xl mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">
