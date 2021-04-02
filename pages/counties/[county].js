@@ -119,7 +119,10 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
 
   if (error) {
     return (
-      <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
+      <Layout
+        title={county + " Vaccine Availability"}
+        description={`Find Vaccine Availability in ${county}, PA and other counties`}
+      >
         <div className="text-center">
           <h1 className="mt-5">We are currently experiencing an outage.</h1>
           <p>This normally only lasts a few minutes. Please check back soon!</p>
