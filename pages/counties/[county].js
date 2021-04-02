@@ -119,7 +119,10 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
 
   if (error) {
     return (
-      <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
+      <Layout
+        title={county + " Vaccine Availability"}
+        description={`Find Vaccine Availability in ${county}, PA and other counties`}
+      >
         <div className="text-center">
           <h1 className="mt-5">We are currently experiencing an outage.</h1>
           <p>This normally only lasts a few minutes. Please check back soon!</p>
@@ -157,7 +160,10 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     locations.allLocations.length > 0 ? locations.allLocations[0] : null;
 
   return (
-    <Layout title={county + " Vaccine Availability"} description={`Find Vaccine Availability in ${county}, PA and other counties`}>
+    <Layout
+      title={county + " Vaccine Availability"}
+      description={`Find Vaccine Availability in ${county}, PA and other counties`}
+    >
       <div className="container-fluid container-xl mt-3">
         <div className="ml-1 mb-2">
           <Link href="/">

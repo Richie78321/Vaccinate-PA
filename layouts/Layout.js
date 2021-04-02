@@ -3,8 +3,10 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 
 export default function Layout({ title, children, description }) {
-  const webDescription = description ? description : "Find Vaccine Availability in PA";
-  
+  const webDescription = description
+    ? description
+    : "Find Vaccine Availability in PA";
+
   return (
     <>
       <Head>
@@ -20,10 +22,7 @@ export default function Layout({ title, children, description }) {
           property="og:title"
           content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
         />
-        <meta
-          property="og:description"
-          content={webDescription}
-        />
+        <meta property="og:description" content={webDescription} />
         <meta
           property="og:image"
           content="https://vaccinatepa.org/social_media_header.png"
@@ -36,10 +35,7 @@ export default function Layout({ title, children, description }) {
           property="twitter:title"
           content="VaccinatePA - Pennsylvania COVID-19 Vaccine Availability"
         />
-        <meta
-          property="twitter:description"
-          content={webDescription}
-        />
+        <meta property="twitter:description" content={webDescription} />
         <meta
           property="twitter:image"
           content="https://vaccinatepa.org/social_media_header.png"
