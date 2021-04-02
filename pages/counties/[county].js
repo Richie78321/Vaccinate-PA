@@ -133,7 +133,10 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
     );
   }
 
-  const shareURL = `https://vaccinatepa.org/counties/${county.replace(" ", "_")}`;
+  const shareURL = `https://vaccinatepa.org/counties/${county.replace(
+    " ",
+    "_"
+  )}`;
 
   const sharethisConfig = {
     alignment: "center",
