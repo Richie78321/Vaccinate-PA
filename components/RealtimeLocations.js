@@ -97,7 +97,6 @@ export default class RealtimeLocations extends Component {
             return acc;
         }, {});
 
-        console.log(locationsByPharmacy);
         return (
             <div className={locations.length <= 0 ? "mb-0" : "mb-2"}>
                 <h3 className="font-weight-normal mb-0">
