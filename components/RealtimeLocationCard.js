@@ -137,7 +137,7 @@ const AppointmentDetail = ({ location }) => {
                                     address
                                 )}`}
                             >
-                                <FaExternalLinkAlt size=".85em" />
+                                <FaExternalLinkAlt size=".75em" />
                             </a>
                         </small>
                     </div>
@@ -220,15 +220,30 @@ export default function RealtimeLocationCard({ providerId, locations }) {
                                     <h5 className="mb-0 card-title text-truncate">
                                         {name}
                                     </h5>
-                                    {website ? (
+                                    <div>
+                                        {website ? (
+                                            <a
+                                                href={website}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <small>
+                                                    Schedule Appointment{" "}
+                                                    <FaExternalLinkAlt size=".75em" />
+                                                </small>
+                                            </a>
+                                        ) : null}
+                                    </div>
+
+                                    {instructionsLink ? (
                                         <a
-                                            href={website}
+                                            href={instructionsLink}
                                             target="_blank"
                                             rel="noreferrer"
                                         >
                                             <small>
-                                                Schedule Appointment{" "}
-                                                <FaExternalLinkAlt size=".85em" />
+                                                View Scheduling Tips{" "}
+                                                <FaExternalLinkAlt size=".75em" />
                                             </small>
                                         </a>
                                     ) : null}
@@ -255,30 +270,6 @@ export default function RealtimeLocationCard({ providerId, locations }) {
                             </span>
                         </span>
                     </li>
-                    {instructionsLink ? (
-                        <li className="list-group-item">
-                            <span className="text-black">
-                                <BsInfoCircle size="1.25em" className="mr-1" />{" "}
-                                <span className="align-middle">
-                                    <span className="font-weight-bold">
-                                        Scheduling Tips:
-                                    </span>{" "}
-                                    Enter the zip code of the location when
-                                    searching for appointments. Look for the
-                                    location with a matching address.{" "}
-                                    <a
-                                        href={instructionsLink}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        View More{" "}
-                                        <FaExternalLinkAlt size=".75em" />
-                                    </a>
-                                </span>
-                            </span>
-                        </li>
-                    ) : null}
-
                     {locations.map((location) => (
                         <AppointmentDetail location={location} />
                     ))}
