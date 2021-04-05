@@ -68,11 +68,9 @@ export default function CountySuggestion({ searchRef }) {
           <div className="mt-3 mt-md-0 col-md-5">
             <h4 className="mb-3">Information about vaccine eligibility</h4>
             <p>
-              As of January 19th, 2021, the State of Pennsylvania has approved
-              giving the COVID-19 vaccine to people ages 65 and older and people
-              ages 16-64 with high-risk conditions. Pennsylvania's statewide
-              COVID-19 vaccination program has been evolving rapidly. You can
-              find more information and links to government websites{" "}
+              As of April 5th, 2021, the Commonwealth of Pennsylvania has approved
+              giving the COVID-19 vaccine to people in Phases 1A &#38; 1B of the <a href="https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#distribution" target="_blank" rel="noreferrer">vaccine rollout plan</a>. Please use the <a href="https://www.pa.gov/guides/get-vaccinated/#Step1ChecktoSeeifYoureEligible" target="_blank" rel="noreferrer">official tool</a> to see if you're eligible. You can
+              find more information and links to additional government websites{" "}
               <Link href="/additional-resources">here</Link>.
             </p>
             <p>
