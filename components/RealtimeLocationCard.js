@@ -139,7 +139,7 @@ const AppointmentDetail = ({ location }) => {
           </div>
           {location.properties.postal_code && websiteUrl && (
             <small>
-              <a href={websiteUrl}>Click here</a> to schedule an appointmment
+              <a href={websiteUrl}>Click here</a> to schedule an appointment
               and enter the zip code <b>{location.properties.postal_code}</b>{" "}
               when searching.{" "}
             </small>
