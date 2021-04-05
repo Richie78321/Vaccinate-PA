@@ -68,8 +68,25 @@ export default function CountySuggestion({ searchRef }) {
           <div className="mt-3 mt-md-0 col-md-5">
             <h4 className="mb-3">Information about vaccine eligibility</h4>
             <p>
-              As of April 5th, 2021, the Commonwealth of Pennsylvania has approved
-              giving the COVID-19 vaccine to people in Phases 1A &#38; 1B of the <a href="https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#distribution" target="_blank" rel="noreferrer">vaccine rollout plan</a>. Please use the <a href="https://www.pa.gov/guides/get-vaccinated/#Step1ChecktoSeeifYoureEligible" target="_blank" rel="noreferrer">official tool</a> to see if you're eligible.
+              As of April 5th, 2021, the Commonwealth of Pennsylvania has
+              approved giving the COVID-19 vaccine to people in Phases 1A &#38;
+              1B of the{" "}
+              <a
+                href="https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#distribution"
+                target="_blank"
+                rel="noreferrer"
+              >
+                vaccine rollout plan
+              </a>
+              . Please use the{" "}
+              <a
+                href="https://www.pa.gov/guides/get-vaccinated/#Step1ChecktoSeeifYoureEligible"
+                target="_blank"
+                rel="noreferrer"
+              >
+                official tool
+              </a>{" "}
+              to see if you're eligible.
             </p>
             <p>
               <Link href="/about-us">About VaccinatePA →</Link>
