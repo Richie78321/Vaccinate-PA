@@ -7,7 +7,9 @@ import { point, multiPolygon } from "@turf/helpers";
 import inside from "@turf/inside";
 
 const countyPolygons = countyGeoJSON["features"].reduce((acc, county) => {
-  acc[county.properties.COUNTY_NAME.toLowerCase()] = multiPolygon(county.geometry.coordinates);
+  acc[county.properties.COUNTY_NAME.toLowerCase()] = multiPolygon(
+    county.geometry.coordinates
+  );
   return acc;
 }, {});
 
@@ -143,10 +145,14 @@ async function getLocationCountyCode(
   }
 
   const locationPoint = point(location.geometry.coordinates);
-  locationCountyCode = Object.keys(countyPolygons).find((countyCode) => inside(locationPoint, countyPolygons[countyCode]));
+  locationCountyCode = Object.keys(countyPolygons).find((countyCode) =>
+    inside(locationPoint, countyPolygons[countyCode])
+  );
 
   if (!locationCountyCode) {
-    console.log(`Unable to find county code for location ID ${location.properties.id}`);
+    console.log(
+      `Unable to find county code for location ID ${location.properties.id}`
+    );
     return undefined;
   }
 
