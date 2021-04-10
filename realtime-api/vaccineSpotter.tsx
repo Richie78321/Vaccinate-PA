@@ -2,6 +2,14 @@ import fetch from "node-fetch";
 import NodeCache from "node-cache";
 import { countyCodes } from "../content/counties";
 import moment from "moment";
+import countyGeoJSON from "../content/PaCounty2021.json";
+import { point, multiPolygon } from "@turf/helpers";
+import inside from "@turf/inside";
+
+const countyPolygons = countyGeoJSON["features"].reduce((acc, county) => {
+  acc[county.properties.COUNTY_NAME.toLowerCase()] = multiPolygon(county.geometry.coordinates);
+  return acc;
+}, {});
 
 interface ExpandedAppointment {
   time: string;
@@ -43,9 +51,6 @@ const locationToCountyCache = new NodeCache({
 });
 
 const endpoint: string = "https://www.vaccinespotter.org/api/v0/states/PA.json";
-
-const fccLocationToCountyEndpoint: string =
-  "https://geo.fcc.gov/api/census/block/find?";
 
 function consolidateAppointments(
   appointments: ExpandedAppointment[]
@@ -137,21 +142,12 @@ async function getLocationCountyCode(
     return locationCountyCode;
   }
 
-  locationCountyCode = (
-    await fetch(
-      fccLocationToCountyEndpoint +
-        new URLSearchParams({
-          latitude: location.geometry.coordinates[1]?.toString(),
-          longitude: location.geometry.coordinates[0]?.toString(),
-          format: "json",
-        }).toString()
-    ).then((resp) => resp.json())
-  )?.County?.name.toLowerCase();
+  const locationPoint = point(location.geometry.coordinates);
+  locationCountyCode = Object.keys(countyPolygons).find((countyCode) => inside(locationPoint, countyPolygons[countyCode]));
 
   if (!locationCountyCode) {
-    console.log(
-      `Failed to find a county for location ${location.properties.id}`
-    );
+    console.log(`Unable to find county code for location ID ${location.properties.id}`);
+    return undefined;
   }
 
   locationToCountyCache.set(location.properties.id, locationCountyCode);
