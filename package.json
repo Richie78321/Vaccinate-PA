@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@turf/helpers": "^6.3.0",
+    "@turf/inside": "^5.0.0",
     "airtable": "^0.10.1",
     "bootstrap": "^4.6.0",
     "fs": "^0.0.1-security",
