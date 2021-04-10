@@ -31,6 +31,7 @@ async function getLatestCached(): Promise<{
   if (!latestCached) {
     // Request the realtime data if it has not already been loaded. This may be problematic if
     // there is a huge spike of requests following a server startup.
+    console.log("Request waiting for realtime to be cached.");
     return await new Promise((resolve, reject) =>
       refreshVaccineSpotter("latest", null, resolve, reject)
     );
