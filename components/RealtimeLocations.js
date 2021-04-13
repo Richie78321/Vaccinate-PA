@@ -77,7 +77,7 @@ export default class RealtimeLocations extends Component {
     this.setState({
       numVisible: this.state.numVisible + VISIBILITY_INCREMENT,
     });
-    
+
     // Prevent refresh from link click
     e.preventDefault();
   }
@@ -124,25 +124,37 @@ export default class RealtimeLocations extends Component {
             {moment(lastUpdated).format("h:mma")}
           </div>
         </div>
-        {locations.map((location, index) => (
+        {locations.map((location, index) =>
           index < numVisible ? (
             <div key={location.properties.id} className="my-3">
               <RealtimeLocationCard location={location} />
             </div>
           ) : null
-        ))}
+        )}
         <div className="text-center mt-4">
           {numVisible < locations.length ? (
-            <button onClick={this.onShowMore.bind(this)} className="btn btn-light border-primary">
-              <AiOutlinePlusCircle size="1.2em" /><span className="ml-2 align-middle" style={{ fontSize: "115%" }}>Show {Math.min(VISIBILITY_INCREMENT, locations.length - numVisible)} more results</span>
+            <button
+              onClick={this.onShowMore.bind(this)}
+              className="btn btn-light border-primary"
+            >
+              <AiOutlinePlusCircle size="1.2em" />
+              <span className="ml-2 align-middle" style={{ fontSize: "115%" }}>
+                Show{" "}
+                {Math.min(VISIBILITY_INCREMENT, locations.length - numVisible)}{" "}
+                more results
+              </span>
             </button>
-          ) : (
-            numVisible > DEFUALT_NUM_VISIBLE ? (
-              <button onClick={this.onShowLess.bind(this)} className="btn btn-light border-primary">
-                <AiOutlineMinusCircle size="1.2em" /><span className="ml-2 align-middle" style={{ fontSize: "115%" }}>Show less results</span>
-              </button>
-            ) : null
-          )}
+          ) : numVisible > DEFUALT_NUM_VISIBLE ? (
+            <button
+              onClick={this.onShowLess.bind(this)}
+              className="btn btn-light border-primary"
+            >
+              <AiOutlineMinusCircle size="1.2em" />
+              <span className="ml-2 align-middle" style={{ fontSize: "115%" }}>
+                Show less results
+              </span>
+            </button>
+          ) : null}
         </div>
       </div>
     );
