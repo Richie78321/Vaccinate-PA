@@ -4,8 +4,11 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { ImSpinner2 } from "react-icons/im";
 import RealtimeLocationCard from "./RealtimeLocationCard";
 import Link from "next/link";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
 const DEFAULT_REFRESH_TIME = 60000; // One minute
+const VISIBILITY_INCREMENT = 10;
+const DEFUALT_NUM_VISIBLE = 5;
 
 export default class RealtimeLocations extends Component {
   constructor(props) {
@@ -14,6 +17,7 @@ export default class RealtimeLocations extends Component {
     this.state = {
       lastUpdated: null,
       locations: [],
+      numVisible: DEFUALT_NUM_VISIBLE,
     };
 
     /**
@@ -69,8 +73,26 @@ export default class RealtimeLocations extends Component {
     }
   }
 
+  onShowMore(e) {
+    this.setState({
+      numVisible: this.state.numVisible + VISIBILITY_INCREMENT,
+    });
+    
+    // Prevent refresh from link click
+    e.preventDefault();
+  }
+
+  onShowLess(e) {
+    this.setState({
+      numVisible: DEFUALT_NUM_VISIBLE,
+    });
+
+    // Prevent refresh from link click
+    e.preventDefault();
+  }
+
   render() {
-    const { lastUpdated, locations } = this.state;
+    const { lastUpdated, locations, numVisible } = this.state;
 
     if (!lastUpdated) {
       return (
@@ -102,11 +124,26 @@ export default class RealtimeLocations extends Component {
             {moment(lastUpdated).format("h:mma")}
           </div>
         </div>
-        {locations.map((location) => (
-          <div key={location.properties.id} className="my-3">
-            <RealtimeLocationCard location={location} />
-          </div>
+        {locations.map((location, index) => (
+          index < numVisible ? (
+            <div key={location.properties.id} className="my-3">
+              <RealtimeLocationCard location={location} />
+            </div>
+          ) : null
         ))}
+        <div className="text-center mt-4">
+          {numVisible < locations.length ? (
+            <button onClick={this.onShowMore.bind(this)} className="btn btn-light border-primary">
+              <AiOutlinePlusCircle size="1.2em" /><span className="ml-2 align-middle" style={{ fontSize: "115%" }}>Show {Math.min(VISIBILITY_INCREMENT, locations.length - numVisible)} more results</span>
+            </button>
+          ) : (
+            numVisible > DEFUALT_NUM_VISIBLE ? (
+              <button onClick={this.onShowLess.bind(this)} className="btn btn-light border-primary">
+                <AiOutlineMinusCircle size="1.2em" /><span className="ml-2 align-middle" style={{ fontSize: "115%" }}>Show less results</span>
+              </button>
+            ) : null
+          )}
+        </div>
       </div>
     );
   }
