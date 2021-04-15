@@ -47,7 +47,21 @@ function RequirementTag({
   pluralBeforeLabel,
   afterLabel,
   pluralAfterLabel,
+  specialCases,
 }) {
+  if (specialCases) {
+    for (let i = 0; i < specialCases.length; i++) {
+      const specialCaseString = specialCases[i](requirementList);
+      if (specialCaseString) {
+        return (
+          <div className="col-md-4 col-12 px-3 py-2 d-flex align-items-center">
+            {specialCaseString}
+          </div>
+        );
+      }
+    }
+  }
+
   const requirementString = requirementList.join(", ").trim();
 
   let endLabel;
@@ -184,6 +198,9 @@ export default function AirTableCard({ location }) {
       beforeLabel: "Phase",
       pluralBeforeLabel: "Phases",
       afterLabel: "Only",
+      specialCases: [
+        (requirementList) => requirementList.length >= 4 ? "All Phases Eligible" : null,
+      ]
     },
   ].filter(
     ({ requirementList }) => requirementList && requirementList.length > 0
