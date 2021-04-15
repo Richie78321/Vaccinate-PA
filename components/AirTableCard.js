@@ -199,8 +199,9 @@ export default function AirTableCard({ location }) {
       pluralBeforeLabel: "Phases",
       afterLabel: "Only",
       specialCases: [
-        (requirementList) => requirementList.length >= 4 ? "All Phases Eligible" : null,
-      ]
+        (requirementList) =>
+          requirementList.length >= 4 ? "All Phases Eligible" : null,
+      ],
     },
   ].filter(
     ({ requirementList }) => requirementList && requirementList.length > 0
