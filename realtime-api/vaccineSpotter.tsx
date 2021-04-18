@@ -2,16 +2,7 @@ import fetch from "node-fetch";
 import NodeCache from "node-cache";
 import { countyCodes } from "../content/counties";
 import moment from "moment";
-import countyGeoJSON from "../content/PaCounty2021.json";
-import { point, multiPolygon } from "@turf/helpers";
-import inside from "@turf/inside";
-
-const countyPolygons = countyGeoJSON["features"].reduce((acc, county) => {
-  acc[county.properties.COUNTY_NAME.toLowerCase()] = multiPolygon(
-    county.geometry.coordinates
-  );
-  return acc;
-}, {});
+import { getCountyCodeFromLatLong } from "../utils/CountyLines";
 
 interface ExpandedAppointment {
   time: string;
@@ -144,10 +135,7 @@ async function getLocationCountyCode(
     return locationCountyCode;
   }
 
-  const locationPoint = point(location.geometry.coordinates);
-  locationCountyCode = Object.keys(countyPolygons).find((countyCode) =>
-    inside(locationPoint, countyPolygons[countyCode])
-  );
+  locationCountyCode = getCountyCodeFromLatLong(location.geometry.coordinates);
 
   if (!locationCountyCode) {
     console.log(
