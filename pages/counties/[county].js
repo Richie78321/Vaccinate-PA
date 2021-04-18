@@ -3,7 +3,7 @@ import counties from "../../content/counties";
 import { StandardLocationGroups } from "../../components/LocationGroups";
 import Layout from "../../layouts/Layout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
-import { FaArrowLeft, FaExternalLinkAlt, FaRegClock } from "react-icons/fa";
+import { FaArrowLeft, FaRegClock } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
@@ -11,6 +11,7 @@ import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeLocations from "../../components/RealtimeLocations";
 import { Button } from "react-bootstrap";
 import DataAnnouncements from "../../components/DataAnnouncements";
+import CountyInfoLinks from "../../components/CountyInfoLinks";
 
 function countyToCountyCode(county) {
   return county.split(" ")[0].toLowerCase();
@@ -21,64 +22,6 @@ function titleCase(str) {
     return t.toUpperCase();
   });
 }
-
-const CountyLinks = ({ countyLinks }) => {
-  let countyCovidInfoLink = countyLinks["County COVID Information"]
-    ? countyLinks["County COVID Information"].trim()
-    : null;
-  if (countyCovidInfoLink && countyCovidInfoLink.length <= 0) {
-    countyCovidInfoLink = countyCovidInfoLink.trim();
-  }
-
-  let countyPreregistrationLink = countyLinks["County COVID Preregistration"]
-    ? countyLinks["County COVID Preregistration"].trim()
-    : null;
-  if (countyPreregistrationLink && countyPreregistrationLink.length <= 0) {
-    countyPreregistrationLink = null;
-  }
-
-  return (
-    <small>
-      {countyCovidInfoLink ? (
-        <p className="county-link mb-2">
-          <a target="_blank" rel="noreferrer" href={countyCovidInfoLink}>
-            Official {countyLinks.County}{" "}
-            <span className="text-nowrap">
-              Information <FaExternalLinkAlt size=".85em" />
-            </span>
-          </a>
-        </p>
-      ) : null}
-      {countyPreregistrationLink ? (
-        <p className="county-link mb-2">
-          <a target="_blank" rel="noreferrer" href={countyPreregistrationLink}>
-            Official {countyLinks.County} Vaccine{" "}
-            <span className="text-nowrap">
-              Preregistration <FaExternalLinkAlt size=".85em" />
-            </span>
-          </a>
-        </p>
-      ) : null}
-      <p className="county-link mb-2">
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://airtable.com/shr7z01kc7h1ogP5R"
-        >
-          Report missing or incorrect{" "}
-          <span className="text-nowrap">
-            information <FaExternalLinkAlt size=".85em" />
-          </span>
-        </a>
-      </p>
-      <style jsx>{`
-        .county-link {
-          line-height: 115%;
-        }
-      `}</style>
-    </small>
-  );
-};
 
 function LatestReportsReceived({
   latestRealtimeReport,
@@ -190,7 +133,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             />
           </div>
           <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
-            <CountyLinks countyLinks={countyLinks} />
+            <CountyInfoLinks countyLinks={countyLinks} />
           </div>
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
