@@ -68,7 +68,25 @@ export default function CountySuggestion({ searchRef }) {
           <div className="mt-3 mt-md-0 col-md-5">
             <h4 className="mb-3">Information about vaccine eligibility</h4>
             <p>
-              All Pennsylvanians aged 16 and older are now eligible for the COVID-19 vaccine. More information from the Pennsylvania Deptartment of Health is available <a href="https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx" target="_blank" rel="noreferrer">here</a> and for Philadelphia County <a href="https://www.phila.gov/programs/coronavirus-disease-2019-covid-19/data/vaccine/" target="_blank" rel="noreferrer">here</a>.
+              All Pennsylvanians aged 16 and older are now eligible for the
+              COVID-19 vaccine. More information from the Pennsylvania
+              Deptartment of Health is available{" "}
+              <a
+                href="https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx"
+                target="_blank"
+                rel="noreferrer"
+              >
+                here
+              </a>{" "}
+              and for Philadelphia County{" "}
+              <a
+                href="https://www.phila.gov/programs/coronavirus-disease-2019-covid-19/data/vaccine/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                here
+              </a>
+              .
             </p>
             <p>
               <Link href="/about-us">About VaccinatePA →</Link>
