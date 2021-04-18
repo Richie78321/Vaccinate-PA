@@ -125,7 +125,7 @@ export default class NearbyLocations extends Component {
             ) : null}
           </div>
           <div className="col-12 col-md-auto text-md-right mt-2 mt-md-0">
-            { this.props.countyLinks ? (
+            {this.props.countyLinks ? (
               <CountyInfoLinks countyLinks={this.props.countyLinks} />
             ) : (
               <small>
@@ -147,7 +147,7 @@ export default class NearbyLocations extends Component {
                   }
                 `}</style>
               </small>
-            ) }
+            )}
           </div>
         </div>
         <div className="form-group">

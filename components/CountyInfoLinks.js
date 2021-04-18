@@ -56,4 +56,4 @@ export default function CountyInfoLinks({ countyLinks }) {
       `}</style>
     </small>
   );
-};
+}

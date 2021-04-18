@@ -9,7 +9,9 @@ const countyPolygons = countyGeoJSON["features"].reduce((acc, county) => {
   return acc;
 }, {});
 
-export function getCountyCodeFromLatLong(coordinates: [number?, number?]): string | undefined {
+export function getCountyCodeFromLatLong(
+  coordinates: [number?, number?]
+): string | undefined {
   if (!coordinates || coordinates.some((num) => !num)) {
     return undefined;
   }
