@@ -6,8 +6,10 @@ import { getZipLatLong } from "../../utils/Data";
 import { FaArrowLeft } from "react-icons/fa";
 import ClientSideOnly from "../../components/ClientSideOnly";
 import { Button } from "react-bootstrap";
+import { getCountyCodeFromLatLong } from "../../utils/CountyLines";
+import { getCountyLinks } from "../../utils/Data";
 
-export default function ZipPage({ zip, lat, long, error }) {
+export default function ZipPage({ zip, lat, long, countyLinks, error }) {
   if (error) {
     return (
       <Layout title={`Vaccine Availability Near ${zip}`}>
@@ -69,6 +71,7 @@ export default function ZipPage({ zip, lat, long, error }) {
             lat={lat}
             long={long}
             sharethisConfig={sharethisConfig}
+            countyLinks={countyLinks}
           />
         </ClientSideOnly>
       </div>
@@ -86,6 +89,10 @@ export async function getServerSideProps({ params }) {
 
   try {
     var zipLatLong = await getZipLatLong(zip);
+    const countyCode = getCountyCodeFromLatLong([zipLatLong.long, zipLatLong.lat]);
+    if (countyCode) {
+      var countyLinks = await getCountyLinks(countyCode.charAt(0).toUpperCase() + countyCode.slice(1) + " County");
+    }
   } catch (error) {
     console.error(error);
     return {
@@ -108,6 +115,7 @@ export async function getServerSideProps({ params }) {
       zip: zip,
       lat: zipLatLong.lat,
       long: zipLatLong.long,
+      countyLinks: countyLinks,
     },
   };
 }
