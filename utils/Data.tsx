@@ -123,12 +123,8 @@ function getDistance(lat: number, long: number, location: RawLocation): number {
   );
 }
 
-export async function getNearbyLocations(
-  lat: number,
-  long: number,
-  distance: number
-): Promise<Location[]> {
-  const allLocations: RawLocation[] = await fetchAirtableData(
+function getAllLocations(): Promise<RawLocation[]> {
+  return fetchAirtableData(
     "all",
     async () => {
       return (
@@ -145,10 +141,22 @@ export async function getNearbyLocations(
           .all()
       )
         .map((record) => record._rawJson)
-        .filter(
-          (location) => location.fields.Latitude && location.fields.Longitude
-        );
     }
+  );
+}
+
+export async function getAllLocationsPreprocessed(): Promise<Location[]> {
+  return preprocessLocations(await getAllLocations());
+} 
+
+export async function getNearbyLocations(
+  lat: number,
+  long: number,
+  distance: number
+): Promise<Location[]> {
+  let allLocations = await getAllLocations();
+  allLocations = allLocations.filter(
+    (location) => location.fields.Latitude && location.fields.Longitude
   );
 
   allLocations.forEach((location) => {

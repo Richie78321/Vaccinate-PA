@@ -10,6 +10,7 @@
     "@turf/inside": "^5.0.0",
     "airtable": "^0.10.1",
     "bootstrap": "^4.6.0",
+    "express-rate-limit": "^5.2.6",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.2",
     "haversine": "^1.1.1",
