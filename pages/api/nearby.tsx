@@ -1,7 +1,26 @@
 import { getNearbyLocations } from "../../utils/Data";
 
 const requiredResponseFields = ["status", "message", "locations"];
-const requiredLocationFields = ["id", "fields", "Name", "Phone number", "Website", "County", "Latitude", "Longitude", "Latest report", "Vaccines available?", "Latest report notes", "Address", "isActiveSupersite", "distanceMiles", "availabilityStatus", "value", "string", "isAvailable"];
+const requiredLocationFields = [
+  "id",
+  "fields",
+  "Name",
+  "Phone number",
+  "Website",
+  "County",
+  "Latitude",
+  "Longitude",
+  "Latest report",
+  "Vaccines available?",
+  "Latest report notes",
+  "Address",
+  "isActiveSupersite",
+  "distanceMiles",
+  "availabilityStatus",
+  "value",
+  "string",
+  "isAvailable",
+];
 
 function getNumber(floatString: string): number {
   if (!floatString) {
