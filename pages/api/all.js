@@ -44,11 +44,16 @@ function runMiddleware(req, res, fn) {
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, rateLimiter);
-  
+
   res.setHeader("Content-Type", "application/json");
-  res.status(200).send(JSON.stringify({ 
-    status: 200,
-    message: "Retrieved all VaccinatePA data.",
-    locations: await getAllLocationsPreprocessed(),
-  }, [...requiredResponseFields, ...requiredLocationFields]));
+  res.status(200).send(
+    JSON.stringify(
+      {
+        status: 200,
+        message: "Retrieved all VaccinatePA data.",
+        locations: await getAllLocationsPreprocessed(),
+      },
+      [...requiredResponseFields, ...requiredLocationFields]
+    )
+  );
 }
