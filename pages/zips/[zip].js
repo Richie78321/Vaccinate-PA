@@ -89,9 +89,14 @@ export async function getServerSideProps({ params }) {
 
   try {
     var zipLatLong = await getZipLatLong(zip);
-    const countyCode = getCountyCodeFromLatLong([zipLatLong.long, zipLatLong.lat]);
+    const countyCode = getCountyCodeFromLatLong([
+      zipLatLong.long,
+      zipLatLong.lat,
+    ]);
     if (countyCode) {
-      var countyLinks = await getCountyLinks(countyCode.charAt(0).toUpperCase() + countyCode.slice(1) + " County");
+      var countyLinks = await getCountyLinks(
+        countyCode.charAt(0).toUpperCase() + countyCode.slice(1) + " County"
+      );
     }
   } catch (error) {
     console.error(error);
