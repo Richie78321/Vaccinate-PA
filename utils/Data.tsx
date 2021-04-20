@@ -124,30 +124,26 @@ function getDistance(lat: number, long: number, location: RawLocation): number {
 }
 
 function getAllLocations(): Promise<RawLocation[]> {
-  return fetchAirtableData(
-    "all",
-    async () => {
-      return (
-        await Airtable.base("appdsheneg5ii1EnQ")("Locations")
-          .select({
-            filterByFormula: `NOT({Do Not Display})`,
-            sort: [
-              {
-                field: "Latest report",
-                direction: "desc",
-              },
-            ],
-          })
-          .all()
-      )
-        .map((record) => record._rawJson)
-    }
-  );
+  return fetchAirtableData("all", async () => {
+    return (
+      await Airtable.base("appdsheneg5ii1EnQ")("Locations")
+        .select({
+          filterByFormula: `NOT({Do Not Display})`,
+          sort: [
+            {
+              field: "Latest report",
+              direction: "desc",
+            },
+          ],
+        })
+        .all()
+    ).map((record) => record._rawJson);
+  });
 }
 
 export async function getAllLocationsPreprocessed(): Promise<Location[]> {
   return preprocessLocations(await getAllLocations());
-} 
+}
 
 export async function getNearbyLocations(
   lat: number,
