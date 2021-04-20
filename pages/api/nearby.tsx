@@ -56,10 +56,15 @@ export default async function handler(req, res) {
     return;
   }
 
-  res.status(200).send(JSON.stringify({
-    status: 200,
-    message: `Received locations within ${distance} miles.`,
-    locations: await getNearbyLocations(lat, long, distance),
-  }, [...requiredResponseFields, ...requiredLocationFields]));
+  res.status(200).send(
+    JSON.stringify(
+      {
+        status: 200,
+        message: `Received locations within ${distance} miles.`,
+        locations: await getNearbyLocations(lat, long, distance),
+      },
+      [...requiredResponseFields, ...requiredLocationFields]
+    )
+  );
   res.setHeader("Content-Type", "application/json");
 }
