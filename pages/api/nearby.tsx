@@ -42,4 +42,5 @@ export default async function handler(req, res) {
     message: `Received locations within ${distance} miles.`,
     locations: await getNearbyLocations(lat, long, distance),
   }, [...requiredResponseFields, ...requiredLocationFields]));
+  res.setHeader("Content-Type", "application/json");
 }

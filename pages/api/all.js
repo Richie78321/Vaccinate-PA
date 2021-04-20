@@ -34,4 +34,5 @@ export default async function handler(req, res) {
     message: "Retrieved all VaccinatePA data.",
     locations: await getAllLocationsPreprocessed(),
   }, [...requiredResponseFields, ...requiredLocationFields]));
+  res.setHeader("Content-Type", "application/json");
 }
