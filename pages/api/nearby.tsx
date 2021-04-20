@@ -1,5 +1,8 @@
 import { getNearbyLocations } from "../../utils/Data";
 
+const requiredResponseFields = ["status", "message", "locations"];
+const requiredLocationFields = ["id", "fields", "Name", "Phone number", "Website", "County", "Latitude", "Longitude", "Latest report", "Vaccines available?", "Latest report notes", "Address", "isActiveSupersite", "distanceMiles", "availabilityStatus", "value", "string", "isAvailable"];
+
 function getNumber(floatString: string): number {
   if (!floatString) {
     return NaN;
@@ -34,9 +37,9 @@ export default async function handler(req, res) {
     return;
   }
 
-  res.status(200).json({
+  res.status(200).send(JSON.stringify({
     status: 200,
     message: `Received locations within ${distance} miles.`,
     locations: await getNearbyLocations(lat, long, distance),
-  });
+  }, [...requiredResponseFields, ...requiredLocationFields]));
 }
