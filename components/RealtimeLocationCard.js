@@ -82,7 +82,9 @@ function ZipCodeInstructions({ location }) {
 
 export default function RealtimeLocationCard({ location }) {
   const website = location?.properties?.url;
-  const address = `${location.properties.address ? location.properties.address + ", ": ""} ${location.properties.city || ""} ${location.properties.postal_code || ""}`;
+  const address = `${
+    location.properties.address ? location.properties.address + ", " : ""
+  } ${location.properties.city || ""} ${location.properties.postal_code || ""}`;
   const latestReportTimeText = location.properties.appointments_last_fetched
     ? moment(location.properties.appointments_last_fetched).fromNow()
     : null;
