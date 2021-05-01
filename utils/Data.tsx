@@ -10,9 +10,9 @@ import {
   ZipCode,
 } from "./DataTypes";
 import { organizeLocations, AVAILABILITY_STATUS } from "./DataLocal";
-import { GoogleSpreadsheet } from "google-spreadsheet"
-import zips from "../content/zips.json"
-import moment from "moment"
+import { GoogleSpreadsheet } from "google-spreadsheet";
+import zips from "../content/zips.json";
+import moment from "moment";
 
 const ARCHIVE_MODE = process.env.ARCHIVE_MODE === "true";
 
@@ -22,7 +22,9 @@ if (ARCHIVE_MODE) {
   // Load data archive sheet. This takes time, so requests made to this sheet will go through
   // a promise so they must wait for the sheet to connect if it is not already.
   dataArchiveSheet = (async () => {
-    const doc = new GoogleSpreadsheet('1OcKiQOELgpVX_iZkbIHWPjN75qOaO6fmJCDkk8iGSQ4');
+    const doc = new GoogleSpreadsheet(
+      "1OcKiQOELgpVX_iZkbIHWPjN75qOaO6fmJCDkk8iGSQ4"
+    );
 
     await doc.useServiceAccountAuth({
       client_email: process.env.GOOGLE_API_CLIENT_EMAIL,
@@ -79,16 +81,18 @@ export async function cacheDataQuery(
 // Warning -- this is is a super sus function
 function spreadsheetRowToAirtableMimic(spreadsheetRow) {
   // Filter out any keys that are private
-  const airtableMimicFields = Object.keys(spreadsheetRow).filter((key) => key.charAt(0) !== '_').reduce((acc, key) => {
-    acc[key] = spreadsheetRow[key];
+  const airtableMimicFields = Object.keys(spreadsheetRow)
+    .filter((key) => key.charAt(0) !== "_")
+    .reduce((acc, key) => {
+      acc[key] = spreadsheetRow[key];
 
-    // The NextJS serializer doesn't like working with undefined values.
-    if (acc[key] === undefined) {
-      acc[key] = null;
-    }
+      // The NextJS serializer doesn't like working with undefined values.
+      if (acc[key] === undefined) {
+        acc[key] = null;
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 
   return {
     id: spreadsheetRow.rowNumber,
@@ -121,15 +125,18 @@ export function getCountyLinks(county: string): Promise<CountyLinks> {
   return cacheDataQuery(`county-links-${county}`, async () => {
     let countyLinks;
     if (ARCHIVE_MODE) {
-      countyLinks = (await (await dataArchiveSheet).sheetsByTitle["Counties"].getRows()).map((row) => spreadsheetRowToAirtableMimic(row));
+      countyLinks = (
+        await (await dataArchiveSheet).sheetsByTitle["Counties"].getRows()
+      ).map((row) => spreadsheetRowToAirtableMimic(row));
     } else {
-      countyLinks = (await Airtable.base("appdsheneg5ii1EnQ")("Counties")
-        .select()
-        .all()).map((record) => record._rawJson);
+      countyLinks = (
+        await Airtable.base("appdsheneg5ii1EnQ")("Counties").select().all()
+      ).map((record) => record._rawJson);
     }
 
-    const countySpecificInfo = countyLinks
-      .filter((record) => record.fields.County === county);
+    const countySpecificInfo = countyLinks.filter(
+      (record) => record.fields.County === county
+    );
 
     if (countySpecificInfo.length > 0) {
       return countySpecificInfo[0].fields;
@@ -174,26 +181,58 @@ function getDistance(lat: number, long: number, location: RawLocation): number {
 function getAllLocations(): Promise<RawLocation[]> {
   return cacheDataQuery("all", async () => {
     if (ARCHIVE_MODE) {
-      let locations = (await (await dataArchiveSheet).sheetsByTitle["Locations"].getRows()).map((row) => spreadsheetRowToAirtableMimic(row))
-        .filter((locations) => locations.fields["Do Not Display"] !== "checked");
+      let locations = (
+        await (await dataArchiveSheet).sheetsByTitle["Locations"].getRows()
+      )
+        .map((row) => spreadsheetRowToAirtableMimic(row))
+        .filter(
+          (locations) => locations.fields["Do Not Display"] !== "checked"
+        );
 
       // Sort array of locations by time
-      const dsu = (arr1, arr2) => arr1
-        .map((item, index) => [arr2[index], item])
-        .sort(([arg1], [arg2]) => arg2 - arg1)
-        .map(([, item]) => item);
+      const dsu = (arr1, arr2) =>
+        arr1
+          .map((item, index) => [arr2[index], item])
+          .sort(([arg1], [arg2]) => arg2 - arg1)
+          .map(([, item]) => item);
 
-      locations = dsu(locations, locations.map((location) => moment(location.fields["Latest report"], "M/D/YYYY h:m A")));
+      locations = dsu(
+        locations,
+        locations.map((location) =>
+          moment(location.fields["Latest report"], "M/D/YYYY h:m A")
+        )
+      );
 
       // A few fields are treated as arrays from AirTable, so must be mimicked here.
       locations.forEach((location) => {
-        location.fields["Vaccines available?"] = location.fields["Vaccines available?"].length > 0 ? [location.fields["Vaccines available?"]] : [];
-        location.fields["Latest report notes"] = location.fields["Latest report notes"].length > 0 ? [location.fields["Latest report notes"]] : [];
-        location.fields["age_requirement"] = location.fields["age_requirement"].length > 0 ? location.fields["age_requirement"].split(", ") : [];
-        location.fields["occupation_requirement"] = location.fields["occupation_requirement"].length > 0 ? location.fields["occupation_requirement"].split(", ") : []
-        location.fields["eligible_counties"] = location.fields["eligible_counties"].length > 0 ? location.fields["eligible_counties"].split(", ") : []
-        location.fields["dose_type"] = location.fields["dose_type"].length > 0 ? location.fields["dose_type"].split(", ") : []
-        location.fields["eligible_phases"] = location.fields["eligible_phases"].length > 0 ? location.fields["eligible_phases"].split(", ") : []
+        location.fields["Vaccines available?"] =
+          location.fields["Vaccines available?"].length > 0
+            ? [location.fields["Vaccines available?"]]
+            : [];
+        location.fields["Latest report notes"] =
+          location.fields["Latest report notes"].length > 0
+            ? [location.fields["Latest report notes"]]
+            : [];
+        location.fields["age_requirement"] =
+          location.fields["age_requirement"].length > 0
+            ? location.fields["age_requirement"].split(", ")
+            : [];
+        location.fields["occupation_requirement"] =
+          location.fields["occupation_requirement"].length > 0
+            ? location.fields["occupation_requirement"].split(", ")
+            : [];
+        location.fields["eligible_counties"] =
+          location.fields["eligible_counties"].length > 0
+            ? location.fields["eligible_counties"].split(", ")
+            : [];
+        location.fields["dose_type"] =
+          location.fields["dose_type"].length > 0
+            ? location.fields["dose_type"].split(", ")
+            : [];
+        location.fields["eligible_phases"] =
+          location.fields["eligible_phases"].length > 0
+            ? location.fields["eligible_phases"].split(", ")
+            : [];
       });
 
       return locations;
@@ -210,7 +249,7 @@ function getAllLocations(): Promise<RawLocation[]> {
             ],
           })
           .all()
-      ).map((record) => record._rawJson); 
+      ).map((record) => record._rawJson);
     }
   });
 }
@@ -265,9 +304,11 @@ export function getCountyLocations(
 ): Promise<OrganizedLocations> {
   return cacheDataQuery(county, async () => {
     let countyLocations: RawLocation[];
-    
+
     if (ARCHIVE_MODE) {
-      countyLocations = (await getAllLocations()).filter((location) => location.fields["County"] === county);
+      countyLocations = (await getAllLocations()).filter(
+        (location) => location.fields["County"] === county
+      );
     } else {
       countyLocations = (
         await Airtable.base("appdsheneg5ii1EnQ")("Locations")
