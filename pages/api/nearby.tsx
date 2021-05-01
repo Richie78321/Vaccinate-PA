@@ -20,6 +20,11 @@ const requiredLocationFields = [
   "value",
   "string",
   "isAvailable",
+  "age_requirement",
+  "occupation_requirement",
+  "eligible_counties",
+  "dose_type",
+  "eligible_phases",
 ];
 
 function getNumber(floatString: string): number {

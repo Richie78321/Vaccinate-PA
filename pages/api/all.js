@@ -16,6 +16,11 @@ const requiredLocationFields = [
   "Latest report notes",
   "Address",
   "isActiveSupersite",
+  "age_requirement",
+  "occupation_requirement",
+  "eligible_counties",
+  "dose_type",
+  "eligible_phases",
 ];
 
 const rateLimiter = rateLimit({
