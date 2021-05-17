@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { Typeahead, Hint } from "react-bootstrap-typeahead";
 import counties from "../content/counties";
-import zips from "../content/zips";
+import zips from "../content/zips.json";
 import { useRouter } from "next/router";
 import { Button, Form } from "react-bootstrap";
 
-const options = counties.concat(zips);
+const options = counties.concat(Object.keys(zips));
 
 function CountySearchInput({
   inputRef,

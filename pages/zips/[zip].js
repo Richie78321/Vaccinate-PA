@@ -89,6 +89,13 @@ export async function getServerSideProps({ params }) {
 
   try {
     var zipLatLong = await getZipLatLong(zip);
+    // TODO : Consider better message than 404 on not found.
+    if (!zipLatLong) {
+      return {
+        notFound: true,
+      };
+    }
+
     const countyCode = getCountyCodeFromLatLong([
       zipLatLong.long,
       zipLatLong.lat,
@@ -105,13 +112,6 @@ export async function getServerSideProps({ params }) {
         zip: zip,
         error: true,
       },
-    };
-  }
-
-  // TODO : Consider better message than 404 on not found.
-  if (!zipLatLong) {
-    return {
-      notFound: true,
     };
   }
 
