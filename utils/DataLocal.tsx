@@ -53,14 +53,16 @@ export function organizeLocations(locations: Location[]): OrganizedLocations {
   const allRecentLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      ((!SUPERSITES_CAN_BE_OUTDATED && location.fields["Location type"] === "Supersite") ||
+      ((!SUPERSITES_CAN_BE_OUTDATED &&
+        location.fields["Location type"] === "Supersite") ||
         Date.parse(location.fields["Latest report"]) >
           outdatedThreshold.getTime())
   );
   const allOutdatedLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      (SUPERSITES_CAN_BE_OUTDATED || location.fields["Location type"] !== "Supersite") &&
+      (SUPERSITES_CAN_BE_OUTDATED ||
+        location.fields["Location type"] !== "Supersite") &&
       Date.parse(location.fields["Latest report"]) <=
         outdatedThreshold.getTime()
   );
