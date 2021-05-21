@@ -41,7 +41,7 @@ export default function CountyInfoLinks({ countyLinks }) {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://airtable.com/shr7z01kc7h1ogP5R"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScUYnD_9b_wlG4UK2RPNHeXgYlaMTIW4sVzXo5Ow0PxqHLIEw/viewform?usp=sf_link"
         >
           Report missing or incorrect{" "}
           <span className="text-nowrap">
