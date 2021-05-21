@@ -8,6 +8,7 @@ import {
 } from "./DataTypes";
 
 const OUTDATED_DAYS_THRESHOLD = 3;
+const SUPERSITES_CAN_BE_OUTDATED = true;
 
 export const AVAILABILITY_STATUS: { [key: string]: AvailabilityStatus } = {
   UNKNOWN: {
@@ -52,14 +53,14 @@ export function organizeLocations(locations: Location[]): OrganizedLocations {
   const allRecentLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      (location.fields["Location type"] === "Supersite" ||
+      ((!SUPERSITES_CAN_BE_OUTDATED && location.fields["Location type"] === "Supersite") ||
         Date.parse(location.fields["Latest report"]) >
           outdatedThreshold.getTime())
   );
   const allOutdatedLocations: Location[] = locations.filter(
     (location) =>
       location.fields["Latest report"] &&
-      location.fields["Location type"] !== "Supersite" &&
+      (SUPERSITES_CAN_BE_OUTDATED || location.fields["Location type"] !== "Supersite") &&
       Date.parse(location.fields["Latest report"]) <=
         outdatedThreshold.getTime()
   );
