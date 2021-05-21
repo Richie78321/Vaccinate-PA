@@ -12,6 +12,7 @@ import RealtimeLocations from "../../components/RealtimeLocations";
 import { Button } from "react-bootstrap";
 import DataAnnouncements from "../../components/DataAnnouncements";
 import CountyInfoLinks from "../../components/CountyInfoLinks";
+import ArchiveNotice from "../../components/ArchiveNotice";
 
 function countyToCountyCode(county) {
   return county.split(" ")[0].toLowerCase();
@@ -145,6 +146,7 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
             apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
           />
         </ClientSideOnly>
+        <ArchiveNotice />
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
             <>

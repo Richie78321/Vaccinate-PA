@@ -7,6 +7,7 @@ import RealtimeLocations from "./RealtimeLocations";
 import DataAnnouncements from "./DataAnnouncements";
 import moment from "moment";
 import CountyInfoLinks from "./CountyInfoLinks";
+import ArchiveNotice from "./ArchiveNotice";
 
 const DISTANCE_OPTIONS_MILES = [5, 10, 15, 25, 50, 75, 100, 150];
 const LOCATIONS_API = "/api/nearby";
@@ -179,6 +180,7 @@ export default class NearbyLocations extends Component {
             distance: this.state.distanceMiles,
           })}`}
         />
+        <ArchiveNotice />
         {this.state.loading ? (
           <div className="text-center my-4">
             <BeatLoader size="0.5em" /> Loading nearby locations...
