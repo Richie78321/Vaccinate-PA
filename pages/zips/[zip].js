@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Layout from "../../layouts/Layout";
 import TranslationOptions from "../../components/TranslationOptions";
-import NearbyLocations, {DEFAULT_DISTANCE_MILES} from "../../components/NearbyLocations";
+import NearbyLocations, {
+  DEFAULT_DISTANCE_MILES,
+} from "../../components/NearbyLocations";
 import { getZipLatLong } from "../../utils/Data";
 import { FaArrowLeft } from "react-icons/fa";
 import ClientSideOnly from "../../components/ClientSideOnly";
@@ -11,7 +13,15 @@ import { getCountyLinks, getNearbyLocations } from "../../utils/Data";
 import { getNearbyLocations as getNearbyLocationsRealtime } from "../../realtime-api/realtimeData";
 import { organizeLocations } from "../../utils/DataLocal";
 
-export default function ZipPage({ zip, lat, long, countyLinks, nearbyLocations, nearbyRealtimeLocations, error }) {
+export default function ZipPage({
+  zip,
+  lat,
+  long,
+  countyLinks,
+  nearbyLocations,
+  nearbyRealtimeLocations,
+  error,
+}) {
   if (error) {
     return (
       <Layout title={`Vaccine Availability Near ${zip}`}>
@@ -103,9 +113,25 @@ export async function getServerSideProps({ params }) {
       zipLatLong.lat,
     ]);
     if (countyCode) {
-      var [countyLinks, nearbyLocations, nearbyRealtimeLocations] = await Promise.all([getCountyLinks(
-        countyCode.charAt(0).toUpperCase() + countyCode.slice(1) + " County"
-      ), getNearbyLocations(zipLatLong.lat, zipLatLong.long, DEFAULT_DISTANCE_MILES), getNearbyLocationsRealtime(zipLatLong.lat, zipLatLong.long, DEFAULT_DISTANCE_MILES)]);
+      var [
+        countyLinks,
+        nearbyLocations,
+        nearbyRealtimeLocations,
+      ] = await Promise.all([
+        getCountyLinks(
+          countyCode.charAt(0).toUpperCase() + countyCode.slice(1) + " County"
+        ),
+        getNearbyLocations(
+          zipLatLong.lat,
+          zipLatLong.long,
+          DEFAULT_DISTANCE_MILES
+        ),
+        getNearbyLocationsRealtime(
+          zipLatLong.lat,
+          zipLatLong.long,
+          DEFAULT_DISTANCE_MILES
+        ),
+      ]);
 
       nearbyLocations = organizeLocations(nearbyLocations);
     }

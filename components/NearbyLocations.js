@@ -1,7 +1,11 @@
 import { Component } from "react";
 import { organizeLocations } from "../utils/DataLocal";
 import { StandardLocationGroups } from "./LocationGroups";
-import { FaRegClock, FaExternalLinkAlt, FaPlaceOfWorship } from "react-icons/fa";
+import {
+  FaRegClock,
+  FaExternalLinkAlt,
+  FaPlaceOfWorship,
+} from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import RealtimeLocations from "./RealtimeLocations";
 import DataAnnouncements from "./DataAnnouncements";
