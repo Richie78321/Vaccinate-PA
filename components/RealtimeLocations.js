@@ -11,7 +11,7 @@ export default class RealtimeLocations extends Component {
   constructor(props) {
     super(props);
 
-    const {lastUpdated, locations} = props;
+    const { lastUpdated, locations } = props;
     if (lastUpdated && locations) {
       this.state = {
         lastUpdated,
@@ -27,7 +27,7 @@ export default class RealtimeLocations extends Component {
       this.state = {
         lastUpdated: null,
         locations: [],
-      }
+      };
     }
   }
 
@@ -120,11 +120,11 @@ export default class RealtimeLocations extends Component {
             {moment(lastUpdated).format("h:mma")}
           </div>
         </div>
-        {locations.map((location) =>
+        {locations.map((location) => (
           <div key={location.properties.id} className="my-3">
             <RealtimeLocationCard location={location} />
           </div>
-        )}
+        ))}
       </div>
     );
   }

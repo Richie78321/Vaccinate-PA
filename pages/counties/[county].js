@@ -56,7 +56,14 @@ function LatestReportsReceived({
   return null;
 }
 
-export default function CountyPage({ county, countyLinks, locations, realtimeLocations, realtimeLocationsUpdated, error }) {
+export default function CountyPage({
+  county,
+  countyLinks,
+  locations,
+  realtimeLocations,
+  realtimeLocationsUpdated,
+  error,
+}) {
   // This might be smelly. Using to avoid spilling realtime data
   // fetching into an otherwise SSR component.
   const [latestRealtimeReport, setLatestRealtimeReport] = useState(null);
@@ -139,13 +146,13 @@ export default function CountyPage({ county, countyLinks, locations, realtimeLoc
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
         <RealtimeLocations
-            updateLatestReportTime={(latestRealtimeReport) =>
-              setLatestRealtimeReport(latestRealtimeReport)
-            }
-            apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
-            locations={realtimeLocations}
-            lastUpdated={realtimeLocationsUpdated}
-          />
+          updateLatestReportTime={(latestRealtimeReport) =>
+            setLatestRealtimeReport(latestRealtimeReport)
+          }
+          apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
+          locations={realtimeLocations}
+          lastUpdated={realtimeLocationsUpdated}
+        />
         <ArchiveNotice />
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
