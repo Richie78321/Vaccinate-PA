@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { organizeLocations } from "../utils/DataLocal";
 import { StandardLocationGroups } from "./LocationGroups";
-import { FaRegClock, FaExternalLinkAlt } from "react-icons/fa";
+import { FaRegClock, FaExternalLinkAlt, FaPlaceOfWorship } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import RealtimeLocations from "./RealtimeLocations";
 import DataAnnouncements from "./DataAnnouncements";
@@ -10,6 +10,7 @@ import CountyInfoLinks from "./CountyInfoLinks";
 import ArchiveNotice from "./ArchiveNotice";
 
 const DISTANCE_OPTIONS_MILES = [5, 10, 15, 25, 50, 75, 100, 150];
+export const DEFAULT_DISTANCE_MILES = DISTANCE_OPTIONS_MILES[2];
 const LOCATIONS_API = "/api/nearby";
 
 function LatestReportsReceived({
@@ -49,22 +50,26 @@ export default class NearbyLocations extends Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: props.locations ? false : true,
       latestRealtimeReport: null,
-      locations: [],
-      distanceMiles: 15,
+      locations: props.locations || [],
+      distanceMiles: DEFAULT_DISTANCE_MILES,
+      preloadedRealtime: props.preloadedRealtime,
     };
+  }
 
+  componentDidMount() {
     /**
      * Controller used to abort fetch requests if the React component is
      * unmounted during a request:
      * https://stackoverflow.com/questions/31061838/how-do-i-cancel-an-http-fetch-request
      */
     this.abortController = new AbortController();
-  }
 
-  componentDidMount() {
-    this.fetchLocations();
+    if (!this.state.locations) {
+      // Only fetch locations if they have not been fetched beforehand.
+      this.fetchLocations();
+    }
   }
 
   componentWillUnmount() {
@@ -99,6 +104,7 @@ export default class NearbyLocations extends Component {
       this.setState({
         loading: true,
         distanceMiles: event.target.value,
+        preloadedRealtime: null,
       });
     }
   }
@@ -179,6 +185,7 @@ export default class NearbyLocations extends Component {
             long: this.props.long,
             distance: this.state.distanceMiles,
           })}`}
+          {...(this.state.preloadedRealtime || {})}
         />
         <ArchiveNotice />
         {this.state.loading ? (
