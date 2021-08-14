@@ -11,21 +11,39 @@ export default class RealtimeLocations extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      lastUpdated: null,
-      locations: [],
-    };
+    const {lastUpdated, locations} = props;
+    if (lastUpdated && locations) {
+      this.state = {
+        lastUpdated,
+        locations,
+      };
 
+      if (locations.length > 0) {
+        this.props.updateLatestReportTime(
+          locations[0].properties?.appointments_last_fetched
+        );
+      }
+    } else {
+      this.state = {
+        lastUpdated: null,
+        locations: [],
+      }
+    }
+  }
+
+  componentDidMount() {
     /**
      * Controller used to abort fetch requests if the React component is
      * unmounted during a request:
      * https://stackoverflow.com/questions/31061838/how-do-i-cancel-an-http-fetch-request
      */
     this.abortController = new AbortController();
-  }
 
-  componentDidMount() {
-    this.fetchUpdatedLocations();
+    if (!this.props.lastUpdated) {
+      // Only immediately fetch if locations haven't been fetched beforehand.
+      this.fetchUpdatedLocations();
+    }
+
     this.reloadInterval = setInterval(
       this.fetchUpdatedLocations.bind(this),
       this.props.refreshSeconds
@@ -47,7 +65,7 @@ export default class RealtimeLocations extends Component {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp?.locations) {
-          const updateTime = Date.now();
+          const updateTime = new Date().toISOString();
           this.setState({
             lastUpdated: updateTime,
             locations: resp.locations,

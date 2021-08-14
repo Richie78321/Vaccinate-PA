@@ -3,11 +3,11 @@ import counties from "../../content/counties";
 import { StandardLocationGroups } from "../../components/LocationGroups";
 import Layout from "../../layouts/Layout";
 import { getCountyLocations, getCountyLinks } from "../../utils/Data";
+import { getCounty } from "../../realtime-api/realtimeData";
 import { FaArrowLeft, FaRegClock } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
 import TranslationOptions from "../../components/TranslationOptions";
-import ClientSideOnly from "../../components/ClientSideOnly";
 import RealtimeLocations from "../../components/RealtimeLocations";
 import { Button } from "react-bootstrap";
 import DataAnnouncements from "../../components/DataAnnouncements";
@@ -56,7 +56,7 @@ function LatestReportsReceived({
   return null;
 }
 
-export default function CountyPage({ county, countyLinks, locations, error }) {
+export default function CountyPage({ county, countyLinks, locations, realtimeLocations, realtimeLocationsUpdated, error }) {
   // This might be smelly. Using to avoid spilling realtime data
   // fetching into an otherwise SSR component.
   const [latestRealtimeReport, setLatestRealtimeReport] = useState(null);
@@ -138,14 +138,14 @@ export default function CountyPage({ county, countyLinks, locations, error }) {
           </div>
         </div>
         <DataAnnouncements sharethisConfig={sharethisConfig} />
-        <ClientSideOnly>
-          <RealtimeLocations
+        <RealtimeLocations
             updateLatestReportTime={(latestRealtimeReport) =>
               setLatestRealtimeReport(latestRealtimeReport)
             }
             apiURL={`/api/realtime/counties/${countyToCountyCode(county)}`}
+            locations={realtimeLocations}
+            lastUpdated={realtimeLocationsUpdated}
           />
-        </ClientSideOnly>
         <ArchiveNotice />
         <div className="d-flex flex-column">
           {locations.allLocations.length <= 0 ? (
@@ -174,8 +174,9 @@ export async function getServerSideProps({ params }) {
   }
 
   try {
-    var [countyLocations, countyLinks] = await Promise.all([
+    var [countyLocations, realtimeLocations, countyLinks] = await Promise.all([
       getCountyLocations(countyDecoded),
+      getCounty(countyToCountyCode(countyDecoded)),
       getCountyLinks(countyDecoded),
     ]);
   } catch (error) {
@@ -193,6 +194,8 @@ export async function getServerSideProps({ params }) {
       county: countyDecoded,
       countyLinks: countyLinks,
       locations: countyLocations,
+      realtimeLocations,
+      realtimeLocationsUpdated: new Date().toISOString(),
     },
   };
 }
