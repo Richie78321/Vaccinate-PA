@@ -2,7 +2,7 @@ import { FaTwitter, FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import GoogleTranslateWidget from "./GoogleTranslateWidget";
 
-const HeartIcon = (
+export const HeartIcon = (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -30,96 +30,10 @@ const HeartIcon = (
 
 export default function Footer() {
   return (
-    <div className="mt-5 py-4 bg-light text-muted">
-      <div className="container">
-        <div id="social-icons" className="mx-auto text-center mb-3">
-          <a
-            href="https://twitter.com/VaccinatePA"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaTwitter size="1.5em" />
-          </a>
-          <a
-            href="https://www.facebook.com/vaccinatepa"
-            target="_blank"
-            rel="noreferrer"
-            className="mx-4"
-          >
-            <FaFacebook size="1.5em" />
-          </a>
-          <a
-            href="https://www.instagram.com/vaccinatepaorg/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <AiFillInstagram size="1.75em" />
-          </a>
-        </div>
-        <p className="text-center">
-          Made with {HeartIcon} by volunteer Pennsylvanians and others.
-        </p>
-        <div className="my-3 d-flex flex-column flex-sm-row justify-content-center">
-          <div className="align-self-center text-center px-sm-4">
-            <a
-              href="?lang=en#googtrans(en|en)"
-              className="notranslate"
-              data-lang="en"
-            >
-              English
-            </a>
-            {" · "}
-            <a
-              href="?lang=es#googtrans(en|es)"
-              className="notranslate"
-              data-lang="es"
-            >
-              Español
-            </a>
-            {" · "}
-            <a
-              href="?lang=zh#googtrans(en|zh-CN)"
-              className="notranslate"
-              data-lang="zh"
-            >
-              简体中文
-            </a>
-          </div>
-          <div className="mt-3 mx-auto mx-sm-0 mt-sm-0">
-            <GoogleTranslateWidget />
-          </div>
-        </div>
-        <p className="text-center">
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdjPA82AIaW2Bo7daEUQfxRdVRsUQS3d2aWz3a26EdaSeTPUA/viewform"
-          >
-            Please let us know if you've found this site useful or have some
-            feedback.
-          </a>
-        </p>
-        <p className="text-center">
-          Interested in volunteering? Please{" "}
-          <a href="https://forms.gle/5vyDk2tTjYUTMTXu6">
-            sign up to volunteer here
-          </a>
-          , and we will reach out to you.
-        </p>
-        <small>
-          This site was put together by volunteers using our best efforts to
-          assemble readily available data from public sources. This site does
-          not provide medical advice, nor does it provide any type of technical
-          advice. vaccinatepa.org is not responsible for any errors or
-          omissions. vaccinatepa.org provides this information on an “as is”
-          basis, with no representations or warranties of any kind, express or
-          implied, including with respect to accuracy, completeness, quality,
-          non-infringement, merchantability or fitness for a particular purpose.
-          vaccinatepa.org will not be liable for any damages of any kind arising
-          from the use of, or reliance on, any information made available on
-          this site.
-        </small>
-      </div>
+    <div className="mt-5 py-4 text-muted">
+      <p className="text-center">
+        Made with {HeartIcon} by volunteer Pennsylvanians and others.
+      </p>
     </div>
   );
 }

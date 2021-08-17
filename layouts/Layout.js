@@ -2,7 +2,7 @@ import SiteNavbar from "../components/SiteNavbar";
 import Footer from "../components/Footer";
 import Head from "next/head";
 
-export default function Layout({ title, children, description }) {
+export default function Layout({ title, children, description, includeNavbar, includeFooter }) {
   const webDescription = description
     ? description
     : "Find Vaccine Availability in PA";
@@ -45,11 +45,19 @@ export default function Layout({ title, children, description }) {
           content="Find vaccines in Pennsylvania with our volunteer-run site"
         />
       </Head>
-      <div className="flex-grow-1">
-        <SiteNavbar />
+      <div className="page flex-grow-1">
+        {includeNavbar ? <SiteNavbar /> : null}
         {children}
       </div>
-      <Footer />
+      <div className="page">
+        {includeFooter ? <Footer /> : null}
+      </div>
+      <style jsx>{`
+        .page {
+          background-color: #FFF2F1;
+          color: #103057;
+        }
+      `}</style>
     </>
   );
 }
