@@ -11,6 +11,16 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/about-us',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/additional-resources',
+        destination: '/',
+        permanent: true,
+      }
     ]
   },
 }
